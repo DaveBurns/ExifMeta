@@ -1,0 +1,1012 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li><strong>Ftp.lua</strong></li>
+	
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>Ftp.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp.assurePassword">Ftp.assurePassword</a>&nbsp;(ftpSettings, ftpPropertyMap)</td>
+	<td class="summary">Static equivalent of query-for-password-if-needed method.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp.formatPath">Ftp.formatPath</a>&nbsp;(p)</td>
+	<td class="summary">Static function to format a server path.assures ftp slash convention (forward).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp.formatSubPath">Ftp.formatSubPath</a>&nbsp;(p, trailingSlashOk)</td>
+	<td class="summary">Static function to format a sub-path - assures ftp slash convention (forward) and removes leading and trailing slashes.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp.uncalibrateClock">Ftp.uncalibrateClock</a>&nbsp;(server)</td>
+	<td class="summary">Allows get-dir-contents to be had, with the caveat that file-time will be uncalibrated.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp:_makeDirPath">Ftp:_makeDirPath</a>&nbsp;(rsp)</td>
+	<td class="summary">Synopsis:       Create a full path to a remote directory from parent and child sub-paths.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp:_makeFilePath">Ftp:_makeFilePath</a>&nbsp;(rsp)</td>
+	<td class="summary">Synopsis:       Creates a full path to a remote file from parent and child components.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp:assureAllRemoteDirectories">Ftp:assureAllRemoteDirectories</a>&nbsp;(rsp)</td>
+	<td class="summary">Synopsis:       Create directories if not already, up to and including the leaf of specified path.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp:calibrateClock">Ftp:calibrateClock</a>&nbsp;(localDirForTempFile, rsp, leaveRemFile)</td>
+	<td class="summary">Synopsis:       Computes offset of remote clock from 2001-01-01, GMT.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp:connect">Ftp:connect</a>&nbsp;()</td>
+	<td class="summary">Connect to the remote server.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp:disconnect">Ftp:disconnect</a>&nbsp;()</td>
+	<td class="summary">Disconnect from the remote server.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp:existsAsDir">Ftp:existsAsDir</a>&nbsp;(rsp, expected)</td>
+	<td class="summary">Synopsis:       Determines if dir exists, and will double-check if no expectation, waits for it to disappear if its supposed to be gone (like when it was just deleted), or waits for it to be present if expected to be there (like if it was just put out there, or detected via get-dir-contents...).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp:existsAsFile">Ftp:existsAsFile</a>&nbsp;(rsp, expected)</td>
+	<td class="summary">Synopsis:       Determines if file exists, and will double-check if no expectation, waits for it to disappear if its supposed to be gone (like when it was just deleted), or waits for it to be present if expected to be there (like if it was just put out there, or detected via get-dir-contents...).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp:getDirContents">Ftp:getDirContents</a>&nbsp;(rsp, remoteClockOffset)</td>
+	<td class="summary">Synopsis:       Get lists of directories and files in the specified remote directory.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp:getFileContents">Ftp:getFileContents</a>&nbsp;(rsp)</td>
+	<td class="summary">Get remote file contents.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp:init">Ftp:init</a>&nbsp;(ftpSettings, autoNegotiate)</td>
+	<td class="summary">Initialize ftp settings and other particulars.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp:isEmpty">Ftp:isEmpty</a>&nbsp;(dir)</td>
+	<td class="summary">Determine if specified directory (remote sub-path) is empty.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp:isFileSame">Ftp:isFileSame</a>&nbsp;(localFile, rsp, options)</td>
+	<td class="summary">Determine if local file is same as remote file.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp:makeDir">Ftp:makeDir</a>&nbsp;(rsp)</td>
+	<td class="summary">Synopsis:       Create a remote directory, if not already existing.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp:new">Ftp:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp:newClass">Ftp:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp:putFile">Ftp:putFile</a>&nbsp;(localPath, rsp, overwriteOK)</td>
+	<td class="summary">Synopsis:       Put (upload) a file from local disk to remote.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp:queryForPasswordIfNeeded">Ftp:queryForPasswordIfNeeded</a>&nbsp;(ftpSettings, ftpPropertyMap)</td>
+	<td class="summary">Serves same purpose as Lr-FTP version - prompt user for password if not provided in the settings.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp:removeDirTree">Ftp:removeDirTree</a>&nbsp;(rsp)</td>
+	<td class="summary">Synopsis:       Remove a directory tree, which typically (although not necessarily) pre-exists, including sub-dir & files.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp:removeEmptyDir">Ftp:removeEmptyDir</a>&nbsp;(rsp)</td>
+	<td class="summary">Synopsis:       Removes a directory known to exist and be empty.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp:removeFile">Ftp:removeFile</a>&nbsp;(rsp)</td>
+	<td class="summary">Synopsis:       Removes a file which is presumably (although not necessarily) existing before calling.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Ftp:uploadFile">Ftp:uploadFile</a>&nbsp;(localPath, rsp, validate)</td>
+	<td class="summary">Upload file (re-writing remote file if necessary), and optionally: validate.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="Ftp.assurePassword"></a><strong>Ftp.assurePassword</strong>&nbsp;(ftpSettings, ftpPropertyMap)</dt>
+<dd>
+Static equivalent of query-for-password-if-needed method. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>ftpSettings</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>ftpPropertyMap</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp.formatPath"></a><strong>Ftp.formatPath</strong>&nbsp;(p)</dt>
+<dd>
+Static function to format a server path.assures ftp slash convention (forward). optional leading slash will determine whether remote path is absolute or relative to server default. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>p</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Assures ftp slash convention (forward). optional leading slash will determine whether remote path is absolute or relative to server default.<br> Trailing slash is preserved, but should not have any effect. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp.formatSubPath"></a><strong>Ftp.formatSubPath</strong>&nbsp;(p, trailingSlashOk)</dt>
+<dd>
+Static function to format a sub-path - assures ftp slash convention (forward) and removes leading and trailing slashes. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>p</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>trailingSlashOk</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp.uncalibrateClock"></a><strong>Ftp.uncalibrateClock</strong>&nbsp;(server)</dt>
+<dd>
+Allows get-dir-contents to be had, with the caveat that file-time will be uncalibrated. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>server</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Warning: this will affect all instances. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp:_makeDirPath"></a><strong>Ftp:_makeDirPath</strong>&nbsp;(rsp)</dt>
+<dd>
+Synopsis:       Create a full path to a remote directory from parent and child sub-paths.  Notes:          This function takes a root-dir-path and sub-dir-path and returns a full-path to a dir for ftp purposes.  Preferred over lightroom's version when you dont want to run the risk of a slash prefixed child-path being interpreted as an absolute path, instead of a relative path. Also, makes sure input paths are interpreted correctly regardless of source path origins (e.g. local windows dir that contains backslashes), and makes sure result path is properly formatted for FTP, meaning only forward slashes, no backslashes.  Reminder: the Lr-Ftp function only checks if child-path begins with a forward slash, and if so root-path is ignored. It interprets backslash prepended child-paths as true children. Also, although Lr-Ftp is surprisingly tolerant of appending windows backslashed paths to traditionaly ftp forward slashed paths, I prefer the asthetic of properly formatted ftp paths, and in so doing, this function may even prevent a bug in the future.  Returns:        Full path, no excuses, trailing slash. - No guarantee its to a real directory: garbage in = garbage out. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>rsp</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp:_makeFilePath"></a><strong>Ftp:_makeFilePath</strong>&nbsp;(rsp)</dt>
+<dd>
+Synopsis:       Creates a full path to a remote file from parent and child components.  Notes:          Uses dir-path function to assure leading slash, one sep, and trailing slash, then removes the trailing slash to turn it into a file reference.  Returns:        Full path, no excuses, no trailing slash.  - No guarantee its to a real file: garbage in = garbage out. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>rsp</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp:assureAllRemoteDirectories"></a><strong>Ftp:assureAllRemoteDirectories</strong>&nbsp;(rsp)</dt>
+<dd>
+Synopsis:       Create directories if not already, up to and including the leaf of specified path.  Notes:          - path must be to folder, not file. - departs from the "leave logging to calling context" convention by logging all dirs created or pre-existing if verbose mode. Idea: could make a table and return to caller.  Returns:        - true, nil:              worked, no comment. - true, comment:          pretend it worked, see comment. - false, error-message:   failed. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>rsp</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp:calibrateClock"></a><strong>Ftp:calibrateClock</strong>&nbsp;(localDirForTempFile, rsp, leaveRemFile)</dt>
+<dd>
+Synopsis:       Computes offset of remote clock from 2001-01-01, GMT.  Motivation:     FTP, much to my dissatisfaction, uses the remote clock to set the timestamp of uploaded files. I wish it would set it to the exact value of the local source file. This would solve a lot of problems, and cause none. But, for some reason, the FTP protocol is like never improved (go figure), thus we have to keep chugging along with same 'ol same 'ol for better and for worse...  The problem is:  If the clock at the remote end is slow, and you upload a file immediately after changing it, it will appear to be out of date already after being uploaded. Throw in differences in time zone, and daylight savings and the problem worsens - the file may appear out of date all day long, even after continually uploading, then appear up-to-date the next day without having done anything except wait. Likewise, and usually a worse problem - if the clock at the remote end is ahead, a recently changed local file may appear up-to-date forever and never be uploaded.  The solution is:  Before beginning an ftp session, create a tiny local file and upload it. Read the remote timestamp back and save the difference between it and local time. This offset can then be applied in the future to compute a normalized remote timestamp that is accurate to within a few seconds, instead of 25 hours.  Note:           This function may be called explicitly from outside, which allows logging of results before ftp session begins, and allows specification of writeable directory to be used for temp filem but if not - will be called automatically from within - temp file dir will be whatever.  My experience has been that true ftp connections are not really made until they needs to be. And since this may be the first need, it will fail if remote server is down.  If local-dir-for-temp-file is passed in, make sure it's been standardized, since this function won't do it.  Returns:        - true, nil:            calibrated, no comment. - false, error-message: failed. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>localDirForTempFile</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>rsp</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>leaveRemFile</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp:connect"></a><strong>Ftp:connect</strong>&nbsp;()</dt>
+<dd>
+Connect to the remote server. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>side-effect: validates root-server-dir exists - this forces a true connection, and is a pre-requisite to everything else. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp:disconnect"></a><strong>Ftp:disconnect</strong>&nbsp;()</dt>
+<dd>
+Disconnect from the remote server. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Optional method - makes for a clean break, but connection cleanup via Lightroom or OS so far has made this unnecessary. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp:existsAsDir"></a><strong>Ftp:existsAsDir</strong>&nbsp;(rsp, expected)</dt>
+<dd>
+Synopsis:       Determines if dir exists, and will double-check if no expectation, waits for it to disappear if its supposed to be gone (like when it was just deleted), or waits for it to be present if expected to be there (like if it was just put out there, or detected via get-dir-contents...).  Returns:        - true, nil: dir exists, for sure. - false, nil: dir does not exist, for sure. - nil, error-message: uncertain, see error message. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>rsp</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>expected</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp:existsAsFile"></a><strong>Ftp:existsAsFile</strong>&nbsp;(rsp, expected)</dt>
+<dd>
+Synopsis:       Determines if file exists, and will double-check if no expectation, waits for it to disappear if its supposed to be gone (like when it was just deleted), or waits for it to be present if expected to be there (like if it was just put out there, or detected via get-dir-contents...).   Returns:        - true, nil: file exists, for sure. - false, nil: file does not exist, for sure. - nil, error-message: uncertain, see error message. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>rsp</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>expected</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp:getDirContents"></a><strong>Ftp:getDirContents</strong>&nbsp;(rsp, remoteClockOffset)</dt>
+<dd>
+Synopsis:       Get lists of directories and files in the specified remote directory.  Returns:        two arrays of directory elements (one for directories, one for files) whose entries are structs containing:  - leafName: string - date: last-mod date-time, expressed as a number of seconds since midnight GMT, January 1, 2001 (same as local files ala lr-file-utils). - size (applies to both dirs & files).  Returns empty tables if directory empty.  Returns nil & error message if probs.  Side Effects:   - Will change path in ftp-conn.  Notes:          Usually only called when directory known to exist - not sure what happens if it doesn't.  *** IMPORTANT NOTE: Relies on parsing text content of remote directory - may not be compatible with all servers. *** IMPORTANT NOTE: Must NOT be called from calibrate-clock method or there will be an infinite loop. (_get-dir-contents can be called from calib-clock - with underscore). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>rsp</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>remoteClockOffset</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp:getFileContents"></a><strong>Ftp:getFileContents</strong>&nbsp;(rsp)</dt>
+<dd>
+Get remote file contents. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>rsp</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>contents or nil.</li>
+	
+	<li>errm or nil. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp:init"></a><strong>Ftp:init</strong>&nbsp;(ftpSettings, autoNegotiate)</dt>
+<dd>
+Initialize ftp settings and other particulars. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>ftpSettings</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>autoNegotiate</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>optional method, in case the particulars were not available at the time of new instance creation. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp:isEmpty"></a><strong>Ftp:isEmpty</strong>&nbsp;(dir)</dt>
+<dd>
+Determine if specified directory (remote sub-path) is empty. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>dir</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status (boolean) nil => error; true => empty; false => not empty</li>
+	
+	<li>message (string) if status == nil, explanation. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp:isFileSame"></a><strong>Ftp:isFileSame</strong>&nbsp;(localFile, rsp, options)</dt>
+<dd>
+Determine if local file is same as remote file. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>localFile</em></code>: (string, required) absolute path
+	</li>
+	
+	<li>
+	  <code><em>rsp</em></code>: (string, required) relative subpath
+	</li>
+	
+	<li>
+	  <code><em>options</em></code>: (struct, optional) named options, including: <br>    dateTol - to set a date tolerance. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Uses auto-caching of dir contents, which means it's only good for one "run", and @24/Jan/2014 5:09, no way to clear caches, so a new ftp object must be created for each run.</pre></li>
+	
+	<li><pre class=example>@8/May/2012, size is only criteria, by default. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status (boolean) true if same, false if different, nil if undiscernable or error.</li>
+	
+	<li>errm (string) nil if status is true or false or undiscernable, else error message. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp:makeDir"></a><strong>Ftp:makeDir</strong>&nbsp;(rsp)</dt>
+<dd>
+Synopsis:       Create a remote directory, if not already existing.  Notes:          Creates parent directories as necessary.  Returns:        - true, nil:            worked, no comment, no distinction. - true, comment:        pretend like it worked, see comment. - false, comment:       failed. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>rsp</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp:new"></a><strong>Ftp:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: (initialization table, optional) ftp-settings and auto-negotiate may come now or in init method. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp:newClass"></a><strong>Ftp:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp:putFile"></a><strong>Ftp:putFile</strong>&nbsp;(localPath, rsp, overwriteOK)</dt>
+<dd>
+Synopsis:       Put (upload) a file from local disk to remote.  Notes:          - If file pre-exists and overwrite OK, existing target will be removed first. - Directory tree created if necessary to support file. - This function takes the liberty to do a little verbose logging, plus warnings...  Returns:        - true, nil:        worked, no comment. - false, comment:   failed. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>localPath</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>rsp</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>overwriteOK</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp:queryForPasswordIfNeeded"></a><strong>Ftp:queryForPasswordIfNeeded</strong>&nbsp;(ftpSettings, ftpPropertyMap)</dt>
+<dd>
+Serves same purpose as Lr-FTP version - prompt user for password if not provided in the settings. <p> Motivation:     Lightroom's version just says "gimme a password" without stating what the password is for. This is one of my all time pet peeves in modern software - I suppose if you are the kind of person that uses the same password for everything and dont care what its for when you are asked for one, it doesn't much matter - I am not that kind of person.  Its completely unacceptable for Photooey since passwords may be needed for two different servers. </p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>ftpSettings</em></code>: (table, required) can be user-created lua table (as long as required members are present),<br> or that created by binding to make-ftp-preset-popup. 
+	</li>
+	
+	<li>
+	  <code><em>ftpPropertyMap</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>This function indicates the password request is for ftp user on specified server.</pre></li>
+	
+	<li><pre class=example>Use in conjunction with view--observe-Ftp-Property-Changes, since it will set up the encrypted password store.</pre></li>
+	
+	<li><pre class=example>This function can be called as object method or dot-function (static). </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>ok (boolean) true iff valid password entered. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp:removeDirTree"></a><strong>Ftp:removeDirTree</strong>&nbsp;(rsp)</dt>
+<dd>
+Synopsis:       Remove a directory tree, which typically (although not necessarily) pre-exists, including sub-dir & files.  Note:           - You can not remove the root dir. - first return value is never nil.  Returns:        - true, nil:                removed, or wasnt there to begin with, no comment, no distinction. - false, error-message:     cant, and here's why... 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>rsp</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp:removeEmptyDir"></a><strong>Ftp:removeEmptyDir</strong>&nbsp;(rsp)</dt>
+<dd>
+Synopsis:       Removes a directory known to exist and be empty.  Notes:          - dir-path - presumably already in the proper format (hint: use make-dir-path). - first return value will never be nil. - Tries 3 times with 1 second between. My experience is that if you've just deleted the last file, then the first attempt at removing the directory may fail.  Returns:        - true, nil -- worked, no issues. - false, msg -- maybe didnt work, warning or error message. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>rsp</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp:removeFile"></a><strong>Ftp:removeFile</strong>&nbsp;(rsp)</dt>
+<dd>
+Synopsis:       Removes a file which is presumably (although not necessarily) existing before calling.  Notes:          file-path - presumably already in the proper format (hint: use make-file-path).  Returns:        - true: file removed, or was never there. - false, error message: file not removed, reason. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>rsp</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Ftp:uploadFile"></a><strong>Ftp:uploadFile</strong>&nbsp;(localPath, rsp, validate)</dt>
+<dd>
+Upload file (re-writing remote file if necessary), and optionally: validate. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>localPath</em></code>: local path
+	</li>
+	
+	<li>
+	  <code><em>rsp</em></code>: remote path
+	</li>
+	
+	<li>
+	  <code><em>validate</em></code>: nil or 'no', 'size', or 'full'. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

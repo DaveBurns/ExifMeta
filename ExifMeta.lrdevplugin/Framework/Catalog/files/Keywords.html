@@ -1,0 +1,554 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li><strong>Keywords.lua</strong></li>
+	
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>Keywords.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#Keywords:getAllKeywordSet">Keywords:getAllKeywordSet</a>&nbsp;(options)</td>
+	<td class="summary">Get set of all keywords.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Keywords:getAllKeywords">Keywords:getAllKeywords</a>&nbsp;(options)</td>
+	<td class="summary">Get all keywords array.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Keywords:getKeywordComponents">Keywords:getKeywordComponents</a>&nbsp;(keyword, reverse)</td>
+	<td class="summary">Get component array given leaf keyword.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Keywords:getKeywordForPath">Keywords:getKeywordForPath</a>&nbsp;(path, options)</td>
+	<td class="summary">Refresh display of recently changed photo (externally changed).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Keywords:getKeywordFromPath">Keywords:getKeywordFromPath</a>&nbsp;(path, permitReinit)</td>
+	<td class="summary">Refresh display of recently changed photo (externally changed).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Keywords:getKeywordPath">Keywords:getKeywordPath</a>&nbsp;(keyword, options)</td>
+	<td class="summary">Get keyword as path.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Keywords:getKeywordPaths">Keywords:getKeywordPaths</a>&nbsp;(keyword, options)</td>
+	<td class="summary">Get array of keyword paths (includes synonyms).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Keywords:initCache">Keywords:initCache</a>&nbsp;()</td>
+	<td class="summary">Init keyword cache.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Keywords:new">Keywords:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Keywords:newClass">Keywords:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Keywords:parseKeywordString">Keywords:parseKeywordString</a>&nbsp;(kwString, options)</td>
+	<td class="summary">Parse keyword string info into parallel arrays of resolved keywords and corresponding names/subpaths (having unique counterpart existing in catalog).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Keywords:startInit">Keywords:startInit</a>&nbsp;(ival)</td>
+	<td class="summary">This is generally called once upon init, then continues to re-init forever, or until stopped or shutdown.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Keywords:stopInit">Keywords:stopInit</a>&nbsp;()</td>
+	<td class="summary">Call this when exiting dialog box that uses initializing keyword object.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="Keywords:getAllKeywordSet"></a><strong>Keywords:getAllKeywordSet</strong>&nbsp;(options)</dt>
+<dd>
+Get set of all keywords. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>options</em></code>: reserved for future. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>keyword set - keys are lr-keyword objects (values are 'true'). </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Keywords:getAllKeywords"></a><strong>Keywords:getAllKeywords</strong>&nbsp;(options)</dt>
+<dd>
+Get all keywords array. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>options</em></code>: reserved for future. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>keyword array - values are lr-keyword objects. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Keywords:getKeywordComponents"></a><strong>Keywords:getKeywordComponents</strong>&nbsp;(keyword, reverse)</dt>
+<dd>
+Get component array given leaf keyword. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>keyword</em></code>: (LrKeyword, required) the keyword to be expressed as component array.
+	</li>
+	
+	<li>
+	  <code><em>reverse</em></code>: (boolean, default: false) whether components should be reversed so root is first. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>it is expected that leaf keyword will be pure/true leaf, but such is not required - it could also be parental keyword. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>comp (array) will always have at least one keyword - never empty, never nil. leaf will be first component, root will be last - reverse order if desired. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Keywords:getKeywordForPath"></a><strong>Keywords:getKeywordForPath</strong>&nbsp;(path, options)</dt>
+<dd>
+Refresh display of recently changed photo (externally changed). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>path</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>options</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>as of 30/May/2014 18:45, not used in any live plugins of mine, but passed preliminary tests. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Keywords:getKeywordFromPath"></a><strong>Keywords:getKeywordFromPath</strong>&nbsp;(path, permitReinit)</dt>
+<dd>
+Refresh display of recently changed photo (externally changed). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>path</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>permitReinit</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Keywords:getKeywordPath"></a><strong>Keywords:getKeywordPath</strong>&nbsp;(keyword, options)</dt>
+<dd>
+Get keyword as path. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>keyword</em></code>: (LrKeyword, required) the keyword to be expressed as path.
+	</li>
+	
+	<li>
+	  <code><em>options</em></code>: (table, optional) include format = 'slash', 'Lr5', or 'legacy', as desired - default is 'slash' notation. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>it is expected that leaf keyword will be pure/true leaf, but such is not required - it could also be parental keyword. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>path string and comp (array). </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Keywords:getKeywordPaths"></a><strong>Keywords:getKeywordPaths</strong>&nbsp;(keyword, options)</dt>
+<dd>
+Get array of keyword paths (includes synonyms). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>keyword</em></code>: lr-keword object.
+	</li>
+	
+	<li>
+	  <code><em>options</em></code>: may include 'format' ('slash' or 'Lr5' or 'legacy') - default is 'slash'. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>array of strings </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Keywords:initCache"></a><strong>Keywords:initCache</strong>&nbsp;()</dt>
+<dd>
+Init keyword cache. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>deprecated (I think) ###2 18/Dec/2013 9:54 (no longer sure why). - still being used in Ottomanic Importer, but maybe only until cut-over (?) </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Keywords:new"></a><strong>Keywords:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: (table) object initialization table, options: <br>    initInterval ( number, default: 1 ) set to zero to not re-initialized, else seconds for keyword re-init interval. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Keywords:newClass"></a><strong>Keywords:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Keywords:parseKeywordString"></a><strong>Keywords:parseKeywordString</strong>&nbsp;(kwString, options)</dt>
+<dd>
+Parse keyword string info into parallel arrays of resolved keywords and corresponding names/subpaths (having unique counterpart existing in catalog). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>kwString</em></code>: keywords as read from get-formatted-metadata method.
+	</li>
+	
+	<li>
+	  <code><em>options</em></code>: may include 'delim' or 'sep'. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>implementation @19/Dec/2013 6:47 does not return parsed keywords which aren't in the catalog, but maybe should, so they can be created, at least as on option. </pre></ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>keywords (array of LrKeyword objects) - resolved.</li>
+	
+	<li>names (parallael array of strings) - resolved.</li>
+	
+	<li>message (qualifying message) - will accompany partially keywords/names, but won't accompany if all are resolved.</li>
+	
+	<li>other ( table, only if qualifying message ) - members: 'missing', 'ambiguous' (arrays of strings). </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Keywords:startInit"></a><strong>Keywords:startInit</strong>&nbsp;(ival)</dt>
+<dd>
+This is generally called once upon init, then continues to re-init forever, or until stopped or shutdown. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>ival</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>another option is to start initialization task, and stop it, as desired. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Keywords:stopInit"></a><strong>Keywords:stopInit</strong>&nbsp;()</dt>
+<dd>
+Call this when exiting dialog box that uses initializing keyword object. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

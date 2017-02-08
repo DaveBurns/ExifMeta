@@ -1,0 +1,580 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/Catalog.html">Catalog.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Collections.html">Collections.lua</a>
+	</li>
+
+	<li><strong>CustomMetadata.lua</strong></li>
+	
+	<li>
+		<a href="../files/DevelopSettings.html">DevelopSettings.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Keywords.html">Keywords.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/LrMetadata.html">LrMetadata.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Previews.html">Previews.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/PublishServices.html">PublishServices.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/SmartCollections.html">SmartCollections.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>CustomMetadata.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#CustomMetadata:clear">CustomMetadata:clear</a>&nbsp;(photos, call, noThrow)</td>
+	<td class="summary">Clear custom metadata for specified photos.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#CustomMetadata:getMetadata">CustomMetadata:getMetadata</a>&nbsp;(photo, pluginId, cMeta)</td>
+	<td class="summary">Consolidate custom metadata for specified plugin into a lookup table (dictionary) form.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#CustomMetadata:getMetadataSpecs">CustomMetadata:getMetadataSpecs</a>&nbsp;(reread)</td>
+	<td class="summary">Gets an array of custom metadata specs, from Metadata.lua  </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#CustomMetadata:getPluginId">CustomMetadata:getPluginId</a>&nbsp;(name, reverseDomain)</td>
+	<td class="summary">Get specific plugin ID, given it's exact (albeit case insensitive) name suffix (must be enabled and have custom metadata).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#CustomMetadata:getPluginIds">CustomMetadata:getPluginIds</a>&nbsp;()</td>
+	<td class="summary">Get set of plugin Ids (that are enabled and have custom metadata).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#CustomMetadata:manualSync">CustomMetadata:manualSync</a>&nbsp;()</td>
+	<td class="summary">Copy selected metadata values from most selected photo to the other selected photos.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#CustomMetadata:migrate">CustomMetadata:migrate</a>&nbsp;(photos, matchFunc)</td>
+	<td class="summary">Migrate metadata from previous instance of plugin.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#CustomMetadata:new">CustomMetadata:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#CustomMetadata:newClass">CustomMetadata:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#CustomMetadata:read">CustomMetadata:read</a>&nbsp;()</td>
+	<td class="summary">Read (all) custom metadata for specified photos, from disk.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#CustomMetadata:save">CustomMetadata:save</a>&nbsp;()</td>
+	<td class="summary">Save (all) custom metadata for specified photos, to disk.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#CustomMetadata:update">CustomMetadata:update</a>&nbsp;(photo, name, value, version, noThrow, tries)</td>
+	<td class="summary">Set custom metadata property of photo to specified value, if not already set to it.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="CustomMetadata:clear"></a><strong>CustomMetadata:clear</strong>&nbsp;(photos, call, noThrow)</dt>
+<dd>
+Clear custom metadata for specified photos. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photos</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>call</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>noThrow</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="CustomMetadata:getMetadata"></a><strong>CustomMetadata:getMetadata</strong>&nbsp;(photo, pluginId, cMeta)</dt>
+<dd>
+Consolidate custom metadata for specified plugin into a lookup table (dictionary) form. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: (LrPhoto, required) photo
+	</li>
+	
+	<li>
+	  <code><em>pluginId</em></code>: (string, required) plugin id.
+	</li>
+	
+	<li>
+	  <code><em>cMeta</em></code>: - (table, optional) batch of raw metadata including custom metadata for all plugins. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>table - id/value members, or empty - never nil. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="CustomMetadata:getMetadataSpecs"></a><strong>CustomMetadata:getMetadataSpecs</strong>&nbsp;(reread)</dt>
+<dd>
+Gets an array of custom metadata specs, from Metadata.lua 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>reread</em></code>: (boolean, default=false) force re-read. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Initialized upon first use, or a forced re-read..<br> (maybe should have made whole provider return-table available, oh well - not needed yet. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="CustomMetadata:getPluginId"></a><strong>CustomMetadata:getPluginId</strong>&nbsp;(name, reverseDomain)</dt>
+<dd>
+Get specific plugin ID, given it's exact (albeit case insensitive) name suffix (must be enabled and have custom metadata). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>reverseDomain</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>pluginId, errm = custMeta:getPluginId( "ChangeManager" ) -- for example. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="CustomMetadata:getPluginIds"></a><strong>CustomMetadata:getPluginIds</strong>&nbsp;()</dt>
+<dd>
+Get set of plugin Ids (that are enabled and have custom metadata). 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>for id, _ in pairs( custMeta:getPlugIds() ) do -- returns empty but never nil. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="CustomMetadata:manualSync"></a><strong>CustomMetadata:manualSync</strong>&nbsp;()</dt>
+<dd>
+Copy selected metadata values from most selected photo to the other selected photos. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="CustomMetadata:migrate"></a><strong>CustomMetadata:migrate</strong>&nbsp;(photos, matchFunc)</dt>
+<dd>
+Migrate metadata from previous instance of plugin. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photos</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>matchFunc</em></code>: (function, optional) if not passed, will match first two parts of present plugin, and last part. <br>          if passed, is function that takes a plugin ID and returns true if it matches such that metadata should be transferred. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Throws error if >1 matching plugin. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="CustomMetadata:new"></a><strong>CustomMetadata:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="CustomMetadata:newClass"></a><strong>CustomMetadata:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="CustomMetadata:read"></a><strong>CustomMetadata:read</strong>&nbsp;()</dt>
+<dd>
+Read (all) custom metadata for specified photos, from disk. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>includes user prompt and the whole nine yards.</pre></li>
+	
+	<li><pre class=example>presently expects files in sibling directory of catalog (named plugin-id), prefixed by photo path. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status (boolean) true if operation completed without uncaught error - there may have been individual file errors logged.</li>
+	
+	<li>message (string) error message if status false. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="CustomMetadata:save"></a><strong>CustomMetadata:save</strong>&nbsp;()</dt>
+<dd>
+Save (all) custom metadata for specified photos, to disk. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>includes user prompt and the whole nine yards.</pre></li>
+	
+	<li><pre class=example>presently saves in sibling directory of catalog (named plugin-id), prefixed by photo path. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status (boolean) true if operation completed without uncaught error - there may have been individual file errors logged.</li>
+	
+	<li>message (string) error message if status false. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="CustomMetadata:update"></a><strong>CustomMetadata:update</strong>&nbsp;(photo, name, value, version, noThrow, tries)</dt>
+<dd>
+Set custom metadata property of photo to specified value, if not already set to it. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: (lr-photo, required) photo set metadata on.
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: (string, required) property name
+	</li>
+	
+	<li>
+	  <code><em>value</em></code>: (string | date | number | boolean, required) property value
+	</li>
+	
+	<li>
+	  <code><em>version</em></code>: (number, default nil) optional version number.
+	</li>
+	
+	<li>
+	  <code><em>noThrow</em></code>: (boolean, default false) optional no-throw, if omitted, errors are thrown.
+	</li>
+	
+	<li>
+	  <code><em>tries</em></code>: (number, default 10) number of tries - only applies if internal catalog wrapping required. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Will wrap with catalog access if need be.</pre></li>
+	
+	<li><pre class=example>Always throws errors for catastrophic failure, just not for undeclared metadata if no-throw. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status (boolean or nil) true iff property set to different value, false iff property need not be set - already same value, nil => error setting property.</li>
+	
+	<li>error-message or previous value (string, nil, or any) nil if status false, error message if status nil, previous value if status true. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

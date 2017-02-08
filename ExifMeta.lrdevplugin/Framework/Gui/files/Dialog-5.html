@@ -1,0 +1,1426 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/Binding.html">Binding.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/DelayedProgressScope.html">DelayedProgressScope.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Dialog-10.html">Dialog-10.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Dialog-11.html">Dialog-11.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Dialog-12.html">Dialog-12.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Dialog-13.html">Dialog-13.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Dialog-14.html">Dialog-14.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Dialog-15.html">Dialog-15.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Dialog-16.html">Dialog-16.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Dialog-17.html">Dialog-17.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Dialog-18.html">Dialog-18.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Dialog-19.html">Dialog-19.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Dialog-2.html">Dialog-2.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Dialog-3.html">Dialog-3.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Dialog-4.html">Dialog-4.lua</a>
+	</li>
+
+	<li><strong>Dialog-5.lua</strong></li>
+	
+	<li>
+		<a href="../files/Dialog-6.html">Dialog-6.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Dialog-7.html">Dialog-7.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Dialog-8.html">Dialog-8.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Dialog-9.html">Dialog-9.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Gui.html">Gui.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Manager.html">Manager.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Notes.html">Notes.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ScrollView.html">ScrollView.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/View.html">View.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>Dialog-5.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:_selectFolder">Dialog:_selectFolder</a>&nbsp;(param, props, name, save)</td>
+	<td class="summary">Allows user to select a folder by way of the "open file" dialog box.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:autoWrap">Dialog:autoWrap</a>&nbsp;(m, maxWidth)</td>
+	<td class="summary">Auto-wrap text to fit in specified width.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:btn">Dialog:btn</a>&nbsp;(label, verb, memorable)</td>
+	<td class="summary">Convenience function to make a button ultimately bound for lr-dialog box.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:buttons">Dialog:buttons</a>&nbsp;(shortcut, cancelNotMemorable)</td>
+	<td class="summary">get specified dialog buttons.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:forgetAnswer">Dialog:forgetAnswer</a>&nbsp;(memKey)</td>
+	<td class="summary">Forget previously remembered answer.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:getAnswer">Dialog:getAnswer</a>&nbsp;(apkRaw)</td>
+	<td class="summary">Determine if action already remembered, and hence there will be no prompt.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:getAnswer">Dialog:getAnswer</a>&nbsp;(apkRaw)</td>
+	<td class="summary">Determine if action already remembered, and hence there will be no prompt.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:getComboBoxSelection">Dialog:getComboBoxSelection</a>&nbsp;(param)</td>
+	<td class="summary">Fetch a user selection from a combo-box.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:getNumericInput">Dialog:getNumericInput</a>&nbsp;(param)</td>
+	<td class="summary">Prompt user to enter a string via simple dialog box.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:getPopupMenuSelection">Dialog:getPopupMenuSelection</a>&nbsp;(param)</td>
+	<td class="summary">Fetch a user selection from a popup-menu.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:getSimpleTextInput">Dialog:getSimpleTextInput</a>&nbsp;(param)</td>
+	<td class="summary">Prompt user to enter a string via simple dialog box.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:isOk">Dialog:isOk</a>&nbsp;(msg, ...)</td>
+	<td class="summary">Determine if its OK with the user to do something, or not - aLways prompts.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:isOkOrDontAsk">Dialog:isOkOrDontAsk</a>&nbsp;(msg, id)</td>
+	<td class="summary">Prompt user to continue or not, with option to remember decision.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:isYes">Dialog:isYes</a>&nbsp;(msg, ...)</td>
+	<td class="summary">Determine if its OK with the user to do something, or not - aLways prompts.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:messageWithOptions">Dialog:messageWithOptions</a>&nbsp;(message, ...)</td>
+	<td class="summary">Displays a message for the user to see, and provides options for the user to choose.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:new">Dialog:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:newClass">Dialog:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:presentFloatingDialog">Dialog:presentFloatingDialog</a>&nbsp;(params)</td>
+	<td class="summary">Present non-modal (floating dialog), in "like" fashion in Lr4 (not officially supported) as Lr5 (1st version in which offcially supported).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:presentModalFrame">Dialog:presentModalFrame</a>&nbsp;(args, returnAllButtons)</td>
+	<td class="summary">Presents a modal dialog without an OK button.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:promptForTargetPhotos">Dialog:promptForTargetPhotos</a>&nbsp;(prefix, returnComponents, call, viewItems, accItems, noApk)</td>
+	<td class="summary">Function to prompt for initiation of operation to be performed on selected photo(s), filmstrip, or whole catalog.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:putTextOnClipboard">Dialog:putTextOnClipboard</a>&nbsp;(param)</td>
+	<td class="summary">Klugerian function whose impetus was to support log file contents copy-n-paste to email.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:quickTips">Dialog:quickTips</a>&nbsp;(strTbl, oneEol)</td>
+	<td class="summary">Present quick-tips dialog box.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:rememberAnswer">Dialog:rememberAnswer</a>&nbsp;(memKey, answer)</td>
+	<td class="summary">Remember answer.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:selectFile">Dialog:selectFile</a>&nbsp;(param, props, name)</td>
+	<td class="summary">Allows user to select a file by way of the "open file" dialog box.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:selectFolder">Dialog:selectFolder</a>&nbsp;(param, props, name)</td>
+	<td class="summary">Allows user to select a folder by way of the "open file" dialog box.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:selectSaveFile">Dialog:selectSaveFile</a>&nbsp;(param, props, name)</td>
+	<td class="summary">Allows user to select a file by way of the "save file" dialog box.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:selectSaveFolder">Dialog:selectSaveFolder</a>&nbsp;(param, props, name)</td>
+	<td class="summary">Allows user to select a folder by way of the "save file" dialog box.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:showInfoAndRememberAnswer">Dialog:showInfoAndRememberAnswer</a>&nbsp;(msg, memKey, memText, okButton, cancelButton, otherButton)</td>
+	<td class="summary">Show information, and remember answer for a while.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:yesNo">Dialog:yesNo</a>&nbsp;(cancelNotMemorable, shortcut)</td>
+	<td class="summary">get specified dialog buttons.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Dialog:yesNoCancel">Dialog:yesNoCancel</a>&nbsp;(shortcut)</td>
+	<td class="summary">get specified dialog buttons.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="Dialog:_selectFolder"></a><strong>Dialog:_selectFolder</strong>&nbsp;(param, props, name, save)</dt>
+<dd>
+Allows user to select a folder by way of the "open file" dialog box. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>param</em></code>: table - same as run-open-panel, except all are optional:<ul> <li>title <li>prompt ("OK" button label alternative) - NOT supported. <li>can-create-directories <li>file-types (string or array of strings, optional): prefix with '.' for best results. <li>initial-directory</ul>
+	</li>
+	
+	<li>
+	  <code><em>props</em></code>: Properties into which folder path will be written.
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: Name of property to write. 
+	</li>
+	
+	<li>
+	  <code><em>save</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Folder is written to named property if provided, in which case return value is typically ignored.</pre></li>
+	
+	<li><pre class=example>Internally wrapped with error handling context for ready use as button action function or the like... </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>string: path of folder, else nil if user cancelled. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:autoWrap"></a><strong>Dialog:autoWrap</strong>&nbsp;(m, maxWidth)</dt>
+<dd>
+Auto-wrap text to fit in specified width. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>m</em></code>: text to wrap.
+	</li>
+	
+	<li>
+	  <code><em>maxWidth</em></code>: maximum len in real string-len characters. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Assumes single line-feed as term char. </pre></ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>wrapped text (string)</li>
+	
+	<li>number of lines required to display wrapped text. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:btn"></a><strong>Dialog:btn</strong>&nbsp;(label, verb, memorable)</dt>
+<dd>
+Convenience function to make a button ultimately bound for lr-dialog box. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>label</em></code>: (string, required) button text
+	</li>
+	
+	<li>
+	  <code><em>verb</em></code>: (string, required) return value
+	</li>
+	
+	<li>
+	  <code><em>memorable</em></code>: (boolean, default=true) pass false to make otherwise memorable buttons not memorable. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:buttons"></a><strong>Dialog:buttons</strong>&nbsp;(shortcut, cancelNotMemorable)</dt>
+<dd>
+get specified dialog buttons. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>shortcut</em></code>: (string, required) specification keys:<br> YesNo - 'ok' => Yes, 'cancel' => No. 
+	</li>
+	
+	<li>
+	  <code><em>cancelNotMemorable</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:forgetAnswer"></a><strong>Dialog:forgetAnswer</strong>&nbsp;(memKey)</dt>
+<dd>
+Forget previously remembered answer. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>memKey</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Call before a loop where you always want user to answer the first time, even if not subsequently. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:getAnswer"></a><strong>Dialog:getAnswer</strong>&nbsp;(apkRaw)</dt>
+<dd>
+Determine if action already remembered, and hence there will be no prompt. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>apkRaw</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:getAnswer"></a><strong>Dialog:getAnswer</strong>&nbsp;(apkRaw)</dt>
+<dd>
+Determine if action already remembered, and hence there will be no prompt. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>apkRaw</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:getComboBoxSelection"></a><strong>Dialog:getComboBoxSelection</strong>&nbsp;(param)</dt>
+<dd>
+Fetch a user selection from a combo-box. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>param</em></code>: Table with the following elements:<ul> <li>title - goes on window frame <li>subtitle - static text banner goes in content at top. <li>items - for combo box.</ul>
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>self-wrapped.</pre></li>
+	
+	<li><pre class=example>multiple selection is not supported. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>string, or nil for cancel. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:getNumericInput"></a><strong>Dialog:getNumericInput</strong>&nbsp;(param)</dt>
+<dd>
+Prompt user to enter a string via simple dialog box. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>param</em></code>: table with the following elements:<ul> <li>title - window frame title <li>subtitle - static text banner at top of content.</ul> 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>self-wrapped. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>string, or nil for cancelled. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:getPopupMenuSelection"></a><strong>Dialog:getPopupMenuSelection</strong>&nbsp;(param)</dt>
+<dd>
+Fetch a user selection from a popup-menu. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>param</em></code>: Table with the following elements:<ul> <li>title - goes on window frame <li>subtitle - static text banner goes in content at top. <li>items - for popup menu.</ul>
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>self-wrapped.</pre></li>
+	
+	<li><pre class=example>multiple selection is not supported. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>selected item's value, or nil for cancel.</li>
+	
+	<li>msg - in case of failure. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:getSimpleTextInput"></a><strong>Dialog:getSimpleTextInput</strong>&nbsp;(param)</dt>
+<dd>
+Prompt user to enter a string via simple dialog box. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>param</em></code>: table with the following elements:<ul> <li>title - window frame title <li>subtitle - static text banner at top of content. <li>init - initial value optional.</ul> <li>width_in_chars - edit-field width (in fat characters).</ul> <li>height_in_lines - edit-field height (in lines).</ul> 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>self-wrapped. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>string, or nil for cancelled. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:isOk"></a><strong>Dialog:isOk</strong>&nbsp;(msg, ...)</dt>
+<dd>
+Determine if its OK with the user to do something, or not - aLways prompts.  <p>For more complex prompts, use confirm box directly.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>msg</em></code>: string message. 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>buttons are OK/Cancel. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>boolean true iff is ok. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:isOkOrDontAsk"></a><strong>Dialog:isOkOrDontAsk</strong>&nbsp;(msg, id)</dt>
+<dd>
+Prompt user to continue or not, with option to remember decision. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>msg</em></code>: string message.
+	</li>
+	
+	<li>
+	  <code><em>id</em></code>: string key for dismissal option. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Same as is-ok plain, except with option to suppress next time. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>boolean true iff is user answered ok this time or previously... </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:isYes"></a><strong>Dialog:isYes</strong>&nbsp;(msg, ...)</dt>
+<dd>
+Determine if its OK with the user to do something, or not - aLways prompts.  <p>For more complex prompts, use confirm box directly.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>msg</em></code>: string message. 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>buttons are Yes/No. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>boolean true iff is ok. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:messageWithOptions"></a><strong>Dialog:messageWithOptions</strong>&nbsp;(message, ...)</dt>
+<dd>
+Displays a message for the user to see, and provides options for the user to choose. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>message</em></code>: ( string or table, default="" )<br> If string<br> - message is info-type format string.<br> If table<br> - message table contains the following members:<br> - info (string) info format string, or<br> - warning (string) warning format string, or<br> - error (string) error format string.<br> - actionPrefKey (string, default=nil ) for "do not show" informational messages only (never warning or error messages).<br> - This should be a user friendly string since these prefs are now individual clearable by user via combo_box. - buttons ( table, default = nil ) button entries are tables with members:<br> label (string, required) button display text<br> verb (string, required) button return text<br> forget (string, default=false) whether button must not be remembered (only applies if actionPrefKey is passed),<br> In which case, at least one button must not be forgetable.<br> *** One button must have verb='ok' Note: A cancel button is not optional in the dialog box, but it is optional as a parameter to this function. - if passed, it may be used to change the label and optionally make memorable (the default for cancel button (labeled "Cancel") is not memorable). the verb must be 'cancel' (that's what makes it a "cancel" button definition). - if not passed, then it defaults to "Cancel" label, returns 'cancel', and is not memorable (will not be remembered by checking 'Don't show again'). - viewItems (array, default=nil) of items to be added to main UI. Normal use does not include these, but for special occasions: - width (integer, default=nil) units are pixels, or - width_in_chars (integer, default=nil) units are that of big fat characters, generally 50% to double that of true character width. - height (integer, default=nil) of message text, in pixels, or - height_in_lines (integer, default = nil) in lines - best to include an extra line or two to spare and to keep it above the buttons. - wrap (boolean, default=false) whether text should be wrapped at width. Note: strings without spaces are still truncated to fit. *** Requires width AND height to be specified somehow. - call (Call, default=nil) if passed, auto-caption will be displayed and previous caption restored. 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: ( any type, default = nil, nil, nil, ... ) variables to be formatted<br> 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Like lr-dialogs.message, lr-dialogs.message-with-do-not-show, lr-dialogs.confirm, and lr-dialogs.prompt-for-action-with-do-not-show combined,<br> except won't compress nor truncate the message.</pre></li>
+	
+	<li><pre class=example>Will automatically wrap if lines are too long, at space if possible, otherwise cuts in the middle.<br> Max width chosen to accomodate most whole file paths.</pre></li>
+	
+	<li><pre class=example>Supports formatting and named parameter passing.</pre></li>
+	
+	<li><pre class=example>Examples:<br> app:show( "I'm simple" ) -- informational<br> app:show( "I'm ^1 simple", howSimple ) -- informational/formatted.<br> app:show( { info="I'm simple" } ) -- informational using named parameter passing.<br> app:show( { info="I'm ^1 simple" }, "very" ) -- informational, named, formatted.<br> app:show( { confirm="I'm asking, but I'll remember your answer", actionPrefKey="QuestionablePrompt", buttons={{label="Yes",verb='ok'},{label='No',verb='cancel',memorable=true}} } ) -- confirm prompt, both yes and no answers can be remembered. app:show( { warning="I'm ^1 simple" }, adjective ) -- simple warning, formatted.<br> app:show( { info="I'm ^1 simple", actionPrefKey="My friendly prompt", buttons={ {label='OK',verb='ok'},{label='Not OK',verb='other',memorable=false} }, "not so" ) -- you can remember OK button only,<br> app:show( { error="I'm an error", buttons={{label="I guess its OK...",verb='ok'},{label='Abort',verb='cancel'}} } ) -- error message with custom cancel button.<br> </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:new"></a><strong>Dialog:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:newClass"></a><strong>Dialog:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:presentFloatingDialog"></a><strong>Dialog:presentFloatingDialog</strong>&nbsp;(params)</dt>
+<dd>
+Present non-modal (floating dialog), in "like" fashion in Lr4 (not officially supported) as Lr5 (1st version in which offcially supported). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>params</em></code>: (table, required) parameter elements: <br>    name (string, default: "generic") unique dialog box name - used for guarding. Note: if there are no other guarded calls active, the default name will suffice. <br>    guard (number, default: no guarding) App.guardXXX - whether call should be guarded internally or not. Usually call should be guarded externally if not internally. <br>    args (table) params may be dialog box args (if all other params to default), or may be member of params, in order to pass the others in enclosing table. <br>        be sure to consider: <br>    title (string, default: "app-name - floating dialog") recommended to override. <br>    save_frame (string, default: don't save) hardly any reason not to allow user to define spot - recommend app-name - window-name. <br>    resizable (boolean, default: false) usually good to set true, since floaters may have too big frame for contents - allows user to control. <br>    background_color (LrColor, default: white) rarely needs to be otherwise specified. <br>    contents (view, required) a complete view, not an array of view items... <br>    blockTask (boolean, default: blocking, if called from async task, else non-blocking) note: this is an emulation via wrappage, actual floater will be blocking regardless. <br>    windowWillClose (function, default: nil) callback when window is closing (Lr5), or has closed (Lr4). Recommend using for finalization, if not handled externally. <br>    onShow (function, default: nil) callback when dialog about to be presented, contains to-front and close functions, which work as advertised in Lr5, and do nothing in Lr4. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Supports Lr4 (by somewhat emulating Lr5) and Lr5 (by somewhat emulating Lr4). - DO NOT PUT A QUIT BUTTON IF LR4 (quitting requires 'X').</pre></li>
+	
+	<li><pre class=example>Call-forwards: to-front and close - not supported in Lr4. So cross-version contexts must not be dependent on them.</pre></li>
+	
+	<li><pre class=example>examples: <br>    dia:presentFloatingDialog { -- param table is args. <br>    title=str:fmtx( "^1 - My fancy dbox..", app:getAppName() ), <br>    save_frame=str:fmtx( "^1 - My fancy dbox..", app:getAppName() ), -- can be same as title <br>    resizable = true, -- generally a good idea for floaters. <br>    contents = vf:view( vi ), -- excludes quit button if Lr4. <br>    blockTask = true, -- wrapped externally in async task <br>    windowWillClose = nil, -- finale handled in calling context. <br>    onShow = function( callForward ) self.toFront = callForward.toFront; self.close = callForward.close end -- calling context expects these to be defined, even if no-ops in Lr4. <br>    } <br>    dia:presentFloatingDialog { -- param table has name, guard, and args. <br>    name=str:fmtx( "^1 - My fancy dbox..", app:getAppName() ), <br>    guard=App.guardVocal, <br>    args = { <br>    save_frame=str:fmtx( "^1 - My fancy dbox..", app:getAppName() ), -- can be same as title <br>    resizable = true, -- generally a good idea for floaters. <br>    contents = vf:view( vi ), -- excludes quit button if Lr4. <br>    blockTask = false, -- not internally wrapped in async task. <br>    windowWillClose = function() exifTool:closeSession( self.ets ) end <br>    onShow = function( callForward ) self.toFront = callForward.toFront; self.close = callForward.close end <br>    }} </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:presentModalFrame"></a><strong>Dialog:presentModalFrame</strong>&nbsp;(args, returnAllButtons)</dt>
+<dd>
+Presents a modal dialog without an OK button. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>args</em></code>: same as to lr-dialog -> present-modal-dialog
+	</li>
+	
+	<li>
+	  <code><em>returnAllButtons</em></code>: true => return first button click, else hold out for 'cancel' button. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>*** Only suitable if when you don't need form elements to be commited upon dismissal. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>string: dismissal button - either 'ok' or one of the other buttons passed - never returns 'cancel', even if cancel button clicked (Mac). </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:promptForTargetPhotos"></a><strong>Dialog:promptForTargetPhotos</strong>&nbsp;(prefix, returnComponents, call, viewItems, accItems, noApk)</dt>
+<dd>
+Function to prompt for initiation of operation to be performed on selected photo(s), filmstrip, or whole catalog. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>prefix</em></code>: (string, required) operation prefix e.g. "Update metadata of", "Adjust"
+	</li>
+	
+	<li>
+	  <code><em>returnComponents</em></code>: (boolean, default=false) true => omit the prompt and return confirm, subs, buttons, and actionPrefKey items. false => prompt user and return photos.
+	</li>
+	
+	<li>
+	  <code><em>call</em></code>: (Call, required) call object instance. 
+	</li>
+	
+	<li>
+	  <code><em>viewItems</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>accItems</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>noApk</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>check if call has been canceled upon return. If not canceled, then there will be at least one target photo.<br></pre></li>
+	
+	<li><pre class=example>Named parameter passing is supported (i.e. parameters can be named members of a single table if you prefer). </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:putTextOnClipboard"></a><strong>Dialog:putTextOnClipboard</strong>&nbsp;(param)</dt>
+<dd>
+Klugerian function whose impetus was to support log file contents copy-n-paste to email.  <p>Presents text in a multi-line edit-field with instructions to user to copy to clipboard...</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>param</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:quickTips"></a><strong>Dialog:quickTips</strong>&nbsp;(strTbl, oneEol)</dt>
+<dd>
+Present quick-tips dialog box. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>strTbl</em></code>: - table of "paragraph" strings - will be concatenated with double EOL between. 
+	</li>
+	
+	<li>
+	  <code><em>oneEol</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Convenience function for presenting a help string with standard title, buttons, and link to web for more info. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:rememberAnswer"></a><strong>Dialog:rememberAnswer</strong>&nbsp;(memKey, answer)</dt>
+<dd>
+Remember answer. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>memKey</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>answer</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Used in case presentation is via custom dialog box. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:selectFile"></a><strong>Dialog:selectFile</strong>&nbsp;(param, props, name)</dt>
+<dd>
+Allows user to select a file by way of the "open file" dialog box. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>param</em></code>: Same as run-open-panel, except all are optional:<ul> <li>title <li>prompt ("OK" button label alternative) <li>fileTypes <li>initialDirectory</ul>
+	</li>
+	
+	<li>
+	  <code><em>props</em></code>: Properties into which folder path will be written.
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: Name of property to write. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>File path is written to named property if provided, in which case return value is typically ignored. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>string: path of file, else nil if user cancelled. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:selectFolder"></a><strong>Dialog:selectFolder</strong>&nbsp;(param, props, name)</dt>
+<dd>
+Allows user to select a folder by way of the "open file" dialog box. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>param</em></code>: table - same as run-open-panel, except all are optional:<ul> <li>title <li>prompt ("OK" button label alternative) - NOT supported. <li>can-create-directories <li>file-types (string or array of strings, optional): prefix with '.' for best results. <li>initial-directory</ul>
+	</li>
+	
+	<li>
+	  <code><em>props</em></code>: Properties into which folder path will be written.
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: Name of property to write. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Folder is written to named property if provided, in which case return value is typically ignored. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>string: path of folder, else nil if user cancelled. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:selectSaveFile"></a><strong>Dialog:selectSaveFile</strong>&nbsp;(param, props, name)</dt>
+<dd>
+Allows user to select a file by way of the "save file" dialog box. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>param</em></code>: Same as run-save-panel, except all are optional:<ul> <li>title <li>prompt ("OK" button label alternative) <li>fileTypes <li>initialDirectory</ul>
+	</li>
+	
+	<li>
+	  <code><em>props</em></code>: Properties into which folder path will be written.
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: Name of property to write. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>File path is written to named property if provided, in which case return value is typically ignored. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>string: path of file, else nil if user cancelled. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:selectSaveFolder"></a><strong>Dialog:selectSaveFolder</strong>&nbsp;(param, props, name)</dt>
+<dd>
+Allows user to select a folder by way of the "save file" dialog box. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>param</em></code>: table - same as run-open-panel, except all are optional:<ul> <li>title <li>prompt ("OK" button label alternative) - NOT supported. <li>can-create-directories <li>file-types (string or array of strings, optional): prefix with '.' for best results. <li>initial-directory</ul>
+	</li>
+	
+	<li>
+	  <code><em>props</em></code>: Properties into which folder path will be written.
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: Name of property to write. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Folder is written to named property if provided, in which case return value is typically ignored. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>string: path of folder, else nil if user cancelled. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:showInfoAndRememberAnswer"></a><strong>Dialog:showInfoAndRememberAnswer</strong>&nbsp;(msg, memKey, memText, okButton, cancelButton, otherButton)</dt>
+<dd>
+Show information, and remember answer for a while. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>msg</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>memKey</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>memText</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>okButton</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>cancelButton</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>otherButton</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Keyword consolidator uses like function in rc-utils: its the only one using this technique, so this function is reserved in case kwc is ever ported to elare framework.</pre></li>
+	
+	<li><pre class=example>How long answer is remembered is governed by the plugin - generally memory lasts for the duration of a service.</pre></li>
+	
+	<li><pre class=example>Must be used in conjunction with "forget-answer" or there's not much point in it...</pre></li>
+	
+	<li><pre class=example>Unlike normal Lr memory, remembers "cancel" answer as well. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:yesNo"></a><strong>Dialog:yesNo</strong>&nbsp;(cancelNotMemorable, shortcut)</dt>
+<dd>
+get specified dialog buttons. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>cancelNotMemorable</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>shortcut</em></code>: (string, required) specification keys:<br> YesNo - 'ok' => Yes, 'cancel' => No. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Dialog:yesNoCancel"></a><strong>Dialog:yesNoCancel</strong>&nbsp;(shortcut)</dt>
+<dd>
+get specified dialog buttons. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>shortcut</em></code>: (string, required) specification keys:<br> YesNo - 'ok' => Yes, 'cancel' => No. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

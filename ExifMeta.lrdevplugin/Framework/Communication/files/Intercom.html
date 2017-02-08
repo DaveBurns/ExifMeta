@@ -1,0 +1,550 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/Ftp.html">Ftp.lua</a>
+	</li>
+
+	<li><strong>Intercom.lua</strong></li>
+	
+	<li>
+		<a href="../files/XmlRpc.html">XmlRpc.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>Intercom.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#Intercom:broadcast">Intercom:broadcast</a>&nbsp;(msg, lifetime)</td>
+	<td class="summary">Broadcast a messsage.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Intercom:createReply">Intercom:createReply</a>&nbsp;(msg)</td>
+	<td class="summary">Optional method to initialize a fresh message for replying.<br> The other possibility is just to reuse the received message for replying.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Intercom:listen">Intercom:listen</a>&nbsp;(method, object, fromList, ival)</td>
+	<td class="summary">Listen to messages from specified plugins, to me.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Intercom:listenForBroadcast">Intercom:listenForBroadcast</a>&nbsp;(method, object, fromList, ival)</td>
+	<td class="summary">Listen to broadcast messages from specified plugins, to anyone.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Intercom:new">Intercom:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Intercom:newClass">Intercom:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Intercom:sendAndReceive">Intercom:sendAndReceive</a>&nbsp;(msg, to, tmo, fromName)</td>
+	<td class="summary">Send message to specified plugin and wait for reply.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Intercom:sendMessage">Intercom:sendMessage</a>&nbsp;(msg, to)</td>
+	<td class="summary">Send message to destination (unsolicited-inbox), and do not expect nor wait for reply.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Intercom:sendReply">Intercom:sendReply</a>&nbsp;(msg, to)</td>
+	<td class="summary">Send message that is the reply to an inbound (unsolicited "command" message).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Intercom:stopBroadcastListening">Intercom:stopBroadcastListening</a>&nbsp;(object)</td>
+	<td class="summary">Stop broadcast listener tied to specified object.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Intercom:stopListening">Intercom:stopListening</a>&nbsp;(object)</td>
+	<td class="summary">Stop listener tied to specified object.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="Intercom:broadcast"></a><strong>Intercom:broadcast</strong>&nbsp;(msg, lifetime)</dt>
+<dd>
+Broadcast a messsage. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>msg</em></code>: (table, required) message to be broadcast.
+	</li>
+	
+	<li>
+	  <code><em>lifetime</em></code>: (number, optional) lifetime in seconds, else defaults to whatever was initialized when intercom object created (e.g. 10 seconds). 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>message will exist for specified time for any broadcast listeners to hear, then it's deleted (by sender - listeners just make note to not reprocess).</pre></li>
+	
+	<li><pre class=example>broadcast messages do not warrant replies, but receiver is free to send message to broadcaster when broadcast message is received... </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Intercom:createReply"></a><strong>Intercom:createReply</strong>&nbsp;(msg)</dt>
+<dd>
+Optional method to initialize a fresh message for replying.<br> The other possibility is just to reuse the received message for replying. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>msg</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Intercom:listen"></a><strong>Intercom:listen</strong>&nbsp;(method, object, fromList, ival)</dt>
+<dd>
+Listen to messages from specified plugins, to me. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>method</em></code>: (function, required) callback function - must be method.
+	</li>
+	
+	<li>
+	  <code><em>object</em></code>: (Class instance object, optional) object containing callback method. - must not be closed object, or must contain __seen member table.
+	</li>
+	
+	<li>
+	  <code><em>fromList</em></code>: (table as set, default = accept from anyone including self) keys are plugin ids from who unsolicited messages will be accepted, values must evaluate to boolean true.
+	</li>
+	
+	<li>
+	  <code><em>ival</em></code>: (number, optional) polling interval, else accept default. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>returns immediately after starting task, which runs until shutdown.</pre></li>
+	
+	<li><pre class=example>object may be nil, and method may be function, as long as plugin will never try to stop listening. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Intercom:listenForBroadcast"></a><strong>Intercom:listenForBroadcast</strong>&nbsp;(method, object, fromList, ival)</dt>
+<dd>
+Listen to broadcast messages from specified plugins, to anyone. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>method</em></code>: (function, required) callback function - must be method.
+	</li>
+	
+	<li>
+	  <code><em>object</em></code>: (Class instance object, optional) object containing callback method. - must not be closed object, or must contain __seen member table.
+	</li>
+	
+	<li>
+	  <code><em>fromList</em></code>: (table as set, default = accept from anyone including self) keys are plugin ids from who unsolicited messages will be accepted, values must evaluate to boolean true.
+	</li>
+	
+	<li>
+	  <code><em>ival</em></code>: (number, optional) polling interval, else accept default. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>returns immediately after starting task, which runs until shutdown. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Intercom:new"></a><strong>Intercom:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: (table) initial object members, all optional, including: <br>    dir (string, default=catalog dir) path to root of messaging dirs. <br>    pollingInterval (number, default=.1) seconds between polling for incoming messages and/or replies. <br>                   - faster means more responsive but more disk wear. Default is .1 second - seems a nice balanced value. <br>                   - you can go down to .01 second (windows base clock frequency), for ultra-fast messaging, <br>                   - or up to a half second if speed is not a concern, to save disk wear. <br>    broadcastLifetime (number, default=10) seconds for broadcast messages to last before they're assumed to have been heard, and are cleaned up. <br>    addlNames (array of strings, default={}) names of additional plugin entities to be communicating via the intercom, e.g. "Background" (corresponding from-address {pluginId}.Background). 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Intercom:newClass"></a><strong>Intercom:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Intercom:sendAndReceive"></a><strong>Intercom:sendAndReceive</strong>&nbsp;(msg, to, tmo, fromName)</dt>
+<dd>
+Send message to specified plugin and wait for reply. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>msg</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>to</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>tmo</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>fromName</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>must be called from a task. </pre></ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>reply (table) or nil if no reply</li>
+	
+	<li>errm (string) error message if no reply. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Intercom:sendMessage"></a><strong>Intercom:sendMessage</strong>&nbsp;(msg, to)</dt>
+<dd>
+Send message to destination (unsolicited-inbox), and do not expect nor wait for reply. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>msg</em></code>: (table, required) 'name' is only required member, but 'content' may be nice...
+	</li>
+	
+	<li>
+	  <code><em>to</em></code>: (string, required) destination plugin id. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Not for internal use - use private methods instead. </pre></ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status (boolean) true => sent.</li>
+	
+	<li>message (string) error message if not sent. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Intercom:sendReply"></a><strong>Intercom:sendReply</strong>&nbsp;(msg, to)</dt>
+<dd>
+Send message that is the reply to an inbound (unsolicited "command" message). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>msg</em></code>: (table, required) 'name' is only required member, but 'content' may be nice...
+	</li>
+	
+	<li>
+	  <code><em>to</em></code>: (string, required) destination plugin id - often msg.from 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Maybe best to recompute message content, then resend original message (since it already has some members assigned as needed) - but its your call...</pre></li>
+	
+	<li><pre class=example>presently throws error if problems sending, but that may change - note: need not be called from task, although typically is. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Intercom:stopBroadcastListening"></a><strong>Intercom:stopBroadcastListening</strong>&nbsp;(object)</dt>
+<dd>
+Stop broadcast listener tied to specified object. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>object</em></code>: Must be same object as passed to listen-for-broadcast function. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Intercom:stopListening"></a><strong>Intercom:stopListening</strong>&nbsp;(object)</dt>
+<dd>
+Stop listener tied to specified object. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>object</em></code>: Must be same object as passed to listen function. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

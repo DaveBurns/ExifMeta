@@ -1,0 +1,505 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/Image.html">Image.lua</a>
+	</li>
+
+	<li><strong>JpegUtils.lua</strong></li>
+	
+	<li>
+		<a href="../files/TiffUtils.html">TiffUtils.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Xmp.html">Xmp.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>JpegUtils.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#JpegUtils.generateContentWithXmpMetadata">JpegUtils.generateContentWithXmpMetadata</a>&nbsp;(preamble, settingsBlockHeader, settingsPreamble, settings, settingsPostamble, postamble)</td>
+	<td class="summary">Synopsis:			Write previously read stuff, and a modified settings block.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#JpegUtils.parseJpegFileToPieces">JpegUtils.parseJpegFileToPieces</a>&nbsp;(contents)</td>
+	<td class="summary">Synopsis:           Divide jpeg file into pieces - where the most coveted piece contains develop settings.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#JpegUtils.reWriteFileWithChgDetMetadata">JpegUtils.reWriteFileWithChgDetMetadata</a>&nbsp;(filePath, preamble, metadata, postamble)</td>
+	<td class="summary">Synopsis:       Write a jpeg file given components previously read and new or updated chgDet-jpeg-metadata.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#JpegUtils.reWriteFileWithMetadata">JpegUtils.reWriteFileWithMetadata</a>&nbsp;(filePath, preamble, metadata, postamble, metadataSignature, blockType)</td>
+	<td class="summary">Rewrite file with metadata.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#JpegUtils.readFileWithChgDetMetadata">JpegUtils.readFileWithChgDetMetadata</a>&nbsp;(filePath)</td>
+	<td class="summary">Synopsis:       Read a jpeg file in such a way that it identifies chgDet-jpeg-metadata, and can be re-written with new or modified chgDet-jpeg-metadata with impunity.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#JpegUtils.readFileWithMetadata">JpegUtils.readFileWithMetadata</a>&nbsp;(filePath, metadataSignature, blockType)</td>
+	<td class="summary">Synopsis:           Read a file containing a block of metadata introduced by a signature at the beginning of the specified block type, and occupying the entire block.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#JpegUtils.readFileWithXmpMetadata">JpegUtils.readFileWithXmpMetadata</a>&nbsp;(filePath)</td>
+	<td class="summary">Synopsis:			Reads the contents of specified file, seachgDethes for the block containing xmp/camera-raw-settings, and returns the stuff before the block, stuff after the block, and block contents.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#JpegUtils.removeApp1Blocks">JpegUtils.removeApp1Blocks</a>&nbsp;(contents)</td>
+	<td class="summary">Synopsis:       Removes APP1 blocks from jpeg content string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#JpegUtils.writeFileWithChgDetMetadata">JpegUtils.writeFileWithChgDetMetadata</a>&nbsp;(filePath, contents, metadata)</td>
+	<td class="summary">Synopsis:       Combine metadata with file contents and write to disk.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#JpegUtils.writeFileWithMetadata">JpegUtils.writeFileWithMetadata</a>&nbsp;(filePath, contents, metadata, metadataSignature, blockType)</td>
+	<td class="summary">Write file with metadata.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="JpegUtils.generateContentWithXmpMetadata"></a><strong>JpegUtils.generateContentWithXmpMetadata</strong>&nbsp;(preamble, settingsBlockHeader, settingsPreamble, settings, settingsPostamble, postamble)</dt>
+<dd>
+Synopsis:			Write previously read stuff, and a modified settings block.  Algorithm:			- compute new block length for settings block as:  block length = length of settings preamble + length of settings + length of settings postamble  - write preamble blocks - write settings preamble with modified block length - write modified settings - write settings postamble - write postamble blocks 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>preamble</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>settingsBlockHeader</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>settingsPreamble</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>settings</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>settingsPostamble</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>postamble</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="JpegUtils.parseJpegFileToPieces"></a><strong>JpegUtils.parseJpegFileToPieces</strong>&nbsp;(contents)</dt>
+<dd>
+Synopsis:           Divide jpeg file into pieces - where the most coveted piece contains develop settings.  ###:                - maybe this should be in with the xmp-core functions, along with other xmp related functions.  Pieces:             - jpeg preamble: includes start of file through end of block without settings - settings block header: 4 byte app1 block header. - settingsPreamble: block content following header preceding selected settings attributes. - settingsString: attributes string containing selected settings. - settingsPreamble: block content following settings to end of app1 block. - jpegPostamble: remainder of jpeg file. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>contents</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="JpegUtils.reWriteFileWithChgDetMetadata"></a><strong>JpegUtils.reWriteFileWithChgDetMetadata</strong>&nbsp;(filePath, preamble, metadata, postamble)</dt>
+<dd>
+Synopsis:       Write a jpeg file given components previously read and new or updated chgDet-jpeg-metadata.  Notes:          Exported photos are always written with fresh souchgDete content, and so dont use this function, It is only used for video thumbnails, which are to be pre-rendered by the user as jpegs in catalog.  Returns:        true, nil: worked - no comment. true, comment: pretended to work - test-mode. false, comment: didn't work, and here's why.  Notes:          - Metadata format is a black box to this function. - signature is considered sacred: will never change. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>filePath</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>preamble</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>metadata</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>postamble</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="JpegUtils.reWriteFileWithMetadata"></a><strong>JpegUtils.reWriteFileWithMetadata</strong>&nbsp;(filePath, preamble, metadata, postamble, metadataSignature, blockType)</dt>
+<dd>
+Rewrite file with metadata. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>filePath</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>preamble</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>metadata</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>postamble</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>metadataSignature</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>blockType</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="JpegUtils.readFileWithChgDetMetadata"></a><strong>JpegUtils.readFileWithChgDetMetadata</strong>&nbsp;(filePath)</dt>
+<dd>
+Synopsis:       Read a jpeg file in such a way that it identifies chgDet-jpeg-metadata, and can be re-written with new or modified chgDet-jpeg-metadata with impunity.  Motivation:     To support chgDet-jpeg-metadata, namely photo-uuid for looking up souchgDete photo in lightroom catalog, and export-change-date which is used to avoid unnecessary updates and uploads.  Notes:          - Metadata format is a black box to this function. - signature is considered sacred: will never change.  Initial Application:    Metadata to contain photo-id & exact date/time of last souchgDete mod to support corelation of target to catalog database and change determination.  Returns:        preamble, chgDet-jpeg-metadata - undressed, postamble, nil -- worked: metadata nil if not present. nil, nil, nil, qualification -- failed. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>filePath</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="JpegUtils.readFileWithMetadata"></a><strong>JpegUtils.readFileWithMetadata</strong>&nbsp;(filePath, metadataSignature, blockType)</dt>
+<dd>
+Synopsis:           Read a file containing a block of metadata introduced by a signature at the beginning of the specified block type, and occupying the entire block.  Returns:            The part before the block containing the target metadata as preamble, the part of the block after the metadata signature as metadata string, and subsequent blocks to end of file as the postamble.  Note:               The block header and metadata signature are missing from the returned data, thus to re-write the file, the missing data should be re-supplied, i.e. to write previously read file:  - preamble verbatim - metadata block header with adjusted length - metadata signature - metadata string - postamble verbatim.  Note:               If metadata is absent, it still returns a preamble and postamble divided at the SOI marker, so file can be re-written even if metadata was not pre-existing. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>filePath</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>metadataSignature</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>blockType</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="JpegUtils.readFileWithXmpMetadata"></a><strong>JpegUtils.readFileWithXmpMetadata</strong>&nbsp;(filePath)</dt>
+<dd>
+Synopsis:			Reads the contents of specified file, seachgDethes for the block containing xmp/camera-raw-settings, and returns the stuff before the block, stuff after the block, and block contents.  Note:				xmp-meta data may span multiple blocks, and settings may be specified before and/or after saved settings.  Limitations:		the active camera-raw-settings must be contained in a single block, thus all other xmp-meta blocks are ignored.  Returns:			- preamble blocks - settings block preamble - settings - settings block postamble - postamble blocks. - msg  Instructions:		Call and save everything for re-write. if settings convert to table. pass saved settings and modified settings as string to rewrite.  
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>filePath</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="JpegUtils.removeApp1Blocks"></a><strong>JpegUtils.removeApp1Blocks</strong>&nbsp;(contents)</dt>
+<dd>
+Synopsis:       Removes APP1 blocks from jpeg content string.  Motivation:     APP1 blocks contain changes like render date, that don't really mean the image has changed in any meaningful way.  This function supports, lax jpeg file change detection.  Instructions:   Remove app1 blocks from souchgDete & target contents, then compare the results to decide if there are any meaningful differences. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>contents</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="JpegUtils.writeFileWithChgDetMetadata"></a><strong>JpegUtils.writeFileWithChgDetMetadata</strong>&nbsp;(filePath, contents, metadata)</dt>
+<dd>
+Synopsis:       Combine metadata with file contents and write to disk.  Motivation:     Supports Photooey which needs to write a newly rendered file to target with metadata.  Returns:        - true, nil:                worked - no comment. - true, comment:            pretended to work - test mode qualification. - false, error-message:     failed.  Notes:          - Since contents comes from rendered file, it won't have metadata to be replaced, so can write as new. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>filePath</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>contents</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>metadata</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="JpegUtils.writeFileWithMetadata"></a><strong>JpegUtils.writeFileWithMetadata</strong>&nbsp;(filePath, contents, metadata, metadataSignature, blockType)</dt>
+<dd>
+Write file with metadata. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>filePath</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>contents</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>metadata</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>metadataSignature</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>blockType</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

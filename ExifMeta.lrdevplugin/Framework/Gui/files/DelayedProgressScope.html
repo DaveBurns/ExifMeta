@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/Binding.html">Binding.lua</a>
+	</li>
+
+	<li><strong>DelayedProgressScope.lua</strong></li>
+	
+	<li>
+		<a href="../files/Dialog.html">Dialog.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Gui.html">Gui.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Manager.html">Manager.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Notes.html">Notes.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ScrollView.html">ScrollView.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/View.html">View.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>DelayedProgressScope.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#DelayedProgressScope:new">DelayedProgressScope:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instances.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#DelayedProgressScope:newClass">DelayedProgressScope:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#DelayedProgressScope:setIndeterminateProgress">DelayedProgressScope:setIndeterminateProgress</a>&nbsp;(yield)</td>
+	<td class="summary">Call to indicate operation is progressing, yet amount til completion unknown.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="DelayedProgressScope:new"></a><strong>DelayedProgressScope:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instances. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: Initial table, with all the same members as regular lr-progress-scope, plus (all are optional): <ul> <li>functionContext (lr-function-context, default nil): if not set in constructor, must be manually attached afterward. <li>modal (boolean, default true): set true to use modal dialog box instead of the upper left corner. <li>indeterminate (boolean, default true): calling set-portion-complete converts an indeterminate scope to a determinate one. <li>cannotCancel (boolean, default false): set true to make it un-cancelable. <li>delaySecs (number, default 1): the number of seconds allowed to elapse before an actual scope is displayed. <li>updateSecs updateSecs (number, default 0.25): the number of seconds between actual updates to the display of the scope.  This allows thousands or hundreds of thousands of call to setCaption() or setPortionComplete() per second without paying much overhead. </ul> 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Can be used anywhere a LrProgressScope object can be used, except: <br>supports determinate progress scopes only - i.e. you have to set portion-complete or the actual scope will never by created. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="DelayedProgressScope:newClass"></a><strong>DelayedProgressScope:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="DelayedProgressScope:setIndeterminateProgress"></a><strong>DelayedProgressScope:setIndeterminateProgress</strong>&nbsp;(yield)</dt>
+<dd>
+Call to indicate operation is progressing, yet amount til completion unknown. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>yield</em></code>: (boolean, default: false) true => yield every update interval. <br>Leave false if calling context yields naturally, but yields are necessary for scope to be displayed. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>auto-converts determinate progress scope to indeterminate one.</pre></li>
+	
+	<li><pre class=example>must be called from task or it'll never get displayed. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

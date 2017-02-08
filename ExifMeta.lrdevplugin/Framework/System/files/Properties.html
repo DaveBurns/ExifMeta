@@ -1,0 +1,584 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/App.html">App.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Background.html">Background.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Call.html">Call.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/DebugScript.html">DebugScript.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ExternalApp.html">ExternalApp.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Gate.html">Gate.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Globals.html">Globals.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/InitFramework.html">InitFramework.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/LogFile.html">LogFile.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Mac.html">Mac.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Object.html">Object.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ObjectFactory.html">ObjectFactory.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/OperatingSystem.html">OperatingSystem.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Preferences.html">Preferences.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Presets.html">Presets.lua</a>
+	</li>
+
+	<li><strong>Properties.lua</strong></li>
+	
+	<li>
+		<a href="../files/Reload.html">Reload.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Require.html">Require.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/RpcApp.html">RpcApp.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/RpcBackground.html">RpcBackground.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Service.html">Service.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Settings.html">Settings.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Sidekick.html">Sidekick.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Timer.html">Timer.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Updater.html">Updater.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/User.html">User.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Windows.html">Windows.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>Properties.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#Properties:getPropertyForPlugin">Properties:getPropertyForPlugin</a>&nbsp;(_plugin, name, forceRead)</td>
+	<td class="summary">Reads named property value associated with catalog.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Properties:getPropertyForPluginSpanningCatalogs">Properties:getPropertyForPluginSpanningCatalogs</a>&nbsp;(pluginId, name)</td>
+	<td class="summary">Gets property tied to plugin, but not to specific catalog.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Properties:getSharedProperty">Properties:getSharedProperty</a>&nbsp;(name, expectedType, default)</td>
+	<td class="summary">Gets shared value associated with specified name.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Properties:new">Properties:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Properties:newClass">Properties:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Properties:setPropertyForPlugin">Properties:setPropertyForPlugin</a>&nbsp;(_plugin, name, value, noFlush)</td>
+	<td class="summary">Set property value specified by name associated with catalog.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Properties:setPropertyForPluginSpanningCatalogs">Properties:setPropertyForPluginSpanningCatalogs</a>&nbsp;(pluginId, name, value, noFlush)</td>
+	<td class="summary">Set plugin property that is catalog independent.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Properties:setSharedProperty">Properties:setSharedProperty</a>&nbsp;(name, value)</td>
+	<td class="summary">Sets property readable by sister function.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="Properties:getPropertyForPlugin"></a><strong>Properties:getPropertyForPlugin</strong>&nbsp;(_plugin, name, forceRead)</dt>
+<dd>
+Reads named property value associated with catalog. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>_plugin</em></code>: - _PLUGIN or pluginId.
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: - property name 
+	</li>
+	
+	<li>
+	  <code><em>forceRead</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Substitute for non-working Lightroom version, until fixed.</pre></li>
+	
+	<li><pre class=example>This will be removed or replaced with the equivalent lightroom version once difficulties are resolved.</pre></li>
+	
+	<li><pre class=example>Reads from loaded table or loads then reads.</pre></li>
+	
+	<li><pre class=example>Name must be a string.</pre></li>
+	
+	<li><pre class=example>Throws error if problem reading properties. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>Value as set, which may be nil. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Properties:getPropertyForPluginSpanningCatalogs"></a><strong>Properties:getPropertyForPluginSpanningCatalogs</strong>&nbsp;(pluginId, name)</dt>
+<dd>
+Gets property tied to plugin, but not to specific catalog. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>pluginId</em></code>: plugin-id - nil for this plugin.
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: string or array representing leaf of hierarchically structured property. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Initial application: Importer master sequence number, so an index used for import file naming into different catalogs <br>would not create conflicts in common backup bucket, or when catalogs merged... </pre></li>
+	
+	<li><pre class=example>Original implementation had properties kept in parent of .lrplugin folder - on retrospect, maybe not such a good idea. <br>       Current implementation uses app-data dir. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>simple value (original type not table). </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Properties:getSharedProperty"></a><strong>Properties:getSharedProperty</strong>&nbsp;(name, expectedType, default)</dt>
+<dd>
+Gets shared value associated with specified name. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: (string or table, required) name or parameter table containing name - property name.
+	</li>
+	
+	<li>
+	  <code><em>expectedType</em></code>: (string, optional) expected type.
+	</li>
+	
+	<li>
+	  <code><em>default</em></code>: (any, optional) return value, instead of nil (note: type not checked, even if "expected type" is passed). 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Shared meaning all-plugins, all-catalogs, all-users, ...</pre></li>
+	
+	<li><pre class=example>Initial application: user-name.</pre></li>
+	
+	<li><pre class=example>Properties are stored in plugin parent, so they will only be shared by child plugins.</pre></li>
+	
+	<li><pre class=example>Throws error if name not supplied or existing properties unobtainable. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>named value, any type - default or nil if non-existing.</li>
+	
+	<li>path of properties file, if value read is nil. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Properties:new"></a><strong>Properties:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Properties:newClass"></a><strong>Properties:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Properties:setPropertyForPlugin"></a><strong>Properties:setPropertyForPlugin</strong>&nbsp;(_plugin, name, value, noFlush)</dt>
+<dd>
+Set property value specified by name associated with catalog. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>_plugin</em></code>: - _PLUGIN or pluginId.
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: - property name
+	</li>
+	
+	<li>
+	  <code><em>value</em></code>: - property value, may be nil.
+	</li>
+	
+	<li>
+	  <code><em>noFlush</em></code>: - true => refrain from writing to disk. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Substitute for non-working Lightroom version, until fixed.</pre></li>
+	
+	<li><pre class=example>This will be removed or replaced with the equivalent lightroom version once difficulties are resolved.</pre></li>
+	
+	<li><pre class=example>Writes a table into file plugin-id.properties.lua with the specified property.</pre></li>
+	
+	<li><pre class=example>name should be string, and value should be number or string or nil.</pre></li>
+	
+	<li><pre class=example>Returns nothing - throws error if can't set property. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Properties:setPropertyForPluginSpanningCatalogs"></a><strong>Properties:setPropertyForPluginSpanningCatalogs</strong>&nbsp;(pluginId, name, value, noFlush)</dt>
+<dd>
+Set plugin property that is catalog independent. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>pluginId</em></code>: plugin-id string - nil for this plugin.
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: string or array representing leaf of hierarchically structured property.
+	</li>
+	
+	<li>
+	  <code><em>value</em></code>: property value.
+	</li>
+	
+	<li>
+	  <code><em>noFlush</em></code>: (boolean, default: flush) set to refrain from flusing properties to disk. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>see 'get' function</pre></li>
+	
+	<li><pre class=example>Returns nothing - throws error if trouble. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Properties:setSharedProperty"></a><strong>Properties:setSharedProperty</strong>&nbsp;(name, value)</dt>
+<dd>
+Sets property readable by sister function. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>value</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>see 'get' function.</pre></li>
+	
+	<li><pre class=example>Returns nothing - throws error if trouble. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

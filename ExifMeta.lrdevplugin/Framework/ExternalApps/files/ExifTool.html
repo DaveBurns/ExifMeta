@@ -1,0 +1,1034 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/Convert.html">Convert.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/DngConverter.html">DngConverter.lua</a>
+	</li>
+
+	<li><strong>ExifTool.lua</strong></li>
+	
+	<li>
+		<a href="../files/Ffmpeg.html">Ffmpeg.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/FtpAgApp.html">FtpAgApp.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ImageMagick.html">ImageMagick.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Java.html">Java.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Mogrify.html">Mogrify.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Sqlite.html">Sqlite.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>ExifTool.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#ExifTool:addArg">ExifTool:addArg</a>&nbsp;(arg)</td>
+	<td class="summary">Exiftool method to emulate exiftool session method of same name.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExifTool:addTarget">ExifTool:addTarget</a>&nbsp;(target)</td>
+	<td class="summary">Accumulate target.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExifTool:browseForExe">ExifTool:browseForExe</a>&nbsp;(params)</td>
+	<td class="summary">Browse for exiftool executable.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExifTool:clearArgumentString">ExifTool:clearArgumentString</a>&nbsp;()</td>
+	<td class="summary">Clears the argument string as perceived by outside world.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExifTool:closeSession">ExifTool:closeSession</a>&nbsp;(session)</td>
+	<td class="summary">Closes (previously opened) exiftool session.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExifTool:execute">ExifTool:execute</a>&nbsp;(tmo)</td>
+	<td class="summary">Exiftool method to emulate exiftool session method of same name.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExifTool:getArgumentString">ExifTool:getArgumentString</a>&nbsp;()</td>
+	<td class="summary">Get argument string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExifTool:getFolderNumber">ExifTool:getFolderNumber</a>&nbsp;(exif)</td>
+	<td class="summary">parse image *number* from full (or sufficiently populated) -S format parsed exif table (i.e.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExifTool:getImageNumber">ExifTool:getImageNumber</a>&nbsp;(exif)</td>
+	<td class="summary">parse image *number* from multi-item (or sufficiently populated) -S format parsed exif table (i.e.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExifTool:getSession">ExifTool:getSession</a>&nbsp;(name)</td>
+	<td class="summary">Get session, if exists.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExifTool:getVersionString">ExifTool:getVersionString</a>&nbsp;()</td>
+	<td class="summary">Exercise exiftool to get version info as table, if usable.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExifTool:isSession">ExifTool:isSession</a>&nbsp;()</td>
+	<td class="summary">Determine if session mode, or exittool proper.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExifTool:isSessionOpen">ExifTool:isSessionOpen</a>&nbsp;(name)</td>
+	<td class="summary">Is session open?  </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExifTool:new">ExifTool:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExifTool:newClass">ExifTool:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExifTool:openSession">ExifTool:openSession</a>&nbsp;(name, cfg, returnExisting)</td>
+	<td class="summary">Create a new exiftool execution session.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExifTool:parseDateTime">ExifTool:parseDateTime</a>&nbsp;(dts)</td>
+	<td class="summary">Parse date time string *value* (auto-detects subsec or time-zone).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExifTool:setTarget">ExifTool:setTarget</a>&nbsp;(target)</td>
+	<td class="summary">Set single target.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExifTool:setTargets">ExifTool:setTargets</a>&nbsp;(targets)</td>
+	<td class="summary">Set target array.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Session:addArg">Session:addArg</a>&nbsp;(arg)</td>
+	<td class="summary">Accumulate argument.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Session:addTarget">Session:addTarget</a>&nbsp;(target)</td>
+	<td class="summary">Accumulate target.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Session:clearArgumentString">Session:clearArgumentString</a>&nbsp;()</td>
+	<td class="summary">Clears the argument string as perceived by outside world.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Session:execRead">Session:execRead</a>&nbsp;(tmo)</td>
+	<td class="summary">Read.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Session:execWrite">Session:execWrite</a>&nbsp;(tmo)</td>
+	<td class="summary">Update ###2 not in exiftool proper, which has some problems anyway, e.g.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Session:execute">Session:execute</a>&nbsp;(tmo)</td>
+	<td class="summary">Execute accumulated arguments.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Session:getArgumentString">Session:getArgumentString</a>&nbsp;()</td>
+	<td class="summary">Get equivalent argument string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Session:isSession">Session:isSession</a>&nbsp;()</td>
+	<td class="summary">Determine if session or exiftool proper.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Session:setTarget">Session:setTarget</a>&nbsp;(target)</td>
+	<td class="summary">Set single target.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Session:setTargets">Session:setTargets</a>&nbsp;(targets)</td>
+	<td class="summary">Set target array.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="ExifTool:addArg"></a><strong>ExifTool:addArg</strong>&nbsp;(arg)</dt>
+<dd>
+Exiftool method to emulate exiftool session method of same name. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>arg</em></code>: argument to add, typically of the form -tag=value, but can be anything. Will wrap with double-quotes, if not already wrapped. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>so workers can use either a session or exiftool proper to do their jobs.</pre></li>
+	
+	<li><pre class=example>last argument added must be target file. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExifTool:addTarget"></a><strong>ExifTool:addTarget</strong>&nbsp;(target)</dt>
+<dd>
+Accumulate target. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>target</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExifTool:browseForExe"></a><strong>ExifTool:browseForExe</strong>&nbsp;(params)</dt>
+<dd>
+Browse for exiftool executable. No default dir, oh well... (###2 could rely on base clas method I think).
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>params</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExifTool:clearArgumentString"></a><strong>ExifTool:clearArgumentString</strong>&nbsp;()</dt>
+<dd>
+Clears the argument string as perceived by outside world. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExifTool:closeSession"></a><strong>ExifTool:closeSession</strong>&nbsp;(session)</dt>
+<dd>
+Closes (previously opened) exiftool session. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>session</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExifTool:execute"></a><strong>ExifTool:execute</strong>&nbsp;(tmo)</dt>
+<dd>
+Exiftool method to emulate exiftool session method of same name. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>tmo</em></code>: Timeout in seconds before to give up on execution response and return error code. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Emulation of session method, so workers can use either a session or exiftool proper to do their jobs. </pre></ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>response (string or boolean) required.</li>
+	
+	<li>message (string) error message if applicable. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExifTool:getArgumentString"></a><strong>ExifTool:getArgumentString</strong>&nbsp;()</dt>
+<dd>
+Get argument string. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExifTool:getFolderNumber"></a><strong>ExifTool:getFolderNumber</strong>&nbsp;(exif)</dt>
+<dd>
+parse image *number* from full (or sufficiently populated) -S format parsed exif table (i.e. keys are exif ID, values are string). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>exif</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>number representing image number, or nil if no such item. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExifTool:getImageNumber"></a><strong>ExifTool:getImageNumber</strong>&nbsp;(exif)</dt>
+<dd>
+parse image *number* from multi-item (or sufficiently populated) -S format parsed exif table (i.e. keys are exif ID, values are string). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>exif</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>number representing image number, or nil if no such item. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExifTool:getSession"></a><strong>ExifTool:getSession</strong>&nbsp;(name)</dt>
+<dd>
+Get session, if exists. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExifTool:getVersionString"></a><strong>ExifTool:getVersionString</strong>&nbsp;()</dt>
+<dd>
+Exercise exiftool to get version info as table, if usable. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExifTool:isSession"></a><strong>ExifTool:isSession</strong>&nbsp;()</dt>
+<dd>
+Determine if session mode, or exittool proper. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExifTool:isSessionOpen"></a><strong>ExifTool:isSessionOpen</strong>&nbsp;(name)</dt>
+<dd>
+Is session open? 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExifTool:new"></a><strong>ExifTool:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>pass pref-name, win-exe-name, or mac-pathed-name, if desired, else rely on defaults (but know what they are - see code). </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExifTool:newClass"></a><strong>ExifTool:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExifTool:openSession"></a><strong>ExifTool:openSession</strong>&nbsp;(name, cfg, returnExisting)</dt>
+<dd>
+Create a new exiftool execution session. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: (string, required) unique session name (e.g. service name). 
+	</li>
+	
+	<li>
+	  <code><em>cfg</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>returnExisting</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>creates arg bufile in temp dir, and starts an exiftool task to listen to it (see -stay_open exiftool option). </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExifTool:parseDateTime"></a><strong>ExifTool:parseDateTime</strong>&nbsp;(dts)</dt>
+<dd>
+Parse date time string *value* (auto-detects subsec or time-zone).
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>dts</em></code>: (string, required) format: 'YYYY:MM:DD HH:MM:SS' (e.g. date-time-original).
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>you may need to call getValueFromPairS first.</pre></ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>timeNumStruct (table) year - second *string* members, maybe subsec or tzHour(may have neg sign) & tzMinute.</li>
+	
+	<li>errm (string) if parse problem.</li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExifTool:setTarget"></a><strong>ExifTool:setTarget</strong>&nbsp;(target)</dt>
+<dd>
+Set single target. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>target</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExifTool:setTargets"></a><strong>ExifTool:setTargets</strong>&nbsp;(targets)</dt>
+<dd>
+Set target array. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>targets</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Session:addArg"></a><strong>Session:addArg</strong>&nbsp;(arg)</dt>
+<dd>
+Accumulate argument. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>arg</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Session:addTarget"></a><strong>Session:addTarget</strong>&nbsp;(target)</dt>
+<dd>
+Accumulate target. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>target</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Session:clearArgumentString"></a><strong>Session:clearArgumentString</strong>&nbsp;()</dt>
+<dd>
+Clears the argument string as perceived by outside world. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>There is no way to revoke arguments already added to a session - they *will* be executed, either by 'execute' or upon closing. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Session:execRead"></a><strong>Session:execRead</strong>&nbsp;(tmo)</dt>
+<dd>
+Read.
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>tmo</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Session:execWrite"></a><strong>Session:execWrite</strong>&nbsp;(tmo)</dt>
+<dd>
+Update ###2 not in exiftool proper, which has some problems anyway, e.g. -tagsFromFile only works in session when separate lines, but only works in et sesn emulation when a single param. I need to make session an abstract class, then subclass working session and exiftool proper.
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>tmo</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Session:execute"></a><strong>Session:execute</strong>&nbsp;(tmo)</dt>
+<dd>
+Execute accumulated arguments. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>tmo</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>response (string) exiftool response, or nil if none.</li>
+	
+	<li>message (string) error message if no response.</li>
+	
+	<li>equiv (string) equivalent command executed, if it got that far. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Session:getArgumentString"></a><strong>Session:getArgumentString</strong>&nbsp;()</dt>
+<dd>
+Get equivalent argument string. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Session:isSession"></a><strong>Session:isSession</strong>&nbsp;()</dt>
+<dd>
+Determine if session or exiftool proper.
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Session:setTarget"></a><strong>Session:setTarget</strong>&nbsp;(target)</dt>
+<dd>
+Set single target. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>target</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Session:setTargets"></a><strong>Session:setTargets</strong>&nbsp;(targets)</dt>
+<dd>
+Set target array. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>targets</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

@@ -1,0 +1,784 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/Binding.html">Binding.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/DelayedProgressScope.html">DelayedProgressScope.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Dialog.html">Dialog.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Gui.html">Gui.lua</a>
+	</li>
+
+	<li><strong>Manager.lua</strong></li>
+	
+	<li>
+		<a href="../files/Notes.html">Notes.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ScrollView.html">ScrollView.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/View.html">View.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>Manager.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#Manager.endDialog">Manager.endDialog</a>&nbsp;(props)</td>
+	<td class="summary">Called when dialog box is being exited for whatever reason.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Manager.initPrefs">Manager.initPrefs</a>&nbsp;()</td>
+	<td class="summary">Static method for initializing preferences: both global and non-global.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Manager.prefChangeHandler">Manager.prefChangeHandler</a>&nbsp;(_id, _prefs, name, value)</td>
+	<td class="summary">Preference change handler.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Manager.propChangeHandler">Manager.propChangeHandler</a>&nbsp;(id, props, name, value)</td>
+	<td class="summary">Property change handler.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Manager.sectionsForBottomOfDialog">Manager.sectionsForBottomOfDialog</a>&nbsp;(vf, props)</td>
+	<td class="summary">Create bottom section with settings.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Manager.sectionsForTopOfDialog">Manager.sectionsForTopOfDialog</a>&nbsp;(vf, props)</td>
+	<td class="summary">Create top section of dialog.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Manager.setProp">Manager.setProp</a>&nbsp;(name, value)</td>
+	<td class="summary">Static method for updating display property corresponding to pref.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Manager.startDialog">Manager.startDialog</a>&nbsp;(props)</td>
+	<td class="summary">Called when dialog box is being initialized for plugin.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Manager:_initGlobalPrefs">Manager:_initGlobalPrefs</a>&nbsp;()</td>
+	<td class="summary">Initialize global preferences.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Manager:_initPrefs">Manager:_initPrefs</a>&nbsp;(presetName)</td>
+	<td class="summary">Initialize local preferences for specified preset.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Manager:endDialogMethod">Manager:endDialogMethod</a>&nbsp;(props)</td>
+	<td class="summary">Called when dialog box is being exited for whatever reason.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Manager:new">Manager:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Manager:newClass">Manager:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Manager:prefChangeHandlerMethod">Manager:prefChangeHandlerMethod</a>&nbsp;(_id, _prefs, key, value, call)</td>
+	<td class="summary">Preference change handler.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Manager:propChangeHandlerMethod">Manager:propChangeHandlerMethod</a>&nbsp;(props, name, value)</td>
+	<td class="summary">Plugin manager property change handler.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Manager:sectionsForBottomOfDialogMethod">Manager:sectionsForBottomOfDialogMethod</a>&nbsp;(vf, props)</td>
+	<td class="summary">Sections for bottom of dialog method.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Manager:sectionsForTopOfDialogMethod">Manager:sectionsForTopOfDialogMethod</a>&nbsp;(vf, props)</td>
+	<td class="summary">Sections for top of dialog method.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Manager:startDialogMethod">Manager:startDialogMethod</a>&nbsp;(props)</td>
+	<td class="summary">Start dialog method.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="Manager.endDialog"></a><strong>Manager.endDialog</strong>&nbsp;(props)</dt>
+<dd>
+Called when dialog box is being exited for whatever reason.  Static function required by Lightroom. Derived classes should override method instead. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Manager.initPrefs"></a><strong>Manager.initPrefs</strong>&nbsp;()</dt>
+<dd>
+Static method for initializing preferences: both global and non-global. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Global preferences used by framework are initialized in init-framework.<br> (I don't think framework is using any non-global preferences at the moment). This function is for initializing preferencea used by application.</pre></li>
+	
+	<li><pre class=example>Must be called from init module, so preferences are initialized without having to visit plugin manager.</pre></li>
+	
+	<li><pre class=example>Extended classes should always call this after initializing extended preferences. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Manager.prefChangeHandler"></a><strong>Manager.prefChangeHandler</strong>&nbsp;(_id, _prefs, name, value)</dt>
+<dd>
+Preference change handler.  Static function required by Lightroom. Derived classes should override method instead. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>_id</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>_prefs</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>value</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Manager.propChangeHandler"></a><strong>Manager.propChangeHandler</strong>&nbsp;(id, props, name, value)</dt>
+<dd>
+Property change handler.  Static function required by Lightroom. Derived classes should override method instead. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>id</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>value</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Manager.sectionsForBottomOfDialog"></a><strong>Manager.sectionsForBottomOfDialog</strong>&nbsp;(vf, props)</dt>
+<dd>
+Create bottom section with settings.  Static function required by Lightroom. Derived classes should override method instead. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>vf</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Manager.sectionsForTopOfDialog"></a><strong>Manager.sectionsForTopOfDialog</strong>&nbsp;(vf, props)</dt>
+<dd>
+Create top section of dialog.  Static function required by Lightroom. Derived classes should override method instead. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>vf</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Manager.setProp"></a><strong>Manager.setProp</strong>&nbsp;(name, value)</dt>
+<dd>
+Static method for updating display property corresponding to pref. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>value</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Manager.startDialog"></a><strong>Manager.startDialog</strong>&nbsp;(props)</dt>
+<dd>
+Called when dialog box is being initialized for plugin.  Static function simply creates an appropriate manager instance and dispatches its start-dialog method.  Derived classes should override methods, not static functions. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Manager:_initGlobalPrefs"></a><strong>Manager:_initGlobalPrefs</strong>&nbsp;()</dt>
+<dd>
+Initialize global preferences. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Manager:_initPrefs"></a><strong>Manager:_initPrefs</strong>&nbsp;(presetName)</dt>
+<dd>
+Initialize local preferences for specified preset. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>presetName</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Manager:endDialogMethod"></a><strong>Manager:endDialogMethod</strong>&nbsp;(props)</dt>
+<dd>
+Called when dialog box is being exited for whatever reason.  <p>Typically a good place to make sure settings have been saved.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>*** MUST be called by derived type too (as well as the start method).</pre></li>
+	
+	<li><pre class=example>The base method just saves everything - override to descriminate. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Manager:new"></a><strong>Manager:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Manager:newClass"></a><strong>Manager:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Manager:prefChangeHandlerMethod"></a><strong>Manager:prefChangeHandlerMethod</strong>&nbsp;(_id, _prefs, key, value, call)</dt>
+<dd>
+Preference change handler.  <p>Handles change to preferences that are associated with a property table in the plugin manager UI.<br> Examples: adv-dbg-ena, pref-set-name.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>_id</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>_prefs</em></code>: Preferences associated with value change.
+	</li>
+	
+	<li>
+	  <code><em>key</em></code>: raw preference key - not suitable for direct comparison to global pref names.
+	</li>
+	
+	<li>
+	  <code><em>value</em></code>: New preference value.
+	</li>
+	
+	<li>
+	  <code><em>call</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>*** IMPORTANT: The base class method is critical and must be called by derived class.</pre></li>
+	
+	<li><pre class=example>Changed items are typically changed via the UI and are bound directly to lr-prefs. <br>props are not bound to prefs explicitly/directly, but need to be reloaded if the pref set name changes. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Manager:propChangeHandlerMethod"></a><strong>Manager:propChangeHandlerMethod</strong>&nbsp;(props, name, value)</dt>
+<dd>
+Plugin manager property change handler. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>value</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Handles changes to property table for UI elements that are NOT specifically/directly bound to a lr-preference.</pre></li>
+	
+	<li><pre class=example>By default, this method simply sets the corresponding preference which may be from a named set, or the unnamed (default) set.</pre></li>
+	
+	<li><pre class=example>*** IMPORTANT: Derived class may need to call base class method, or at a minimum, make sure changed prefs are set. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Manager:sectionsForBottomOfDialogMethod"></a><strong>Manager:sectionsForBottomOfDialogMethod</strong>&nbsp;(vf, props)</dt>
+<dd>
+Sections for bottom of dialog method. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>vf</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>*** Required for named preference set support - must be called in derived class if named preferences are to be supported and this method is overridden. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Manager:sectionsForTopOfDialogMethod"></a><strong>Manager:sectionsForTopOfDialogMethod</strong>&nbsp;(vf, props)</dt>
+<dd>
+Sections for top of dialog method. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>vf</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Derived class is free to call to include standard sections, or override completely... </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Manager:startDialogMethod"></a><strong>Manager:startDialogMethod</strong>&nbsp;(props)</dt>
+<dd>
+Start dialog method. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>*** IMPORTANT: The base class method is critical and must be called by derived class, <br>AFTER initializing all the pref values, so they get loaded into props. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

@@ -1,0 +1,713 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/Binding.html">Binding.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/DelayedProgressScope.html">DelayedProgressScope.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Dialog.html">Dialog.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Gui.html">Gui.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Manager.html">Manager.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Notes.html">Notes.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ScrollView.html">ScrollView.lua</a>
+	</li>
+
+	<li><strong>View.lua</strong></li>
+	
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>View.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#View:getCollectionBrowser">View:getCollectionBrowser</a>&nbsp;(params)</td>
+	<td class="summary">Gets collection browser in the form of a push-button view item.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#View:getEncryptedPasswordViewItems">View:getEncryptedPasswordViewItems</a>&nbsp;(passwordFieldName, props, pwDescr, viewOptions)</td>
+	<td class="summary">Get (encrypted) password view items.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#View:getLogControls">View:getLogControls</a>&nbsp;(params)</td>
+	<td class="summary">Create items for view of log-file controls (verbose, show, clear).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#View:getPluginManagerPresetControls">View:getPluginManagerPresetControls</a>&nbsp;(params)</td>
+	<td class="summary">Create items for view of plugin manager preset (label, preset-dropdown).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#View:getPresetName">View:getPresetName</a>&nbsp;(presetId, props)</td>
+	<td class="summary">Get preset name and associated data value(s) key, given ID and props - nil => in transition, blank => no preset selected.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#View:getThumbnailViewItem">View:getThumbnailViewItem</a>&nbsp;(params)</td>
+	<td class="summary">Get a view item capable of representing the thumbnail of a catalog photo.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#View:getThumbnailsView">View:getThumbnailsView</a>&nbsp;(args)</td>
+	<td class="summary">Get catalog-photo view in a scroller.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#View:makePresetPopup">View:makePresetPopup</a>&nbsp;(params)</td>
+	<td class="summary">Makes a preset popup menu which utilizes callbacks to handle associated preset data, whilst encapsulating preset selection/new/delete.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#View:new">View:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#View:newClass">View:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#View:observeFtpPropertyChanges">View:observeFtpPropertyChanges</a>&nbsp;(object, props, ftpSettingsName, checkSetting)</td>
+	<td class="summary">Observe ftp setting property changes.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#View:setObserver">View:setObserver</a>&nbsp;(props, name, id, handler)</td>
+	<td class="summary">Add observer, without having duplicate.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#View:startFtpSettingsView">View:startFtpSettingsView</a>&nbsp;(object, props, enabledBinding, retItems, labelOptions, dataOptions)</td>
+	<td class="summary">Get view items for ftp settings as an array of two arrays containing view items, suitable for a two-row display.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#View:unobserveFtpPropertyChanges">View:unobserveFtpPropertyChanges</a>&nbsp;(object)</td>
+	<td class="summary">Discontinue observation of ftp setting changes.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#View:verifyPassword">View:verifyPassword</a>&nbsp;(passwordFieldName, props)</td>
+	<td class="summary">Determines whether password entered (in props) is same as corresponding value in encrypted store.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="View:getCollectionBrowser"></a><strong>View:getCollectionBrowser</strong>&nbsp;(params)</dt>
+<dd>
+Gets collection browser in the form of a push-button view item. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>params</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="View:getEncryptedPasswordViewItems"></a><strong>View:getEncryptedPasswordViewItems</strong>&nbsp;(passwordFieldName, props, pwDescr, viewOptions)</dt>
+<dd>
+Get (encrypted) password view items. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>passwordFieldName</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>pwDescr</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>viewOptions</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>array with: <br>    editable password field <br>    encryption button. <br>    show password button. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="View:getLogControls"></a><strong>View:getLogControls</strong>&nbsp;(params)</dt>
+<dd>
+Create items for view of log-file controls (verbose, show, clear). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>params</em></code>: (table/structure, optional) with named members: <br>    verboseCheckboxViewOptions <br>    showLogsButtonViewOptions <br>    clearLogsButtonViewOptions 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>assign named items to create view of your choice. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>table of named items: verboseCheckbox, showLogsButton, clearLogsButton. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="View:getPluginManagerPresetControls"></a><strong>View:getPluginManagerPresetControls</strong>&nbsp;(params)</dt>
+<dd>
+Create items for view of plugin manager preset (label, preset-dropdown). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>params</em></code>: (table/structure, required) with named members: <br>    call (Call class, required) not sure what this is used for, but never tried NOT passing it. <br>    labelViewOptions (table/structure, optional) view options for static-text label control. <br>    presetPopupOptions (table/structure, optional) options for argument to pref-mgr's make-preset-popup method, most notably: <br>    call            - defaults to call passed as top-level param. <br>    valueBindTo     - defaults to prefs <br>    valueKey        - defaults to global pref key whose name is 'pluginManagerPreset'. <br>    callback        - defaults to integrity-checking no-op. <br>    popupViewOptions (table/structure, optional) these can be included as part of the former, or as this var instead. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>assign named items to create view of your choice.</pre></li>
+	
+	<li><pre class=example>By default, target value is bound to 'pluginManagerPreset' in global prefs, and is NOT initialized by this method.</pre></li>
+	
+	<li><pre class=example>target value is NOT initialized by this method, so initialize externally before presenting dialog box. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>table of named view items: label, popup. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="View:getPresetName"></a><strong>View:getPresetName</strong>&nbsp;(presetId, props)</dt>
+<dd>
+Get preset name and associated data value(s) key, given ID and props - nil => in transition, blank => no preset selected. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>presetId</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="View:getThumbnailViewItem"></a><strong>View:getThumbnailViewItem</strong>&nbsp;(params)</dt>
+<dd>
+Get a view item capable of representing the thumbnail of a catalog photo. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>params</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="View:getThumbnailsView"></a><strong>View:getThumbnailsView</strong>&nbsp;(args)</dt>
+<dd>
+Get catalog-photo view in a scroller. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>args</em></code>: (table) containing:<br> - photos (array, required) photos to view. <br> - fmtMetaSpecs (array, optional) formatted metadata keys to accompany thumbnails. <br> - fmtMeta (array, optional) formatted metadata to accompany thumbnails. <br> - clickBack (function, optional) callback function for clickage. <br> - viewWidth <br> - viewHeight <br> - thumbWidth <br> - thumbHeight <br> 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="View:makePresetPopup"></a><strong>View:makePresetPopup</strong>&nbsp;(params)</dt>
+<dd>
+Makes a preset popup menu which utilizes callbacks to handle associated preset data, whilst encapsulating preset selection/new/delete. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>params</em></code>: (table) with members: <br>presetId (string, required) uniquely identifies this preset popup and it's preference settings. <br>props (propertyTable, required) property table created in calling context. note: initialized afresh from persistent prefs, so no need for it to also be persistent. <br>callback (table, required) members are callback functions: <br>getPresetNames ( function( presetId, app:getPref( presetNamesPref ), app:getPref( selectedPresetNamePref ) ) - returns presetNames, presetName; required ) sort names, or generate default list, ... ). <br>initNewPreset ( function( presetId, presetName, presetKey ) - returns name, m; required ) initialize data associated with specified preset. <br>deletePreset ( function( presetId, presetName, presetKey ) - returns s, m; required ) scrub settings associated with specified preset. <br>selectPreset ( function( presetId, presetName, presetKey ) - returns s, m; required ) function to select preset. <br>isEqual ( function( presetId, presetName, presetKey ) - returns s, m; optional ) function to determine equality - if not passed, then auto-save is assumed. <br>viewOptions (table, optional) view options. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="View:new"></a><strong>View:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="View:newClass"></a><strong>View:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="View:observeFtpPropertyChanges"></a><strong>View:observeFtpPropertyChanges</strong>&nbsp;(object, props, ftpSettingsName, checkSetting)</dt>
+<dd>
+Observe ftp setting property changes. ### deprecated.  @deprecated 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>object</em></code>: (table, required) must include 'observeFtpPropertyChanges' table with a named member set to boolean 'true' for each property to be observed.
+	</li>
+	
+	<li>
+	  <code><em>props</em></code>: (property-table, required) ftp-settings.
+	</li>
+	
+	<li>
+	  <code><em>ftpSettingsName</em></code>: (string, required) name of ftp-settings property.
+	</li>
+	
+	<li>
+	  <code><em>checkSetting</em></code>: (function( ftpProps, name, prev, value ), optional) can be used to check the values being set, and return true for 'OK' or false and a warning message if not. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Call when starting dialog box containing ftp settings.</pre></li>
+	
+	<li><pre class=example>This function was designed to be used in conjunction with<br> the framework object's version of ftp-query-for-password-if-needed, since it will look<br> in the encrypted store for the password saved by this function. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="View:setObserver"></a><strong>View:setObserver</strong>&nbsp;(props, name, id, handler)</dt>
+<dd>
+Add observer, without having duplicate. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>id</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>handler</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="View:startFtpSettingsView"></a><strong>View:startFtpSettingsView</strong>&nbsp;(object, props, enabledBinding, retItems, labelOptions, dataOptions)</dt>
+<dd>
+Get view items for ftp settings as an array of two arrays containing view items, suitable for a two-row display. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>object</em></code>: (table, required) Serves as ID for set-observer. May contain ftpPropertyMap member table with elements:<br> * server = { propName='ftpServer', validationMethodName='checkFtpSetting' },<br> * ... ditto for other ftp-settings, and<br> * remoteDirPathForFtpUploadTest = { propName='customUploadDir', validationMethodName='checkUploadDir' },<br> Note: validation method(s) of object take name, value as param and return sts, msg.
+	</li>
+	
+	<li>
+	  <code><em>props</em></code>: (LrObservableTable, required) properties passed to start-dialog box...
+	</li>
+	
+	<li>
+	  <code><em>enabledBinding</em></code>: (binding table, optional) if passed, all fields enabling will be contingent upon specified binding.
+	</li>
+	
+	<li>
+	  <code><em>retItems</em></code>: (boolean, optional) if passed, return items.
+	</li>
+	
+	<li>
+	  <code><em>labelOptions</em></code>: (table, optional) if passed, options for labels.
+	</li>
+	
+	<li>
+	  <code><em>dataOptions</em></code>: (table, optional) if passed, options for labels. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>starts task to watch for property changes, so you must call end-ftp-settings-view in end-dialog method.</pre></li>
+	
+	<li><pre class=example>So far, it only works for display directly in plugin manager dialog or export/publish dialog.</pre></li>
+	
+	<li><pre class=example>If you want a different physical arrangement..., you can massage the returned items and re-package...</pre></li>
+	
+	<li><pre class=example>To use:<br> local vi = view:getFtpSettingsViewItems( ftpSettings, props, "getPrefBinding" ) -- bind using app--get-pref-binding method.<br> local view = vf:view{ vf:row( vi[1] ), vf:row( vi[2] ) } -- or<br> <br> local vi = view:getFtpSettingsViewItems( ftpSettings, props ) -- default props binding<br> local view = vf:view{ vf:row( vi[1] ), vf:row( vi[2] ) } </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>defaultView (LrView) default ftp view.</li>
+	
+	<li>viewItems (2-D array of view-items, 1st-D is "row", 2nd-D has 3 view items for the "row") in case you want to massage before creating custom view. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="View:unobserveFtpPropertyChanges"></a><strong>View:unobserveFtpPropertyChanges</strong>&nbsp;(object)</dt>
+<dd>
+Discontinue observation of ftp setting changes. deprecated.  @deprecated 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>object</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>This must be called when dialog box is ended. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="View:verifyPassword"></a><strong>View:verifyPassword</strong>&nbsp;(passwordFieldName, props)</dt>
+<dd>
+Determines whether password entered (in props) is same as corresponding value in encrypted store. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>passwordFieldName</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

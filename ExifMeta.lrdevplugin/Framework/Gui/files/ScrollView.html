@@ -1,0 +1,547 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/Binding.html">Binding.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/DelayedProgressScope.html">DelayedProgressScope.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Dialog.html">Dialog.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Gui.html">Gui.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Manager.html">Manager.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Notes.html">Notes.lua</a>
+	</li>
+
+	<li><strong>ScrollView.lua</strong></li>
+	
+	<li>
+		<a href="../files/View.html">View.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>ScrollView.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#ScrollView:computeScrollPos">ScrollView:computeScrollPos</a>&nbsp;(up, num)</td>
+	<td class="summary">Compute new scroll position, given specified adjustment.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ScrollView:confineScrollPos">ScrollView:confineScrollPos</a>&nbsp;(pos)</td>
+	<td class="summary">Compute new scroll position, if necessary, to assure position is in range.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ScrollView:dataIndices">ScrollView:dataIndices</a>&nbsp;()</td>
+	<td class="summary">Iterator: delivers visible row indexes 1 - N, where N is between nil and number of rows on a page.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ScrollView:fillIndices">ScrollView:fillIndices</a>&nbsp;()</td>
+	<td class="summary">Returns iterator that returns prop index only, to fill balance of a page with nil for when data is short of a page.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ScrollView:getBinding">ScrollView:getBinding</a>&nbsp;(t)</td>
+	<td class="summary">Get a pref binding as specified in parameter table.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ScrollView:getPrefIndex">ScrollView:getPrefIndex</a>&nbsp;(propIndex)</td>
+	<td class="summary">Get pref index for specified prop index.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ScrollView:getScrollPos">ScrollView:getScrollPos</a>&nbsp;()</td>
+	<td class="summary">Get actual scroll position.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ScrollView:new">ScrollView:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ScrollView:newClass">ScrollView:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ScrollView:scroll">ScrollView:scroll</a>&nbsp;(up, num)</td>
+	<td class="summary">Scroll or page the view.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ScrollView:setDataSize">ScrollView:setDataSize</a>&nbsp;(nRows)</td>
+	<td class="summary">Set total number of rows to be scrolled or paged.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ScrollView:setPageSize">ScrollView:setPageSize</a>&nbsp;(nRows)</td>
+	<td class="summary">Set number of rows in a page.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ScrollView:setScrollPos">ScrollView:setScrollPos</a>&nbsp;(pos)</td>
+	<td class="summary">Set scroll position to specified value.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="ScrollView:computeScrollPos"></a><strong>ScrollView:computeScrollPos</strong>&nbsp;(up, num)</dt>
+<dd>
+Compute new scroll position, given specified adjustment. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>up</em></code>: (boolean, default nil) true => scroll upward, false => scroll one downward, nil => just update scroll position by confining.
+	</li>
+	
+	<li>
+	  <code><em>num</em></code>: (number, default one page) 1 => scroll one row. nil means scroll one page. Huge => all the way. Ignored if up is nil. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>call in response to scroll buttons. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ScrollView:confineScrollPos"></a><strong>ScrollView:confineScrollPos</strong>&nbsp;(pos)</dt>
+<dd>
+Compute new scroll position, if necessary, to assure position is in range. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>pos</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ScrollView:dataIndices"></a><strong>ScrollView:dataIndices</strong>&nbsp;()</dt>
+<dd>
+Iterator: delivers visible row indexes 1 - N, where N is between nil and number of rows on a page. Its short when there isn't enough data to fill the page (based on item count). visible index is paired with data item index.
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>call data-indexes followed by fill-indexes. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ScrollView:fillIndices"></a><strong>ScrollView:fillIndices</strong>&nbsp;()</dt>
+<dd>
+Returns iterator that returns prop index only, to fill balance of a page with nil for when data is short of a page. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ScrollView:getBinding"></a><strong>ScrollView:getBinding</strong>&nbsp;(t)</dt>
+<dd>
+Get a pref binding as specified in parameter table. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: parameter table <ul> <li>keys (table of strings, required) array of all keys for this data item. <li>index (number, required) row index this binding applies to. </ul> 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ScrollView:getPrefIndex"></a><strong>ScrollView:getPrefIndex</strong>&nbsp;(propIndex)</dt>
+<dd>
+Get pref index for specified prop index. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>propIndex</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>This allows calling context to lookup the proper preference to set based on preference index when a scrollable property changes. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ScrollView:getScrollPos"></a><strong>ScrollView:getScrollPos</strong>&nbsp;()</dt>
+<dd>
+Get actual scroll position. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ScrollView:new"></a><strong>ScrollView:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: Parameter table: <ul> <li>global (boolean, required) governs whether global or local pref bindings are used. <li>pageSize (number, default: nil) set in constructor, or further on down the road, but do set. <li>dataSize (number, default: nil) set in constructor, or further on down the road, but do set. </ul> 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>wraps a row view for scrolling or paging. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ScrollView:newClass"></a><strong>ScrollView:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ScrollView:scroll"></a><strong>ScrollView:scroll</strong>&nbsp;(up, num)</dt>
+<dd>
+Scroll or page the view. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>up</em></code>: (boolean, required) true => scroll one upward (pass true in response to up(1) button).
+	</li>
+	
+	<li>
+	  <code><em>num</em></code>: (number, default one page) 1 => scroll one row. nil means scroll one page. Huge => all the way. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>call in response to scroll buttons. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ScrollView:setDataSize"></a><strong>ScrollView:setDataSize</strong>&nbsp;(nRows)</dt>
+<dd>
+Set total number of rows to be scrolled or paged. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>nRows</em></code>: (number, required) Number of items total. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>If set in constructor, this method is not necessary, otherwise it is.</pre></li>
+	
+	<li><pre class=example>Designed with rows in mind, but could just as easily be columns, or even sprinkled about. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ScrollView:setPageSize"></a><strong>ScrollView:setPageSize</strong>&nbsp;(nRows)</dt>
+<dd>
+Set number of rows in a page. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>nRows</em></code>: (number, required) Number of items in a page. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>If set in constructor, this method is not necessary, otherwise it is.</pre></li>
+	
+	<li><pre class=example>Designed with rows in mind, but could just as easily be columns, or even sprinkled about. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ScrollView:setScrollPos"></a><strong>ScrollView:setScrollPos</strong>&nbsp;(pos)</dt>
+<dd>
+Set scroll position to specified value. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>pos</em></code>: (number, required) row number for page top - will be confined if necessary to valid range. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>actualPos (number) actual scroll position, after possible adjustment. </ul>
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

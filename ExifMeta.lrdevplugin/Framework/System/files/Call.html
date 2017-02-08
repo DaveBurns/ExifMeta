@@ -1,0 +1,847 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/App.html">App.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Background.html">Background.lua</a>
+	</li>
+
+	<li><strong>Call.lua</strong></li>
+	
+	<li>
+		<a href="../files/DebugScript.html">DebugScript.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ExternalApp.html">ExternalApp.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Gate.html">Gate.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Globals.html">Globals.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/InitFramework.html">InitFramework.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/LogFile.html">LogFile.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Mac.html">Mac.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Object.html">Object.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ObjectFactory.html">ObjectFactory.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/OperatingSystem.html">OperatingSystem.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Preferences.html">Preferences.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Presets.html">Presets.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Properties.html">Properties.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Reload.html">Reload.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Require.html">Require.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/RpcApp.html">RpcApp.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/RpcBackground.html">RpcBackground.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Service.html">Service.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Settings.html">Settings.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Sidekick.html">Sidekick.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Timer.html">Timer.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Updater.html">Updater.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/User.html">User.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Windows.html">Windows.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>Call.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#Call:abort">Call:abort</a>&nbsp;(message, ...)</td>
+	<td class="summary">Abort call or service.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Call:assureStats">Call:assureStats</a>&nbsp;(names)</td>
+	<td class="summary">Initialize call stats - optional, but recommended - to avoid nagging when debug is enabled.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Call:cancel">Call:cancel</a>&nbsp;(message)</td>
+	<td class="summary">Cancel call or service.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Call:cleanup">Call:cleanup</a>&nbsp;(status, message)</td>
+	<td class="summary">"Cleanup" function called after main function, even if main aborted due to error.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Call:closeStats">Call:closeStats</a>&nbsp;()</td>
+	<td class="summary">Determine if any stats have not been used (only does something if (adv) debug mode enabled).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Call:getCaption">Call:getCaption</a>&nbsp;()</td>
+	<td class="summary">Get caption, usually for subsequent restoral.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Call:getStat">Call:getStat</a>&nbsp;(name)</td>
+	<td class="summary">get stat value, 0 if undefined.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Call:incrStat">Call:incrStat</a>&nbsp;(name, amt)</td>
+	<td class="summary">Increment a call stat: may or may not be initialized.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Call:initStats">Call:initStats</a>&nbsp;(names)</td>
+	<td class="summary">Initialize call stats - optional, but recommended - to avoid nagging when debug is enabled.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Call:isAborted">Call:isAborted</a>&nbsp;()</td>
+	<td class="summary">Determine if call has been aborted.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Call:isCanceled">Call:isCanceled</a>&nbsp;()</td>
+	<td class="summary">Determine if a call was canceled.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Call:isQuit">Call:isQuit</a>&nbsp;(scope)</td>
+	<td class="summary">Determine if call has quit due to cancelation or abortion.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Call:new">Call:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance objects.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Call:newClass">Call:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for class extension.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Call:newStats">Call:newStats</a>&nbsp;(names)</td>
+	<td class="summary">Constructor for a call-like object that just keeps a set of stats, without being "performed" (no main function...).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Call:perform">Call:perform</a>&nbsp;(context, ...)</td>
+	<td class="summary">Call (perform) main function.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Call:setCaption">Call:setCaption</a>&nbsp;(fmt, ...)</td>
+	<td class="summary">Set a caption on a progress indicator.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Call:setPortionComplete">Call:setPortionComplete</a>&nbsp;(amt, ttl)</td>
+	<td class="summary">Convenience function for setting portion complete on encapsulated scope.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Call:setStat">Call:setStat</a>&nbsp;(name, val)</td>
+	<td class="summary">get stat value, 0 if undefined.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Call:unQuit">Call:unQuit</a>&nbsp;()</td>
+	<td class="summary">Used by background task so it can be canceled, but not stay canceled forever.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="Call:abort"></a><strong>Call:abort</strong>&nbsp;(message, ...)</dt>
+<dd>
+Abort call or service. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>message</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Note: Do not call base class abort method here. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Call:assureStats"></a><strong>Call:assureStats</strong>&nbsp;(names)</dt>
+<dd>
+Initialize call stats - optional, but recommended - to avoid nagging when debug is enabled. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>names</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Call:cancel"></a><strong>Call:cancel</strong>&nbsp;(message)</dt>
+<dd>
+Cancel call or service. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>message</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>cancelation means don't bother user again. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Call:cleanup"></a><strong>Call:cleanup</strong>&nbsp;(status, message)</dt>
+<dd>
+"Cleanup" function called after main function, even if main aborted due to error.  <p>I'm not real crazy about the term "cleanup", but the big deal is that its guaranteed to be called regardless of the status of main function execution. "cleanup" activities can include things like clearing recursion guards, logging results, and displaying a successful completion or error message.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>status</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>message</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Normally no need to override - pass finale function to constructor instead.</pre></li>
+	
+	<li><pre class=example>App calls this in protected fashion - if error in cleanup function, default error handler is called. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Call:closeStats"></a><strong>Call:closeStats</strong>&nbsp;()</dt>
+<dd>
+Determine if any stats have not been used (only does something if (adv) debug mode enabled). 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>unsused means not set, incr'd, nor gotten. (it does NOT mean it couldn't have been set, incr'd, or gotten, given another program path). </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Call:getCaption"></a><strong>Call:getCaption</strong>&nbsp;()</dt>
+<dd>
+Get caption, usually for subsequent restoral. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Call:getStat"></a><strong>Call:getStat</strong>&nbsp;(name)</dt>
+<dd>
+get stat value, 0 if undefined. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Call:incrStat"></a><strong>Call:incrStat</strong>&nbsp;(name, amt)</dt>
+<dd>
+Increment a call stat: may or may not be initialized. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>amt</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Call:initStats"></a><strong>Call:initStats</strong>&nbsp;(names)</dt>
+<dd>
+Initialize call stats - optional, but recommended - to avoid nagging when debug is enabled. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>names</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Call:isAborted"></a><strong>Call:isAborted</strong>&nbsp;()</dt>
+<dd>
+Determine if call has been aborted. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Call:isCanceled"></a><strong>Call:isCanceled</strong>&nbsp;()</dt>
+<dd>
+Determine if a call was canceled. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>cancelation means don't bother user again. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>cancel-message which serves as boolean (if not nil) and optional message (if not the empty string). </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Call:isQuit"></a><strong>Call:isQuit</strong>&nbsp;(scope)</dt>
+<dd>
+Determine if call has quit due to cancelation or abortion. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>scope</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Does not check for scope canceled, nor scope done. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Call:new"></a><strong>Call:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance objects.  <p>Table parameter elements:</p><blockquote>  - name:         (string, required) operation name, used for context debugging and as guard key.<br> - async:        (boolean, default false) true => main function runs as asynchronous task. false => synchronous.<br> - guard:        (number, default 0) 0 or nil => no guard, 1 => silent, 2 => vocal. Hint: Use App constants; App.guardSilent and App.guardVocal.<br> - object:       (table, default nil) if main (and finale if applicable) is method, object is required, else leave blank to call main (and finale if applicable) as static function.<br> - main:         (function, required) main function or method.<br> - finale:       (function, default nil) pass finale function if something to do after main completes or aborts.</blockquote> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: Table holding call paramaters. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Call:newClass"></a><strong>Call:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for class extension. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Call:newStats"></a><strong>Call:newStats</strong>&nbsp;(names)</dt>
+<dd>
+Constructor for a call-like object that just keeps a set of stats, without being "performed" (no main function...). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>names</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Call:perform"></a><strong>Call:perform</strong>&nbsp;(context, ...)</dt>
+<dd>
+Call (perform) main function. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>context</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Normally no need to override - pass main function to constructor instead.</pre></li>
+	
+	<li><pre class=example>Called as static function if object nil, else method.</pre></li>
+	
+	<li><pre class=example>Errors thrown in main are caught by App and passed to finale. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Call:setCaption"></a><strong>Call:setCaption</strong>&nbsp;(fmt, ...)</dt>
+<dd>
+Set a caption on a progress indicator. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>fmt</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>normally pre-created, but will create default scope on demand if need be. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Call:setPortionComplete"></a><strong>Call:setPortionComplete</strong>&nbsp;(amt, ttl)</dt>
+<dd>
+Convenience function for setting portion complete on encapsulated scope. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>amt</em></code>: (number, required) number completed.
+	</li>
+	
+	<li>
+	  <code><em>ttl</em></code>: (number, default=1) out of total. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Call:setStat"></a><strong>Call:setStat</strong>&nbsp;(name, val)</dt>
+<dd>
+get stat value, 0 if undefined. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>val</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Call:unQuit"></a><strong>Call:unQuit</strong>&nbsp;()</dt>
+<dd>
+Used by background task so it can be canceled, but not stay canceled forever. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

@@ -1,0 +1,3391 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li><strong>Catalog.lua</strong></li>
+	
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>Catalog.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:addOriginalFilename">Catalog:addOriginalFilename</a>&nbsp;(photo, fn)</td>
+	<td class="summary">Add photo's original filename to lookup table.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:assureMetadataColumnInViewFilter">Catalog:assureMetadataColumnInViewFilter</a>&nbsp;(metadataId, pluginId)</td>
+	<td class="summary">Assure specified metadata column is active in current view filter.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:assurePhotoIsSelected">Catalog:assurePhotoIsSelected</a>&nbsp;(photo, photoPath)</td>
+	<td class="summary">Make specified photo the *only* photo selected, whether source is active or not.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:assurePluginCollection">Catalog:assurePluginCollection</a>&nbsp;(name, tries, pluginName)</td>
+	<td class="summary">Assures collection is created in plugin set.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:assurePluginCollectionSet">Catalog:assurePluginCollectionSet</a>&nbsp;(tries)</td>
+	<td class="summary">Assures collection set is created for plugin.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:assurePluginCollections">Catalog:assurePluginCollections</a>&nbsp;(names, tries, doNotRemoveDevSuffixFromPluginName, pluginName)</td>
+	<td class="summary">Assures collections are created in plugin set.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:batchGetLockMetadata">Catalog:batchGetLockMetadata</a>&nbsp;(photos, call)</td>
+	<td class="summary">Get batch (ChangeManager) lock-status metadata.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:clearViewFilter">Catalog:clearViewFilter</a>&nbsp;(noYield)</td>
+	<td class="summary">Clears view filter so all photos will be showing.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:createCollection">Catalog:createCollection</a>&nbsp;(name, parent, returnExisting)</td>
+	<td class="summary">Case insensitve version of like-named lr-catalog method.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:createCollectionSet">Catalog:createCollectionSet</a>&nbsp;(name, parent, returnExisting)</td>
+	<td class="summary">Case insensitve version of like-named lr-catalog method.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:createSmartCollection">Catalog:createSmartCollection</a>&nbsp;(name, smarts, parent, returnExisting)</td>
+	<td class="summary">Case insensitve version of like-named lr-catalog method.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:createVirtualCopies">Catalog:createVirtualCopies</a>&nbsp;(params)</td>
+	<td class="summary">Create multiple virtual copies.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:createVirtualCopy">Catalog:createVirtualCopy</a>&nbsp;(photo, prompt)</td>
+	<td class="summary">Creates a virtual copy of one photo.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:deletePhotos">Catalog:deletePhotos</a>&nbsp;(params)</td>
+	<td class="summary">Delete photos.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:findPhotoByPath">Catalog:findPhotoByPath</a>&nbsp;(file, copyName, rawMeta, fmtMeta)</td>
+	<td class="summary">Similar in purpose to lr-catalog method of same name, except takes virtual copy status into consideration.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getAnyPhoto">Catalog:getAnyPhoto</a>&nbsp;(notMissing, typeKey, call)</td>
+	<td class="summary">Get a photo, any photo (nil means no photo gettable).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getBatchFormattedMetadata">Catalog:getBatchFormattedMetadata</a>&nbsp;(photos, ...)</td>
+	<td class="summary">Get batch of formatted metadata without bringing down the system.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getBatchRawMetadata">Catalog:getBatchRawMetadata</a>&nbsp;(photos, ...)</td>
+	<td class="summary">Get batch of raw metadata without bringing down the system.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getCatDir">Catalog:getCatDir</a>&nbsp;()</td>
+	<td class="summary">Get directory containing catalog (just a tiny convenience/reminder function).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getCollection">Catalog:getCollection</a>&nbsp;(name, parent)</td>
+	<td class="summary">Get collection *or* smart collection of specified name in specified parent, if it exists.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getCollectionSetPhotos">Catalog:getCollectionSetPhotos</a>&nbsp;(collSet)</td>
+	<td class="summary">Get collection set photos (in regular collections only).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getCollectionSetPopupItems">Catalog:getCollectionSetPopupItems</a>&nbsp;(pub)</td>
+	<td class="summary">Get collection set popup items.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getExtSupport">Catalog:getExtSupport</a>&nbsp;(ext)</td>
+	<td class="summary">Get support type for all or specified extension.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getFilmstripPhotos">Catalog:getFilmstripPhotos</a>&nbsp;(assumeSubfoldersToo, ignoreIfBuried, excludeSource)</td>
+	<td class="summary">Get list of photos in filmstrip *** DEPRECATED in favor of getVisiblePhotos, which could stand to be augmented with parameters like includeIfBuried...</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getFolder">Catalog:getFolder</a>&nbsp;(photo, photoPath)</td>
+	<td class="summary">Get lr folder for photo, if possible.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getFolderByPath">Catalog:getFolderByPath</a>&nbsp;(folderPath)</td>
+	<td class="summary">Equivalent to Lr's native method, except works for unmapped network drives too (Lr's doesn't, as of Lr5.4 anyway).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getFolderSet">Catalog:getFolderSet</a>&nbsp;(photos, cache)</td>
+	<td class="summary">Get set of folders housing specified photos.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getFormattedMetadata">Catalog:getFormattedMetadata</a>&nbsp;(photo, name, fmtMeta)</td>
+	<td class="summary">Get formatted metadata, preferrable from that read in batch mode, else from photo directly.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getLocalImageId">Catalog:getLocalImageId</a>&nbsp;(photo)</td>
+	<td class="summary">Get local image id for photo.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getOriginalFilename">Catalog:getOriginalFilename</a>&nbsp;(photo)</td>
+	<td class="summary">Get original filename corresponding to photo.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getPhotoName">Catalog:getPhotoName</a>&nbsp;(photo, fullPath, rawMeta, fmtMeta)</td>
+	<td class="summary">Get photo name or path which includes copy name when appropriate.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getPhotoNameDisp">Catalog:getPhotoNameDisp</a>&nbsp;(photo, fullPath, metaCache)</td>
+	<td class="summary">Get photo name or path which includes copy name when appropriate.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getPhotoSetFromSeedPhotos">Catalog:getPhotoSetFromSeedPhotos</a>&nbsp;(seedPhotos, cache)</td>
+	<td class="summary">Get photo set from seed photos.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getPluginCollection">Catalog:getPluginCollection</a>&nbsp;(collName)</td>
+	<td class="summary">Determine if plugin collection exists, and get it.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getPropertyForPlugin">Catalog:getPropertyForPlugin</a>&nbsp;(name)</td>
+	<td class="summary">Get catalog metadata property.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getPublishService">Catalog:getPublishService</a>&nbsp;(id)</td>
+	<td class="summary">Get publish service, and name, corresponding to specified ID.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getPublishServicePopupItems">Catalog:getPublishServicePopupItems</a>&nbsp;()</td>
+	<td class="summary">Get publish service popup items.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getRawMetadata">Catalog:getRawMetadata</a>&nbsp;(photo, name, rawMeta)</td>
+	<td class="summary">Get raw metadata, preferrable from that read in batch mode, else from photo directly.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getSelectedPhotos">Catalog:getSelectedPhotos</a>&nbsp;(photo)</td>
+	<td class="summary">Get selected photos.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getSmartCollection">Catalog:getSmartCollection</a>&nbsp;(id)</td>
+	<td class="summary">Get smart collection, and name.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getSmartCollectionPopupItems">Catalog:getSmartCollectionPopupItems</a>&nbsp;(startHere)</td>
+	<td class="summary">Get smart collection popup items (within catalog or publish service).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getSmartColls">Catalog:getSmartColls</a>&nbsp;(photo, collSet)</td>
+	<td class="summary">Get smart collections associated with specified photo ###1 coll-set?  </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getSourceName">Catalog:getSourceName</a>&nbsp;(source)</td>
+	<td class="summary">Get source name, and id if special.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getSourcePhotos">Catalog:getSourcePhotos</a>&nbsp;(assumeSubfoldersToo, ignoreIfBuried, metaIds)</td>
+	<td class="summary">Get list complete list of photos in selected sources, unless buried in stack (optional).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getSourceType">Catalog:getSourceType</a>&nbsp;(source)</td>
+	<td class="summary">get source type, regardless of source.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getStackRelation">Catalog:getStackRelation</a>&nbsp;(photo1, photo2, cache)</td>
+	<td class="summary">Get stack relationship  </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getTargetPhotos">Catalog:getTargetPhotos</a>&nbsp;(p)</td>
+	<td class="summary">Get target photos.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:getVisiblePhotos">Catalog:getVisiblePhotos</a>&nbsp;(params)</td>
+	<td class="summary">Get photos visible in filmstrip (as filtered, as stacked, ...</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:initFolderCache">Catalog:initFolderCache</a>&nbsp;(unInit)</td>
+	<td class="summary">Initialize folder cache to assure fresh results via (and set mode of) get-folder-by-path.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:initForOriginalFilenames">Catalog:initForOriginalFilenames</a>&nbsp;()</td>
+	<td class="summary">Determine if original filenames are even a possibility, and if so, prepare..</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:initSmartColls">Catalog:initSmartColls</a>&nbsp;()</td>
+	<td class="summary">Initialize caches/lookups to be used by get-smart-colls.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:isBuriedInStack">Catalog:isBuriedInStack</a>&nbsp;(photo, bm)</td>
+	<td class="summary">Determine if specified photo is buried in collapsed stack in folder of origin.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:isLocked">Catalog:isLocked</a>&nbsp;(photo, orXmp, cache)</td>
+	<td class="summary">Determine if locked, and if so: return lock-date as string, as 2nd item in return list (1st item is boolean locked, or not).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:isMetadataColumnActive">Catalog:isMetadataColumnActive</a>&nbsp;(metaIds, filter)</td>
+	<td class="summary">Determine if specified metadata columns are active in specified lib view filter.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:isMissing">Catalog:isMissing</a>&nbsp;(photo, cache)</td>
+	<td class="summary">Determine if photo is missing - i.e.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:isOriginalFilenamesInit">Catalog:isOriginalFilenamesInit</a>&nbsp;()</td>
+	<td class="summary">Determine if original filename subsystem is properly initialized.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:isSmartPreview">Catalog:isSmartPreview</a>&nbsp;(photo, cache)</td>
+	<td class="summary">Determine if photo has a smart preview.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:new">Catalog:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:newClass">Catalog:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:readPhotoMetadata">Catalog:readPhotoMetadata</a>&nbsp;(photo, photoPath, alreadyInLibraryModule, service, manualSubtitle)</td>
+	<td class="summary">Read metadata for one photo.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:refreshDisplay">Catalog:refreshDisplay</a>&nbsp;(photo, photoPath)</td>
+	<td class="summary">Refresh display of recently changed photo (externally changed).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:restoreSelPhotos">Catalog:restoreSelPhotos</a>&nbsp;(selPhotos)</td>
+	<td class="summary">Restore previously saved photo selection and related settings.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:saveMetadata">Catalog:saveMetadata</a>&nbsp;(photos, preSelect, restoreSelect, alreadyInGridMode, service)</td>
+	<td class="summary">Save metadata for (multiple) specified photos.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:savePhotoMetadata">Catalog:savePhotoMetadata</a>&nbsp;(photo, photoPath, targ, call, noVal, oldWay)</td>
+	<td class="summary">Save metadata for one photo.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:saveSelPhotos">Catalog:saveSelPhotos</a>&nbsp;()</td>
+	<td class="summary">Save selected photos, and related info/settings, for restoral later.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:selectOnePhoto">Catalog:selectOnePhoto</a>&nbsp;(photo)</td>
+	<td class="summary">select one photo, de-select all others - confirm selection.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:selectPhoto">Catalog:selectPhoto</a>&nbsp;(photo)</td>
+	<td class="summary">Make specified photo most selected, without changing other selections if possible.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:selectPhotos">Catalog:selectPhotos</a>&nbsp;(photo, photos, assureFolders, metaCache)</td>
+	<td class="summary">Set selected photos, and verify selection, with option to select folders if necessary to assure photos will be selected, even if not in filmstrip.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:setActiveSources">Catalog:setActiveSources</a>&nbsp;(sources)</td>
+	<td class="summary">Set active sources, and verify all were properly set.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:setCollectionPhotos">Catalog:setCollectionPhotos</a>&nbsp;(coll, photos, tmo)</td>
+	<td class="summary">Set collection photos.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:setPropertyForPlugin">Catalog:setPropertyForPlugin</a>&nbsp;(name, value, validate)</td>
+	<td class="summary">Set catalog metadata property if not already.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:update">Catalog:update</a>&nbsp;(tmo, name, func, ...)</td>
+	<td class="summary">Wrapper for named/undoable catalog:withWriteAccessDo method - divide to conquor func.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:updatePrivate">Catalog:updatePrivate</a>&nbsp;(tmo, func, ...)</td>
+	<td class="summary">Wrapper for un-named catalog:withPrivateWriteAccessDo method - divide to conquor func.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:withDo">Catalog:withDo</a>&nbsp;(tryCount, func, catalog, p1, p2, ...)</td>
+	<td class="summary">Catalog access wrapper that distinquishes catalog contention errors from target function errors.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Catalog:withRetries">Catalog:withRetries</a>&nbsp;(tryCount, func, p1, p2, ...)</td>
+	<td class="summary">Catalog access wrapper that distinquishes catalog contention errors from target function errors.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="Catalog:addOriginalFilename"></a><strong>Catalog:addOriginalFilename</strong>&nbsp;(photo, fn)</dt>
+<dd>
+Add photo's original filename to lookup table. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: (lr-photo, required) photo
+	</li>
+	
+	<li>
+	  <code><em>fn</em></code>: (string, required) filename (includes extension, but excludes path). 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>for importer support after new file added to catalog - supports dup. checking. </pre></ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status (boolean) true iff added.</li>
+	
+	<li>message (string) accompanies non-true status to explain. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:assureMetadataColumnInViewFilter"></a><strong>Catalog:assureMetadataColumnInViewFilter</strong>&nbsp;(metadataId, pluginId)</dt>
+<dd>
+Assure specified metadata column is active in current view filter. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>metadataId</em></code>: metadata ID.
+	</li>
+	
+	<li>
+	  <code><em>pluginId</em></code>: toolkit ID. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>returns nothing </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:assurePhotoIsSelected"></a><strong>Catalog:assurePhotoIsSelected</strong>&nbsp;(photo, photoPath)</dt>
+<dd>
+Make specified photo the *only* photo selected, whether source is active or not. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: (lr-photo, generally required) will be obtained from photo-path if it is passed.
+	</li>
+	
+	<li>
+	  <code><em>photoPath</em></code>: (string, optional) will be obtained from photo metadata if not passed. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>present implementation satisfies by adding folder to source, if necessary.<br> </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>status, but NOT error message - logs stuff as it goes... </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:assurePluginCollection"></a><strong>Catalog:assurePluginCollection</strong>&nbsp;(name, tries, pluginName)</dt>
+<dd>
+Assures collection is created in plugin set. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: (string, required) the collection name.
+	</li>
+	
+	<li>
+	  <code><em>tries</em></code>: (number, optional) cat access tmo.
+	</li>
+	
+	<li>
+	  <code><em>pluginName</em></code>: (string, optional) defaults to app--get-plugin-name() 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Must NOT be called from a with-write-access-gate. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>collection or throws error trying. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:assurePluginCollectionSet"></a><strong>Catalog:assurePluginCollectionSet</strong>&nbsp;(tries)</dt>
+<dd>
+Assures collection set is created for plugin. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>tries</em></code>: (number, optional) cat access tmo. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Must NOT be called from a with-write-access-gate. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>collection or throws error trying. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:assurePluginCollections"></a><strong>Catalog:assurePluginCollections</strong>&nbsp;(names, tries, doNotRemoveDevSuffixFromPluginName, pluginName)</dt>
+<dd>
+Assures collections are created in plugin set. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>names</em></code>: (variable, required) if array of strings, then sub-collection names to be created in plugin collection set. <br>if 'string', then name of single plugin collection. <br>if array of structures, then elements are: 'name', and 'searchDesc' - intended for defining smart collection(s).
+	</li>
+	
+	<li>
+	  <code><em>tries</em></code>: (number, default = 20) maximum number of catalog access attempts before giving up.
+	</li>
+	
+	<li>
+	  <code><em>doNotRemoveDevSuffixFromPluginName</em></code>: (boolean, default = false) pass 'true' if you want to keep the ' (Dev)' suffix in the development version of the collection set. 
+	</li>
+	
+	<li>
+	  <code><em>pluginName</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>NOT be called from a with-write-access-gate. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>collections or throws error trying. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:batchGetLockMetadata"></a><strong>Catalog:batchGetLockMetadata</strong>&nbsp;(photos, call)</dt>
+<dd>
+Get batch (ChangeManager) lock-status metadata. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photos</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>call</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>lock-data lookup table: keys are photos, values are tables with single boolean member: 'locked' (I must have had lock-date in mind in the beginning..).</li>
+	
+	<li>num-locked number of locked photos. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:clearViewFilter"></a><strong>Catalog:clearViewFilter</strong>&nbsp;(noYield)</dt>
+<dd>
+Clears view filter so all photos will be showing. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>noYield</em></code>: (boolean, default false) if true, will return immediately, but be forewarned: this function probably needs some "settling" time. <br>  if false, this method may yield or sleep as this method deems appropriate. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Dunno how to control global lock who-de-kai. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:createCollection"></a><strong>Catalog:createCollection</strong>&nbsp;(name, parent, returnExisting)</dt>
+<dd>
+Case insensitve version of like-named lr-catalog method. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>parent</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>returnExisting</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:createCollectionSet"></a><strong>Catalog:createCollectionSet</strong>&nbsp;(name, parent, returnExisting)</dt>
+<dd>
+Case insensitve version of like-named lr-catalog method. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>parent</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>returnExisting</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:createSmartCollection"></a><strong>Catalog:createSmartCollection</strong>&nbsp;(name, smarts, parent, returnExisting)</dt>
+<dd>
+Case insensitve version of like-named lr-catalog method. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>smarts</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>parent</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>returnExisting</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:createVirtualCopies"></a><strong>Catalog:createVirtualCopies</strong>&nbsp;(params)</dt>
+<dd>
+Create multiple virtual copies. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>params</em></code>: (table) elements: <br>photos (array, default = selectedPhotos) of LrPhoto's. <br>copyName (string, default = "Virtual Copy" if Lr5, else "Copy N"). <br>call (Call, required) call with context. <br>assumeGridView (boolean, default = false ) <br>cache (LrMetadataCache, default = nil ) cache for base photo metadata. <br>verify (boolean, default = true ) set false to subvert copy verification. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>copies (array of LrPhoto) iff success.</li>
+	
+	<li>errMsg (string) non-empty iff unsuccessful. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:createVirtualCopy"></a><strong>Catalog:createVirtualCopy</strong>&nbsp;(photo, prompt)</dt>
+<dd>
+Creates a virtual copy of one photo. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: (LrPhoto, default nil) Photo object to create virtual copy of, or nil to create copy of most selected photo.
+	</li>
+	
+	<li>
+	  <code><em>prompt</em></code>: (boolean, default false) Pass true to prompt user about this stuff, or false to let 'er rip and take yer chances (definitive status will be returned). 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Note: this is used to create a single virtual copy in both Lr4 and Lr5 implementations. Multiple virtual copies can be created using the new Lr5 method. <br>In Lr4, virtual copy creation itself uses scripting; in Lr5 (and Lr4) switching to grid mode requires scripting (for smooth operation anyway) I did build <br>in some logic for manual user intervention/assurance, but it's testing has gotten less over the years.</pre></li>
+	
+	<li><pre class=example>Must be called from asynchronous task.</pre></li>
+	
+	<li><pre class=example>No errors are thrown - check return values for status, and error message if applicable.</pre></li>
+	
+	<li><pre class=example>Can be used to create multiple copies, by calling in a loop - but is very inefficient for doing multiples like that.<br> if you want multiples, you should code a new method that selects all photos you want copied, then issues the Ctrl/Cmd-'<br> And for robustness, the routine should check for existence of all copies before returning with thumbs up.</pre></li>
+	
+	<li><pre class=example>Its up to calling context to assure Lightroom is in library or develop modules before calling.</pre></li>
+	
+	<li><pre class=example>Hint: calling context can restore selected photos upon return, or whatever... </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>photo-copy (lr-photo) if virtual copy successfully created.</li>
+	
+	<li>error-message (string) if unable to create virtual copy, nil if user canceled. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:deletePhotos"></a><strong>Catalog:deletePhotos</strong>&nbsp;(params)</dt>
+<dd>
+Delete photos.
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>params</em></code>: table of parameters<br> call (Call, required) call or service... photos (array, required) photos to delete promptTidbit (string, default="Items") e.g. "Snapshot photos" final (boolean, default=false) only applies if mac atm: means dialog box is to be the final box of the service.
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>*** ASSURE LIST OF FILES TO DELETE HAS ALREADY BEEN LOGGED, OTHERWISE THIS METHOD WILL MAKE A LIAR OUT OF THE CALLING CONTEXT.</pre></li>
+	
+	<li><pre class=example>call to delete photos.</pre></li>
+	
+	<li><pre class=example>depends on prefs: 'preservePicks', 'delayForManualMetadataSaveBox' (used for manual delete box).</pre></li>
+	
+	<li><pre class=example>as of 30/May/2014, will always prompt user before deleting - user can then choose manual or let plugin splatt delete them.</pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>status (boolean) true iff photos were deleted; false => not. Note: no qualifying message (check call to see if canceled).</ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:findPhotoByPath"></a><strong>Catalog:findPhotoByPath</strong>&nbsp;(file, copyName, rawMeta, fmtMeta)</dt>
+<dd>
+Similar in purpose to lr-catalog method of same name, except takes virtual copy status into consideration. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>file</em></code>: path
+	</li>
+	
+	<li>
+	  <code><em>copyName</em></code>: virtual copy name, if not wanting master photo.
+	</li>
+	
+	<li>
+	  <code><em>rawMeta</em></code>: batch of..
+	</li>
+	
+	<li>
+	  <code><em>fmtMeta</em></code>: batch of.. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>And one day it will not be case sensitive.</pre></li>
+	
+	<li><pre class=example>Hopefully to be replaced by a version which uses metadata cache instead of raw/fmt-meta params. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getAnyPhoto"></a><strong>Catalog:getAnyPhoto</strong>&nbsp;(notMissing, typeKey, call)</dt>
+<dd>
+Get a photo, any photo (nil means no photo gettable). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>notMissing</em></code>: set true to assure said photo is not offline (in case sample op is to extract preview, or exiftool it..).
+	</li>
+	
+	<li>
+	  <code><em>typeKey</em></code>: (optional) 'raw', 'rgb', 'video'.
+	</li>
+	
+	<li>
+	  <code><em>call</em></code>: (optional) for setting caption (in case op may take a while. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>for sample ops.. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getBatchFormattedMetadata"></a><strong>Catalog:getBatchFormattedMetadata</strong>&nbsp;(photos, ...)</dt>
+<dd>
+Get batch of formatted metadata without bringing down the system. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photos</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>I'm not sure about the value of this function - I think this did not fix a problem caused by something else.</pre></li>
+	
+	<li><pre class=example>Gets in batches of 1000 instead of all at once, presumably to keep Lr from being unresponsive or using too much memory or something - don't remember 'zactly.</pre></li>
+	
+	<li><pre class=example>must be called from async task.</pre></li>
+	
+	<li><pre class=example>this method may take a loooong time to run, so consider displaying porgress scope before calling. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>table, indexed by photos, values are metadata tables, whose keys are metadata ids and values are metadata. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getBatchRawMetadata"></a><strong>Catalog:getBatchRawMetadata</strong>&nbsp;(photos, ...)</dt>
+<dd>
+Get batch of raw metadata without bringing down the system. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photos</em></code>: array of lr-photos
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: raw IDs 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>I'm not sure about the value of this function - I think this did not fix a problem caused by something else.</pre></li>
+	
+	<li><pre class=example>Gets in batches of 1000 instead of all at once, presumably to keep Lr from being unresponsive or using too much memory or something - don't remember 'zactly.</pre></li>
+	
+	<li><pre class=example>must be called from async task.</pre></li>
+	
+	<li><pre class=example>this method may take a loooong time to run, so consider displaying progress scope before calling. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>table, indexed by photos, values are metadata tables, whose keys are metadata ids and values are metadata. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getCatDir"></a><strong>Catalog:getCatDir</strong>&nbsp;()</dt>
+<dd>
+Get directory containing catalog (just a tiny convenience/reminder function). 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getCollection"></a><strong>Catalog:getCollection</strong>&nbsp;(name, parent)</dt>
+<dd>
+Get collection *or* smart collection of specified name in specified parent, if it exists. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>parent</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getCollectionSetPhotos"></a><strong>Catalog:getCollectionSetPhotos</strong>&nbsp;(collSet)</dt>
+<dd>
+Get collection set photos (in regular collections only). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>collSet</em></code>: collection set object. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>uses breadth-first algorithm. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>photos (array) may be empty, never nil. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getCollectionSetPopupItems"></a><strong>Catalog:getCollectionSetPopupItems</strong>&nbsp;(pub)</dt>
+<dd>
+Get collection set popup items. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>pub</em></code>: (boolean, default=false) set true for publish services collection sets; false => catalog coll sets. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>items for popup: titles are collection set paths.., values are local IDs or "LrCatalog".</li>
+	
+	<li>lookup keys are item values, values are item titles. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getExtSupport"></a><strong>Catalog:getExtSupport</strong>&nbsp;(ext)</dt>
+<dd>
+Get support type for all or specified extension. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>ext</em></code>: extension or nil. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>make a copy of the returned table if plugin is to change support type strings to tables, or add-on... </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>supportType (string: 'raw', 'rgb', 'video') or nil, if specified extension is not supported by Lightroom. <br>    DNG is considered raw, even though it could be dng-wrapped jpeg, likewise NEF is considered raw even though it could be rgb internally.. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getFilmstripPhotos"></a><strong>Catalog:getFilmstripPhotos</strong>&nbsp;(assumeSubfoldersToo, ignoreIfBuried, excludeSource)</dt>
+<dd>
+Get list of photos in filmstrip *** DEPRECATED in favor of getVisiblePhotos, which could stand to be augmented with parameters like includeIfBuried... - exclude source would not fit, and perhaps should be handled as special case in 1 plugin using it: MissingInAction. consider modifying other plugins to use it. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>assumeSubfoldersToo</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>ignoreIfBuried</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>excludeSource</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>*** DEPRECATED.</pre></li>
+	
+	<li><pre class=example>this function *may* not be perfect, and may return photos even if excluded by lib filter or buried in stack. <br>    presently its working perfectly, but I don't trust it, and neither should you!? <br>    *** originally: function Catalog:getFilmstripPhotos( assumeSubfoldersToo, bottomFeedersToo ) </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>array of photos - may be empty, but never nil (should not throw any errors). </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getFolder"></a><strong>Catalog:getFolder</strong>&nbsp;(photo, photoPath)</dt>
+<dd>
+Get lr folder for photo, if possible. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: (lr-photo, required) photo whose folder is desired.
+	</li>
+	
+	<li>
+	  <code><em>photoPath</em></code>: (string, optional) if known in calling context, saves a more expensive call to get-raw-metadata in here. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>lr-folder, or nil if no can do. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getFolderByPath"></a><strong>Catalog:getFolderByPath</strong>&nbsp;(folderPath)</dt>
+<dd>
+Equivalent to Lr's native method, except works for unmapped network drives too (Lr's doesn't, as of Lr5.4 anyway). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>folderPath</em></code>: (string, required) path of folder for which corresponding lr-folder object is desired. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>it is recommended but not required to initialize folder cache before calling the first time. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>folder (lr-folder object) hopefully never nil (assuming valid folder-path), but best to check in calling context. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getFolderSet"></a><strong>Catalog:getFolderSet</strong>&nbsp;(photos, cache)</dt>
+<dd>
+Get set of folders housing specified photos. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photos</em></code>: (array of lr-photo) required.
+	</li>
+	
+	<li>
+	  <code><em>cache</em></code>: just needs 'path' to be useful. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>logs warning(s) if folder(s) not found. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>set of lr-folders - maybe empty, but never nil. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getFormattedMetadata"></a><strong>Catalog:getFormattedMetadata</strong>&nbsp;(photo, name, fmtMeta)</dt>
+<dd>
+Get formatted metadata, preferrable from that read in batch mode, else from photo directly. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: (lr-photo, required) the photo.
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: (string, required) raw metadata item name.
+	</li>
+	
+	<li>
+	  <code><em>fmtMeta</em></code>: (table, optional) formatted metadata table read using batch mode. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>*** deprecated - use metadata cache instead. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getLocalImageId"></a><strong>Catalog:getLocalImageId</strong>&nbsp;(photo)</dt>
+<dd>
+Get local image id for photo. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: the photo 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>imageId (string) local database id corresponding to photo, or nil if problem.</li>
+	
+	<li>message (string) error message if problem, else nil. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getOriginalFilename"></a><strong>Catalog:getOriginalFilename</strong>&nbsp;(photo)</dt>
+<dd>
+Get original filename corresponding to photo. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>*** requires original filenames initialized via SQLiteroom, or the like.</pre></li>
+	
+	<li><pre class=example>- consider checking for corresponding disk file if pertinent (e.g. photo object may be from stale info, and photo and/or file since deleted..). </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>filename (string) nil if unavailable.</li>
+	
+	<li>excuse (string) nil if available, else reason for no filename. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getPhotoName"></a><strong>Catalog:getPhotoName</strong>&nbsp;(photo, fullPath, rawMeta, fmtMeta)</dt>
+<dd>
+Get photo name or path which includes copy name when appropriate. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: (LrPhoto, required) photo
+	</li>
+	
+	<li>
+	  <code><em>fullPath</em></code>: (boolean, default = false) true for full-path, else filename only as base.
+	</li>
+	
+	<li>
+	  <code><em>rawMeta</em></code>: (table, optional) batched raw metadata, or metadata cache.
+	</li>
+	
+	<li>
+	  <code><em>fmtMeta</em></code>: (table, optional) batched fmt metadata, or nil (cache may include formatted metadata). 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>*** deprecated - use get-photo-name-disp instead (I like the simpler name, but I recommend migrating to a metadata caching scheme). </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getPhotoNameDisp"></a><strong>Catalog:getPhotoNameDisp</strong>&nbsp;(photo, fullPath, metaCache)</dt>
+<dd>
+Get photo name or path which includes copy name when appropriate. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: (LrPhoto, required) photo
+	</li>
+	
+	<li>
+	  <code><em>fullPath</em></code>: (boolean, default = false) true for full-path, else filename only as base.
+	</li>
+	
+	<li>
+	  <code><em>metaCache</em></code>: (Cache, optional) Metadata cache. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getPhotoSetFromSeedPhotos"></a><strong>Catalog:getPhotoSetFromSeedPhotos</strong>&nbsp;(seedPhotos, cache)</dt>
+<dd>
+Get photo set from seed photos. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>seedPhotos</em></code>: (table, required) An array of photos, often obtained from some catalog source. 
+	</li>
+	
+	<li>
+	  <code><em>cache</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>To get top photos, and those underneath too...</pre></li>
+	
+	<li><pre class=example>Not very efficient if there are lots of expanded stacks, and all underneath are already included in seed photos. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>photoSet (table, never nil) keys are photos, values are true. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getPluginCollection"></a><strong>Catalog:getPluginCollection</strong>&nbsp;(collName)</dt>
+<dd>
+Determine if plugin collection exists, and get it. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>collName</em></code>: collection name 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>collection or nil </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getPropertyForPlugin"></a><strong>Catalog:getPropertyForPlugin</strong>&nbsp;(name)</dt>
+<dd>
+Get catalog metadata property. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: (string, required) property name 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Gets property for plugin tied to catalog.</pre></li>
+	
+	<li><pre class=example>Present implementation uses Lightroom preferences and never fails. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>value (any) or nil. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getPublishService"></a><strong>Catalog:getPublishService</strong>&nbsp;(id)</dt>
+<dd>
+Get publish service, and name, corresponding to specified ID. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>id</em></code>: publish service ID. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>publish service</li>
+	
+	<li>name</li>
+	
+	<li>id </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getPublishServicePopupItems"></a><strong>Catalog:getPublishServicePopupItems</strong>&nbsp;()</dt>
+<dd>
+Get publish service popup items. 
+
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>items for popup: titles are publish service names, values are local IDs.</li>
+	
+	<li>lookup keys publish service local IDs, values are tables with: pubSrv, name, pid. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getRawMetadata"></a><strong>Catalog:getRawMetadata</strong>&nbsp;(photo, name, rawMeta)</dt>
+<dd>
+Get raw metadata, preferrable from that read in batch mode, else from photo directly. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: (lr-photo, required) the photo.
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: (string, required) raw metadata item name.
+	</li>
+	
+	<li>
+	  <code><em>rawMeta</em></code>: (table, optional) raw metadata table read using batch mode. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>*** deprecated - use metadata cache instead. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getSelectedPhotos"></a><strong>Catalog:getSelectedPhotos</strong>&nbsp;(photo)</dt>
+<dd>
+Get selected photos. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Use instead of lr-catalog's get-target-photos method if you don't want the entire filmstrip to be returned when nothing is selected. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>empty table if none selected - never returns nil. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getSmartCollection"></a><strong>Catalog:getSmartCollection</strong>&nbsp;(id)</dt>
+<dd>
+Get smart collection, and name. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>id</em></code>: smart collection ID. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>collection if found, else nil.</li>
+	
+	<li>name if found, else excuse.</li>
+	
+	<li>path if found, else nil. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getSmartCollectionPopupItems"></a><strong>Catalog:getSmartCollectionPopupItems</strong>&nbsp;(startHere)</dt>
+<dd>
+Get smart collection popup items (within catalog or publish service). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>startHere</em></code>: (collection set or publish service, default = catalog) 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>popup items: titles are indented collection names, values are collections local-IDs. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getSmartColls"></a><strong>Catalog:getSmartColls</strong>&nbsp;(photo, collSet)</dt>
+<dd>
+Get smart collections associated with specified photo ###1 coll-set? 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>collSet</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>probably needs to be called from async task, protected.. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>array of smart collections. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getSourceName"></a><strong>Catalog:getSourceName</strong>&nbsp;(source)</dt>
+<dd>
+Get source name, and id if special. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>source</em></code>: any source 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>some sources don't have get-name function. this method assures a reasonable name, regardless of source type. </pre></ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>sourceName (string) never empty, never nil. source name will be invented if no get-name function, or source ID if special source is not "registered" here.</li>
+	
+	<li>sourceId (string) if special source - as registered here, or source object type, or to-string of source.. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getSourcePhotos"></a><strong>Catalog:getSourcePhotos</strong>&nbsp;(assumeSubfoldersToo, ignoreIfBuried, metaIds)</dt>
+<dd>
+Get list complete list of photos in selected sources, unless buried in stack (optional). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>assumeSubfoldersToo</em></code>: (boolean, default = true ) will get folders in subfolders too. Note: this only matches the user's filmstrip if he/she is also viewing subfolders, thus the term "assume".
+	</li>
+	
+	<li>
+	  <code><em>ignoreIfBuried</em></code>: (boolean, default = true ) will exclude photos if not top of stack (or unstacked).
+	</li>
+	
+	<li>
+	  <code><em>metaIds</em></code>: (array of strings, default = nil ) IDs of metadata items in this plugin that if active, means filtered set should be returned (see example plugin: MissingInAction). 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Beware: this function *may* not be perfect e.g. may not work if sources are special Lr collections, and not sure about how reliable is the assume-subfolders field, nor ignore-if-buried - you have been warned.</pre></li>
+	
+	<li><pre class=example>deprecated </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>photos (array of LrPhoto objects) - may be empty, but never nil (should not throw any errors).</li>
+	
+	<li>excludeIfFiltered (boolean), not always returned. hmm... ###3 </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getSourceType"></a><strong>Catalog:getSourceType</strong>&nbsp;(source)</dt>
+<dd>
+get source type, regardless of source. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>source</em></code>: any photo/video source, including catalog or special collection. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>sourceType (string) same as source--get-type if said method exists, else "lr-catalog" or "special" (never empty, never nil). </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getStackRelation"></a><strong>Catalog:getStackRelation</strong>&nbsp;(photo1, photo2, cache)</dt>
+<dd>
+Get stack relationship 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo1</em></code>: first photo
+	</li>
+	
+	<li>
+	  <code><em>photo2</em></code>: second photo
+	</li>
+	
+	<li>
+	  <code><em>cache</em></code>: metadata cache (optional). 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>which is above, nil if not in same stack.</li>
+	
+	<li>stack position of photo1, 0 if not in a stack</li>
+	
+	<li>stack position of photo2, ditto. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getTargetPhotos"></a><strong>Catalog:getTargetPhotos</strong>&nbsp;(p)</dt>
+<dd>
+Get target photos. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>p</em></code>: (table, optional) handling members:<br> * noneSel (string, default=nil) 'allPhotos', 'filmstrip', or nil.<br> * oneSel (string, default=nil) 'filmstrip', or nil.<br> 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>*** deprecated - may be removed in a future version (or, may not be..). </pre></li>
+	
+	<li><pre class=example>If multiple selected, they are returned. What happens when none or one are selected depends on parameter table:<br> if handling member is nil, then selected photos returned without change. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>may return empty table, but never returns nil. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:getVisiblePhotos"></a><strong>Catalog:getVisiblePhotos</strong>&nbsp;(params)</dt>
+<dd>
+Get photos visible in filmstrip (as filtered, as stacked, ... ). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>params</em></code>: parameter table: <br>    selectedPhoto (LrPhoto, default=nil) catalog:getTargetPhoto() - in case already available in calling context. <br>    selectedPhotos (array of LrPhoto, default=nil) catalog:getTargetPhotos() - ditto. <br>    metadataCache (LrMetadata::Cache, optional) metadata cache (see code below for expected members). <br>    includeIfBuried (boolean, default=false) visible only? or those underneath in collapsed stacks too. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>without disturbing users's present selection.</pre></li>
+	
+	<li><pre class=example>*** BEWARE: adds 'Undo Select' item to undo stack, so DO NOT call from background task. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>visiblePhotos (array) never nil, but may be empty (e.g. virgin catalog) </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:initFolderCache"></a><strong>Catalog:initFolderCache</strong>&nbsp;(unInit)</dt>
+<dd>
+Initialize folder cache to assure fresh results via (and set mode of) get-folder-by-path. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>unInit</em></code>: (boolean, default = false) if false, get-folder-by-path will use cached mode (faster, but results will be stale unless care is taken to init before each "run"..). <br>    if true, get-folder-by-path will use non-cached mode (slower, but results are always fresh). 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:initForOriginalFilenames"></a><strong>Catalog:initForOriginalFilenames</strong>&nbsp;()</dt>
+<dd>
+Determine if original filenames are even a possibility, and if so, prepare.. 
+
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status - true iff successful</li>
+	
+	<li>message -- reason if not successful. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:initSmartColls"></a><strong>Catalog:initSmartColls</strong>&nbsp;()</dt>
+<dd>
+Initialize caches/lookups to be used by get-smart-colls. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:isBuriedInStack"></a><strong>Catalog:isBuriedInStack</strong>&nbsp;(photo, bm)</dt>
+<dd>
+Determine if specified photo is buried in collapsed stack in folder of origin. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: lr-photo in question.
+	</li>
+	
+	<li>
+	  <code><em>bm</em></code>: batch (raw) metadata - optional. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:isLocked"></a><strong>Catalog:isLocked</strong>&nbsp;(photo, orXmp, cache)</dt>
+<dd>
+Determine if locked, and if so: return lock-date as string, as 2nd item in return list (1st item is boolean locked, or not). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: lr-photo
+	</li>
+	
+	<li>
+	  <code><em>orXmp</em></code>: if photo not locked, also check if xmp is read-only. 
+	</li>
+	
+	<li>
+	  <code><em>cache</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>locked true if so</li>
+	
+	<li>qualification may accompany *true* status: lock-date or xmp notice. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:isMetadataColumnActive"></a><strong>Catalog:isMetadataColumnActive</strong>&nbsp;(metaIds, filter)</dt>
+<dd>
+Determine if specified metadata columns are active in specified lib view filter. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>metaIds</em></code>: array of strings
+	</li>
+	
+	<li>
+	  <code><em>filter</em></code>: view filter 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>true iff is active. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:isMissing"></a><strong>Catalog:isMissing</strong>&nbsp;(photo, cache)</dt>
+<dd>
+Determine if photo is missing - i.e. not physical file and no smart copy stub. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>cache</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status (boolean, always) true if photo source file does not exist.</li>
+	
+	<li>qualifier (string, sometimes) Note: it's not an error message (never set when false is returned), if accomanying 'true' status, it means smart preview exists. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:isOriginalFilenamesInit"></a><strong>Catalog:isOriginalFilenamesInit</strong>&nbsp;()</dt>
+<dd>
+Determine if original filename subsystem is properly initialized. 
+
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>file *iff* init'd sans issue. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:isSmartPreview"></a><strong>Catalog:isSmartPreview</strong>&nbsp;(photo, cache)</dt>
+<dd>
+Determine if photo has a smart preview. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>cache</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Previews object has a 'getSmartPreview' method, if you actually want to have the preview. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>is (boolean) true or false. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:new"></a><strong>Catalog:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:newClass"></a><strong>Catalog:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:readPhotoMetadata"></a><strong>Catalog:readPhotoMetadata</strong>&nbsp;(photo, photoPath, alreadyInLibraryModule, service, manualSubtitle)</dt>
+<dd>
+Read metadata for one photo. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: - single photo object to read metadata for.
+	</li>
+	
+	<li>
+	  <code><em>photoPath</em></code>: - photo path.
+	</li>
+	
+	<li>
+	  <code><em>alreadyInLibraryModule</em></code>: - true iff library module has been assured before calling.
+	</li>
+	
+	<li>
+	  <code><em>service</em></code>: - if a scope in here it will be used for captioning.
+	</li>
+	
+	<li>
+	  <code><em>manualSubtitle</em></code>: - a tidbit for the prompt, if omitted it will be "this plugin needs metadata to be read". 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Not reliable in a loop without user prompting in between (or maybe lengthy delays).</pre></li>
+	
+	<li><pre class=example>Switch to grid mode first if necessary.</pre></li>
+	
+	<li><pre class=example>*** Side-effect of single photo selection - be sure to read previous multi-photo selection to restore afterward if necessary.</pre></li>
+	
+	<li><pre class=example>Ignores photos that are set to read-only, so make read-write before calling, if desired.</pre></li>
+	
+	<li><pre class=example>Uses keystroke emission to do the job.</pre></li>
+	
+	<li><pre class=example>Will not work on virtual copy (returns error message), so check before calling. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>true iff metadata read</li>
+	
+	<li>error message if metadata not read. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:refreshDisplay"></a><strong>Catalog:refreshDisplay</strong>&nbsp;(photo, photoPath)</dt>
+<dd>
+Refresh display of recently changed photo (externally changed). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>photoPath</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>If I remember correctly, this method does not work that well, so don't depend on it. <br>Theoretically, request-jpeg-thumbnail could be used to refresh display, except (as of Lr5.4) it doesn't work well enough either (ugh). </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:restoreSelPhotos"></a><strong>Catalog:restoreSelPhotos</strong>&nbsp;(selPhotos)</dt>
+<dd>
+Restore previously saved photo selection and related settings. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>selPhotos</em></code>: black box, as saved by save-sel-photos (yes: includes selected photos ;-}). 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>call in cleanup handler if photo selection was changed temporarily by plugin.</pre></li>
+	
+	<li><pre class=example>cant deselect photos, so if nothing was selected in filmstrip before restoral, then restoral will just be a no-op. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:saveMetadata"></a><strong>Catalog:saveMetadata</strong>&nbsp;(photos, preSelect, restoreSelect, alreadyInGridMode, service)</dt>
+<dd>
+Save metadata for (multiple) specified photos. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photos</em></code>: - photos to save metadata for, or nil to do all target photos.
+	</li>
+	
+	<li>
+	  <code><em>preSelect</em></code>: - true to have specified photos selected before saving metadata, false if you are certain they are already selected.
+	</li>
+	
+	<li>
+	  <code><em>restoreSelect</em></code>: - true to have previously photo selections restored before returning.
+	</li>
+	
+	<li>
+	  <code><em>alreadyInGridMode</em></code>: - multiple photos requires grid mode, if already in it, for sure, set this to true.
+	</li>
+	
+	<li>
+	  <code><em>service</em></code>: - if a scope in here it will be used for captioning. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Windows + Mac (its the *read* metadata that's not supported on mac).</pre></li>
+	
+	<li><pre class=example>Switch to grid mode first if desired, and select target photos first if possible.</pre></li>
+	
+	<li><pre class=example>Cause metadata conflict for photos that are set to read-only, so make read-write before calling, if desired.</pre></li>
+	
+	<li><pre class=example>Uses keystroke emission to do the job.</pre></li>
+	
+	<li><pre class=example>User will be prompted to first make sure the "Overwrite Settings" prompt will no longer appear. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>true iff metadata saved.</li>
+	
+	<li>error message if metadata not saved. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:savePhotoMetadata"></a><strong>Catalog:savePhotoMetadata</strong>&nbsp;(photo, photoPath, targ, call, noVal, oldWay)</dt>
+<dd>
+Save metadata for one photo. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: - single photo object to save metadata for.
+	</li>
+	
+	<li>
+	  <code><em>photoPath</em></code>: - photo path (optional).
+	</li>
+	
+	<li>
+	  <code><em>targ</em></code>: - path to file containing xmp for save validation (optional).
+	</li>
+	
+	<li>
+	  <code><em>call</em></code>: - if a scope in call it will be used for captioning.
+	</li>
+	
+	<li>
+	  <code><em>noVal</em></code>: - don't validate that metadata is saved.
+	</li>
+	
+	<li>
+	  <code><em>oldWay</em></code>: - don't use buggy Lr5.2RC method. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Windows + Mac (its the *read* metadata that's not supported on mac).</pre></li>
+	
+	<li><pre class=example>If you've just done something that needs settling before save, call sleep(e.g. .1) before this method to increase odds for success on first try.</pre></li>
+	
+	<li><pre class=example>Library mode is not necessary to save single photo metadata.</pre></li>
+	
+	<li><pre class=example>*** Side-effect of single photo selection - be sure to save previous multi-photo selection to restore afterward if necessary.</pre></li>
+	
+	<li><pre class=example>Will cause metadata conflict flag if xmp is read-only, so make read-write before calling, if desired.</pre></li>
+	
+	<li><pre class=example>Uses keystroke emission to do the job. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>true iff metadata saved.</li>
+	
+	<li>error message if metadata not saved. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:saveSelPhotos"></a><strong>Catalog:saveSelPhotos</strong>&nbsp;()</dt>
+<dd>
+Save selected photos, and related info/settings, for restoral later. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>call if photo selection will be changed temporarily by plugin. <br>- restore in cleanup handler. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>black box to pass to restoral function. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:selectOnePhoto"></a><strong>Catalog:selectOnePhoto</strong>&nbsp;(photo)</dt>
+<dd>
+select one photo, de-select all others - confirm selection. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>For when photo is likely to be in filmstrip, otherwise use assure-photo-is-selected instead.</pre></li>
+	
+	<li><pre class=example>Will only select specified photo if not buried in stack, and not filtered out... </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status (boolean, required) true => specified photo is only photo selected - confirmed.</li>
+	
+	<li>message (string or nil) qualification of failure. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:selectPhoto"></a><strong>Catalog:selectPhoto</strong>&nbsp;(photo)</dt>
+<dd>
+Make specified photo most selected, without changing other selections if possible. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>photo source must already be active, or this won't work.</pre></li>
+	
+	<li><pre class=example>@3/May/2014 20:50, only plugin (of mine) using this method is SnapTrash. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status true if successful.</li>
+	
+	<li>message error message if unsuccessful. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:selectPhotos"></a><strong>Catalog:selectPhotos</strong>&nbsp;(photo, photos, assureFolders, metaCache)</dt>
+<dd>
+Set selected photos, and verify selection, with option to select folders if necessary to assure photos will be selected, even if not in filmstrip. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: (LrPhoto, required) most selected.
+	</li>
+	
+	<li>
+	  <code><em>photos</em></code>: (array of LrPhotos, required) the rest, which must include most selected, unless assureSources is true.
+	</li>
+	
+	<li>
+	  <code><em>assureFolders</em></code>: (boolean, default=false) pass true to add photo to photos, if need be, and assure requisite sources are selected too - must be folders.
+	</li>
+	
+	<li>
+	  <code><em>metaCache</em></code>: (Cache, default=nil) pass a metadata cache to boost performance, if desired: must be populated with raw metadata for 'path' key, or it won't be worth anything. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>This function will also clear view filter if necessary to select photos - what it won't do is expand stacks.</pre></li>
+	
+	<li><pre class=example>Catalog photo selection may not take until processor is given up for Lightroom to do its thing.<br> If you must be certain selection has settled before continuing with processing, call<br> this method instead.</pre></li>
+	
+	<li><pre class=example>Do not call this method, unless you know the photos are all in active sources, or if all from folders, set assure-sources. Presently, there is no method for assuring multiple selected photos from diverse (possibly not active) sources.</pre></li>
+	
+	<li><pre class=example>Will clear lib filter if need be, but will *not* unstack if need be, so stacking to exposes photos for selection must be handled externally, if needed. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status (boolean) true iff specified selection validated.</li>
+	
+	<li>message (string) error message if status is false. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:setActiveSources"></a><strong>Catalog:setActiveSources</strong>&nbsp;(sources)</dt>
+<dd>
+Set active sources, and verify all were properly set. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>sources</em></code>: array of sources, must be settable via set-active-sources (e.g. catalog won't work, nor publish service, nor (I don't think) special collections. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status true iff all specified sources are active.</li>
+	
+	<li>error-message explanation if not. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:setCollectionPhotos"></a><strong>Catalog:setCollectionPhotos</strong>&nbsp;(coll, photos, tmo)</dt>
+<dd>
+Set collection photos. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>coll</em></code>: (lr-collection object, required)
+	</li>
+	
+	<li>
+	  <code><em>photos</em></code>: (array of lr-photos, required) may be empty, but may not be nil.
+	</li>
+	
+	<li>
+	  <code><em>tmo</em></code>: (number, optional) cat access tmo. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>auto-wrapped with cat-accessor if need be.</pre></li>
+	
+	<li><pre class=example>removes all photos from collection, then adds specified photos. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>nil - throws error if problem. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:setPropertyForPlugin"></a><strong>Catalog:setPropertyForPlugin</strong>&nbsp;(name, value, validate)</dt>
+<dd>
+Set catalog metadata property if not already. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: (string, required) property name
+	</li>
+	
+	<li>
+	  <code><em>value</em></code>: (string | date | number | boolean, required) property value
+	</li>
+	
+	<li>
+	  <code><em>validate</em></code>: (boolean, default=false) if true, will read property back and compare to that which was set (left over from problem times - not necessary now, but won't hurt much either..). 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>*** This is for setting catalog properties, NOT for setting photo properties (use metadata-manager for that).</pre></li>
+	
+	<li><pre class=example>Will wrap with async task if need be (in which case BEWARE: returns are always nil, and property is not guaranteed).<br> This mode appropriate for calling from plugin init module only.</pre></li>
+	
+	<li><pre class=example>Will wrap with catalog access if need be.</pre></li>
+	
+	<li><pre class=example>Reminder: you can only set for current plugin - you can read for any plugin if you have its ID.</pre></li>
+	
+	<li><pre class=example>No errors are thrown - see status and error message for results.</pre></li>
+	
+	<li><pre class=example>*** property whose name is photo-uuid is reserved for background task. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>nothing. throws error if problem. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:update"></a><strong>Catalog:update</strong>&nbsp;(tmo, name, func, ...)</dt>
+<dd>
+Wrapper for named/undoable catalog:withWriteAccessDo method - divide to conquor func. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>tmo</em></code>: (number) max seconds to get in. ***note: if > 1, user will be prompted to keep-trying (good for manually initiated ops). if <= 1, returns pronto (good for background processes which gracefully weather errors and retry naturally..).
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: (string) undo title.
+	</li>
+	
+	<li>
+	  <code><em>func</em></code>: (function) divided catalog writing function( context, phase, ... ): returns sts, msg = true when done; false if to be continued; nil, error message if trouble.
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: (any) additional parameters passed to func. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>example:<br> <br>local function catUpdate( context, phase ) <br>    local i1 = ( phase - 1 ) * 1000 + 1 <br>    local i2 = math.min( phase * 1000, #photos ) <br>    for i = i1, i2 do <br>        -- do something to photos[i] <br>        -- if trouble, return nil, msg. <br>    end <br>    if i2 == #photos then <br>        return true -- done, no errors. <br>    else <br>        return false -- continue, no errors. <br>    end <br>end <br>local sts, msg = cat:update( 10, "Test", catUpdate ) <br>if sts then <br>    -- log successful message. <br>else <br>    -- print error message... <br>end </pre></li>
+	
+	<li><pre class=example>phase param can also be used to do things like add keyword (in phase 1), then use keyword (in phase 2). </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status (boolean) true iff updated.</li>
+	
+	<li>message (string) accompanies un-true status to explain. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:updatePrivate"></a><strong>Catalog:updatePrivate</strong>&nbsp;(tmo, func, ...)</dt>
+<dd>
+Wrapper for un-named catalog:withPrivateWriteAccessDo method - divide to conquor func. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>tmo</em></code>: (number) max seconds to get in.
+	</li>
+	
+	<li>
+	  <code><em>func</em></code>: (function) divided catalog writing function: returns sts, msg = true when done; false if to be continued; nil, error message if trouble.
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: (any) passed to func. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>AFAIC (despite Adobe documentation), this method is only good for updating custom plugin metadata (aka photo properties) - all others require full update. </pre></li>
+	
+	<li><pre class=example>see catalog--update method for example. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status (boolean) true iff updated.</li>
+	
+	<li>message (string) accompanies un-true status to explain. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:withDo"></a><strong>Catalog:withDo</strong>&nbsp;(tryCount, func, catalog, p1, p2, ...)</dt>
+<dd>
+Catalog access wrapper that distinquishes catalog contention errors from target function errors. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>tryCount</em></code>: Number of tries before giving up, at a half second per try (average).
+	</li>
+	
+	<li>
+	  <code><em>func</em></code>: Catalog with-do function.
+	</li>
+	
+	<li>
+	  <code><em>catalog</em></code>: The lr-catalog object.
+	</li>
+	
+	<li>
+	  <code><em>p1</em></code>: First parameter which may be a function, an action name, or a param table.
+	</li>
+	
+	<li>
+	  <code><em>p2</em></code>: Second parameter which will be a function or nil.
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: Additional function parameters 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>*** deprecated - use cat update methods instead.</pre></li>
+	
+	<li><pre class=example>Returns immediately upon target function error.</pre></li>
+	
+	<li><pre class=example>The purpose of this function is so multiple concurrent tasks can access the catalog in succession without error. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status (boolean):    true iff target function executed without error.</li>
+	
+	<li>other:    function return value, or error message. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Catalog:withRetries"></a><strong>Catalog:withRetries</strong>&nbsp;(tryCount, func, p1, p2, ...)</dt>
+<dd>
+Catalog access wrapper that distinquishes catalog contention errors from target function errors. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>tryCount</em></code>: Number of tries before giving up, at a half second per try (average).
+	</li>
+	
+	<li>
+	  <code><em>func</em></code>: Catalog with-do function.
+	</li>
+	
+	<li>
+	  <code><em>p1</em></code>: First parameter which may be a function, an action name, or a param table.
+	</li>
+	
+	<li>
+	  <code><em>p2</em></code>: Second parameter which will be a function or nil.
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: Additional function parameters 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>*** deprecated - recommend update and/or update-private method instead.</pre></li>
+	
+	<li><pre class=example>Same as with-do method, except relies on global lr catalog.</pre></li>
+	
+	<li><pre class=example>Returns immediately upon target function error.</pre></li>
+	
+	<li><pre class=example>The purpose of this function is so multiple concurrent tasks can access the catalog in succession without error. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status (boolean):    true iff target function executed without error.</li>
+	
+	<li>other:    function return value, or error message. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

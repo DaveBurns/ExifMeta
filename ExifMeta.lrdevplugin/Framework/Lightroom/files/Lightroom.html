@@ -1,0 +1,594 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li><strong>Lightroom.lua</strong></li>
+	
+	<li>
+		<a href="../files/Preferences.html">Preferences.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>Lightroom.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#Lightroom:assurePreset">Lightroom:assurePreset</a>&nbsp;(presetSubdir, presetName, textValue, suppressExtension, forceUpdate)</td>
+	<td class="summary">Save preset, in both dirs if possible - w/catalog and common/shared.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Lightroom:computeLrAppPath">Lightroom:computeLrAppPath</a>&nbsp;()</td>
+	<td class="summary">Determine Lr app/exe file path based on develop preset folders, or whatever means possible.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Lightroom:exit">Lightroom:exit</a>&nbsp;()</td>
+	<td class="summary">Exit Lightroom  </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Lightroom:getCameraProfiles">Lightroom:getCameraProfiles</a>&nbsp;(model)</td>
+	<td class="summary">Get camera calibration profile items corresponding to specified model.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Lightroom:getDevelopPresetItems">Lightroom:getDevelopPresetItems</a>&nbsp;(params)</td>
+	<td class="summary">Get (popup compatible) array of develop preset items - value is UUID.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Lightroom:getDevelopPresetNames">Lightroom:getDevelopPresetNames</a>&nbsp;()</td>
+	<td class="summary">Get (combo-box compatible) array of develop preset names.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Lightroom:getFilenamePresetDir">Lightroom:getFilenamePresetDir</a>&nbsp;()</td>
+	<td class="summary">Get filename preset dir.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Lightroom:getFilenamePresetDir2">Lightroom:getFilenamePresetDir2</a>&nbsp;()</td>
+	<td class="summary">Get filename preset dir - 2nd version (recommended).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Lightroom:getMetadataPresetItems">Lightroom:getMetadataPresetItems</a>&nbsp;(substr)</td>
+	<td class="summary">Get (popup compatible) array of metadata preset items - value is UUID.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Lightroom:getPrefsDir">Lightroom:getPrefsDir</a>&nbsp;()</td>
+	<td class="summary">Get filename preset dir - 2nd version (recommended).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Lightroom:getPresetDir">Lightroom:getPresetDir</a>&nbsp;(subdir, create)</td>
+	<td class="summary">Generic function for getting Lightroom settings dir - either root or subdir.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Lightroom:new">Lightroom:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Lightroom:newClass">Lightroom:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Lightroom:prepareForRestart">Lightroom:prepareForRestart</a>&nbsp;(catPath)</td>
+	<td class="summary">Evaluate conditions necessary for successfully restarting Lightroom.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Lightroom:restart">Lightroom:restart</a>&nbsp;(catPath, noPrompt)</td>
+	<td class="summary">Restarts lightroom with current or specified catalog *** @deprecated, since does not save prefs - use other method, unless you want to subvert prefs.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="Lightroom:assurePreset"></a><strong>Lightroom:assurePreset</strong>&nbsp;(presetSubdir, presetName, textValue, suppressExtension, forceUpdate)</dt>
+<dd>
+Save preset, in both dirs if possible - w/catalog and common/shared. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>presetSubdir</em></code>: (string, required) e.g. 'Export Actions'
+	</li>
+	
+	<li>
+	  <code><em>presetName</em></code>: (string, required) base name, will have .lrtemplate appended.
+	</li>
+	
+	<li>
+	  <code><em>textValue</em></code>: (string, required) preset value in text form.
+	</li>
+	
+	<li>
+	  <code><em>suppressExtension</em></code>: (boolean, default=false) set true to not append .lrtemplate.
+	</li>
+	
+	<li>
+	  <code><em>forceUpdate</em></code>: (boolean, default=false) set true to to force update (copy even if already existing). 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>comStatus - true iff saved in common location.</li>
+	
+	<li>catStatus - true iff saved with catalog.</li>
+	
+	<li>message - qualifying message, will be non-empty string unless both statuses are true. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Lightroom:computeLrAppPath"></a><strong>Lightroom:computeLrAppPath</strong>&nbsp;()</dt>
+<dd>
+Determine Lr app/exe file path based on develop preset folders, or whatever means possible. 
+
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>exe file path or nil if none</li>
+	
+	<li>Lr program folder path or error message. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Lightroom:exit"></a><strong>Lightroom:exit</strong>&nbsp;()</dt>
+<dd>
+Exit Lightroom 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Lightroom:getCameraProfiles"></a><strong>Lightroom:getCameraProfiles</strong>&nbsp;(model)</dt>
+<dd>
+Get camera calibration profile items corresponding to specified model. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>model</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Lightroom:getDevelopPresetItems"></a><strong>Lightroom:getDevelopPresetItems</strong>&nbsp;(params)</dt>
+<dd>
+Get (popup compatible) array of develop preset items - value is UUID. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>params</em></code>: optional table of parameters (all members are optional): <br>    folderIncl <br>    folderExcl <br>    nameIncl <br>    nameExcl 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Lightroom:getDevelopPresetNames"></a><strong>Lightroom:getDevelopPresetNames</strong>&nbsp;()</dt>
+<dd>
+Get (combo-box compatible) array of develop preset names. ###3 consider a develop-presets module.
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Lightroom:getFilenamePresetDir"></a><strong>Lightroom:getFilenamePresetDir</strong>&nbsp;()</dt>
+<dd>
+Get filename preset dir. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Lightroom:getFilenamePresetDir2"></a><strong>Lightroom:getFilenamePresetDir2</strong>&nbsp;()</dt>
+<dd>
+Get filename preset dir - 2nd version (recommended). 
+
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>dir (or nil)</li>
+	
+	<li>reason for nil dir (or nil itself). </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Lightroom:getMetadataPresetItems"></a><strong>Lightroom:getMetadataPresetItems</strong>&nbsp;(substr)</dt>
+<dd>
+Get (popup compatible) array of metadata preset items - value is UUID. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>substr</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Lightroom:getPrefsDir"></a><strong>Lightroom:getPrefsDir</strong>&nbsp;()</dt>
+<dd>
+Get filename preset dir - 2nd version (recommended). 
+
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>dir (or nil)</li>
+	
+	<li>reason for nil dir (or nil itself). </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Lightroom:getPresetDir"></a><strong>Lightroom:getPresetDir</strong>&nbsp;(subdir, create)</dt>
+<dd>
+Generic function for getting Lightroom settings dir - either root or subdir.  @usage: lightroo m : g etPresetDir() same as lightroom:computeActivePresetDir() @usage: lightroo m : g etPresetDir( 'Preferences' ) to get prefs dir.. @usage: lightroo m : g etPresetDir( 'Filename Templates' ) to get fn tmpl dir.. @usage: lightroo m : g etPresetDir( 'Export Presets' ) to get export preset dir.. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>subdir</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>create</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Lightroom:new"></a><strong>Lightroom:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Lightroom:newClass"></a><strong>Lightroom:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Lightroom:prepareForRestart"></a><strong>Lightroom:prepareForRestart</strong>&nbsp;(catPath)</dt>
+<dd>
+Evaluate conditions necessary for successfully restarting Lightroom. *** saves prefs? 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>catPath</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>restart function appropriate for OS, or nil.</li>
+	
+	<li>status message to explain no restart function. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Lightroom:restart"></a><strong>Lightroom:restart</strong>&nbsp;(catPath, noPrompt)</dt>
+<dd>
+Restarts lightroom with current or specified catalog *** @deprecated, since does not save prefs - use other method, unless you want to subvert prefs. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>catPath</em></code>: (string, default = current catalog) path to catalog to restart with.
+	</li>
+	
+	<li>
+	  <code><em>noPrompt</em></code>: (boolean, default = false) set true for no prompting, otherwise user will be prompted prior to restart, if prompt not permanently dismissed that is. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>*** Does NOT save preferences on the way out (@25/Nov/2013, there is no way I know to restart and save prefs).</pre></li>
+	
+	<li><pre class=example>depends on 'lrApp' pref or global-pref for exe-path in windows environment - if not there, user will be prompted for exe file. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

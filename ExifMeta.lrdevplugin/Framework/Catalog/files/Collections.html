@@ -1,0 +1,287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/Catalog.html">Catalog.lua</a>
+	</li>
+
+	<li><strong>Collections.lua</strong></li>
+	
+	<li>
+		<a href="../files/CustomMetadata.html">CustomMetadata.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/DevelopSettings.html">DevelopSettings.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Keywords.html">Keywords.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/LrMetadata.html">LrMetadata.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Previews.html">Previews.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/PublishServices.html">PublishServices.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/SmartCollections.html">SmartCollections.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>Collections.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#Collections:getCollPath">Collections:getCollPath</a>&nbsp;(coll, sep)</td>
+	<td class="summary">Get path to collection or set.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Collections:getFullCollPath">Collections:getFullCollPath</a>&nbsp;(coll, sep)</td>
+	<td class="summary">Get path to collection or set, except if parent is publish service, it's included as root component in path.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Collections:new">Collections:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Collections:newClass">Collections:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="Collections:getCollPath"></a><strong>Collections:getCollPath</strong>&nbsp;(coll, sep)</dt>
+<dd>
+Get path to collection or set. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>coll</em></code>: (Lr collection, or set, required) can not be nil, but can be a special collection.
+	</li>
+	
+	<li>
+	  <code><em>sep</em></code>: (string, default: app--path-sep) path separator. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>assuming coll is a collection, even if special. </pre></ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>path (string) If no parent returns collection name, even if special.</li>
+	
+	<li>comp (array of strings) components, in case you want to roll your own path or sub-path.. last element is name of collection itself. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Collections:getFullCollPath"></a><strong>Collections:getFullCollPath</strong>&nbsp;(coll, sep)</dt>
+<dd>
+Get path to collection or set, except if parent is publish service, it's included as root component in path. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>coll</em></code>: (LrCollection, required) can not be nil, but can be a special collection.
+	</li>
+	
+	<li>
+	  <code><em>sep</em></code>: (string, default: app--path-sep) path separator. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>assuming coll is a collection, even if special. </pre></ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>path (string) If no parent returns collection name, even if special.</li>
+	
+	<li>comp (array of strings) components, in case you want to roll your own path or sub-path.. last element is name of collection itself. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Collections:new"></a><strong>Collections:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Collections:newClass"></a><strong>Collections:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

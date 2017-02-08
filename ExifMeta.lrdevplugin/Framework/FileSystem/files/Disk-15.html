@@ -1,0 +1,1952 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/Disk-10.html">Disk-10.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Disk-11.html">Disk-11.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Disk-12.html">Disk-12.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Disk-13.html">Disk-13.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Disk-14.html">Disk-14.lua</a>
+	</li>
+
+	<li><strong>Disk-15.lua</strong></li>
+	
+	<li>
+		<a href="../files/Disk-16.html">Disk-16.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Disk-17.html">Disk-17.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Disk-18.html">Disk-18.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Disk-19.html">Disk-19.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Disk-2.html">Disk-2.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Disk-3.html">Disk-3.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Disk-4.html">Disk-4.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Disk-5.html">Disk-5.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Disk-6.html">Disk-6.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Disk-7.html">Disk-7.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Disk-8.html">Disk-8.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Disk-9.html">Disk-9.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>Disk-15.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:assureAllDirectories">Disk:assureAllDirectories</a>&nbsp;(targetDir)</td>
+	<td class="summary">Attempts to assure sub-directory tree will exist upon return.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:closeFile">Disk:closeFile</a>&nbsp;(fileHandle)</td>
+	<td class="summary">Closes a file protectedly.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:copyBigFile">Disk:copyBigFile</a>&nbsp;(sourcePath, destPath, createDestDirsIfNecessary, overwriteDestFileIfNecessary, avoidUnnecessaryUpdate, progressScope, timeCheckIsEnough)</td>
+	<td class="summary">Like copy-file, except for files big enough to warrant a progress-indicator - like video.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:copyFile">Disk:copyFile</a>&nbsp;(sourcePath, destPath, createDestDirsIfNecessary, overwriteDestFileIfNecessary, avoidUnnecessaryUpdate, timeCheckIsEnough, call, captionPrefix)</td>
+	<td class="summary">Copies source file to destination, as specified.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:copyTree">Disk:copyTree</a>&nbsp;(src, dest, excl, overwrite, timeCheckIsEnough, call)</td>
+	<td class="summary">Copy files in folder to target destination, maintaining directory structure.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:deleteFileConfirm">Disk:deleteFileConfirm</a>&nbsp;(path)</td>
+	<td class="summary">Deletes a file and confirms deletion instead of relying on status code returned from delete.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:deleteFolderOrFile">Disk:deleteFolderOrFile</a>&nbsp;(path)</td>
+	<td class="summary">Deletes specified folder or file.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:deleteTree">Disk:deleteTree</a>&nbsp;(tree, trash, leaveRoot, call)</td>
+	<td class="summary">Delete directory tree.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:eject">Disk:eject</a>&nbsp;(drives)</td>
+	<td class="summary">Eject disks.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:exists">Disk:exists</a>&nbsp;(p)</td>
+	<td class="summary">Same as lr-file-utils--exists  </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:existsAs">Disk:existsAs</a>&nbsp;(path, type, throwErrorIfWrongType)</td>
+	<td class="summary">Determines if path exists as a specified type.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:existsAsDirectory">Disk:existsAsDirectory</a>&nbsp;(path)</td>
+	<td class="summary">Determine if path is to a directory.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:existsAsFile">Disk:existsAsFile</a>&nbsp;(path)</td>
+	<td class="summary">Determine if path is to a file.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:getAppDataDir">Disk:getAppDataDir</a>&nbsp;(winSubdir)</td>
+	<td class="summary">Get system-wide app-data location.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:getByte">Disk:getByte</a>&nbsp;(file)</td>
+	<td class="summary">Reads one byte from a file.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:getDouble">Disk:getDouble</a>&nbsp;(file, bigEndian)</td>
+	<td class="summary">Reads one quadruple byte word from a file.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:getExactPath">Disk:getExactPath</a>&nbsp;(_path)</td>
+	<td class="summary">Get exact path, case and all, to file (typically) already known to exist, but case unknown.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:getFileCreationDate">Disk:getFileCreationDate</a>&nbsp;(file)</td>
+	<td class="summary">Get file created date - file need not be known to exist.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:getFileModificationDate">Disk:getFileModificationDate</a>&nbsp;(file)</td>
+	<td class="summary">Get file modification date - file need not be known to exist.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:getFileSize">Disk:getFileSize</a>&nbsp;(file)</td>
+	<td class="summary">Get file size - file need not be known to exist.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:getFoldersAndFiles">Disk:getFoldersAndFiles</a>&nbsp;(dir, folderSortFunc, fileSortFunc)</td>
+	<td class="summary">Get folders and files, separated and sorted.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:getWord">Disk:getWord</a>&nbsp;(file, bigEndian)</td>
+	<td class="summary">Reads one double-byte word from a file.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:isChangedSince">Disk:isChangedSince</a>&nbsp;(srcFile, lastMod)</td>
+	<td class="summary">Determine if source file has cnanged since specified date.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:isDirEmpty">Disk:isDirEmpty</a>&nbsp;(dir)</td>
+	<td class="summary">Determine if directory is empty.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:isFileSame">Disk:isFileSame</a>&nbsp;(path1, path2, timeCheckIsEnough)</td>
+	<td class="summary">Determine if target file content is different than source file content.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:isNewer">Disk:isNewer</a>&nbsp;(srcFile, targFile)</td>
+	<td class="summary">Determine if source file is newer than target file.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:isReadOnly">Disk:isReadOnly</a>&nbsp;(path)</td>
+	<td class="summary">Determine if file is read-only.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:isReadWrite">Disk:isReadWrite</a>&nbsp;(path)</td>
+	<td class="summary">Determine if file is read-write.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:makeExecutable">Disk:makeExecutable</a>&nbsp;(path)</td>
+	<td class="summary">Make Mac file executable.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:makeReadOnly">Disk:makeReadOnly</a>&nbsp;(path)</td>
+	<td class="summary">Make file read-only.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:makeReadWrite">Disk:makeReadWrite</a>&nbsp;(path)</td>
+	<td class="summary">Make file read-write.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:moveFile">Disk:moveFile</a>&nbsp;(sourcePath, destPath, createDestDirsIfNecessary, overwriteDestFileIfNecessary, avoidUnnecessaryUpdate, timeCheckIsEnough)</td>
+	<td class="summary">Moves source file to destination, or rename.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:moveFolderOrFile">Disk:moveFolderOrFile</a>&nbsp;(oldPath, newPath)</td>
+	<td class="summary">Move or rename a file.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:moveToTrash">Disk:moveToTrash</a>&nbsp;(path)</td>
+	<td class="summary">Moves specified folder or file to trash/recycle bin.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:new">Disk:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:newClass">Disk:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:numOfDirEntries">Disk:numOfDirEntries</a>&nbsp;(path, any)</td>
+	<td class="summary">Counts directory entries.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:readFile">Disk:readFile</a>&nbsp;(filePath)</td>
+	<td class="summary">Get entire contents of file.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:readTextFile">Disk:readTextFile</a>&nbsp;(filePath)</td>
+	<td class="summary">Reads as binary, then gets rid of the zero characters which look like string term char to Lr.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:writeFile">Disk:writeFile</a>&nbsp;(filePath, contents, dontAssumeDir, disallowOverwrite)</td>
+	<td class="summary">Write entire contents of file.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Disk:writeFileAtomically">Disk:writeFileAtomically</a>&nbsp;(filePath, contents, dontAssumeDir, disallowOverwrite)</td>
+	<td class="summary">Write atomically (write to temp file, then move to final destination).</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="Disk:assureAllDirectories"></a><strong>Disk:assureAllDirectories</strong>&nbsp;(targetDir)</dt>
+<dd>
+Attempts to assure sub-directory tree will exist upon return. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>targetDir</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>throws error if target not directory. </pre></li>
+	
+	<li><pre class=example>Examples: <p>success, qual, created = fsoassureAllDirectories( target ) <br>if success then <br>    if created then <br>        nCreated = nCreated + 1 <br>        if qual then <br>            logMessageLine( qual ) <br>        else <br>            logMessageLine( "Directories created: " .. target ) <br>        end <br>    else <br>        nAlready = nAlready + 1 <br>    end <br>    -- do things to target... <br>else <br>    assert( created == false ) <br>    assert( str:is( qual ) ) <br>    logError( "Unable to assure destination directory - " .. qual ) <br>    -- abort function... <br>end<p> </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status - boolean: true iff successful.</li>
+	
+	<li>errorMessage - string: if unsuccessful - the reason.</li>
+	
+	<li>created - boolean: true if dir not pre-existing (one or more dir in path was actually created). </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:closeFile"></a><strong>Disk:closeFile</strong>&nbsp;(fileHandle)</dt>
+<dd>
+Closes a file protectedly.  <p>Initial motivation: to keep file close errors from interrupting export services - better to log error and keep going.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>fileHandle</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>true iff successful. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:copyBigFile"></a><strong>Disk:copyBigFile</strong>&nbsp;(sourcePath, destPath, createDestDirsIfNecessary, overwriteDestFileIfNecessary, avoidUnnecessaryUpdate, progressScope, timeCheckIsEnough)</dt>
+<dd>
+Like copy-file, except for files big enough to warrant a progress-indicator - like video. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>sourcePath</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>destPath</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>createDestDirsIfNecessary</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>overwriteDestFileIfNecessary</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>avoidUnnecessaryUpdate</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>progressScope</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>timeCheckIsEnough</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>deprecated - copyFile has big-file auto-detect built in.  <p>The other motivation for this function is file transfer efficiency. For some reason, Lightrooms file copy/mover can be extremely inefficient sometimes.</p>  <p>I probably should find someway to move the decision for use out of the app and into this class, until then...</p> </pre></li>
+	
+	<li><pre class=example>parameters are the same as for copying normal file, except progress-scope is new... </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:copyFile"></a><strong>Disk:copyFile</strong>&nbsp;(sourcePath, destPath, createDestDirsIfNecessary, overwriteDestFileIfNecessary, avoidUnnecessaryUpdate, timeCheckIsEnough, call, captionPrefix)</dt>
+<dd>
+Copies source file to destination, as specified.  <p>Initial motivation: frustration with most API's file copy functions which do not specify what they do if source does not exist, or target does... are directories created?...</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>sourcePath</em></code>: source file path.
+	</li>
+	
+	<li>
+	  <code><em>destPath</em></code>: destination file path.
+	</li>
+	
+	<li>
+	  <code><em>createDestDirsIfNecessary</em></code>: boolean: default is nil.<blockquote> - nil:    dest-dir-tree not checked for, just does whatever lr version would in that respect.<br> - false:  checks for dest-dirs, and if not there, returns failure and explanation.<br> - true:  checks for dest-dirs, and if not there, creates them.</blockquote>
+	</li>
+	
+	<li>
+	  <code><em>overwriteDestFileIfNecessary</em></code>: boolean: default is nil.<blockquote> - nil:    dest-file not checked for, just does whatever lr version would in that respect.<br> - false:  checks for dest-file, and if there, returns failure and explanation.<br> - true:  checks for dest-dirs, and if there, deletes it before copying.</blockquote>
+	</li>
+	
+	<li>
+	  <code><em>avoidUnnecessaryUpdate</em></code>: boolean: true => pre-read file before writing, and don't write if no new data. Default is false. 
+	</li>
+	
+	<li>
+	  <code><em>timeCheckIsEnough</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>call</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>captionPrefix</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Assumes source file exists - bombs if not.  <p>Example #1:     sts, expl, ov, dirs, touched = fso:copyFile( source, dest, true, true )<blockquote> if sts then<br> if expl then<br> logMessage( expl ) -- test mode log<br> else<br> logMessage( "File copied. " ) -- normal mode log.<br> end<br> if ov then<br> logMessage( "Target file overwritten. " )<br> elseif dirs then<br> logMessage( "Target dirs created. " )<br> end<br> logMessageLine()<br> else<br> logError( "File copy failed: " .. expl )<br> end</blockquote></p>  <p>Example #2:     sts, expl = fso:copyFile( source, dest )<blockquote> if sts then<br> if expl then<br> logMessageLine( expl ) -- test mode log<br> else<br> logMessageLine( "File copied. " ) -- normal mode log.<br> end<br> else<br> logError( "File copy failed: " .. expl )<br> end</blockquote></p </pre></ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status - boolean: true iff successful.</li>
+	
+	<li>errorMessage - string: if unsuccessful - the reason.</li>
+	
+	<li>overwritten - boolean: true if pre-exisint file overwritten.</li>
+	
+	<li>dirsCreated - boolean: true if target dir had to be created.</li>
+	
+	<li>touched - boolean: true if target file existed with exact same contents already. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:copyTree"></a><strong>Disk:copyTree</strong>&nbsp;(src, dest, excl, overwrite, timeCheckIsEnough, call)</dt>
+<dd>
+Copy files in folder to target destination, maintaining directory structure. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>src</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>dest</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>excl</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>overwrite</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>timeCheckIsEnough</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>call</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>does not pre-check destination, so if an exact dup is desired, pre-delete dest. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:deleteFileConfirm"></a><strong>Disk:deleteFileConfirm</strong>&nbsp;(path)</dt>
+<dd>
+Deletes a file and confirms deletion instead of relying on status code returned from delete.  <p>Born from a case I had where a recently deleted file was not able to be immediately written, or something like that.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>path</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>****** MUST be called from a task. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>*** Unlike most methods of file-system, this one throws an error if cant delete (instead of returning status). </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:deleteFolderOrFile"></a><strong>Disk:deleteFolderOrFile</strong>&nbsp;(path)</dt>
+<dd>
+Deletes specified folder or file.  <p>Thin wrapper around lr-file-utils - delete.</p> <p>Initial motivation is "historical".</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>path</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Not sure what happens if specified item does not exist - same as lr version. </pre></ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status - boolean: true iff successful.</li>
+	
+	<li>errorMessage - string: if unsuccessful - the reason. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:deleteTree"></a><strong>Disk:deleteTree</strong>&nbsp;(tree, trash, leaveRoot, call)</dt>
+<dd>
+Delete directory tree. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>tree</em></code>: (string, required) path to tree dir.
+	</li>
+	
+	<li>
+	  <code><em>trash</em></code>: (boolean, default=false) move-to-trash or delete permanently?
+	</li>
+	
+	<li>
+	  <code><em>leaveRoot</em></code>: (boolean, default=false) leave-root dir or remove it too?
+	</li>
+	
+	<li>
+	  <code><em>call</em></code>: (Call object, default=nil) pass call to make op cancelable. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>All contents are deleted - does not need to be empty to start with.</pre></li>
+	
+	<li><pre class=example>Throws error only upon attempt to delete root or nil tree arg. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>true iff deleted in its entirety.</li>
+	
+	<li>error message if not deleted. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:eject"></a><strong>Disk:eject</strong>&nbsp;(drives)</dt>
+<dd>
+Eject disks. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>drives</em></code>: (array of strings, required) drives to eject. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>callers responsibility to assure disks are ejectable. </pre></ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status (boolean, always) true => disks in specified drives were successfully ejected.</li>
+	
+	<li>message (string, always) qualitative message for display to user or logging. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:exists"></a><strong>Disk:exists</strong>&nbsp;(p)</dt>
+<dd>
+Same as lr-file-utils--exists 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>p</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:existsAs"></a><strong>Disk:existsAs</strong>&nbsp;(path, type, throwErrorIfWrongType)</dt>
+<dd>
+Determines if path exists as a specified type.  <p>One motivation: Sometimes its not good enough to know if a path exists or not, but what type it exists as. Adobe realized this, which is why their exists method returns a type string. Problem is, one can not compare it directly to an expected type because if it does not exist, a "boolean being compared to string" error is thrown. Thus, a nested conditional is required: 1. does it exist, 2. What type. This method allows calling context to use a single conditional.</p>  <p>Side Benefit: Forces calling context to deal with the possibility that a folder may exist where a file is expected, or vice versa, which if un-detected, may cause strange and difficult to diagnose behavior / errors.</p>  <p>Examples:<blockquote><br>  path = "/asdf"<br> existsAsFile, isDir = fso:existsAs( path, 'file' ) -- return opposite type else not found if not type.<br> if existsAsFile then<br> -- process file<br> elseif isDir then<br> assert( dirType == 'directory', "Path is to directory: " .. path )<br> -- process path is to directory, not file.<br> else<br> -- process file not found.<br> end<br><br>  existsAsDir = fso:existsAs( path, 'directory', true ) -- returns true or false, bombs if path is to file.<br> if existsAsDir then<br> -- process directory<br> else<br> -- process dir not found.<br> end<br></blockquote> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>path</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>type</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>throwErrorIfWrongType</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>boolean: true iff exists as specified type.</li>
+	
+	<li>IF NOT THROWING ERROR UPON WRONG TYPE: returns the other type. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:existsAsDirectory"></a><strong>Disk:existsAsDirectory</strong>&nbsp;(path)</dt>
+<dd>
+Determine if path is to a directory. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>path</em></code>: directory path 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>The directory entry must either not exist, or be a directory, else an error is thrown. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:existsAsFile"></a><strong>Disk:existsAsFile</strong>&nbsp;(path)</dt>
+<dd>
+Determine if path is to a file. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>path</em></code>: file path 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>The directory entry must either not exist, or be a file, else an error is thrown. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:getAppDataDir"></a><strong>Disk:getAppDataDir</strong>&nbsp;(winSubdir)</dt>
+<dd>
+Get system-wide app-data location. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>winSubdir</em></code>: ignored on Mac, pass "Local" on Windows, if desired (default is "Roaming"). 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Windows: C:\Users\{user}\AppData\Roaming</pre></li>
+	
+	<li><pre class=example>Macintosh: /Users/{user}/Library/Application Support </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>dir-path or nil.</li>
+	
+	<li>err-msg if dir-path nil. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:getByte"></a><strong>Disk:getByte</strong>&nbsp;(file)</dt>
+<dd>
+Reads one byte from a file. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>file</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>Numerical value of the byte, else nil for eof. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:getDouble"></a><strong>Disk:getDouble</strong>&nbsp;(file, bigEndian)</dt>
+<dd>
+Reads one quadruple byte word from a file. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>file</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>bigEndian</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>it </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:getExactPath"></a><strong>Disk:getExactPath</strong>&nbsp;(_path)</dt>
+<dd>
+Get exact path, case and all, to file (typically) already known to exist, but case unknown.  <p>Handles condition when exact case of file on disk is important - like for looking up in lr-catalog.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>_path</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Very inefficient for large directories - best confined to small dirs if possible. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>path if exists, else nil. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:getFileCreationDate"></a><strong>Disk:getFileCreationDate</strong>&nbsp;(file)</dt>
+<dd>
+Get file created date - file need not be known to exist. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>file</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:getFileModificationDate"></a><strong>Disk:getFileModificationDate</strong>&nbsp;(file)</dt>
+<dd>
+Get file modification date - file need not be known to exist. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>file</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:getFileSize"></a><strong>Disk:getFileSize</strong>&nbsp;(file)</dt>
+<dd>
+Get file size - file need not be known to exist. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>file</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:getFoldersAndFiles"></a><strong>Disk:getFoldersAndFiles</strong>&nbsp;(dir, folderSortFunc, fileSortFunc)</dt>
+<dd>
+Get folders and files, separated and sorted. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>dir</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>folderSortFunc</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>fileSortFunc</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>folders - array of filenames, sorted.</li>
+	
+	<li>files - array of filenames, sorted. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:getWord"></a><strong>Disk:getWord</strong>&nbsp;(file, bigEndian)</dt>
+<dd>
+Reads one double-byte word from a file. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>file</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>bigEndian</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Machines have native endian, but that's overridden by file type, e.g. jpeg is big-endian on all platforms. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>Numerical value of the byte, else nil for eof. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:isChangedSince"></a><strong>Disk:isChangedSince</strong>&nbsp;(srcFile, lastMod)</dt>
+<dd>
+Determine if source file has cnanged since specified date. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>srcFile</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>lastMod</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>both files are expected to exist. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:isDirEmpty"></a><strong>Disk:isDirEmpty</strong>&nbsp;(dir)</dt>
+<dd>
+Determine if directory is empty. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>dir</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:isFileSame"></a><strong>Disk:isFileSame</strong>&nbsp;(path1, path2, timeCheckIsEnough)</dt>
+<dd>
+Determine if target file content is different than source file content. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>path1</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>path2</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>timeCheckIsEnough</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Keeps unchanged targets from being updated if not necessary.</pre></li>
+	
+	<li><pre class=example>Works in protected mode to avoid bombing upon i-o failure.</pre></li>
+	
+	<li><pre class=example>Tests a relatively small block first, then does larger ones from there on out. </pre></li>
+	
+	<li><pre class=example>Examples: <p>local same, problem = fso-isFileSame( path1, path2 ) <br>if not problem then <br>    if same <br>        -- dont update <br>    else <br>        -- update target <br>    end <br>else <br>    -- process error message <br>end</p> </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status (boolean) true if files are same content-wise, false if different, nil if error.</li>
+	
+	<li>error message (string) if error. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:isNewer"></a><strong>Disk:isNewer</strong>&nbsp;(srcFile, targFile)</dt>
+<dd>
+Determine if source file is newer than target file. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>srcFile</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>targFile</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>both files are expected to exist. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:isReadOnly"></a><strong>Disk:isReadOnly</strong>&nbsp;(path)</dt>
+<dd>
+Determine if file is read-only. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>path</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>true iff read-only.</li>
+	
+	<li>error message iff didn't work. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:isReadWrite"></a><strong>Disk:isReadWrite</strong>&nbsp;(path)</dt>
+<dd>
+Determine if file is read-write. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>path</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Convenience function: same as not-read-only. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:makeExecutable"></a><strong>Disk:makeExecutable</strong>&nbsp;(path)</dt>
+<dd>
+Make Mac file executable. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>path</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>true iff worked.</li>
+	
+	<li>error message iff didn't work. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:makeReadOnly"></a><strong>Disk:makeReadOnly</strong>&nbsp;(path)</dt>
+<dd>
+Make file read-only. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>path</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>true iff worked.</li>
+	
+	<li>error message iff didn't work. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:makeReadWrite"></a><strong>Disk:makeReadWrite</strong>&nbsp;(path)</dt>
+<dd>
+Make file read-write. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>path</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>true iff worked.</li>
+	
+	<li>error message iff didn't work. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:moveFile"></a><strong>Disk:moveFile</strong>&nbsp;(sourcePath, destPath, createDestDirsIfNecessary, overwriteDestFileIfNecessary, avoidUnnecessaryUpdate, timeCheckIsEnough)</dt>
+<dd>
+Moves source file to destination, or rename. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>sourcePath</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>destPath</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>createDestDirsIfNecessary</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>overwriteDestFileIfNecessary</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>avoidUnnecessaryUpdate</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>timeCheckIsEnough</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Assumes source file exists - throws error if not.</pre></li>
+	
+	<li><pre class=example>See copy-file for additional info. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:moveFolderOrFile"></a><strong>Disk:moveFolderOrFile</strong>&nbsp;(oldPath, newPath)</dt>
+<dd>
+Move or rename a file.  <p>One motivation: to handle case of silent failure of Lr version.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>oldPath</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>newPath</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Lr doc says its just for files, but experience dictates it works on folders as well.</pre></li>
+	
+	<li><pre class=example>*** SOURCE EXISTENCE NOT PRE-CHECKED, NOR IS TARGET PRE-EXISTENCE - SO CHECK BEFORE CALLING IF DESIRED. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>boolean: true iff successfully moved.</li>
+	
+	<li>error message if unable to move. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:moveToTrash"></a><strong>Disk:moveToTrash</strong>&nbsp;(path)</dt>
+<dd>
+Moves specified folder or file to trash/recycle bin.  <p>Initial motivation: lr-move-to-trash was bombing when file was on network share.</p> <p>If move-to-trash not supported, then file will simply be deleted.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>path</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Note move-to-trash returns false with no reason if specified file does not exist, not sure about delete.<br> this function however will consider it a success if file not found, so it is strongly recommended to check existence before calling to avoid erroneous<br> messages about what got moved-to-trash/deleted. </pre></ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status - boolean: true iff successfully deleted. Hopefully it was moved to trash, but that is not guaranteed.</li>
+	
+	<li>qualifier - string: if item not deleted/moved-to-trash - the reason. if deleted, it's extra qualification. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:new"></a><strong>Disk:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:newClass"></a><strong>Disk:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:numOfDirEntries"></a><strong>Disk:numOfDirEntries</strong>&nbsp;(path, any)</dt>
+<dd>
+Counts directory entries.  <p>Initial motivation - in case preparation needs be done before loop processing dir entries.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>path</em></code>: (string, required) dir
+	</li>
+	
+	<li>
+	  <code><em>any</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Assumes specified directory is known to exist: does not check. </pre></li>
+	
+	<li><pre class=example>any (boolean, default=true) any kind of directory entry. If false, returns #files & #dirs too. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>number of dir entries</li>
+	
+	<li>number of files (if any == false).</li>
+	
+	<li>number of dirs (if any == false). </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:readFile"></a><strong>Disk:readFile</strong>&nbsp;(filePath)</dt>
+<dd>
+Get entire contents of file.  <p>Same as Lightroom's lr-file-utils-read-file, except returns error message upon failure instead of throwing error.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>filePath</em></code>: absolute path to file. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Uses binary mode, which can also be used for reading text files as long as you don't mind zeros and CR/LF in your string...</pre></li>
+	
+	<li><pre class=example>@3/Aug/2011 10:37 works with non-ascii chars in path (previous versions did NOT). </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>contents - string: non-nil if successful.</li>
+	
+	<li>comment - string: explanation for failure. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:readTextFile"></a><strong>Disk:readTextFile</strong>&nbsp;(filePath)</dt>
+<dd>
+Reads as binary, then gets rid of the zero characters which look like string term char to Lr. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>filePath</em></code>: absolute path to file. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>binary file contents sans zero bytes. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:writeFile"></a><strong>Disk:writeFile</strong>&nbsp;(filePath, contents, dontAssumeDir, disallowOverwrite)</dt>
+<dd>
+Write entire contents of file.  <p>Runs in protected mode so export does not die upon first io failure.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>filePath</em></code>: (string, required) The (absolute) file path.
+	</li>
+	
+	<li>
+	  <code><em>contents</em></code>: (string, required) The contents to be.
+	</li>
+	
+	<li>
+	  <code><em>dontAssumeDir</em></code>: (boolean, default=false) If true, directory will be pre-assured, else error if target directory does not exist.
+	</li>
+	
+	<li>
+	  <code><em>disallowOverwrite</em></code>: (boolean, default=false) If true, an error will be thrown if target file already exists. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Dunno how this works out when file-path contains non-ascii characters. ###2 </pre></ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>true iff successful.</li>
+	
+	<li>error message if failure. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Disk:writeFileAtomically"></a><strong>Disk:writeFileAtomically</strong>&nbsp;(filePath, contents, dontAssumeDir, disallowOverwrite)</dt>
+<dd>
+Write atomically (write to temp file, then move to final destination). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>filePath</em></code>: (string, required) The (absolute) file path.
+	</li>
+	
+	<li>
+	  <code><em>contents</em></code>: (string, required) The contents to be.
+	</li>
+	
+	<li>
+	  <code><em>dontAssumeDir</em></code>: (boolean, default=false) If true, directory will be pre-assured, else error if target directory does not exist.
+	</li>
+	
+	<li>
+	  <code><em>disallowOverwrite</em></code>: (boolean, default=false) If true, an error will be thrown if target file already exists. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Dunno how this works out when file-path contains non-ascii characters. ###2</pre></li>
+	
+	<li><pre class=example>Only throws error if bug in method - external (io) errors will result in status returned. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>true iff successful.</li>
+	
+	<li>error message iff failure. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

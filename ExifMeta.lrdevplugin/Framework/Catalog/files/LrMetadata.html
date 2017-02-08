@@ -1,0 +1,992 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li><strong>LrMetadata.lua</strong></li>
+	
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>LrMetadata.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#Cache:addFormattedMetadata">Cache:addFormattedMetadata</a>&nbsp;(photos, names)</td>
+	<td class="summary">Add formatted metadata to cache - note: photos may be different, caller of get-fmt-metadata beware.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Cache:addRawMetadata">Cache:addRawMetadata</a>&nbsp;(photos, names)</td>
+	<td class="summary">Add raw metadata to cache - note: photos may be different, caller of get-raw-metadata beware.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Cache:getFmtMeta">Cache:getFmtMeta</a>&nbsp;()</td>
+	<td class="summary">Get formatted metadata table - for legacy methods that still require separate, raw-meta and fmt-meta tables.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Cache:getFormattedMetadata">Cache:getFormattedMetadata</a>&nbsp;(photo, name, acceptUncached, rejectNil)</td>
+	<td class="summary">Get specified formatted metadata, hopefully from cache.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Cache:getRawMeta">Cache:getRawMeta</a>&nbsp;()</td>
+	<td class="summary">Get raw metadata table - for legacy methods that still require separate, raw-meta and fmt-meta tables.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Cache:getRawMetadata">Cache:getRawMetadata</a>&nbsp;(photo, name, acceptUncached, rejectNil)</td>
+	<td class="summary">Get specified raw metadata, hopefully from cache.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Cache:loadFormattedMetadata">Cache:loadFormattedMetadata</a>&nbsp;(photos, names)</td>
+	<td class="summary">Assure specified formatted metadata is in cache for short-term future use.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Cache:loadRawMetadata">Cache:loadRawMetadata</a>&nbsp;(photos, names)</td>
+	<td class="summary">Cache specified raw metadata for short-term future use.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Cache:new">Cache:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LrMetadata:createCache">LrMetadata:createCache</a>&nbsp;(t)</td>
+	<td class="summary">Create metadata cache for local use.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LrMetadata:defineTokens">LrMetadata:defineTokens</a>&nbsp;(params)</td>
+	<td class="summary">Display dialog box for defining tokens.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LrMetadata:getFmtGetPopupItems">LrMetadata:getFmtGetPopupItems</a>&nbsp;(params)</td>
+	<td class="summary">Get gettable formatted items suitable for popup menu.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LrMetadata:getFormattedMetadata">LrMetadata:getFormattedMetadata</a>&nbsp;(photo, name, cache)</td>
+	<td class="summary">Get specified formatted metadata, from cache if available.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LrMetadata:getHelpText">LrMetadata:getHelpText</a>&nbsp;(params)</td>
+	<td class="summary">Get list of metadata items for printing or clipboard..</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LrMetadata:getPopupItems">LrMetadata:getPopupItems</a>&nbsp;()</td>
+	<td class="summary">Get gettable raw items suitable for popup menu.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LrMetadata:getRawGetPopupItems">LrMetadata:getRawGetPopupItems</a>&nbsp;(params)</td>
+	<td class="summary">Get gettable raw items suitable for popup menu.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LrMetadata:getRawMetadata">LrMetadata:getRawMetadata</a>&nbsp;(photo, name, cache)</td>
+	<td class="summary">Get specified raw metadata, from cache if available.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LrMetadata:getRawSetPopupItems">LrMetadata:getRawSetPopupItems</a>&nbsp;(params)</td>
+	<td class="summary">Get settable raw items suitable for popup menu.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LrMetadata:init">LrMetadata:init</a>&nbsp;()</td>
+	<td class="summary">Initialize data descriptors for getting/setting raw/formatted Lightroom metadata.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LrMetadata:isKnownKey">LrMetadata:isKnownKey</a>&nbsp;(photo, name)</td>
+	<td class="summary">Determine if key is known in formatted metadata.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LrMetadata:isKnownRawKey">LrMetadata:isKnownRawKey</a>&nbsp;(photo, name)</td>
+	<td class="summary">Determine if key is valid for reading raw metadata.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LrMetadata:isSettableRawKey">LrMetadata:isSettableRawKey</a>&nbsp;(name)</td>
+	<td class="summary">Determine if key is valid for setting raw metadata.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LrMetadata:new">LrMetadata:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LrMetadata:newClass">LrMetadata:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LrMetadata:transfer">LrMetadata:transfer</a>&nbsp;(params)</td>
+	<td class="summary">Transfer metadata from photo (possibly missing) to photo (presumably file must exist, unless inclusions/exclusions carefully chosen).</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="Cache:addFormattedMetadata"></a><strong>Cache:addFormattedMetadata</strong>&nbsp;(photos, names)</dt>
+<dd>
+Add formatted metadata to cache - note: photos may be different, caller of get-fmt-metadata beware. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photos</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>names</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Cache:addRawMetadata"></a><strong>Cache:addRawMetadata</strong>&nbsp;(photos, names)</dt>
+<dd>
+Add raw metadata to cache - note: photos may be different, caller of get-raw-metadata beware. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photos</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>names</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Cache:getFmtMeta"></a><strong>Cache:getFmtMeta</strong>&nbsp;()</dt>
+<dd>
+Get formatted metadata table - for legacy methods that still require separate, raw-meta and fmt-meta tables. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Cache:getFormattedMetadata"></a><strong>Cache:getFormattedMetadata</strong>&nbsp;(photo, name, acceptUncached, rejectNil)</dt>
+<dd>
+Get specified formatted metadata, hopefully from cache. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>acceptUncached</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>rejectNil</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Enable advanced debugging for this module to see uncached metadata accesses. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Cache:getRawMeta"></a><strong>Cache:getRawMeta</strong>&nbsp;()</dt>
+<dd>
+Get raw metadata table - for legacy methods that still require separate, raw-meta and fmt-meta tables. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Cache:getRawMetadata"></a><strong>Cache:getRawMetadata</strong>&nbsp;(photo, name, acceptUncached, rejectNil)</dt>
+<dd>
+Get specified raw metadata, hopefully from cache. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>acceptUncached</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>rejectNil</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Enable advanced debugging for this module to see uncached metadata accesses. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Cache:loadFormattedMetadata"></a><strong>Cache:loadFormattedMetadata</strong>&nbsp;(photos, names)</dt>
+<dd>
+Assure specified formatted metadata is in cache for short-term future use. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photos</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>names</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>clears any previous metadata from cache - use add-fmt-metadata to, well, add formatted metadata to the cache. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Cache:loadRawMetadata"></a><strong>Cache:loadRawMetadata</strong>&nbsp;(photos, names)</dt>
+<dd>
+Cache specified raw metadata for short-term future use. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photos</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>names</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>clears any previous metadata from cache - use add-raw-metadata to, well, add raw metadata to the cache. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Cache:new"></a><strong>Cache:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>presently no way to extend internal cache class.<br> if that changes, then provide new class constructor and go through object factory to create. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LrMetadata:createCache"></a><strong>LrMetadata:createCache</strong>&nbsp;(t)</dt>
+<dd>
+Create metadata cache for local use. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: (table, optional) members: photos, rawIds, fmtIds, call. If provided, cache will be pre-loaded (and call used for caption while loading). 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>equivalent to Lr catalog's batch get metadata functions, with the following conveniences: <br>You can add metadata to the cache, for same or different photos, after the fact. <br>When getting metadata via lr-meta methods, it will take from cache if available, else photo - thus no "attempt to index nil..." errors. <br>if data not in cache, debug message logged, so you can try passing an empty cache, and then based on what's logged learn how to fill it.</pre></li>
+	
+	<li><pre class=example>If you you know the cache variable exists, then there is no reason not to access directly, setting accept-cached as desired, <br>but if cache is being passed in, it's best to call lr-meta--get-raw/fmt instead, since it not only checks for cache, but accepts uncached. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LrMetadata:defineTokens"></a><strong>LrMetadata:defineTokens</strong>&nbsp;(params)</dt>
+<dd>
+Display dialog box for defining tokens. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>params</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>asynchronous (optional callbacks).</pre></li>
+	
+	<li><pre class=example>params may include callbacks as defined in show-floating-dialog method.</pre></li>
+	
+	<li><pre class=example>if more than one simultaneous, pass unique titles, since they're used for guarding. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LrMetadata:getFmtGetPopupItems"></a><strong>LrMetadata:getFmtGetPopupItems</strong>&nbsp;(params)</dt>
+<dd>
+Get gettable formatted items suitable for popup menu. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>params</em></code>: optional parameter table, with members: simpleOnly (exclude table metadata), idOnly (item values to be id, not spec). 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>popup items - menu-compatible: titles are friendly, and values may be ids or raw-metadata specs (as seen in this module) depending on param.</li>
+	
+	<li>lookup - keys are ids, values are specs. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LrMetadata:getFormattedMetadata"></a><strong>LrMetadata:getFormattedMetadata</strong>&nbsp;(photo, name, cache)</dt>
+<dd>
+Get specified formatted metadata, from cache if available. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>cache</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>good for functions that can take advantage of a cache created externally, or not. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LrMetadata:getHelpText"></a><strong>LrMetadata:getHelpText</strong>&nbsp;(params)</dt>
+<dd>
+Get list of metadata items for printing or clipboard.. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>params</em></code>: parameter table, with optional members: 'format' (idOnly, idPlusFriendly, friendlyOnly, friendlyPlusId) 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>excludes custom (plugin) metadata </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LrMetadata:getPopupItems"></a><strong>LrMetadata:getPopupItems</strong>&nbsp;()</dt>
+<dd>
+Get gettable raw items suitable for popup menu.  [[ *** on hold - needs more thought..
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LrMetadata:getRawGetPopupItems"></a><strong>LrMetadata:getRawGetPopupItems</strong>&nbsp;(params)</dt>
+<dd>
+Get gettable raw items suitable for popup menu. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>params</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LrMetadata:getRawMetadata"></a><strong>LrMetadata:getRawMetadata</strong>&nbsp;(photo, name, cache)</dt>
+<dd>
+Get specified raw metadata, from cache if available. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>cache</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>good for functions that can take advantage of a cache created externally, or not. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LrMetadata:getRawSetPopupItems"></a><strong>LrMetadata:getRawSetPopupItems</strong>&nbsp;(params)</dt>
+<dd>
+Get settable raw items suitable for popup menu. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>params</em></code>: optional parameter table, with members: simpleOnly (exclude table metadata), idOnly (item values to be id, not spec). 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>popup items - menu-compatible: titles are friendly, and values may be ids or raw-metadata specs (as seen in this module) depending on param.</li>
+	
+	<li>lookup - keys are ids, values are specs. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LrMetadata:init"></a><strong>LrMetadata:init</strong>&nbsp;()</dt>
+<dd>
+Initialize data descriptors for getting/setting raw/formatted Lightroom metadata. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>called automatically if need be, but feel free to call upon plugin init for faster initial on-demand response.</pre></li>
+	
+	<li><pre class=example>info is static, so only needs to be called once. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LrMetadata:isKnownKey"></a><strong>LrMetadata:isKnownKey</strong>&nbsp;(photo, name)</dt>
+<dd>
+Determine if key is known in formatted metadata. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LrMetadata:isKnownRawKey"></a><strong>LrMetadata:isKnownRawKey</strong>&nbsp;(photo, name)</dt>
+<dd>
+Determine if key is valid for reading raw metadata. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: (LrPhoto, optional) test photo.
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: (string, required) key. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LrMetadata:isSettableRawKey"></a><strong>LrMetadata:isSettableRawKey</strong>&nbsp;(name)</dt>
+<dd>
+Determine if key is valid for setting raw metadata. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LrMetadata:new"></a><strong>LrMetadata:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LrMetadata:newClass"></a><strong>LrMetadata:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LrMetadata:transfer"></a><strong>LrMetadata:transfer</strong>&nbsp;(params)</dt>
+<dd>
+Transfer metadata from photo (possibly missing) to photo (presumably file must exist, unless inclusions/exclusions carefully chosen). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>params</em></code>: (table) required. elements:<br> catUpdTitle (string, default="Transfer Lr Metadata") fromPhoto (LrPhoto, required) source of metadata (from catalog only). toPhoto (LrPhoto, required) target of metadata (catalog and maybe file too). inclusions (table, optional, but recommended) set (or array) of metadata names to include. exclusions (table, optional, usually omitted) set (or array) of metadata names to exclude. toIsVirginal (boolean, default = false) if true, blank from items will be ignored. exifToolSession (object, usually required) - in case included items will require exiftool to transfer. exifTool (object, fallback) - will be used if ets not provided, and et needed - @5/May/2014 18:00, I think it's safest to pass ets. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Uses a combination of exiftool and sdk for both reading and writing.</pre></li>
+	
+	<li><pre class=example>Derived originally from NxToo's transferLrMetadata function.</pre></li>
+	
+	<li><pre class=example>Probably doesn't (wont/cant) transfer icc profile(?)</pre></li>
+	
+	<li><pre class=example>comment added 5/May/2014 18:01 - if metadata set via exiftool, I think a read-meta is required afterward so Lr gets the memo(?)</pre></li>
+	
+	<li><pre class=example>Initially used for transferring metadata from missing photo to recovered preview, also used in relative antics (selective mode).</pre></li>
+	
+	<li><pre class=example>This method may be preferred if target is photo in catalog, see also: Image:transferMetadata and Xmp:transferMetadata (in case target is file on disk).</pre></li>
+	
+	<li><pre class=example>incl/excl as passed - does not depend on prefs. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

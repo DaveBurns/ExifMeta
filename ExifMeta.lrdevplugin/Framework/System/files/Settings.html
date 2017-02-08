@@ -1,0 +1,648 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/App.html">App.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Background.html">Background.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Call.html">Call.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/DebugScript.html">DebugScript.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ExternalApp.html">ExternalApp.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Gate.html">Gate.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Globals.html">Globals.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/InitFramework.html">InitFramework.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/LogFile.html">LogFile.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Mac.html">Mac.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Object.html">Object.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ObjectFactory.html">ObjectFactory.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/OperatingSystem.html">OperatingSystem.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Preferences.html">Preferences.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Presets.html">Presets.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Properties.html">Properties.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Reload.html">Reload.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Require.html">Require.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/RpcApp.html">RpcApp.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/RpcBackground.html">RpcBackground.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Service.html">Service.lua</a>
+	</li>
+
+	<li><strong>Settings.lua</strong></li>
+	
+	<li>
+		<a href="../files/Sidekick.html">Sidekick.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Timer.html">Timer.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Updater.html">Updater.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/User.html">User.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Windows.html">Windows.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>Settings.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#Settings:_devSettingsView">Settings:_devSettingsView</a>&nbsp;(itemKey, bindTo, spec, returnViewItems)</td>
+	<td class="summary">Present Develop settings "editor/chooser" view.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Settings:_init">Settings:_init</a>&nbsp;(_parentKey, _items, bindTo, force)</td>
+	<td class="summary">Initialize spec data in bind-to object at root key, and initialize lookup for future reference.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Settings:childKey">Settings:childKey</a>&nbsp;(parentKey, childName)</td>
+	<td class="summary">Get new key from parent key and child name.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Settings:getDevelopSettingsViewItems">Settings:getDevelopSettingsViewItems</a>&nbsp;(parentKey, bindTo, viewType)</td>
+	<td class="summary">Get develop settings view items, value key, and function for commiting values after view items presented to user.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Settings:getKey">Settings:getKey</a>&nbsp;(rootKeyOrName, ...)</td>
+	<td class="summary">Translate key names, into usable form (internal format).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Settings:getNameForKey">Settings:getNameForKey</a>&nbsp;(key)</td>
+	<td class="summary">Get simple name for (usually absolute) key - works for relative keys too.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Settings:getValue">Settings:getValue</a>&nbsp;(_key, bindTo, options)</td>
+	<td class="summary">Get value of setting specified by key, in bind-to property table (could be prefs or ad-hoc props)  </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Settings:getViewItems">Settings:getViewItems</a>&nbsp;(params, viewData, bindTo)</td>
+	<td class="summary">Get generic array of view items based on data description table.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Settings:getViewItemsAndLookup">Settings:getViewItemsAndLookup</a>&nbsp;(call)</td>
+	<td class="summary">Get settings root view items and lookup.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Settings:new">Settings:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructs a new preference manager.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Settings:newClass">Settings:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="Settings:_devSettingsView"></a><strong>Settings:_devSettingsView</strong>&nbsp;(itemKey, bindTo, spec, returnViewItems)</dt>
+<dd>
+Present Develop settings "editor/chooser" view. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>itemKey</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>bindTo</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>spec</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>returnViewItems</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>presently only supports multi-item selection (checkboxes), but could be modified to support<br> single item view (radio-buttons).</pre></li>
+	
+	<li><pre class=example>not wrapped (so wrap in calling context as warranted). </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Settings:_init"></a><strong>Settings:_init</strong>&nbsp;(_parentKey, _items, bindTo, force)</dt>
+<dd>
+Initialize spec data in bind-to object at root key, and initialize lookup for future reference.
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>_parentKey</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>_items</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>bindTo</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>force</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Settings:childKey"></a><strong>Settings:childKey</strong>&nbsp;(parentKey, childName)</dt>
+<dd>
+Get new key from parent key and child name. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>parentKey</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>childName</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Settings:getDevelopSettingsViewItems"></a><strong>Settings:getDevelopSettingsViewItems</strong>&nbsp;(parentKey, bindTo, viewType)</dt>
+<dd>
+Get develop settings view items, value key, and function for commiting values after view items presented to user. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>parentKey</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>bindTo</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>viewType</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>this is a special purpose function in case develop settings are to be included inline (instead of in response to event). </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Settings:getKey"></a><strong>Settings:getKey</strong>&nbsp;(rootKeyOrName, ...)</dt>
+<dd>
+Translate key names, into usable form (internal format). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>rootKeyOrName</em></code>: (string) may already be in internal format - it's ok.
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: (strings) if var-args present, root-key-or-name is prepended to far-args, otherwise root-key-or-name is considered relative to current (root) settings key. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Internal format is a string with double-underscore to delimit/separate. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Settings:getNameForKey"></a><strong>Settings:getNameForKey</strong>&nbsp;(key)</dt>
+<dd>
+Get simple name for (usually absolute) key - works for relative keys too. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>key</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>under normal circumstances, this method is not needed. I've used it for testing and such. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Settings:getValue"></a><strong>Settings:getValue</strong>&nbsp;(_key, bindTo, options)</dt>
+<dd>
+Get value of setting specified by key, in bind-to property table (could be prefs or ad-hoc props) 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>_key</em></code>: (string, required) relative or absolute key specifying data value in property table.
+	</li>
+	
+	<li>
+	  <code><em>bindTo</em></code>: (property table, default=prefs) property table.
+	</li>
+	
+	<li>
+	  <code><em>options</em></code>: (table, optional) e.g. 'whole' for whole array, instead of array element. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>depends on item having been pre-initialized, since item data descriptor must be consulted to format value.</pre></li>
+	
+	<li><pre class=example>*** throws error if key not registered. this way one can make distinction between value is nil, and value is invalid. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>value (any, required) typed/formated value.</li>
+	
+	<li>rawValue (string, number, boolean; required) raw value as read from property table. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Settings:getViewItems"></a><strong>Settings:getViewItems</strong>&nbsp;(params, viewData, bindTo)</dt>
+<dd>
+Get generic array of view items based on data description table. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>params</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>viewData</em></code>: (table, required) array of data descriptors. <pre> table element: </pre>
+	</li>
+	
+	<li>
+	  <code><em>bindTo</em></code>: ( property table, required ) 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Settings:getViewItemsAndLookup"></a><strong>Settings:getViewItemsAndLookup</strong>&nbsp;(call)</dt>
+<dd>
+Get settings root view items and lookup.
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>call</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Settings:new"></a><strong>Settings:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructs a new preference manager.  <p>Installation procedure is going to have to be smart enough to deal with pre-existing directory upgrade.</p>  <p>This object manages named preference sets. Exclude and you just have the reglar set of unnamed (un-prefixed) prefs...</p>  <p>Param Table In:<blockquote> - name(id): set name. if missing, then default set.<br> - file-essential boolean.</blockquote></p>  <p>Object Table Out:<blockquote> - friendlyName: same as name/id except for default.<br> - file (path)<br> - prefs (name-val table)</blockquote></p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: input parameter table. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Subdirectory for supplemental files is 'Settings' in plugin directory.</pre></li>
+	
+	<li><pre class=example>See app class pref methods for more info. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>Preference manager object. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Settings:newClass"></a><strong>Settings:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

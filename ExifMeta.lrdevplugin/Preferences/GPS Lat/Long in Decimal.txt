@@ -1,0 +1,495 @@
+--[[
+        User-editable configuration for exif-meta.
+        
+        a.k.a. stuff I was too lazy to put in plugin preferences...
+--]]
+
+
+--[[
+        Declaration of configuration table to be returned.
+        
+        Instructions:
+        
+            - Don't mess with this.
+--]]
+local _t = {}
+
+
+
+--[[
+        Temp directory
+
+        Instructions:
+        
+            - set to 'nil' (without the apostrophes) to use same directory as photo for temporary exiftool output.
+            - or set to absolute path to use an absolute path.
+            - or set to one of the standard path names, as supported by Lightroom SDK (see LrPathUtils.getStandardFilePath in API doc) - typically 'temp'.
+--]]
+_t.exifTempDir = nil -- so its same as its been forever...
+-- _t.exifTempDir = 'temp' -- uncomment this to use system temp folder, if you have it mapped to high-speed device.
+
+
+
+--[[
+        Tagset baselines.
+        
+        ExifMeta will append items to these baselines as discovered dynamically.
+    
+        Instructions:
+            
+            - Feel free to edit existing tagset baselines, or add new ones.
+--]]
+
+
+--   T A G S E T   B A S E L I N E   O N E
+local _ts1 = {}
+
+--   A D O B E   P R O P E R
+
+_ts1[#_ts1 + 1] = '{ "com.adobe.label", label = "File Info" }'
+_ts1[#_ts1 + 1] = "'com.adobe.filename'"
+_ts1[#_ts1 + 1] = "'com.adobe.originalFilename.ifDiffers'"
+_ts1[#_ts1 + 1] = "'com.adobe.sidecars'"
+_ts1[#_ts1 + 1] = "'com.adobe.copyname'"
+_ts1[#_ts1 + 1] = "'com.adobe.folder'"
+_ts1[#_ts1 + 1] = "'com.adobe.filesize'"
+_ts1[#_ts1 + 1] = "'com.adobe.filetype'"
+_ts1[#_ts1 + 1] = "'com.adobe.fileFormat'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.captureDateTime'"
+_ts1[#_ts1 + 1] = "'com.adobe.dateTime.onlyIfUnique'"
+_ts1[#_ts1 + 1] = "'com.adobe.dateTimeOriginal'"
+_ts1[#_ts1 + 1] = "'com.adobe.dateTimeDigitized.onlyIfUnique'"  -- dunno if the uniqueness qualifier works on this one(?)
+_ts1[#_ts1 + 1] = "'com.adobe.colorLabels'"
+_ts1[#_ts1 + 1] = "'com.adobe.metadataStatus'"
+_ts1[#_ts1 + 1] = "'com.adobe.metadataDate'"
+_ts1[#_ts1 + 1] = "'com.adobe.audioAnnotation'"
+_ts1[#_ts1 + 1] = "'com.adobe.imageFileDimensions'"
+_ts1[#_ts1 + 1] = "'com.adobe.imageCroppedDimensions'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.filePath'"     -- no longer supported.
+
+
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
+_ts1[#_ts1 + 1] = '{ "com.adobe.label", label = "Title & Caption" }'
+_ts1[#_ts1 + 1] = "'com.adobe.title'"
+_ts1[#_ts1 + 1] = "{ 'com.adobe.caption', height_in_lines = 3 }"
+
+-- _ts1[#_ts1 + 1] = "'com.adobe.rating'"       -- already displayed elsewhere
+-- _ts1[#_ts1 + 1] = "'com.adobe.colorLabel'"   -- already displayed elsewhere
+
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
+_ts1[#_ts1 + 1] = '{ "com.adobe.label", label = "Shooting Info" }'
+_ts1[#_ts1 + 1] = "'com.adobe.shutterSpeedValue'"
+_ts1[#_ts1 + 1] = "'com.adobe.apertureValue'"
+_ts1[#_ts1 + 1] = "'com.adobe.brightnessValue'"
+_ts1[#_ts1 + 1] = "'com.adobe.exposureBiasValue'"
+_ts1[#_ts1 + 1] = "'com.adobe.flash'"
+_ts1[#_ts1 + 1] = "'com.adobe.exposureProgram'"
+_ts1[#_ts1 + 1] = "'com.adobe.meteringMode'"
+_ts1[#_ts1 + 1] = "'com.adobe.ISOSpeedRating'"
+_ts1[#_ts1 + 1] = "'com.adobe.focalLength'"
+_ts1[#_ts1 + 1] = "'com.adobe.focalLength35mm'"
+_ts1[#_ts1 + 1] = "'com.adobe.lens'"
+_ts1[#_ts1 + 1] = "'com.adobe.subjectDistance'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.dateTimeOriginal'"     -- handled above
+-- _ts1[#_ts1 + 1] = "'com.adobe.dateTimeDigitized'"    -- handled above
+-- _ts1[#_ts1 + 1] = "'com.adobe.dateTime'"             -- dunno what this is - drives me crazy!
+_ts1[#_ts1 + 1] = "'com.adobe.make'"
+_ts1[#_ts1 + 1] = "'com.adobe.model'"
+_ts1[#_ts1 + 1] = "'com.adobe.serialNumber'"
+_ts1[#_ts1 + 1] = "'com.adobe.artist'"
+_ts1[#_ts1 + 1] = "'com.adobe.software'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.GPS'"                  -- Uncomment if you use GPS
+-- _ts1[#_ts1 + 1] = "'com.adobe.GPSAltitude'"          -- ditto.
+
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
+_ts1[#_ts1 + 1] = '{ "com.adobe.label", label = "Creator" }'
+_ts1[#_ts1 + 1] = "'com.adobe.creator'"
+_ts1[#_ts1 + 1] = "'com.adobe.creatorJobTitle'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.creatorAddress'"       -- Uncomment if desired.
+-- _ts1[#_ts1 + 1] = "'com.adobe.creatorCity'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.creatorState'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.creatorZip'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.creatorCountry'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.creatorWorkPhone'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.creatorWorkEmail'"
+_ts1[#_ts1 + 1] = "'com.adobe.creatorWorkWebsite'"
+
+-- _ts1[#_ts1 + 1] = "'com.adobe.separator'"
+-- _ts1[#_ts1 + 1] = '{ "com.adobe.label", label = "IPTC" }'
+-- _ts1[#_ts1 + 1] = "'com.adobe.headline'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.iptcSubjectCode'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.descriptionWriter'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.category'"                 -- deprecated.
+-- _ts1[#_ts1 + 1] = "'com.adobe.supplementalCategories'"      -- ditto
+-- _ts1[#_ts1 + 1] = "'com.adobe.dateCreated'"              -- got 'nuff dates?
+
+
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
+_ts1[#_ts1 + 1] = '{ "com.adobe.label", label = "Genre, Scene, & Location" }'
+_ts1[#_ts1 + 1] = "'com.adobe.intellectualGenre'"
+_ts1[#_ts1 + 1] = "'com.adobe.scene'"            -- see newscodes.org for recommended use.
+_ts1[#_ts1 + 1] = "'com.adobe.location'"
+_ts1[#_ts1 + 1] = "'com.adobe.city'"
+_ts1[#_ts1 + 1] = "'com.adobe.state'"
+_ts1[#_ts1 + 1] = "'com.adobe.country'"
+_ts1[#_ts1 + 1] = "'com.adobe.isoCountryCode'"
+
+-- _ts1[#_ts1 + 1] = "'com.adobe.separator'"
+-- _ts1[#_ts1 + 1] = '{ "com.adobe.label", label = "Job" }'
+-- _ts1[#_ts1 + 1] = "'com.adobe.jobIdentifier'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.instructions'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.provider'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.source'"
+
+-- _ts1[#_ts1 + 1] = "'com.adobe.separator'"
+-- _ts1[#_ts1 + 1] = '{ "com.adobe.label", label = "Copyright" }'
+-- _ts1[#_ts1 + 1] = "'com.adobe.copyright'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.rightsUsageTerms'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.copyrightInfoURL'"
+
+
+-- _ts1[#_ts1 + 1] = "'com.adobe.separator'"
+-- _ts1[#_ts1 + 1] = '{ "com.adobe.label", label = "Plus" }'
+-- _ts1[#_ts1 + 1] = "'com.adobe.personInImage'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.locationCreated'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.locationShown'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.organisationInImageName'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.organisationInImageCode'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.event'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.artworkOrObject'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.additionalModelInfo'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.modelAge'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.minorModelAgeDisclosure'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.modelReleaseStatus'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.imageSupplier'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.registryId'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.maxAvailWidth'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.maxAvailHeight'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.digitalSourceType'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.imageCreator'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.copyrightOwner'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.licensor'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.propertyReleaseID'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.propertyReleaseStatus'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.digImageGUID'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.plusVersion'"
+-- _ts1[#_ts1 + 1] = "'com.adobe.intellectualGenre'"
+
+
+
+
+
+
+
+--   U S E R   P L U G I N S
+
+--   c u s t o m   m e t a d a t a
+_ts1[#_ts1 + 1] = "'com.robcole.lightroom.CustomMetadata.*'"    -- user version of custom metadata.
+
+
+
+--   R C   P L U G I N S
+
+--   r c   l o c k
+_ts1[#_ts1 + 1] = "'com.robcole.dev.ChangeManager.*'"
+_ts1[#_ts1 + 1] = "'com.robcole.lightroom.ChangeManager.*'"
+
+
+
+--   c u s t o m   m e t a d a t a
+_ts1[#_ts1 + 1] = "'com.robcole.lightroom.metadata.RC_CustomMetadata.*'"  -- my version of custom metadata.
+
+
+
+--   d e v - a d j u s t
+_ts1[#_ts1 + 1] = "'com.robcole.lightroom.develop.DevAdjust.*'"
+
+
+
+--   d e v - m e t a
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
+_ts1[#_ts1 + 1] = '{ "com.adobe.label", label = "RC Dev Meta" }'
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.lastUpdate'"
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.ProcessVersion'"
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
+_ts1[#_ts1 + 1] = '{ "com.adobe.label", label = "Camera Calibration" }'
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.CameraProfile'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.ShadowTint'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.rgbColorMods'"
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
+_ts1[#_ts1 + 1] = '{ "com.adobe.label", label = "Basic" }'
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.WhiteBalance'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.Temperature'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.Tint'"
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
+-- PV12
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.Exposure2012'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.Contrast2012'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.Highlights2012'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.Shadows2012'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.Whites2012'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.Blacks2012'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.Clarity2012'"
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.Vibrance'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.Saturation'"
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
+-- PV03/10
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.Exposure'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.HighlightRecovery'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.FillLight'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.Shadows'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.Brightness'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.Contrast'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.Clarity'"
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
+_ts1[#_ts1 + 1] = '{ "com.adobe.label", label = "Tone Curve" }'
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.ToneCurveName'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.toneCurveParamMods'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.toneCurvePointMods'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.channelCurveMods'" -- PV12
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
+_ts1[#_ts1 + 1] = '{ "com.adobe.label", label = "HSL / Color / B & W" }'
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.colorType'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.colorMods'"
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
+_ts1[#_ts1 + 1] = '{ "com.adobe.label", label = "Split Toning" }'
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.splitToning'"
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
+_ts1[#_ts1 + 1] = '{ "com.adobe.label", label = "Detail" }'
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.Sharpness'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.SharpenRadius'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.SharpenDetail'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.SharpenEdgeMasking'"
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.LuminanceSmoothing'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.LuminanceNoiseReductionDetail'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.LuminanceNoiseReductionContrast'"
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.ColorNoiseReduction'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.ColorNoiseReductionDetail'"
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
+_ts1[#_ts1 + 1] = '{ "com.adobe.label", label = "Lens Corrections" }'
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.lensDistortion'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.lensVignetting'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.lensCa'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.perspective'"
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
+_ts1[#_ts1 + 1] = '{ "com.adobe.label", label = "Effects" }'
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.postCropVignette'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.grain'"
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
+_ts1[#_ts1 + 1] = '{ "com.adobe.label", label = "Crop, Locals, & Retouch" }'
+-- _ts1[#_ts1 + 1] = "'com.robcole.DevMeta.cropped'" - already in Lr proper @Lr3.4, maybe was before that..
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.CropWidth'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.CropHeight'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.retouched'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.redeye'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.gradients'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.brushes'"
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.stackPos'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.pixelCount'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.aspectRatio'"
+
+
+
+--   n x   t o o & e y
+_ts1[#_ts1 + 1] = "'com.robcole.lightroom.NxToo.*'"
+_ts1[#_ts1 + 1] = "'com.robcole.lightroom.plugin.nxTooey3.*'"
+-- exifmeta handled dynamically.
+
+
+local _tagset1 = {
+    title = "RC Standard", -- standard/default/primary set.
+    items = _ts1,
+}
+
+
+--  T A G S E T   B A S E L I N E   T W O
+local _ts2 = {}
+_ts2[#_ts2 + 1] = "'com.adobe.filename'"
+_tagset2 = {
+    title = "RC Custom", -- standard/default/primary set.
+    items = _ts2,
+}
+
+
+
+--[[
+        Tagset baselines table.
+        
+        Instructions:
+        
+            - add additional baseline tagsets here.
+              - no spaces or funny characters in between the ''.
+              - letters, digits, and "_" only - starting with a letter.
+--]]
+local _tagsetBaselines = {}
+
+_tagsetBaselines['RCMetadataSetOne'] = _tagset1
+_tagsetBaselines['RCMetadataSetTwo'] = _tagset2
+
+
+
+--[[
+        Main configuration entities assigned to return table
+        
+        Instructions:
+        
+            - Don't mess with this unless you know what you're doing.
+--]]
+_t.tagsetBaselines = _tagsetBaselines
+
+
+
+--[[
+        "Presets"
+        
+        Instructions: add to or delete from as desired - careful to maintain syntax/punctuation in same manner as original.
+        
+        Examples:
+        
+            None - don't like presets:
+            
+                _t.addlTagPresets = {}
+                
+                
+            My Favorites:
+            
+                _t.addlTagPresets = {
+                    { title = "Nikon D300", value = {
+                        { tag="Make", value="NIKON CORPORATION" },
+                        { tag="Model", value="NIKON D300" },
+                    }},
+                    { title = "Proprietary", value = {
+                        { tag="Proprietary", value="Custom" },
+                    }},    
+                }
+                
+--]]
+_t.addlTagPresets = {
+    { title = "One Tag Template", value = {
+        { tag="tag", value="value" },
+    }},
+    { title = "Two Tag Template", value = {
+        { tag="tag", value="value" },
+        { tag="tag2", value="value2" },
+    }},    
+}
+
+
+
+--[[
+        Number of additional tag/value rows.
+        
+        Instructions: reduce if small screen, increase if warranted..
+--]]
+_t.maxTags = 7
+
+
+
+--[[
+        what to do about metadata in xmp sidecar when present along with raw.
+        
+        *** Moved to plugin manager UI.
+        
+        Descriptions:
+        
+            _t.xmpHandling = 'rawOnly'  -- the default, for backward compatibility: exif metadata for raw photos is processed, metadata in xmp is ignored. Fastest, but some tags in xmp are not in raw - those tags will not be available.
+            _t.xmpHandling = 'xmpPri'   -- process both, but take xmp over raw if duplicate tags. - *** recommended if you save xmp regularly ***. Takes a little longer, but xmp tags will not be missing.
+            _t.xmpHandling = 'rawPri'   -- process both, but take raw over xmp if duplicate tags. - recommended if you primarily use xmp as a vehicle for transporting changes from other apps to Lr.
+            _t.xmpHandling = 'xmpOnly'  -- take xmp instead of raw, when present. - not recommended, unless you have no interest in metadata in raw files.
+            
+        Beware: processing both raw metadata and xmp metadata makes for a huge big block.
+--]]
+--_t.xmpHandling = 'rawOnly' - moved to plugin manager UI.
+
+
+
+--[[
+        Function to map name and value from exif to preferred name, and or value format.
+        
+        *** Instructions: Return string for name, and string value (array of strings for mapped value may be implemented some day, but @15/Sep/2013 18:03, hasn't been).
+        
+        Note: Although not the intended use, you can also return nil or "" for name to have metadata ignored.
+        It was intended to use the UI for such, but returning nil or "" here will keep it off the UI and out of the big block too - your call...
+        
+        Parameters (members of 'params'):
+            * make: Make of camera, as read from Exif.
+            * model: Model of camera, " .
+            * make5: First five characters of make (see below for how it's used). If make is less than 5 chars long, then so will make5.
+            * make5L: First five characters of make, in lower case (ditto). " .
+            * id: tag ID, as massaged by ExifMeta (after read by exif-tool).
+            * name: tag name, as read by exiftool, without massaging - will be non-blank string.
+            * value: tag value, as read by exiftool, in string form (won't be nil, but may be blank) - no binary values will be passed, and numeric values will be converted to string before passing.
+        
+        Examples:
+            _t.getNameAndValue = nil -- let plugin decide name and value format.
+            -- No mapping - same as ExifMeta v1-5.
+            _t.getNameAndValue = function( params )
+                return params.name, params.value
+            end
+            -- Map ND300 focus points:
+            _t.getNameAndValue = function( params )
+                local name, value = params.name, params.value
+                if params.id == 'Nikon_PrimaryAFPoint' then
+                    value = nikonAf51Points[params.value]
+                end
+                return name, value
+            end
+--]]
+_t.getNameAndValue = function( params )
+    if params.name:sub( 1, 3 ) == "GPS" then
+        local value = params.value:gsub( "&#39;", "'" ):gsub( "&quot;", '"' )
+        --[[ uncomment this block if you want lat/long in decimal notation
+        local remName = params.name:sub( 5 )
+        if remName == 'Latitude' or remName == 'Longitude' then
+            local p1, p2 = value:find( 'deg', 3 )
+            if p1 then
+                local degrees = tonumber( value:sub( 1, p1-2 ) )
+                local q1, q2 = value:find( "'", p2 + 2 )
+                if q1 then
+                    local min = tonumber( value:sub( p2+2, q1-1 ) )
+                    local p1, p2 = value:find( '"', q2 + 2 )
+                    if p1 then
+                        local sec = tonumber( value:sub( q2+2, p2-1 ) )
+                        if degrees and min and sec then
+                            value = string.format( "%.5f", degrees + min/60 + sec/3600 )
+                        else
+                            Debug.pause( degrees, min, sec )
+                        end
+                    else
+                        Debug.pause()
+                    end
+                else
+                    Debug.pause()
+                end
+            else
+                Debug.pause()
+            end
+        else
+            --Debug.pause()
+        end
+        --]]
+        --Debug.pause( params.name, value )
+        return params.name, value
+    else
+        return params.name, params.value
+    end
+end
+
+
+
+--[[
+        Return configuration to plugin.
+        
+        Without this everything else is for naut.
+        
+        Instructions:
+        
+            - Don't mess with this.
+--]]
+return _t

@@ -1,0 +1,986 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li><strong>XmlMutable.lua</strong></li>
+	
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>XmlMutable.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#Attributes:addAttr">Attributes:addAttr</a>&nbsp;(name, value)</td>
+	<td class="summary">Add an attribute as name/value pair.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Attributes:getArray">Attributes:getArray</a>&nbsp;()</td>
+	<td class="summary">Get array of attributes.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Attributes:getAttrText">Attributes:getAttrText</a>&nbsp;(name)</td>
+	<td class="summary">Get specified attribute by name.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Attributes:getLookup">Attributes:getLookup</a>&nbsp;()</td>
+	<td class="summary">Get attributes as lookup table.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Attributes:new">Attributes:new</a>&nbsp;(attrTable)</td>
+	<td class="summary">Create an object that represents an xml element's attributes.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Attributes:serialize">Attributes:serialize</a>&nbsp;(ind)</td>
+	<td class="summary">Serialize attributes.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Document:getDecl">Document:getDecl</a>&nbsp;()</td>
+	<td class="summary">Get xml declaration header as text string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Document:getRoot">Document:getRoot</a>&nbsp;()</td>
+	<td class="summary">Get root element.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Document:new">Document:new</a>&nbsp;(t)</td>
+	<td class="summary">Create an xml document, which is essentially just an xml element, plus an optional preamble, and encoding.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Document:serialize">Document:serialize</a>&nbsp;()</td>
+	<td class="summary">Serialize xml document.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Element:addChild">Element:addChild</a>&nbsp;(elem)</td>
+	<td class="summary">Add child element.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Element:getAttributeArray">Element:getAttributeArray</a>&nbsp;()</td>
+	<td class="summary">Gets attributes as array.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Element:getAttributeLookup">Element:getAttributeLookup</a>&nbsp;()</td>
+	<td class="summary">Get attributes as lookup table.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Element:getChildAtIndex">Element:getChildAtIndex</a>&nbsp;(i)</td>
+	<td class="summary">Get child element node specified by index.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Element:getChildCount">Element:getChildCount</a>&nbsp;()</td>
+	<td class="summary">Get number of children.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Element:getChildren">Element:getChildren</a>&nbsp;()</td>
+	<td class="summary">Get array of child element nodes.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Element:getName">Element:getName</a>&nbsp;()</td>
+	<td class="summary">Get element name - excluding namespace.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Element:getNamespace">Element:getNamespace</a>&nbsp;()</td>
+	<td class="summary">Get element namespace.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Element:getText">Element:getText</a>&nbsp;()</td>
+	<td class="summary">Get textual content, if any.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Element:new">Element:new</a>&nbsp;(t)</td>
+	<td class="summary">Create an xml element.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Element:serialize">Element:serialize</a>&nbsp;(initialIndentation, spacesPerIndent)</td>
+	<td class="summary">Serialize element, and all its children.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Element:setText">Element:setText</a>&nbsp;(text)</td>
+	<td class="summary">Set textual content.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#XmlMutable:new">XmlMutable:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#XmlMutable:newClass">XmlMutable:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#XmlMutable:newDocument">XmlMutable:newDocument</a>&nbsp;(xml, includePreamble)</td>
+	<td class="summary">Load xml string into xml table.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#XmlMutable:parseToLua">XmlMutable:parseToLua</a>&nbsp;(xmlString, expectDecl)</td>
+	<td class="summary">Converts serialized xml string to lua table (or simple variable).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#XmlMutable:parseXml">XmlMutable:parseXml</a>&nbsp;(x, decl)</td>
+	<td class="summary">Parse xml string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#XmlMutable:serialize">XmlMutable:serialize</a>&nbsp;(xdoc, initialIndentationSpaceString, numberOfSpacesPerIndentLevel)</td>
+	<td class="summary">Convert xml document to string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#XmlMutable:serializeLua">XmlMutable:serializeLua</a>&nbsp;(luaT, includeDecl, nSpaces)</td>
+	<td class="summary">Converts lua table (or simple variable) to string, typically for writing to a file upon return.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="Attributes:addAttr"></a><strong>Attributes:addAttr</strong>&nbsp;(name, value)</dt>
+<dd>
+Add an attribute as name/value pair. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: (string, required) name of attribute.
+	</li>
+	
+	<li>
+	  <code><em>value</em></code>: (any, required) any serializable value (serialized by global lua tostring function, tostring method in metatable, or toString class method if available). 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>attribute must NOT already exist. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Attributes:getArray"></a><strong>Attributes:getArray</strong>&nbsp;()</dt>
+<dd>
+Get array of attributes. 
+
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>array (table(array)) items are tables with named items: name/text.</ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Attributes:getAttrText"></a><strong>Attributes:getAttrText</strong>&nbsp;(name)</dt>
+<dd>
+Get specified attribute by name. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: (string, required) attribute name 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>value (string) attribute value as string, or nil if no attribute with specifed name. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Attributes:getLookup"></a><strong>Attributes:getLookup</strong>&nbsp;()</dt>
+<dd>
+Get attributes as lookup table. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Attributes:new"></a><strong>Attributes:new</strong>&nbsp;(attrTable)</dt>
+<dd>
+Create an object that represents an xml element's attributes. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>attrTable</em></code>: (table, optional) array of items with a name and text member for each attribute, or a name/text lookup table. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Attributes:serialize"></a><strong>Attributes:serialize</strong>&nbsp;(ind)</dt>
+<dd>
+Serialize attributes. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>ind</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>s (string) blank string if none, else name="value"... (space separated). </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Document:getDecl"></a><strong>Document:getDecl</strong>&nbsp;()</dt>
+<dd>
+Get xml declaration header as text string. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Document:getRoot"></a><strong>Document:getRoot</strong>&nbsp;()</dt>
+<dd>
+Get root element. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Document:new"></a><strong>Document:new</strong>&nbsp;(t)</dt>
+<dd>
+Create an xml document, which is essentially just an xml element, plus an optional preamble, and encoding. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: (table, optional) initial members. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Document:serialize"></a><strong>Document:serialize</strong>&nbsp;()</dt>
+<dd>
+Serialize xml document. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Element:addChild"></a><strong>Element:addChild</strong>&nbsp;(elem)</dt>
+<dd>
+Add child element. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>elem</em></code>: (Element, required) element to add. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Element:getAttributeArray"></a><strong>Element:getAttributeArray</strong>&nbsp;()</dt>
+<dd>
+Gets attributes as array. 
+
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>attribueArray (table(array)) empty if no attributes, else elements are tables containing name/text members. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Element:getAttributeLookup"></a><strong>Element:getAttributeLookup</strong>&nbsp;()</dt>
+<dd>
+Get attributes as lookup table. 
+
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>attributeLookupTable (table(named members)) key is attribute name, value is string. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Element:getChildAtIndex"></a><strong>Element:getChildAtIndex</strong>&nbsp;(i)</dt>
+<dd>
+Get child element node specified by index. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>i</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Element:getChildCount"></a><strong>Element:getChildCount</strong>&nbsp;()</dt>
+<dd>
+Get number of children. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Element:getChildren"></a><strong>Element:getChildren</strong>&nbsp;()</dt>
+<dd>
+Get array of child element nodes. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Element:getName"></a><strong>Element:getName</strong>&nbsp;()</dt>
+<dd>
+Get element name - excluding namespace. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Element:getNamespace"></a><strong>Element:getNamespace</strong>&nbsp;()</dt>
+<dd>
+Get element namespace. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Element:getText"></a><strong>Element:getText</strong>&nbsp;()</dt>
+<dd>
+Get textual content, if any. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Content may need to be unescaped externally. CDATA not supported. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Element:new"></a><strong>Element:new</strong>&nbsp;(t)</dt>
+<dd>
+Create an xml element. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: (table, optional) default members. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Element:serialize"></a><strong>Element:serialize</strong>&nbsp;(initialIndentation, spacesPerIndent)</dt>
+<dd>
+Serialize element, and all its children. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>initialIndentation</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>spacesPerIndent</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>indentation presently hardcoded to start at zero </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Element:setText"></a><strong>Element:setText</strong>&nbsp;(text)</dt>
+<dd>
+Set textual content. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>text</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Does not support CDATA, and escaping must be done externally, if required. ###2 </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="XmlMutable:new"></a><strong>XmlMutable:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="XmlMutable:newClass"></a><strong>XmlMutable:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="XmlMutable:newDocument"></a><strong>XmlMutable:newDocument</strong>&nbsp;(xml, includePreamble)</dt>
+<dd>
+Load xml string into xml table. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>xml</em></code>: (string, optional) Typically as read from file, but could be manufactured, or nil to create blank document. 
+	</li>
+	
+	<li>
+	  <code><em>includePreamble</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>returned table can be modified, then re-written. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>xmlDocument (Document) xml document instance. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="XmlMutable:parseToLua"></a><strong>XmlMutable:parseToLua</strong>&nbsp;(xmlString, expectDecl)</dt>
+<dd>
+Converts serialized xml string to lua table (or simple variable). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>xmlString</em></code>: (string, required) xml string - if blank returns empty table (if nil returns nil).
+	</li>
+	
+	<li>
+	  <code><em>expectDecl</em></code>: (boolean, default=false) if true, parse fails if no decl. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>does not support generic xml, only as serialized by this module.</pre></li>
+	
+	<li><pre class=example>reminder: attributes are only used for storing index value & type, and only string and number types are supported,<br> since the whole point of this exercise is serialization/de-serialization, it hardly makes sense to have a table object as index. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>lua table - sans decl </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="XmlMutable:parseXml"></a><strong>XmlMutable:parseXml</strong>&nbsp;(x, decl)</dt>
+<dd>
+Parse xml string. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>x</em></code>: (string, required) xml string.
+	</li>
+	
+	<li>
+	  <code><em>decl</em></code>: (boolean, default=false) expect decl. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>xmlDocument (private 'Document' class) accessed via methods. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="XmlMutable:serialize"></a><strong>XmlMutable:serialize</strong>&nbsp;(xdoc, initialIndentationSpaceString, numberOfSpacesPerIndentLevel)</dt>
+<dd>
+Convert xml document to string. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>xdoc</em></code>: (private 'Document' class) initially gotten by parsing xml string - may be since modified.
+	</li>
+	
+	<li>
+	  <code><em>initialIndentationSpaceString</em></code>: (string, default = "") spaces to indent root.
+	</li>
+	
+	<li>
+	  <code><em>numberOfSpacesPerIndentLevel</em></code>: (number, default = 2) number of additional spaces per nesting level. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>throws errors if problems. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>s (string) for display or disk storage... </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="XmlMutable:serializeLua"></a><strong>XmlMutable:serializeLua</strong>&nbsp;(luaT, includeDecl, nSpaces)</dt>
+<dd>
+Converts lua table (or simple variable) to string, typically for writing to a file upon return. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>luaT</em></code>: (lua table, required) actually can be a simple variable too, but in practice is nearly always a table.
+	</li>
+	
+	<li>
+	  <code><em>includeDecl</em></code>: (boolean, default=false) include declaration prefix
+	</li>
+	
+	<li>
+	  <code><em>nSpaces</em></code>: (number, default=2) number of spaces per indent. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Serializes in multi-line format, like xmp files. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>xml string, with optional decl sans char encoding, unix-style eol. </ul>
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

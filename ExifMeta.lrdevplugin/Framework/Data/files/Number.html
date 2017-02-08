@@ -1,0 +1,459 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li><strong>Number.lua</strong></li>
+	
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>Number.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#Number:fmtPrec">Number:fmtPrec</a>&nbsp;(val, prec)</td>
+	<td class="summary">Format number to string with specified precision.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Number:getAsNumber">Number:getAsNumber</a>&nbsp;(a)</td>
+	<td class="summary">Get a number from a variable whose type has not been pre-assured.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Number:getNumber">Number:getNumber</a>&nbsp;(a, nameToThrow)</td>
+	<td class="summary">Determine if a number, and if so, return it's value, otherwise return nil.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Number:isInteger">Number:isInteger</a>&nbsp;(nmbr)</td>
+	<td class="summary">Determine if number is integer.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Number:isNonZero">Number:isNonZero</a>&nbsp;(value)</td>
+	<td class="summary">Check if value is non-zero number.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Number:isWithin">Number:isWithin</a>&nbsp;(num1, num2, amt)</td>
+	<td class="summary">Determine if number is within a certain amount of another number +/-  </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Number:new">Number:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Number:newClass">Number:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Number:numberFromString">Number:numberFromString</a>&nbsp;(s)</td>
+	<td class="summary">Try to convert a string to a number, without croaking if the string is nil, null, or isn't a number...</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Number:signedString">Number:signedString</a>&nbsp;(v)</td>
+	<td class="summary">takes a number (or string representation of a number) and returns a string with sign prepended, whether positive or negative.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="Number:fmtPrec"></a><strong>Number:fmtPrec</strong>&nbsp;(val, prec)</dt>
+<dd>
+Format number to string with specified precision. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>val</em></code>: number to be formatted.
+	</li>
+	
+	<li>
+	  <code><em>prec</em></code>: (number, required) precision: number of digits after decimal place. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>num:fmtPrec( LrDate.currentTime() - initialTime, 3 ) -- replaces date-time--format-time-diff-msec method. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>string e.g. '1.234' -- elapsed time to nearest millisecond. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Number:getAsNumber"></a><strong>Number:getAsNumber</strong>&nbsp;(a)</dt>
+<dd>
+Get a number from a variable whose type has not been pre-assured. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>a</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>This function was invented when I thought the above would fail when 's' not string (e.g. number), but that seems OK now, so this function is may be completely redundent.</pre></li>
+	
+	<li><pre class=example>If number, then returned verbatim, if string, then attempt to convert to number, otherwise returns nil.</pre></li>
+	
+	<li><pre class=example>The intended use is for cases when a number is required, but user or legacy code may have left something else where a number is expected, in which case, the old value is to be ignored...</pre></li>
+	
+	<li><pre class=example>never throws an error. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Number:getNumber"></a><strong>Number:getNumber</strong>&nbsp;(a, nameToThrow)</dt>
+<dd>
+Determine if a number, and if so, return it's value, otherwise return nil. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>a</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>nameToThrow</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>never throws error. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Number:isInteger"></a><strong>Number:isInteger</strong>&nbsp;(nmbr)</dt>
+<dd>
+Determine if number is integer. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>nmbr</em></code>: number (not string, not nil..). 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Number:isNonZero"></a><strong>Number:isNonZero</strong>&nbsp;(value)</dt>
+<dd>
+Check if value is non-zero number. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>value</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>value can be nil, but if non-nil - must be number. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Number:isWithin"></a><strong>Number:isWithin</strong>&nbsp;(num1, num2, amt)</dt>
+<dd>
+Determine if number is within a certain amount of another number +/- 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>num1</em></code>: first number.
+	</li>
+	
+	<li>
+	  <code><em>num2</em></code>: second number.
+	</li>
+	
+	<li>
+	  <code><em>amt</em></code>: maximum difference amount. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>does not matter which number is first param and which is second. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>true of false if num1 is within amt of num2, or vice versa. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Number:new"></a><strong>Number:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Number:newClass"></a><strong>Number:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Number:numberFromString"></a><strong>Number:numberFromString</strong>&nbsp;(s)</dt>
+<dd>
+Try to convert a string to a number, without croaking if the string is nil, null, or isn't a number... 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>*** deprecated - this function is essentially the same as tonumber (which is more robust than I once thought, handling invalid types etc. by returning nil instead of throwing error, and handling numbers and numeric-strings in desired fashion. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Number:signedString"></a><strong>Number:signedString</strong>&nbsp;(v)</dt>
+<dd>
+takes a number (or string representation of a number) and returns a string with sign prepended, whether positive or negative. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>v</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

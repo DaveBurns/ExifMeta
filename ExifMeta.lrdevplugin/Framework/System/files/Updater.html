@@ -1,0 +1,436 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/App.html">App.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Background.html">Background.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Call.html">Call.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/DebugScript.html">DebugScript.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ExternalApp.html">ExternalApp.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Gate.html">Gate.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Globals.html">Globals.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/InitFramework.html">InitFramework.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/LogFile.html">LogFile.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Mac.html">Mac.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Object.html">Object.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ObjectFactory.html">ObjectFactory.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/OperatingSystem.html">OperatingSystem.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Preferences.html">Preferences.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Presets.html">Presets.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Properties.html">Properties.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Reload.html">Reload.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Require.html">Require.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/RpcApp.html">RpcApp.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/RpcBackground.html">RpcBackground.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Service.html">Service.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Settings.html">Settings.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Sidekick.html">Sidekick.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Timer.html">Timer.lua</a>
+	</li>
+
+	<li><strong>Updater.lua</strong></li>
+	
+	<li>
+		<a href="../files/User.html">User.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Windows.html">Windows.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>Updater.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#Updater:isCopyExcluded">Updater:isCopyExcluded</a>&nbsp;(f)</td>
+	<td class="summary">Determine if a particular sub-path is to be excluded from copying from source of update to target.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Updater:isPurgeExcluded">Updater:isPurgeExcluded</a>&nbsp;(f)</td>
+	<td class="summary">Determine if a particular sub-path is to be excluded from purging from updated target.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Updater:migratePrefsAndSets">Updater:migratePrefsAndSets</a>&nbsp;(subdir)</td>
+	<td class="summary">Migrate plugin preferences.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Updater:migrateSpecials">Updater:migrateSpecials</a>&nbsp;()</td>
+	<td class="summary">Migrate special plugin files.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Updater:new">Updater:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance object.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Updater:newClass">Updater:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Updater:syncTree">Updater:syncTree</a>&nbsp;()</td>
+	<td class="summary">Sync source tree to target tree.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Updater:updatePlugin">Updater:updatePlugin</a>&nbsp;()</td>
+	<td class="summary">Updates plugin to new version (must be already downloaded/available).</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="Updater:isCopyExcluded"></a><strong>Updater:isCopyExcluded</strong>&nbsp;(f)</dt>
+<dd>
+Determine if a particular sub-path is to be excluded from copying from source of update to target. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>f</em></code>: sub-path relative to lrplugin dir 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Updater:isPurgeExcluded"></a><strong>Updater:isPurgeExcluded</strong>&nbsp;(f)</dt>
+<dd>
+Determine if a particular sub-path is to be excluded from purging from updated target. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>f</em></code>: sub-path relative to lrplugin dir 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Updater:migratePrefsAndSets"></a><strong>Updater:migratePrefsAndSets</strong>&nbsp;(subdir)</dt>
+<dd>
+Migrate plugin preferences. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>subdir</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Default implementation simply transfers plugin preference backing files.<br> Override in extended class to translate legacy preferences (backed or reglar) to new, if desired. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>number of errors encountered. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Updater:migrateSpecials"></a><strong>Updater:migrateSpecials</strong>&nbsp;()</dt>
+<dd>
+Migrate special plugin files. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>In case some files require special handling instead of just copying.<br> Prime examples are auto-generated metadata module files.<br> Excludes preferences which are handled more specifically (see migrate-prefs method). </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Updater:new"></a><strong>Updater:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance object. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: initial table - optional. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Construct new updater with the default of no copy exclusions, and excluding preferences from being seen as extraneous and purging. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Updater:newClass"></a><strong>Updater:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: initial table - optional. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Updater:syncTree"></a><strong>Updater:syncTree</strong>&nbsp;()</dt>
+<dd>
+Sync source tree to target tree. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Updater:updatePlugin"></a><strong>Updater:updatePlugin</strong>&nbsp;()</dt>
+<dd>
+Updates plugin to new version (must be already downloaded/available). 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

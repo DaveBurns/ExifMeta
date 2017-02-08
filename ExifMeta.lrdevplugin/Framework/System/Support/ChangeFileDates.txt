@@ -1,0 +1,13 @@
+http://www.hamsoftengineering.com/codeSharing/ChangeFileDates/ChangeFileDates.html
+
+In a nutshell:
+
+Usage:
+ChangeFileDates -cDate creationDate -mDate modificationDate -file filePath
+
+The input variables explained:
+[-cDate "date"] the creation date
+[-mDate "date"] the modification date
+[-file "path/to/file"] the file to change
+
+NOTE: Dates should be in the format 'mm/dd/yyyy hh:mm:ss'.

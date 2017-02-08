@@ -1,0 +1,551 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/App.html">App.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Background.html">Background.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Call.html">Call.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/DebugScript.html">DebugScript.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ExternalApp.html">ExternalApp.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Gate.html">Gate.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Globals.html">Globals.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/InitFramework.html">InitFramework.lua</a>
+	</li>
+
+	<li><strong>LogFile.lua</strong></li>
+	
+	<li>
+		<a href="../files/Mac.html">Mac.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Object.html">Object.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ObjectFactory.html">ObjectFactory.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/OperatingSystem.html">OperatingSystem.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Preferences.html">Preferences.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Presets.html">Presets.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Properties.html">Properties.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Reload.html">Reload.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Require.html">Require.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/RpcApp.html">RpcApp.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/RpcBackground.html">RpcBackground.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Service.html">Service.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Settings.html">Settings.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Sidekick.html">Sidekick.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Timer.html">Timer.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Updater.html">Updater.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/User.html">User.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Windows.html">Windows.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>LogFile.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#LogFile:clear">LogFile:clear</a>&nbsp;()</td>
+	<td class="summary">Clear contents of log file.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LogFile:disable">LogFile:disable</a>&nbsp;()</td>
+	<td class="summary">Disables the log file - no more logs will be accepted after this is called.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LogFile:enable">LogFile:enable</a>&nbsp;(t)</td>
+	<td class="summary">Enables the logger for logging.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LogFile:getLogContents">LogFile:getLogContents</a>&nbsp;()</td>
+	<td class="summary">Get contents of log file.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LogFile:getLogFilePath">LogFile:getLogFilePath</a>&nbsp;()</td>
+	<td class="summary">Get path to log file.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LogFile:logError">LogFile:logError</a>&nbsp;(num, msg)</td>
+	<td class="summary">Logs an error line with an error prefix that includes index number, and counts it.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LogFile:logInfo">LogFile:logInfo</a>&nbsp;(message, verbose)</td>
+	<td class="summary">Logs a message line, or end-of-line - EOL output after message.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LogFile:logInfoStart">LogFile:logInfoStart</a>&nbsp;(message, verbose)</td>
+	<td class="summary">Logs a message segment, no EOL output.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LogFile:logWarning">LogFile:logWarning</a>&nbsp;(num, msg)</td>
+	<td class="summary">Logs a warning line with a warning prefix that includes index number, and counts it.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LogFile:new">LogFile:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructs a not-yet-enabled logger.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#LogFile:newClass">LogFile:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor to extend class.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="LogFile:clear"></a><strong>LogFile:clear</strong>&nbsp;()</dt>
+<dd>
+Clear contents of log file.  <p>It does this by simply deleting it.</p> <p>App clears warning & error counters when calling.</p> 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LogFile:disable"></a><strong>LogFile:disable</strong>&nbsp;()</dt>
+<dd>
+Disables the log file - no more logs will be accepted after this is called.  <p>Presently, this shan't be called, since a plugin either includes log file support or it doesn't. (not true @2010-11-22, but may be @some.)</p>  <p>User doesn't have a say. Still, just in case...</p> 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LogFile:enable"></a><strong>LogFile:enable</strong>&nbsp;(t)</dt>
+<dd>
+Enables the logger for logging.  <p>###2 To Do: resurrect ability to route debug-trace messages to debugger instead of log file.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LogFile:getLogContents"></a><strong>LogFile:getLogContents</strong>&nbsp;()</dt>
+<dd>
+Get contents of log file.  <p>Normally this is not required, since there is a show-log-file method in the app interface. The motivation for this function is to support a klugy send-log-file feature that involves the user copying the log contents from an edit field to the clipboard and pasting it in an email.</p> 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LogFile:getLogFilePath"></a><strong>LogFile:getLogFilePath</strong>&nbsp;()</dt>
+<dd>
+Get path to log file. 
+
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>The path, or nil if logger not enabled for logging to file. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LogFile:logError"></a><strong>LogFile:logError</strong>&nbsp;(num, msg)</dt>
+<dd>
+Logs an error line with an error prefix that includes index number, and counts it. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>num</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>msg</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>No-op if logger not open.</pre></li>
+	
+	<li><pre class=example>Errors are never considered verbose. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LogFile:logInfo"></a><strong>LogFile:logInfo</strong>&nbsp;(message, verbose)</dt>
+<dd>
+Logs a message line, or end-of-line - EOL output after message. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>message</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>verbose</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>No-op if logger not open. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LogFile:logInfoStart"></a><strong>LogFile:logInfoStart</strong>&nbsp;(message, verbose)</dt>
+<dd>
+Logs a message segment, no EOL output. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>message</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>verbose</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>No-op if logger not open. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LogFile:logWarning"></a><strong>LogFile:logWarning</strong>&nbsp;(num, msg)</dt>
+<dd>
+Logs a warning line with a warning prefix that includes index number, and counts it. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>num</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>msg</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>No-op if logger not open.</pre></li>
+	
+	<li><pre class=example>Warnings are never considered verbose. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LogFile:new"></a><strong>LogFile:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructs a not-yet-enabled logger.  <p>Initialization parameters:</p><blockquote>  - verbose<br> - overwrite</blockquote> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: Initialization parameter table. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="LogFile:newClass"></a><strong>LogFile:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor to extend class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

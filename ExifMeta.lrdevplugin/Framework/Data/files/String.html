@@ -1,0 +1,2792 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li><strong>String.lua</strong></li>
+	
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>String.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#String:appendWithSep">String:appendWithSep</a>&nbsp;(s1, sep, s2)</td>
+	<td class="summary">Append one string to another with a separator in between, but only if the first string is not empty.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:breakdownPath">String:breakdownPath</a>&nbsp;(path)</td>
+	<td class="summary">Break down a path into an array of components.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:checkIndices">String:checkIndices</a>&nbsp;(start, stop)</td>
+	<td class="summary">Determine whether start & stop indices, when applied to substring, have a chance of yielding a non-empty string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:child">String:child</a>&nbsp;(s1, sep, s2)</td>
+	<td class="summary">returns path with s2 as child of s1 - assures only 1 separator between them, whether s1 ends with a sep, or s2 begins with one.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:compare">String:compare</a>&nbsp;(s1, s2)</td>
+	<td class="summary">Compare two strings.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:compareAll">String:compareAll</a>&nbsp;(s1, s2, count)</td>
+	<td class="summary">Compare two strings in their entirety (or until one string runs out of characters).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:componentsToPath">String:componentsToPath</a>&nbsp;(comps, sep)</td>
+	<td class="summary">Make path from component array - can be made identical to that parsed using parse-path, in all cases.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:consolidate">String:consolidate</a>&nbsp;(s, char, charCount)</td>
+	<td class="summary">Remove redundent adjacent characters.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:fmtx">String:fmtx</a>&nbsp;(s, ...)</td>
+	<td class="summary">Format a string, ampersands are expected to be in && win-compatible format (if plugin runs on Windows too), but will be converted to mac compatible format on mac.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:format">String:format</a>&nbsp;(s, ...)</td>
+	<td class="summary">Format a string using LOC formatter but without localization.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:formatAmp">String:formatAmp</a>&nbsp;(s, ...)</td>
+	<td class="summary">Same as format plain except converts ampersands for mac compatibility.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:formatAmps">String:formatAmps</a>&nbsp;(s, ...)</td>
+	<td class="summary">Same as format plain except converts ampersands for windows compatibility.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:formatPath">String:formatPath</a>&nbsp;(_path)</td>
+	<td class="summary">Assure path separators are consistent with operating system file-system.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:getAscii">String:getAscii</a>&nbsp;(binStr)</td>
+	<td class="summary">Strip non-ascii characters from binary string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:getBaseName">String:getBaseName</a>&nbsp;(fp)</td>
+	<td class="summary">Get filename sans extension from path.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:getChar">String:getChar</a>&nbsp;(s, index)</td>
+	<td class="summary">Convenience function for getting the n-th character of a string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:getDiff">String:getDiff</a>&nbsp;(s1, s2)</td>
+	<td class="summary">Get the difference between two strings.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:getDriveAndSubPath">String:getDriveAndSubPath</a>&nbsp;(path)</td>
+	<td class="summary">Get root drive and sub-path of specified path.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:getFirstChar">String:getFirstChar</a>&nbsp;(s)</td>
+	<td class="summary">Convenience function for getting the first character of a string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:getImageNumStr">String:getImageNumStr</a>&nbsp;(filename, minLen, maxLen)</td>
+	<td class="summary">Get image number (as string) from filename.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:getLastChar">String:getLastChar</a>&nbsp;(s)</td>
+	<td class="summary">Convenience function for getting the last character of a string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:getLastIndexOf">String:getLastIndexOf</a>&nbsp;(s, t, regexFlag)</td>
+	<td class="summary">Return last index in source string, of target string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:getNonNegativeNumber">String:getNonNegativeNumber</a>&nbsp;(s)</td>
+	<td class="summary">Extract a number from the front of a string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:getRoot">String:getRoot</a>&nbsp;(path)</td>
+	<td class="summary">Get root drive of specified path.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:getString">String:getString</a>&nbsp;(a, nameToThrow)</td>
+	<td class="summary">Get 'a' as string if string else nil.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:includedAndNotExcluded">String:includedAndNotExcluded</a>&nbsp;(t, incl, excl)</td>
+	<td class="summary">Determine whether target string matches include/exclude criteria.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:initPlurals">String:initPlurals</a>&nbsp;()</td>
+	<td class="summary">Initializes dictionaries for singular/plural support.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:is">String:is</a>&nbsp;(s, name)</td>
+	<td class="summary">Determine if prospective string is non-empty - return false if nil (or empty), throw error if not string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:isAllLowerCaseAlphaNum">String:isAllLowerCaseAlphaNum</a>&nbsp;(s)</td>
+	<td class="summary">Determines if specified string is all lower case and alpha-numeric.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:isAllUpperCaseAlphaNum">String:isAllUpperCaseAlphaNum</a>&nbsp;(s)</td>
+	<td class="summary">Determines if specified string is all upper case and alpha-numeric.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:isBeginningWith">String:isBeginningWith</a>&nbsp;(s, t)</td>
+	<td class="summary">Determine if one string begins with another - NOTE: plain text (always).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:isCharLower">String:isCharLower</a>&nbsp;(c)</td>
+	<td class="summary">Determine if character is lower case (ascii).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:isEndingWith">String:isEndingWith</a>&nbsp;(s, t)</td>
+	<td class="summary">Determine if one string ends with another - plain text.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:isEqual">String:isEqual</a>&nbsp;(s1, s2, ignoreCase)</td>
+	<td class="summary">Determine if two strings are equal - case-sensitive by default.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:isEqualIgnoringCase">String:isEqualIgnoringCase</a>&nbsp;(s1, s2)</td>
+	<td class="summary">Determine if two strings are equal other than case differences.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:isLower">String:isLower</a>&nbsp;(s)</td>
+	<td class="summary">Determine if string is all lower case.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:isPlural">String:isPlural</a>&nbsp;(word)</td>
+	<td class="summary">Determine if a word is singular or plural.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:isStartingWith">String:isStartingWith</a>&nbsp;(s, t, ...)</td>
+	<td class="summary">Determine if one string starts with another - BEWARE: regex by default.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:isString">String:isString</a>&nbsp;(s)</td>
+	<td class="summary">Determine if prospective string is non-empty - return false if nil, empty, or not a string type value.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:limit">String:limit</a>&nbsp;(s, n)</td>
+	<td class="summary">Return length-limited version of s, with trailing '...' to indicate.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:lines">String:lines</a>&nbsp;(s, delim)</td>
+	<td class="summary">Returns iterator over lines in a string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:loc">String:loc</a>&nbsp;(i18nKey, s, ...)</td>
+	<td class="summary">Example: str:loc( "My/Thing", "In English, we say...^1", myvar )  In my opinion, this is just more readable than the LOC syntax.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:makeFilenameCompliant">String:makeFilenameCompliant</a>&nbsp;(s, replacementCharacter)</td>
+	<td class="summary">Return string that complies with filename requirements.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:makeLuaVariableNameCompliant">String:makeLuaVariableNameCompliant</a>&nbsp;(s)</td>
+	<td class="summary">Return string that complies with Lr preference key requirements.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:makePathFromComponents">String:makePathFromComponents</a>&nbsp;(comps)</td>
+	<td class="summary">Make path from component array, usually identical to that broken down using breakdown-path.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:makePlural">String:makePlural</a>&nbsp;(word)</td>
+	<td class="summary">Makes a word presumed to be singular into its plural form.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:makeSingular">String:makeSingular</a>&nbsp;(word, exception)</td>
+	<td class="summary">Make a plural form singular.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:makeSpace">String:makeSpace</a>&nbsp;(howMany)</td>
+	<td class="summary">Makes a string of spaces - used for indentation and output formatting...</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:nItems">String:nItems</a>&nbsp;(count, pluralPhrase, exception)</td>
+	<td class="summary">Return string with number of items in proper grammar.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:new">String:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:newClass">String:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:padLeft">String:padLeft</a>&nbsp;(s, chr, wid)</td>
+	<td class="summary">Synopsis:       Pads a string on the left with specified character up to width.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:padRight">String:padRight</a>&nbsp;(s, chr, wid)</td>
+	<td class="summary">Pads a string on the left with specified character up to width.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:parsePath">String:parsePath</a>&nbsp;(path)</td>
+	<td class="summary">Break down a path into an array of components.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:pathToPropForPluginKey">String:pathToPropForPluginKey</a>&nbsp;(path)</td>
+	<td class="summary">Convert path to key that can be used for "property for plugin" key: photo or catalog.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:plural">String:plural</a>&nbsp;(count, singular, useNumberForSingular)</td>
+	<td class="summary">Return singular or plural count of something.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:replaceBackSlashesWithForwardSlashes">String:replaceBackSlashesWithForwardSlashes</a>&nbsp;(_path)</td>
+	<td class="summary">Convert windows backslash format to mac/unix/ftp forward-slash notation.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:searchAndReplace">String:searchAndReplace</a>&nbsp;(s, search, replace, padChar, max)</td>
+	<td class="summary">Global substitution of plain text.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:split">String:split</a>&nbsp;(s, delim, maxItems, regex)</td>
+	<td class="summary">Split a string based on delimiter.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:splitEscape">String:splitEscape</a>&nbsp;(s, delim, prepFunc)</td>
+	<td class="summary">Split at delimiter, but interpret consecutive delimiters as escaped data, and unescape it.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:squeeze">String:squeeze</a>&nbsp;(s)</td>
+	<td class="summary">Remove spaces from middle of a string (as well as ends).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:squeezePath">String:squeezePath</a>&nbsp;(_path, _width)</td>
+	<td class="summary">Squeezes a path to fit into fixed width display field.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:squeezeToFit">String:squeezeToFit</a>&nbsp;(_str, _width)</td>
+	<td class="summary">Squeezes a string to fit into fixed width display field.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:to">String:to</a>&nbsp;(var)</td>
+	<td class="summary">Return string suitable primarily for short (synopsis-style) debug output and/or display when precise format is not critical.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:tokenize">String:tokenize</a>&nbsp;(s, nTokensMax)</td>
+	<td class="summary">Breaks a string into tokens by getting rid of the whitespace between them.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:trim">String:trim</a>&nbsp;(s)</td>
+	<td class="summary">Trim whitespace from front & tail (left & right) of string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:trimLeft">String:trimLeft</a>&nbsp;(s)</td>
+	<td class="summary">Trim whitespace from front (left) of string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#String:trimRight">String:trimRight</a>&nbsp;(s)</td>
+	<td class="summary">Trim whitespace from tail (right) of string.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="String:appendWithSep"></a><strong>String:appendWithSep</strong>&nbsp;(s1, sep, s2)</dt>
+<dd>
+Append one string to another with a separator in between, but only if the first string is not empty. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s1</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>sep</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>s2</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>does NOT assure only a single separator in between - if you need that, use str--child instead. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:breakdownPath"></a><strong>String:breakdownPath</strong>&nbsp;(path)</dt>
+<dd>
+Break down a path into an array of components. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>path</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>*** deprecated - use parse-path method instead: it's more robust and *almost* completely backward compatible, differences: <br>    this method always returns two components if unmapped network drive, e.g. "\\asdf\qwerty"\file" path would be '\\asdf\qwerty' & 'file' components (parse-path handles more reasonably). <br>    this method always returns forward slash as first component of windows path in format "\asdf\qwerty", whereas parse-path will return backslash. <br>I almost replaced this method instead of adding a new one, but I was afraid it might induce some subtle/pesky bugs here or there..</pre></li>
+	
+	<li><pre class=example>Does not distinguish absolute from relative paths. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>array (1st component is root), usually not empty, never nil. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:checkIndices"></a><strong>String:checkIndices</strong>&nbsp;(start, stop)</dt>
+<dd>
+Determine whether start & stop indices, when applied to substring, have a chance of yielding a non-empty string. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>start</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>stop</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Note: checking is independent of string len. If len is to be considered, it must be done in calling context. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>0 iff yes. (-1 means both are negative and no-go, +1 means both are positive and no-go). </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:child"></a><strong>String:child</strong>&nbsp;(s1, sep, s2)</dt>
+<dd>
+returns path with s2 as child of s1 - assures only 1 separator between them, whether s1 ends with a sep, or s2 begins with one. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s1</em></code>: required
+	</li>
+	
+	<li>
+	  <code><em>sep</em></code>: required
+	</li>
+	
+	<li>
+	  <code><em>s2</em></code>: required 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>all 3 params are required, and sep is the middle one.. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>s1 sep s2 </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:compare"></a><strong>String:compare</strong>&nbsp;(s1, s2)</dt>
+<dd>
+Compare two strings. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s1</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>s2</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Returns immediately upon first difference. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>0 if same, else position of first different character. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:compareAll"></a><strong>String:compareAll</strong>&nbsp;(s1, s2, count)</dt>
+<dd>
+Compare two strings in their entirety (or until one string runs out of characters). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s1</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>s2</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>count</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Use when it is desired to know the character positions of all the differences.</pre></li>
+	
+	<li><pre class=example>Most appropriate when the files are same length, or at least start off the same, since there is no attempt to resynchronize... </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>nil if same, else array of difference indexes. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:componentsToPath"></a><strong>String:componentsToPath</strong>&nbsp;(comps, sep)</dt>
+<dd>
+Make path from component array - can be made identical to that parsed using parse-path, in all cases. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>comps</em></code>: array of path component strings - typically obtained using parse-path but could also come from breakdown-path, or be wholly computed however..
+	</li>
+	
+	<li>
+	  <code><em>sep</em></code>: string separator, optional - only required if path parsed was relative and/or different separator from OS is desired. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>path string </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:consolidate"></a><strong>String:consolidate</strong>&nbsp;(s, char, charCount)</dt>
+<dd>
+Remove redundent adjacent characters. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>char</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>charCount</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Initial motivation was to format value returned by table.concat( items, " " ) when some items may be empty strings. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>Consolidated string. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:fmtx"></a><strong>String:fmtx</strong>&nbsp;(s, ...)</dt>
+<dd>
+Format a string, ampersands are expected to be in && win-compatible format (if plugin runs on Windows too), but will be converted to mac compatible format on mac. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: format string in LOC format.
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: substution variables - any format: nil OK. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>x in the name stands for cross-platform.</pre></li>
+	
+	<li><pre class=example>Will never throw an error, unless format string is not string type - don't use for critical program strings, just logging and UI display, when it's better to have a small aesthetic bug than a catastrophic error.</pre></li>
+	
+	<li><pre class=example>LOC will throw error when passed a boolean, string.format will throw an error when insufficient substitutions or incompatible data type. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:format"></a><strong>String:format</strong>&nbsp;(s, ...)</dt>
+<dd>
+Format a string using LOC formatter but without localization. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>*** deprecated in favor of fmtx method, which is more robust.</pre></li>
+	
+	<li><pre class=example>An alternative to lua string.format function (which uses ansi 'C' printf syntax). </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:formatAmp"></a><strong>String:formatAmp</strong>&nbsp;(s, ...)</dt>
+<dd>
+Same as format plain except converts ampersands for mac compatibility. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>*** deprecated in favor of fmtx. <br>Assumes they are formatted for Windows compatibility upon entry (double '&&' ). <br> <br>Pros: More efficient on windows. <br>Cons: Less efficient on Mac, & less readable. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:formatAmps"></a><strong>String:formatAmps</strong>&nbsp;(s, ...)</dt>
+<dd>
+Same as format plain except converts ampersands for windows compatibility. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>*** deprecated in favor of fmtx.  Assumes they are formatted for Mac compatibility upon entry (single '&' ).  Pros: More readable on all platforms. Cons: Less efficient on Windows. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:formatPath"></a><strong>String:formatPath</strong>&nbsp;(_path)</dt>
+<dd>
+Assure path separators are consistent with operating system file-system. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>_path</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Lr path utils - standardize path function will also do this and then some (making it less efficient). <br>prefer this method if separators are the only potential issue with the path. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:getAscii"></a><strong>String:getAscii</strong>&nbsp;(binStr)</dt>
+<dd>
+Strip non-ascii characters from binary string. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>binStr</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Good for searching for text in binary files, otherwise string searcher stops upon first zero byte.</br> could probably just strip zeros, but this gives a printable string that can be logged for debug... </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:getBaseName"></a><strong>String:getBaseName</strong>&nbsp;(fp)</dt>
+<dd>
+Get filename sans extension from path. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>fp</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>*** I could have sworn this failed when I tried these ops in reverse, i.e. removing extension of leaf-name not sure why (maybe erroneous conclusion). Hmmm... </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:getChar"></a><strong>String:getChar</strong>&nbsp;(s, index)</dt>
+<dd>
+Convenience function for getting the n-th character of a string. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: The string.
+	</li>
+	
+	<li>
+	  <code><em>index</em></code>: First char is index 1. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>@2010-11-23: *** Will throw error if index is out of bounds, so check before calling if unsure. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>character in string. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:getDiff"></a><strong>String:getDiff</strong>&nbsp;(s1, s2)</dt>
+<dd>
+Get the difference between two strings. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s1</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>s2</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Use to see the difference between two strings. </pre></ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>diff-len</li>
+	
+	<li>s1-remainder</li>
+	
+	<li>s2-remainder </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:getDriveAndSubPath"></a><strong>String:getDriveAndSubPath</strong>&nbsp;(path)</dt>
+<dd>
+Get root drive and sub-path of specified path. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>path</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:getFirstChar"></a><strong>String:getFirstChar</strong>&nbsp;(s)</dt>
+<dd>
+Convenience function for getting the first character of a string. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>a slightly more redable equivalent to s:sub( 1, 1 ) - also: won't die if 's' is nil.. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:getImageNumStr"></a><strong>String:getImageNumStr</strong>&nbsp;(filename, minLen, maxLen)</dt>
+<dd>
+Get image number (as string) from filename. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>filename</em></code>: (string, required) extension suffix may be OK (safer to strip it to assure it wont be interpreted as being or having the image number), <br>    but folder-pathing prefix should be omitted.
+	</li>
+	
+	<li>
+	  <code><em>minLen</em></code>: - minimum acceptable length for image number.
+	</li>
+	
+	<li>
+	  <code><em>maxLen</em></code>: - maximum acceptable length for image number. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>algorithm: take last digit-sequence which is not smaller than nor greater what is expected. <br> if none such, return nil. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:getLastChar"></a><strong>String:getLastChar</strong>&nbsp;(s)</dt>
+<dd>
+Convenience function for getting the last character of a string. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>a slightly more redable equivalent to s:sub( -1 ) - also: won't die if 's' is nil.. <br>in my defense: I didn't know about negative indexes when I wrote this ;-}, which was a loooong time ago.. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:getLastIndexOf"></a><strong>String:getLastIndexOf</strong>&nbsp;(s, t, regexFlag)</dt>
+<dd>
+Return last index in source string, of target string. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>regexFlag</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>startIndex or 0 if not found - never returns nil.</li>
+	
+	<li>stopIndex or 0 if not found - never returns nil. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:getNonNegativeNumber"></a><strong>String:getNonNegativeNumber</strong>&nbsp;(s)</dt>
+<dd>
+Extract a number from the front of a string.  <p>Initial application for ordering strings that start with a number.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>*** Warning: Does NOT check incoming string or parse position. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>Next parse position. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:getRoot"></a><strong>String:getRoot</strong>&nbsp;(path)</dt>
+<dd>
+Get root drive of specified path. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>path</em></code>: (string, required) absolute path to folder or file. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>root (string, always) root will always be non-nil, and "shouldn't" be blank.</li>
+	
+	<li>leaves (string, always) leaves will be in least-sig-first order, i.e. path leaf will be at index 1. @19/Nov/2013 16:37 (long after initial writing/testing), I'm not sure if it's possible for last leaf to be same as root - I think not. Not sure if it can be blank either. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:getString"></a><strong>String:getString</strong>&nbsp;(a, nameToThrow)</dt>
+<dd>
+Get 'a' as string if string else nil. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>a</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>nameToThrow</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:includedAndNotExcluded"></a><strong>String:includedAndNotExcluded</strong>&nbsp;(t, incl, excl)</dt>
+<dd>
+Determine whether target string matches include/exclude criteria. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: string required.
+	</li>
+	
+	<li>
+	  <code><em>incl</em></code>: (optional) - include criteria (substr (required), start, stop, regex) - or array of same.
+	</li>
+	
+	<li>
+	  <code><em>excl</em></code>: (optional) - exclude criteria (substr (required), start, stop, regex) - or array of same. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>the idea was for a general purpose filtering function which would be easy to specify parameters. <br>initial use case was for specifying develop presets. Also used to specify folders and/or files for lua-doc'ing. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>true iff target string should be included and not excluded according to specified criteria. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:initPlurals"></a><strong>String:initPlurals</strong>&nbsp;()</dt>
+<dd>
+Initializes dictionaries for singular/plural support.  <p>May never be called if plugin does not call at least one plural function.</p> 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Could be called in plugin-init, or in string constructor - but isn't. - will be called on first demand. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:is"></a><strong>String:is</strong>&nbsp;(s, name)</dt>
+<dd>
+Determine if prospective string is non-empty - return false if nil (or empty), throw error if not string.  <p>Convenience function to avoid checking both aspects, or getting a "expected string, got nil" error.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>If value type is not known to be string if not nil, then use 'is-string' instead.</pre></li>
+	
+	<li><pre class=example>Throws error if type is not string or nil. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>true iff non-empty string. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:isAllLowerCaseAlphaNum"></a><strong>String:isAllLowerCaseAlphaNum</strong>&nbsp;(s)</dt>
+<dd>
+Determines if specified string is all lower case and alpha-numeric.
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:isAllUpperCaseAlphaNum"></a><strong>String:isAllUpperCaseAlphaNum</strong>&nbsp;(s)</dt>
+<dd>
+Determines if specified string is all upper case and alpha-numeric. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:isBeginningWith"></a><strong>String:isBeginningWith</strong>&nbsp;(s, t)</dt>
+<dd>
+Determine if one string begins with another - NOTE: plain text (always).  <p>Does not use 'find'.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Does not check incoming strings.</pre></li>
+	
+	<li><pre class=example>Does not ignore whitespace. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>true iff s begins with t. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:isCharLower"></a><strong>String:isCharLower</strong>&nbsp;(c)</dt>
+<dd>
+Determine if character is lower case (ascii). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>c</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:isEndingWith"></a><strong>String:isEndingWith</strong>&nbsp;(s, t)</dt>
+<dd>
+Determine if one string ends with another - plain text.  <p>Avoids the problem of using the nil returned by string.find in a context that does not like it.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Does not check incoming strings.</pre></li>
+	
+	<li><pre class=example>Does not ignore whitespace. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>true iff s begins with t in character position 1. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:isEqual"></a><strong>String:isEqual</strong>&nbsp;(s1, s2, ignoreCase)</dt>
+<dd>
+Determine if two strings are equal - case-sensitive by default. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s1</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>s2</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>ignoreCase</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:isEqualIgnoringCase"></a><strong>String:isEqualIgnoringCase</strong>&nbsp;(s1, s2)</dt>
+<dd>
+Determine if two strings are equal other than case differences. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s1</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>s2</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:isLower"></a><strong>String:isLower</strong>&nbsp;(s)</dt>
+<dd>
+Determine if string is all lower case. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:isPlural"></a><strong>String:isPlural</strong>&nbsp;(word)</dt>
+<dd>
+Determine if a word is singular or plural.  <p>Note: It is possible for some plurals to escape detection. Not to be used when ascertainment is critical - intention is more for aesthetics...</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>word</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>trim beforehand if necessary. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>true iff word is plural. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:isStartingWith"></a><strong>String:isStartingWith</strong>&nbsp;(s, t, ...)</dt>
+<dd>
+Determine if one string starts with another - BEWARE: regex by default.  <p>Avoids the problem of using the nil returned by string.find in a context that does not like it.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Does not check incoming strings.</pre></li>
+	
+	<li><pre class=example>Does not ignore whitespace.</pre></li>
+	
+	<li><pre class=example>If string is not expected to be there at the start, and the source string is very long, it will be more efficient to pass a substring instead, for example:<br> local isThere = str:isStartingWith( longstr:sub( 1, t:len() ), t )</pre></li>
+	
+	<li><pre class=example>you must also pass parameters "1, true" for plain text (index must be one, followed by boolean true). </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>true iff s begins with t in character position 1. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:isString"></a><strong>String:isString</strong>&nbsp;(s)</dt>
+<dd>
+Determine if prospective string is non-empty - return false if nil, empty, or not a string type value. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Avoids checking aspects individually, or getting a "expected string, got nil or boolean" error.</pre></li>
+	
+	<li><pre class=example>Also weathers the case when s is a table (or number?) </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>true iff non-empty string. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:limit"></a><strong>String:limit</strong>&nbsp;(s, n)</dt>
+<dd>
+Return length-limited version of s, with trailing '...' to indicate. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>n</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:lines"></a><strong>String:lines</strong>&nbsp;(s, delim)</dt>
+<dd>
+Returns iterator over lines in a string.  <p>For those times when you already have a file's contents as a string and you want to iterate its lines. This essential does the same thing as Lua's io.lines function.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>delim</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Handles \n or \r\n dynamically as EOL sequence.</pre></li>
+	
+	<li><pre class=example>Does not handle Mac legacy (\r alone) EOL sequence.</pre></li>
+	
+	<li><pre class=example>Works as well on binary as text file - no need to read as text file unless the lines must be zero-byte free. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:loc"></a><strong>String:loc</strong>&nbsp;(i18nKey, s, ...)</dt>
+<dd>
+Example: str:loc( "My/Thing", "In English, we say...^1", myvar )  In my opinion, this is just more readable than the LOC syntax. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>i18nKey</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:makeFilenameCompliant"></a><strong>String:makeFilenameCompliant</strong>&nbsp;(s, replacementCharacter)</dt>
+<dd>
+Return string that complies with filename requirements. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: string
+	</li>
+	
+	<li>
+	  <code><em>replacementCharacter</em></code>: optional - defaults to '-'. empty string is legal.. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:makeLuaVariableNameCompliant"></a><strong>String:makeLuaVariableNameCompliant</strong>&nbsp;(s)</dt>
+<dd>
+Return string that complies with Lr preference key requirements. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>initial motivation is for lr pref key.</pre></li>
+	
+	<li><pre class=example>reminder: photo metadata properties can not begin with an underscore, dunno 'bout catalog properties for plugin. prefs are OK with leading underscore.</pre></li>
+	
+	<li><pre class=example>Also, caller needs to make sure first char isn't a number - ###3. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:makePathFromComponents"></a><strong>String:makePathFromComponents</strong>&nbsp;(comps)</dt>
+<dd>
+Make path from component array, usually identical to that broken down using breakdown-path. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>comps</em></code>: The array of path components: 1st element is root, last element is child. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>uses lrpathutils-child function to assemble components into a path, so most appropriate when paths are for disk files and are absolute. <br>If you need to assure path created by parse-path would make an identical path when re-assembled, choose components-to-path instead, and pass a separator if necessary. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:makePlural"></a><strong>String:makePlural</strong>&nbsp;(word)</dt>
+<dd>
+Makes a word presumed to be singular into its plural form. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>word</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Call is-plural and trim beforehand if necessary. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:makeSingular"></a><strong>String:makeSingular</strong>&nbsp;(word, exception)</dt>
+<dd>
+Make a plural form singular. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>word</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>exception</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>If unsure whether already singular, call is-plural before-hand, and trim if necessary. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:makeSpace"></a><strong>String:makeSpace</strong>&nbsp;(howMany)</dt>
+<dd>
+Makes a string of spaces - used for indentation and output formatting... 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>howMany</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>*** deprecated - use Lua's string-rep function instead. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:nItems"></a><strong>String:nItems</strong>&nbsp;(count, pluralPhrase, exception)</dt>
+<dd>
+Return string with number of items in proper grammar. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>count</em></code>: number of items
+	</li>
+	
+	<li>
+	  <code><em>pluralPhrase</em></code>: correct grammer for items if 0 or >1 item.
+	</li>
+	
+	<li>
+	  <code><em>exception</em></code>: pass true iff One or one is to be displayed when 1 item. Case is adaptive. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>not so sure this was a good idea. Seems making plural is more often correct than making singular. ###2 <br>e.g. str:nItems( 1, "updates" ) yields "1 updatis", unless you pass the exception param (exception should probably be the default, but for backward compatibility, it's not). </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:new"></a><strong>String:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:newClass"></a><strong>String:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:padLeft"></a><strong>String:padLeft</strong>&nbsp;(s, chr, wid)</dt>
+<dd>
+Synopsis:       Pads a string on the left with specified character up to width.  Motivation:     Typically used with spaces for tabular display, or 0s when string represents a number. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>chr</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>wid</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:padRight"></a><strong>String:padRight</strong>&nbsp;(s, chr, wid)</dt>
+<dd>
+Pads a string on the left with specified character up to width. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>chr</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>wid</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Typically used with spaces for tabular display, or 0s when string represents a number.</pre></li>
+	
+	<li><pre class=example>only works right if fixed-width font. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:parsePath"></a><strong>String:parsePath</strong>&nbsp;(path)</dt>
+<dd>
+Break down a path into an array of components. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>path</em></code>: disk folder/file or collection or keyword path.. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Can be used on absolute or relative paths (or even non-disk paths, as long as they're using slash or backslash as separator).</pre></li>
+	
+	<li><pre class=example>format of unmapped network drive on Windows is: \\drv\fldr\file... <br>format of windows path: C:\root\fldr\file <br>format of mac path: /drvOrFlder/fldr/file </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>array (1st component is root drive on windows - e.g. 'C:', or '/' on Mac, or '\\' (true double) if unmapped windows network drive), <br>and '\' if leading backslash (presumably Windows). <br>last component is filename. <br>usually not empty, never nil. <br> <br>examples - path string      component list: <br>\\one\two\file.x        \\, one, two, file.x  -- drive name is 2nd component - better handling than breakdown-path. <br>C:\one\two\file.x       C:, one, two, file.x  -- root drive is first component <br>/one/two/file.x         /, one, two, file.x   -- hard to tell if 'one' is a drive or path was subpath and 'one' is a folder - should be clear from context (maybe if subpath, do not include leading slash). <br>\one\two\file.x         \, one, two, file.x   -- departure from breakdown-path. <br>one\two\file.x          one, two, file.x <br>one/two/file.x          one, two, file.x </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:pathToPropForPluginKey"></a><strong>String:pathToPropForPluginKey</strong>&nbsp;(path)</dt>
+<dd>
+Convert path to key that can be used for "property for plugin" key: photo or catalog. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>path</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:plural"></a><strong>String:plural</strong>&nbsp;(count, singular, useNumberForSingular)</dt>
+<dd>
+Return singular or plural count of something.  <p>Could be enhanced to force case of singular explicitly, instead of just adaptive.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>count</em></code>: Actual number of things.
+	</li>
+	
+	<li>
+	  <code><em>singular</em></code>: The singular form to be used if count is 1.
+	</li>
+	
+	<li>
+	  <code><em>useNumberForSingular</em></code>: may be boolean or string<blockquote> boolean true => use numeric form of singular for better aesthetics.<br> string 'u' or 'upper' => use upper case of singular (first char only).<br> string 'l' or 'lower' => use lower case of singular (first char only).<br> default is adaptive case.</blockquote> 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Example: str:format( "^1 rendered.", str:plural( nRendered, "photo" ) ) - "one photo" or "2 photos"</pre></li>
+	
+	<li><pre class=example>Case is adaptive when word form of singular is used. For example: str:plural( nRendered, "Photo" ) - yields "One Photo". </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:replaceBackSlashesWithForwardSlashes"></a><strong>String:replaceBackSlashesWithForwardSlashes</strong>&nbsp;(_path)</dt>
+<dd>
+Convert windows backslash format to mac/unix/ftp forward-slash notation. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>_path</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Prefer lr-path-utils - standardize-path to assure path to disk file is in proper format for localhost.</pre></li>
+	
+	<li><pre class=example>This function is primarily used for converting windows sub-paths for use in FTP. <br>Lightroom is pretty good about allowing mixtures of forward and backward slashes in ftp functions, <br>but still - I find it more pleasing to handle explicitly. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:searchAndReplace"></a><strong>String:searchAndReplace</strong>&nbsp;(s, search, replace, padChar, max)</dt>
+<dd>
+Global substitution of plain text. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: subject string
+	</li>
+	
+	<li>
+	  <code><em>search</em></code>: search string
+	</li>
+	
+	<li>
+	  <code><em>replace</em></code>: replacement string
+	</li>
+	
+	<li>
+	  <code><em>padChar</em></code>: used to pad replacement area, to keep overall string length the same - invaluable for searching and replacing text in binary files.
+	</li>
+	
+	<li>
+	  <code><em>max</em></code>: maximum number of replacements - default is a million (sanity only). 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>final string </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:split"></a><strong>String:split</strong>&nbsp;(s, delim, maxItems, regex)</dt>
+<dd>
+Split a string based on delimiter. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: (string, required) The string to be split.
+	</li>
+	
+	<li>
+	  <code><em>delim</em></code>: (string, required) The delimiter string (plain text). Often something like ','.
+	</li>
+	
+	<li>
+	  <code><em>maxItems</em></code>: (number, optional) if passed, final element will contain entire remainder of string. Often is 2, to get first element then remainder. 
+	</li>
+	
+	<li>
+	  <code><em>regex</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Seems like there should be a lua or lr function to do this, but I haven't seen it.</pre></li>
+	
+	<li><pre class=example>Components may be empty strings - if repeating delimiters exist. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>Array of trimmed components - never nil nor empty table unless input is nil or empty string, respectively. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:splitEscape"></a><strong>String:splitEscape</strong>&nbsp;(s, delim, prepFunc)</dt>
+<dd>
+Split at delimiter, but interpret consecutive delimiters as escaped data, and unescape it. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>delim</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>prepFunc</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>does not support max components, but does allow custom preparation function - defaulting to whitespace trimmer. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:squeeze"></a><strong>String:squeeze</strong>&nbsp;(s)</dt>
+<dd>
+Remove spaces from middle of a string (as well as ends). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Convenience function to make more readable than testing for nil followed by gsub. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>Squeezed string, nil -> empty. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:squeezePath"></a><strong>String:squeezePath</strong>&nbsp;(_path, _width)</dt>
+<dd>
+Squeezes a path to fit into fixed width display field.  <p>One could argue for another parameter that selects a balance between first part of path, and second part of path<br> i.e. balance = 0 => select first part only, balance = 1 => prefer trailing path, .5 => split equally between first and last part of path.</p> <p>Although its conceivable that some pathing may be preferred over long filename, that solution is waiting for a problem...</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>_path</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>_width</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Guaranteed to get entire filename, and as much of first part of path as possible.</pre></li>
+	
+	<li><pre class=example>Lightroom does something similar for progress caption, but algorithm is different. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>first-part-of-path.../filename. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:squeezeToFit"></a><strong>String:squeezeToFit</strong>&nbsp;(_str, _width)</dt>
+<dd>
+Squeezes a string to fit into fixed width display field. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>_str</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>_width</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>first half ... last half </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:to"></a><strong>String:to</strong>&nbsp;(var)</dt>
+<dd>
+Return string suitable primarily for short (synopsis-style) debug output and/or display when precise format is not critical. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>var</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Feel free to pass a nil value and let 'nil' be returned.</pre></li>
+	
+	<li><pre class=example>If object has an explicit to-string method, then it will be called, otherwise the lua global function.</pre></li>
+	
+	<li><pre class=example>Use dump methods for objects and/or log-table..., if more verbose output is desired. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:tokenize"></a><strong>String:tokenize</strong>&nbsp;(s, nTokensMax)</dt>
+<dd>
+Breaks a string into tokens by getting rid of the whitespace between them. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: - string to tokenize.
+	</li>
+	
+	<li>
+	  <code><em>nTokensMax</em></code>: - remainder of string returned as single token once this many tokens found in the first part of the string. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Does similar thing as "split", except delimiter is any whitespace, not just true spaces. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>array of strings (tokens). </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:trim"></a><strong>String:trim</strong>&nbsp;(s)</dt>
+<dd>
+Trim whitespace from front & tail (left & right) of string. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Reminder: Lr's trimmer does not handle binary strings (those containing zero bytes) properly, this method does. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:trimLeft"></a><strong>String:trimLeft</strong>&nbsp;(s)</dt>
+<dd>
+Trim whitespace from front (left) of string. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Reminder: Lr's trimmer does not handle binary strings (those containing zero bytes) properly, this method does. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="String:trimRight"></a><strong>String:trimRight</strong>&nbsp;(s)</dt>
+<dd>
+Trim whitespace from tail (right) of string. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Reminder: Lr's trimmer does not handle binary strings (those containing zero bytes) properly, this method does. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

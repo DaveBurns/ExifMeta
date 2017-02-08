@@ -1,0 +1,5124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li><strong>App.lua</strong></li>
+	
+	<li>
+		<a href="../files/Background.html">Background.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Call.html">Call.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/DebugScript.html">DebugScript.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ExternalApp.html">ExternalApp.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Gate.html">Gate.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Globals.html">Globals.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/InitFramework.html">InitFramework.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/LogFile.html">LogFile.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Mac.html">Mac.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Object.html">Object.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ObjectFactory.html">ObjectFactory.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/OperatingSystem.html">OperatingSystem.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Preferences.html">Preferences.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Presets.html">Presets.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Properties.html">Properties.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Reload.html">Reload.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Require.html">Require.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/RpcApp.html">RpcApp.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/RpcBackground.html">RpcBackground.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Service.html">Service.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Settings.html">Settings.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Sidekick.html">Sidekick.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Timer.html">Timer.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Updater.html">Updater.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/User.html">User.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Windows.html">Windows.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>App.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#App.defaultFailureHandler">App.defaultFailureHandler</a>&nbsp;(_false, errMsg)</td>
+	<td class="summary">Failure handler which can be used if nothing better springs to mind.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:alertLogE">App:alertLogE</a>&nbsp;(fmt, ...)</td>
+	<td class="summary">Log error, and display alert message so user knows it's been logged.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:alertLogW">App:alertLogW</a>&nbsp;(fmt, ...)</td>
+	<td class="summary">Log warning, and display alert message so user knows it's been logged.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:alertLogWE">App:alertLogWE</a>&nbsp;(opts, fmt, ...)</td>
+	<td class="summary">Mostly private method to do guts of alert W & E.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:assert">App:assert</a>&nbsp;(c, m, ...)</td>
+	<td class="summary">formatted assertion.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:assurePrefSupportFile">App:assurePrefSupportFile</a>&nbsp;(presetName)</td>
+	<td class="summary">Assure pref support file, if managed presets.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:call">App:call</a>&nbsp;(op, ...)</td>
+	<td class="summary">Call an operation, with optional variable parameters.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:callingAssert">App:callingAssert</a>&nbsp;(c, m, ...)</td>
+	<td class="summary">formatted calling assertion.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:callingError">App:callingError</a>&nbsp;(m, ...)</td>
+	<td class="summary">Throw an error in calling context, with built-in formatting.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:changeFileDates">App:changeFileDates</a>&nbsp;(params)</td>
+	<td class="summary">Touch file(s) with current time or specified time.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:checkForUpdate">App:checkForUpdate</a>&nbsp;(autoMode)</td>
+	<td class="summary">Checks for new version of plugin to download.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:checkSupport">App:checkSupport</a>&nbsp;()</td>
+	<td class="summary">Check if platform (OS) is supported, and if version of Lightroom is supported.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:classDebugTrace">App:classDebugTrace</a>&nbsp;(name, ...)</td>
+	<td class="summary">Output debug info for class if class enabled for debug.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:classDebugTraceFmt">App:classDebugTraceFmt</a>&nbsp;(name, fmt, ...)</td>
+	<td class="summary">Output debug info, formatted, for class if class enabled for debug.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:clearAllPrefs">App:clearAllPrefs</a>&nbsp;(props)</td>
+	<td class="summary">Clear all preferences for this plugin.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:clearBezel">App:clearBezel</a>&nbsp;()</td>
+	<td class="summary">Clear bezel.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:clearDebugLog">App:clearDebugLog</a>&nbsp;()</td>
+	<td class="summary">Clear debug log by moving to trash.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:clearLogFile">App:clearLogFile</a>&nbsp;()</td>
+	<td class="summary">Clear the contents of the log file and the logged error/warning counts.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:createPreset">App:createPreset</a>&nbsp;(props)</td>
+	<td class="summary">Create a new preference preset.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:debugStackTrace">App:debugStackTrace</a>&nbsp;()</td>
+	<td class="summary">Logs a rudimentary stack trace (function name, source file, line number).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:debugTrace">App:debugTrace</a>&nbsp;(...)</td>
+	<td class="summary">Does debug trace action provided supporting object has been created, and master debug is enabled.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:deletePrefPreset">App:deletePrefPreset</a>&nbsp;(props)</td>
+	<td class="summary">Delete preference preset.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:display">App:display</a>&nbsp;(opts, fmt, ...)</td>
+	<td class="summary">Display application info message, with options.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:displayError">App:displayError</a>&nbsp;(params, ...)</td>
+	<td class="summary">Display error in progress scope, and optionally include message for log file.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:displayInfo">App:displayInfo</a>&nbsp;(fmt, ...)</td>
+	<td class="summary">Display application info message - default options.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:displayWarning">App:displayWarning</a>&nbsp;(params, ...)</td>
+	<td class="summary">Display warning in progress scope, and optionally include message for log file.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:error">App:error</a>&nbsp;(m, ...)</td>
+	<td class="summary">Throw an error in executing context, with built-in formatting.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:executeCommand">App:executeCommand</a>&nbsp;(command, parameters, targets, output, handling, noQuotes, expectedReturnCode)</td>
+	<td class="summary">Executes a shell command.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:findFrameworkResource">App:findFrameworkResource</a>&nbsp;(name)</td>
+	<td class="summary">Find framework resource reference.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:findResource">App:findResource</a>&nbsp;(name)</td>
+	<td class="summary">Get find plugin or framework resource reference.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:formatErrorMessage">App:formatErrorMessage</a>&nbsp;(message)</td>
+	<td class="summary">Returns a single string containing filename, line number, and error message - in a pretty format.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:func">App:func</a>&nbsp;(her, spec)</td>
+	<td class="summary">Get name of function or calling function...</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getAltKeySeq">App:getAltKeySeq</a>&nbsp;(key)</td>
+	<td class="summary">Get control keyboard sequence for running platform.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getAppName">App:getAppName</a>&nbsp;()</td>
+	<td class="summary">Get app name, which in general is a close derivative of the plugin name.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getAuthor">App:getAuthor</a>&nbsp;()</td>
+	<td class="summary">Get plugin author's name as specified in info-lua.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getAuthorsWebsite">App:getAuthorsWebsite</a>&nbsp;()</td>
+	<td class="summary">Get plugin author's website as specified in info-lua.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getCompatibilityString">App:getCompatibilityString</a>&nbsp;()</td>
+	<td class="summary">Returns string for displaying Platform & Lightroom compatibility.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getCtrlKeySeq">App:getCtrlKeySeq</a>&nbsp;(key)</td>
+	<td class="summary">Get control-modified keystroke string for display purposes only.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getDisplayDimensions">App:getDisplayDimensions</a>&nbsp;()</td>
+	<td class="summary">Get's both maximum and minimum display dimensions, as table { max = { width=..., height=...</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getErrorCount">App:getErrorCount</a>&nbsp;()</td>
+	<td class="summary">Get number of errors logged since logger was cleared (or app startup).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getFrameworkResource">App:getFrameworkResource</a>&nbsp;(name)</td>
+	<td class="summary">Get framework resource reference.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getGlobalPref">App:getGlobalPref</a>&nbsp;(name)</td>
+	<td class="summary">Get global preference.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getGlobalPrefBinding">App:getGlobalPrefBinding</a>&nbsp;(name, val)</td>
+	<td class="summary">Get binding that uses the proper key.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getGlobalPrefKey">App:getGlobalPrefKey</a>&nbsp;(name)</td>
+	<td class="summary">Get global preference key for binding.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getGlobalPrefName">App:getGlobalPrefName</a>&nbsp;(key)</td>
+	<td class="summary">Get global preference name given key.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getGlobalPrefPairs">App:getGlobalPrefPairs</a>&nbsp;(sortFunc)</td>
+	<td class="summary">Get global preference iterator.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getInfo">App:getInfo</a>&nbsp;(name)</td>
+	<td class="summary">Get property from info-lua.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getLogFileContents">App:getLogFileContents</a>&nbsp;()</td>
+	<td class="summary">Get log file contents as text string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getLogFilePath">App:getLogFilePath</a>&nbsp;()</td>
+	<td class="summary">Not usually needed, since show-log-file and send-log-file are both app interfaces.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getLrCompatibilityString">App:getLrCompatibilityString</a>&nbsp;()</td>
+	<td class="summary">Get friendly Lr compatibility display string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getLrVerMajor">App:getLrVerMajor</a>&nbsp;()</td>
+	<td class="summary">Get Lr major version number.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getLrVersionName">App:getLrVersionName</a>&nbsp;()</td>
+	<td class="summary">Get Lightroom version name.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getPathSep">App:getPathSep</a>&nbsp;()</td>
+	<td class="summary">Get path separator, appropriate for OS.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getPlatformName">App:getPlatformName</a>&nbsp;()</td>
+	<td class="summary">Get OS platform name.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getPlatformString">App:getPlatformString</a>&nbsp;()</td>
+	<td class="summary">Get friendly string for displaying Platform compatibility - depends on platform support array defined in info-lua.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getPluginId">App:getPluginId</a>&nbsp;()</td>
+	<td class="summary">Get plugin name as specified in info-lua.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getPluginName">App:getPluginName</a>&nbsp;()</td>
+	<td class="summary">Get plugin name as specified in info-lua.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getPluginUrl">App:getPluginUrl</a>&nbsp;()</td>
+	<td class="summary">Get plugin url as specified in info-lua.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getPref">App:getPref</a>&nbsp;(name, presetName, expectedType, default)</td>
+	<td class="summary">Get the value of the specified preference.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getPrefBinding">App:getPrefBinding</a>&nbsp;(name, presetName, val)</td>
+	<td class="summary">Get binding that uses the proper key.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getPrefKey">App:getPrefKey</a>&nbsp;(name, presetName)</td>
+	<td class="summary">Get preference key for binding.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getPrefName">App:getPrefName</a>&nbsp;(key)</td>
+	<td class="summary">Get preference name given key.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getPrefPairs">App:getPrefPairs</a>&nbsp;(sortFunc)</td>
+	<td class="summary">Get local preference iterator.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getPresetName">App:getPresetName</a>&nbsp;()</td>
+	<td class="summary">Get active preset name.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getPresetNameItems">App:getPresetNameItems</a>&nbsp;()</td>
+	<td class="summary">Get preset names in popup-menu-compatible items format.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getPresetNames">App:getPresetNames</a>&nbsp;(exclDefault)</td>
+	<td class="summary">Get array of preset names, sorted alphabetically, except Default first.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getResource">App:getResource</a>&nbsp;(name)</td>
+	<td class="summary">Get plugin or framework resource reference.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getRunCount">App:getRunCount</a>&nbsp;()</td>
+	<td class="summary">Get number of times this plugin has been reloaded, or number times Lr has been restarted since prefs were reset.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getSettingsKey">App:getSettingsKey</a>&nbsp;(name)</td>
+	<td class="summary">Get (root) settings key, format undefined, and name.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getShellName">App:getShellName</a>&nbsp;()</td>
+	<td class="summary">Get name of explorer or finder.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getShortAppName">App:getShortAppName</a>&nbsp;()</td>
+	<td class="summary">Get short version of app-name, for use in cramped spaces (e.g.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getUserName">App:getUserName</a>&nbsp;()</td>
+	<td class="summary">Get name of user.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getVersionString">App:getVersionString</a>&nbsp;()</td>
+	<td class="summary">Get plugin version number as a string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:getWarningCount">App:getWarningCount</a>&nbsp;()</td>
+	<td class="summary">Get number of warnings logged since logger was cleared (or app startup).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:init">App:init</a>&nbsp;()</td>
+	<td class="summary">Synchronous initialization  </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:initDone">App:initDone</a>&nbsp;(s, m)</td>
+	<td class="summary">Asserts (synchronous) initialization is complete.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:initGlobalPref">App:initGlobalPref</a>&nbsp;(name, dflt)</td>
+	<td class="summary">Init global preference.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:initPref">App:initPref</a>&nbsp;(name, default, presetName, values)</td>
+	<td class="summary">Make sure support preference is initialized.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:isAdvDbgEna">App:isAdvDbgEna</a>&nbsp;()</td>
+	<td class="summary">Determines if advanced debug functionality is present and enabled.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:isAdvDbgLogOk">App:isAdvDbgLogOk</a>&nbsp;()</td>
+	<td class="summary">Determine if advanced debug support and logger enabled to go with.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:isClassDebugEnabled">App:isClassDebugEnabled</a>&nbsp;(name)</td>
+	<td class="summary">Determine if class-filtered debug mode is in effect, and class of executing method is specifically enabled.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:isDebugEnabled">App:isDebugEnabled</a>&nbsp;()</td>
+	<td class="summary">Determine if basic app-wide debug mode is in effect.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:isFirstRun">App:isFirstRun</a>&nbsp;()</td>
+	<td class="summary">Determine if this is the first time the plugin has been run, since init, or since prefs cleared.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:isLoggerEnabled">App:isLoggerEnabled</a>&nbsp;()</td>
+	<td class="summary">Determine if app has a logger that can be used.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:isLr3">App:isLr3</a>&nbsp;()</td>
+	<td class="summary">Determines if plugin can support Lr3 functionality.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:isLr4">App:isLr4</a>&nbsp;()</td>
+	<td class="summary">Determines if plugin can support new Lr4 functionality.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:isLrVersionSupported">App:isLrVersionSupported</a>&nbsp;()</td>
+	<td class="summary">Determine if plugin supports current Lightroom version.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:isMacSupported">App:isMacSupported</a>&nbsp;()</td>
+	<td class="summary">Determine if plugin supports Mac OS.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:isPlatformSupported">App:isPlatformSupported</a>&nbsp;()</td>
+	<td class="summary">Determine if plugin supports current platform.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:isPluginEnabled">App:isPluginEnabled</a>&nbsp;(name, photo)</td>
+	<td class="summary">Determine if metadata-supporting plugin is enabled.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:isRealMode">App:isRealMode</a>&nbsp;()</td>
+	<td class="summary">Real mode detection.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:isRelease">App:isRelease</a>&nbsp;()</td>
+	<td class="summary">Determines if plugin is in release state.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:isTestMode">App:isTestMode</a>&nbsp;()</td>
+	<td class="summary">Test mode detection.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:isUser">App:isUser</a>&nbsp;()</td>
+	<td class="summary">Determine if non-anonymous user.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:isVerbose">App:isVerbose</a>&nbsp;()</td>
+	<td class="summary">Is app operating in verbose/debug mode, or normal.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:isWindowsSupported">App:isWindowsSupported</a>&nbsp;()</td>
+	<td class="summary">Determine if plugin supports Windows OS.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:loadPrefSupportFile">App:loadPrefSupportFile</a>&nbsp;(presetName)</td>
+	<td class="summary">Load default or specified preference support file, or throw error.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:loadProps">App:loadProps</a>&nbsp;(props)</td>
+	<td class="summary">Loads (plugin manager) properties from named set or unnamed.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:log">App:log</a>&nbsp;(message, ...)</td>
+	<td class="summary">Log info, if more than one param, first is assumed to be a format string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:logError">App:logError</a>&nbsp;(message, ...)</td>
+	<td class="summary">Count error and log it with number - supports LOC-based formatting.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:logInfo">App:logInfo</a>&nbsp;(message, verbose)</td>
+	<td class="summary">Log info (will append to whatever was "to-be-continued").</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:logInfoToBeContinued">App:logInfoToBeContinued</a>&nbsp;(message, ...)</td>
+	<td class="summary">Start or continue log entry, without terminating it.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:logObject">App:logObject</a>&nbsp;(t)</td>
+	<td class="summary">Log any lua variable, including complex tables with cross links.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:logPropertyTable">App:logPropertyTable</a>&nbsp;(t, name)</td>
+	<td class="summary">Log an observable property table.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:logStat">App:logStat</a>&nbsp;(fmt, stat, nItemsString)</td>
+	<td class="summary">Log statistical value, but only if non zero.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:logTable">App:logTable</a>&nbsp;(t)</td>
+	<td class="summary">Log a simple key/value table.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:logVerbose">App:logVerbose</a>&nbsp;(message, ...)</td>
+	<td class="summary">Log verbose info, if more than one param, first is assumed to be a format string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:logWarning">App:logWarning</a>&nbsp;(message, ...)</td>
+	<td class="summary">Count warning and log it with number - supports LOC-based formatting.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:makeFileLink">App:makeFileLink</a>&nbsp;(linkPath, folderPath)</td>
+	<td class="summary">Make file link.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:makeFolderLink">App:makeFolderLink</a>&nbsp;(linkPath, folderPath)</td>
+	<td class="summary">Make folder link.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:new">App:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance object.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:newClass">App:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:openFileInDefaultApp">App:openFileInDefaultApp</a>&nbsp;(file, prompt)</td>
+	<td class="summary">Open file in OS default app.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:parseErrorMessage">App:parseErrorMessage</a>&nbsp;(message)</td>
+	<td class="summary">Attempts to break an error message (obtained via lua debug object) into pure text message component, filename, and line number as string.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:parseToolkitId">App:parseToolkitId</a>&nbsp;(pluginId)</td>
+	<td class="summary">Parse Lr toolkit identifier and return components.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:pcall">App:pcall</a>&nbsp;(t)</td>
+	<td class="summary">Shortcut app pcall  </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:registerPreset">App:registerPreset</a>&nbsp;(name, ord)</td>
+	<td class="summary">Register preset.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:resetWarningDialogs">App:resetWarningDialogs</a>&nbsp;()</td>
+	<td class="summary">Reset Lightroom warning dialogs and custom warning dialogs.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:saveProps">App:saveProps</a>&nbsp;(props)</td>
+	<td class="summary">Save properties in preferences.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:sendKeys">App:sendKeys</a>&nbsp;(text, noYield)</td>
+	<td class="summary">Send unmodified keystrokes to lightroom.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:sendMacEncKeys">App:sendMacEncKeys</a>&nbsp;(keys, yieldSpec)</td>
+	<td class="summary">Send mac modified keystrokes to lightroom, in proprietary encoded format as follows:  </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:sendWinAhkKeys">App:sendWinAhkKeys</a>&nbsp;(keys, yieldSpec)</td>
+	<td class="summary">Send windows modified keystrokes to lightroom in AHK encoded format.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:service">App:service</a>&nbsp;(t)</td>
+	<td class="summary">Shortcut app pcall  </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:setGlobalPref">App:setGlobalPref</a>&nbsp;(name, val)</td>
+	<td class="summary">Set global preference.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:setPref">App:setPref</a>&nbsp;(name, value, presetName)</td>
+	<td class="summary">Set the specified preference to the specified value.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:setVerbose">App:setVerbose</a>&nbsp;(verbose)</td>
+	<td class="summary">To support turning verbosity on/off when plugin manager dialog box is not being displayed.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:show">App:show</a>&nbsp;(message, ...)</td>
+	<td class="summary">Show info to user - supports formatting.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:showBezel">App:showBezel</a>&nbsp;(opts, fmt, ...)</td>
+	<td class="summary">Display momentary message - Like LrDialogs.showBezel, except if called from task, messages are guaranteed to be displayed for at least 1.2 seconds.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:showDebugLog">App:showDebugLog</a>&nbsp;()</td>
+	<td class="summary">Open debug log in default app for viewing.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:showError">App:showError</a>&nbsp;(info, buttons, cancelButton, otherButton)</td>
+	<td class="summary">Show error to user.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:showInfo">App:showInfo</a>&nbsp;(info, actionPrefKey, buttons, cancelButton, otherButton)</td>
+	<td class="summary">Show info to user.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:showLogFile">App:showLogFile</a>&nbsp;()</td>
+	<td class="summary">Shows log file to user by opening in default app for .log.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:showWarning">App:showWarning</a>&nbsp;(info, buttons, cancelButton, otherButton)</td>
+	<td class="summary">Show warning to user.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:sleepTimer">App:sleepTimer</a>&nbsp;(timer, interval)</td>
+	<td class="summary">Sleep until times up, or global shutdown flag set.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:sleepUnlessShutdown">App:sleepUnlessShutdown</a>&nbsp;(time, incr, doneFunc)</td>
+	<td class="summary">Sleep until times up, or global shutdown flag set.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:switchPreset">App:switchPreset</a>&nbsp;(props)</td>
+	<td class="summary">Switch to another preference preset.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:touchFile">App:touchFile</a>&nbsp;(path, time, justDate)</td>
+	<td class="summary">Touch file(s) with current time or specified time.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:uninstallPlugin">App:uninstallPlugin</a>&nbsp;()</td>
+	<td class="summary">Updates plugin to new version (must be already downloaded/available).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:updatePlugin">App:updatePlugin</a>&nbsp;()</td>
+	<td class="summary">Updates plugin to new version (must be already downloaded/available).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:waitUnlessShutdown">App:waitUnlessShutdown</a>&nbsp;(start, t, incr)</td>
+	<td class="summary">Sleep for a moment if time remaining.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:yield">App:yield</a>&nbsp;(count, maxCount)</td>
+	<td class="summary">Yield unless too soon.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#App:yieldIfPossible">App:yieldIfPossible</a>&nbsp;()</td>
+	<td class="summary">Yield if called from task.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="App.defaultFailureHandler"></a><strong>App.defaultFailureHandler</strong>&nbsp;(_false, errMsg)</dt>
+<dd>
+Failure handler which can be used if nothing better springs to mind. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>_false</em></code>: First parmameter is always false and can be safely ignored.
+	</li>
+	
+	<li>
+	  <code><em>errMsg</em></code>: Error message. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Generally only used when there is no cleanup handler.</pre></li>
+	
+	<li><pre class=example>Note: This is NOT a method. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:alertLogE"></a><strong>App:alertLogE</strong>&nbsp;(fmt, ...)</dt>
+<dd>
+Log error, and display alert message so user knows it's been logged. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>fmt</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Use in contexts when it makes sense for message to stay until user acknowledges it by clicking 'X' in progress scope, namely background process (which actually have their own display method which may be preferred(?) ###1, since it's clearable) or non-modal dialog boxes, <br>    although truth betold, I wonder if it doesn't make more sense to have that stuff built into the UI in that case - hmm... </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:alertLogW"></a><strong>App:alertLogW</strong>&nbsp;(fmt, ...)</dt>
+<dd>
+Log warning, and display alert message so user knows it's been logged. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>fmt</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Use in contexts when it makes sense for message to stay until user acknowledges it by clicking 'X' in progress scope, namely background process (which actually have their own display method which may be preferred(?) ###1, since it's clearable) or non-modal dialog boxes, <br>    although truth betold, I wonder if it doesn't make more sense to have that stuff built into the UI in that case - hmm... </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:alertLogWE"></a><strong>App:alertLogWE</strong>&nbsp;(opts, fmt, ...)</dt>
+<dd>
+Mostly private method to do guts of alert W & E. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>opts</em></code>: (table/structure, required) named options: <br>    we (string, required) either 'w' or 'e' (lower case) to indicate whether warning or error. <br>    holdoff (number, default=1.2) minimum amount of time to block before returning (if called from task). <br>    dur (number, default=3) duration of momentary alert display "prompt". 
+	</li>
+	
+	<li>
+	  <code><em>fmt</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>callable directly when non-default options are required. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:assert"></a><strong>App:assert</strong>&nbsp;(c, m, ...)</dt>
+<dd>
+formatted assertion. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>c</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>m</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:assurePrefSupportFile"></a><strong>App:assurePrefSupportFile</strong>&nbsp;(presetName)</dt>
+<dd>
+Assure pref support file, if managed presets. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>presetName</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:call"></a><strong>App:call</strong>&nbsp;(op, ...)</dt>
+<dd>
+Call an operation, with optional variable parameters.  <p>See 'Call' and 'Service' classes for more information.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>op</em></code>: Object encapsulating operation to be performed - must extend the 'Call' class.<br><br>  Reminder, must include:<br><ul>  <li>name <li>main (called as method if object passed) <li>(object - if main is a method)<br><br></ul>  Optional:<br><ul>  <li>cleanup (also called as method if object passed). <li>async <li>guard</ul><br> 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: Passed to main function. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Main function call will be wrapped with interactive debug (show-errors) during development, <br>and regular error handling upon production (finale function or default handler - see Call class).</pre></li>
+	
+	<li><pre class=example>used to return guarded (boolean, default: nil) true iff call did not commence due to guarding. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status (boolean) true means call OK, false means call error, or nil if guarded. (true only means task started if async).</li>
+	
+	<li>message (string) nil unless status is false, in which case error message is returned. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:callingAssert"></a><strong>App:callingAssert</strong>&nbsp;(c, m, ...)</dt>
+<dd>
+formatted calling assertion. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>c</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>m</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:callingError"></a><strong>App:callingError</strong>&nbsp;(m, ...)</dt>
+<dd>
+Throw an error in calling context, with built-in formatting. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>m</em></code>: (string, required) error message.
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: formating substitutions. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Example: if param[1] == nil then app:callingError( "param ^1 must not be nil", paramNumber ) </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:changeFileDates"></a><strong>App:changeFileDates</strong>&nbsp;(params)</dt>
+<dd>
+Touch file(s) with current time or specified time. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>params</em></code>: (table, required) named parameters:<br> file (string, required) path to file.<br> modifiedTime (number) either this or created time is required.<br> createdTime (number) ditto.<br> preservePreviousModifiedTime (boolean, default is false)<br> 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>to avoid setting when already set consider checking before calling. </pre></li>
+	
+	<li><pre class=example>either modifiedTime or createdTime is required, or both. </pre></li>
+	
+	<li><pre class=example>Examples:<br> local s, cm, c = app:changeFileDates{ modifiedTime=LrDate.currentTime() } -- touch last-mod. local s, cm, c = app:changeFileDates{ createdTime=LrDate.currentTime() } -- touch created. local s, cm, c = app:changeFileDates{ modifiedTime=now, createdTime=now } -- touch both ('now' set to current time). local s, cm, c = app:changeFileDates{ modifiedTime=LrDate.currentTime() - 86400 } -- set last mod to 24 hours ago. local s, cm, c = app:changeFileDates{ createdTime=LrDate.currentTime() - 86400 } -- set created to 24hours ago. local s, cm, c = app:changeFileDates{ modifiedTime=now, createdTime=LrDate.currentTime() - 86400 } -- created 24 hours ago, modified now. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status</li>
+	
+	<li>message</li>
+	
+	<li>content </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:checkForUpdate"></a><strong>App:checkForUpdate</strong>&nbsp;(autoMode)</dt>
+<dd>
+Checks for new version of plugin to download. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>autoMode</em></code>: (boolean) set true if its an auto-check-upon-startup mode, so user isn't bothered by version up-2-date message. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Requires global xmlRpc object constructed with xml-rpc service URL.</pre></li>
+	
+	<li><pre class=example>Does not return anything - presents dialog if appropriate... </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:checkSupport"></a><strong>App:checkSupport</strong>&nbsp;()</dt>
+<dd>
+Check if platform (OS) is supported, and if version of Lightroom is supported. Offer user opportunity to bail if not. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Returns nothing - presents dialog if plugin lacks pre-requisite support, and throws error if user opts not to continue.</pre></li>
+	
+	<li><pre class=example>It is intended that this be called WITHOUT being wrapped by an error handler, so error causes true abortion. <br>Init.lua is a good candidate... </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:classDebugTrace"></a><strong>App:classDebugTrace</strong>&nbsp;(name, ...)</dt>
+<dd>
+Output debug info for class if class enabled for debug. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Typically this is not called directly, but instead by way of the Debug.logn function returned by the class constructor or object registrar. Still, it is available to be called directly if desired.</pre></li>
+	
+	<li><pre class=example>Pre-requisite: advanced debug enabled, and logger enabled (@2010-11-22 - the latter always is).</pre></li>
+	
+	<li><pre class=example>See advanced-debug class for more information. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:classDebugTraceFmt"></a><strong>App:classDebugTraceFmt</strong>&nbsp;(name, fmt, ...)</dt>
+<dd>
+Output debug info, formatted, for class if class enabled for debug. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>fmt</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Typically this is not called directly, but instead by way of the Debug.logn function returned by the class constructor or object registrar. Still, it is available to be called directly if desired.</pre></li>
+	
+	<li><pre class=example>Pre-requisite: advanced debug enabled, and logger enabled (@2010-11-22 - the latter always is).</pre></li>
+	
+	<li><pre class=example>See advanced-debug class for more information. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:clearAllPrefs"></a><strong>App:clearAllPrefs</strong>&nbsp;(props)</dt>
+<dd>
+Clear all preferences for this plugin. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Generally only called in response to button press when adv-Debug.logn-enabled and prefs are managed. <br>but could be called in init-lua or wherever if you like - for testing and debug only... </pre></li>
+	
+	<li><pre class=example>Works for managed as well as un-managed preferences. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:clearBezel"></a><strong>App:clearBezel</strong>&nbsp;()</dt>
+<dd>
+Clear bezel. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:clearDebugLog"></a><strong>App:clearDebugLog</strong>&nbsp;()</dt>
+<dd>
+Clear debug log by moving to trash. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>wrapped internally </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:clearLogFile"></a><strong>App:clearLogFile</strong>&nbsp;()</dt>
+<dd>
+Clear the contents of the log file and the logged error/warning counts. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:createPreset"></a><strong>App:createPreset</strong>&nbsp;(props)</dt>
+<dd>
+Create a new preference preset. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:debugStackTrace"></a><strong>App:debugStackTrace</strong>&nbsp;()</dt>
+<dd>
+Logs a rudimentary stack trace (function name, source file, line number). 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>No-op when advanced debugging is disabled. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:debugTrace"></a><strong>App:debugTrace</strong>&nbsp;(...)</dt>
+<dd>
+Does debug trace action provided supporting object has been created, and master debug is enabled.  <p>Typically this is not called directly, but instead by way of the Debug.logn function returned by the class constructor or object registrar. Still, it is available to be called directly if desired.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Pre-requisite: advanced debug enabled, and logger enabled (@2010-11-22 - the latter always is).</pre></li>
+	
+	<li><pre class=example>See advanced-debug class for more information. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:deletePrefPreset"></a><strong>App:deletePrefPreset</strong>&nbsp;(props)</dt>
+<dd>
+Delete preference preset. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>props</em></code>: - get re-loaded from defaults, or if default set is being "deleted" (reset), then they're reloaded from saved default values. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>which is governed by global preset name pref. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:display"></a><strong>App:display</strong>&nbsp;(opts, fmt, ...)</dt>
+<dd>
+Display application info message, with options. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>opts</em></code>: (table/structure, optional) options: <br>    dur (number, default=3) duration in seconds. 
+	</li>
+	
+	<li>
+	  <code><em>fmt</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Info will be displayed in bezel, or pseudo-bezel.</pre></li>
+	
+	<li><pre class=example>nothing returned, never throws an error (hopefully ;-}). </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:displayError"></a><strong>App:displayError</strong>&nbsp;(params, ...)</dt>
+<dd>
+Display error in progress scope, and optionally include message for log file. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>params</em></code>: (table, default={} ) disp/log parameters - see examples. 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Examples:<br> app:displayError() -- displays generic "see log file" message, but logs nothing. (use only if error message logged in calling context). app:displayError( "trouble - ^1", errm ) -- log error and display truncated version of it. app:displayError{ disp="display me" } -- displays custom message, but log nothing. app:displayError{ log="log me" } -- displays custom log message, and generic disp message: "see log file". app:displayError{ disp="display me", log="log ^1", "me" } -- called using table params instead. Note: varargs are intra-table, and apply to log msg (no fmtx subs for disp msg). </pre></li>
+	
+	<li><pre class=example>@24/May/2013 21:05, this message will be displayed until user acknowledges it (cancels scope), so only appropriate for background tasks, not foreground services. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:displayInfo"></a><strong>App:displayInfo</strong>&nbsp;(fmt, ...)</dt>
+<dd>
+Display application info message - default options. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>fmt</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Info will be displayed in bezel, or pseudo-bezel.</pre></li>
+	
+	<li><pre class=example>nothing returned, never throws an error (hopefully ;-}). </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:displayWarning"></a><strong>App:displayWarning</strong>&nbsp;(params, ...)</dt>
+<dd>
+Display warning in progress scope, and optionally include message for log file. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>params</em></code>: (table, default={} ) disp/log parameters - see examples. 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Examples:<br> app:displayWarning() -- displays generic "see log file" message, but logs nothing. (use only if warning message logged in calling context). app:displayWarning( "potential trouble - ^1", msg ) -- log warning and display truncated version of it. app:displayWarning{ disp="display me" } -- displays custom message, but log nothing. app:displayWarning{ log="log me" } -- displays custom log message, and generic disp message: "see log file". app:displayWarning{ disp="display me", log="log ^1", "me" } -- called using table params instead. Note: varargs are intra-table, and apply to log msg (no fmtx subs for disp msg). </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:error"></a><strong>App:error</strong>&nbsp;(m, ...)</dt>
+<dd>
+Throw an error in executing context, with built-in formatting. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>m</em></code>: (string, required) error message.
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: formating substitutions. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Example: if var == nil then app:error( "var ^1 must not be nil", varNumber ) </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:executeCommand"></a><strong>App:executeCommand</strong>&nbsp;(command, parameters, targets, output, handling, noQuotes, expectedReturnCode)</dt>
+<dd>
+Executes a shell command.  <p>Although the format for command/params... is platform independent, the command itself may not be. For example:</p> <blockquote>'exiftool' may be all that is needed to reference a pre-installed version of exiftool on Mac. However, full path may be required on windows, since exiftool installer does not automatically add exiftool to path.</blockquote> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>command</em></code>: (string, required) A pathed command name, or absolute path to executable.
+	</li>
+	
+	<li>
+	  <code><em>parameters</em></code>: (string or array, optional) Example string: '-G -p "asdf qwerty"' or table: { "-p", "-it=me" }
+	</li>
+	
+	<li>
+	  <code><em>targets</em></code>: (string or array, optional) An array of multiple filenames, or single target string.
+	</li>
+	
+	<li>
+	  <code><em>output</em></code>: (string, optional) Path to file where command output will be re-directed, or nil for let method decide.
+	</li>
+	
+	<li>
+	  <code><em>handling</em></code>: (string, optional) nil or '' => do nothing with output, 'get' => retrieve output as string, 'del' => retrieve output as string and delete output file.
+	</li>
+	
+	<li>
+	  <code><em>noQuotes</em></code>: (boolean, optional) set true to keep from over-wrapping with quotes - do code search to see use cases.
+	</li>
+	
+	<li>
+	  <code><em>expectedReturnCode</em></code>: (number, optional) if not passed, zero is assumed. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Quotes will be added where necessary depending on platform. The only exception to this is when something in parameter string needs to be quoted. </pre></li>
+	
+	<li><pre class=example>calling context can choose to alter parameters based on user and/or debug mode in order to keep output file(s) for perusal if desired. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status (boolean):       true iff successful.</li>
+	
+	<li>command-or-error-message(string):     command if success, error otherwise.</li>
+	
+	<li>content (string):       content of output file, if out-handling > 0. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:findFrameworkResource"></a><strong>App:findFrameworkResource</strong>&nbsp;(name)</dt>
+<dd>
+Find framework resource reference. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Only use I know of at present is for displaying a vf-picture.</pre></li>
+	
+	<li><pre class=example>Supports png - Lr doc says what else...</pre></li>
+	
+	<li><pre class=example>Assures resource comes from framework and not user plugin resource. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>abs path or nil if no resource. If Adobe changes type, so will this function. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:findResource"></a><strong>App:findResource</strong>&nbsp;(name)</dt>
+<dd>
+Get find plugin or framework resource reference. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Only use I know of at present is for displaying a vf-picture.</pre></li>
+	
+	<li><pre class=example>Supports png - Lr doc says what else...</pre></li>
+	
+	<li><pre class=example>Resource will be searched for in all require-paths, so plugin resources take priority (as long as they are in folder called 'Resource'). but will also return framework resources. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>abs path or nil if no resource. If Adobe changes type, so will this function. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:formatErrorMessage"></a><strong>App:formatErrorMessage</strong>&nbsp;(message)</dt>
+<dd>
+Returns a single string containing filename, line number, and error message - in a pretty format. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>message</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:func"></a><strong>App:func</strong>&nbsp;(her, spec)</dt>
+<dd>
+Get name of function or calling function... 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>her</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>spec</em></code>: (number or string, default=2) 0 for "this" function, 1 for calling function..., or alternate mnemonic for "this" function. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>for debug message display. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>string - never nil nor empty </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getAltKeySeq"></a><strong>App:getAltKeySeq</strong>&nbsp;(key)</dt>
+<dd>
+Get control keyboard sequence for running platform.  <p>Purpose is so Mac users don't have to be bothered with Windows syntax, nor vice versa.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>key</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Not for issuing keystrokes but for prompting user.</pre></li>
+	
+	<li><pre class=example>For example: str:format( 'Press ^1 to save metadata first...', app:getCtrlKeySeq( 's' ) )</pre></li>
+	
+	<li><pre class=example>Sorry about the Windows bias to the method name. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getAppName"></a><strong>App:getAppName</strong>&nbsp;()</dt>
+<dd>
+Get app name, which in general is a close derivative of the plugin name. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>I use different plugin names for distinguishing test/dev version and release version, but same appname for both. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getAuthor"></a><strong>App:getAuthor</strong>&nbsp;()</dt>
+<dd>
+Get plugin author's name as specified in info-lua. 
+
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>string: never nil, blank only if explicitly set to blank in info-lua, otherwise something like "unknown". </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getAuthorsWebsite"></a><strong>App:getAuthorsWebsite</strong>&nbsp;()</dt>
+<dd>
+Get plugin author's website as specified in info-lua. 
+
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>string: never nil, blank only if explicitly set to blank in info-lua, otherwise something like "unknown". </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getCompatibilityString"></a><strong>App:getCompatibilityString</strong>&nbsp;()</dt>
+<dd>
+Returns string for displaying Platform & Lightroom compatibility.  <p>Typically this is used in the plugin manager for informational purposes only. Info for program logic best obtained using other methods, since format returned by this function is not guaranteed.</p> 
+
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>string: e.g. "Windows+Mac, Lr2 to Lr3" </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getCtrlKeySeq"></a><strong>App:getCtrlKeySeq</strong>&nbsp;(key)</dt>
+<dd>
+Get control-modified keystroke string for display purposes only.  <p>Purpose is so Mac users don't have to be bothered with Windows syntax, nor vice versa.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>key</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Not for issuing keystrokes but for prompting user.</pre></li>
+	
+	<li><pre class=example>For example: str:format( 'Press ^1 to save metadata first...', app:getCtrlKeySeq( 's' ) )</pre></li>
+	
+	<li><pre class=example>Sorry about the Windows bias to the method name. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getDisplayDimensions"></a><strong>App:getDisplayDimensions</strong>&nbsp;()</dt>
+<dd>
+Get's both maximum and minimum display dimensions, as table { max = { width=..., height=... }, min = { width=..., height=... } } 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getErrorCount"></a><strong>App:getErrorCount</strong>&nbsp;()</dt>
+<dd>
+Get number of errors logged since logger was cleared (or app startup). 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getFrameworkResource"></a><strong>App:getFrameworkResource</strong>&nbsp;(name)</dt>
+<dd>
+Get framework resource reference. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Only use I know of at present is for displaying a vf-picture.</pre></li>
+	
+	<li><pre class=example>Supports png - Lr doc says what else...</pre></li>
+	
+	<li><pre class=example>Assures resource comes from framework and not user plugin resource. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>abs path or nil if no resource. If Adobe changes type, so will this function. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getGlobalPref"></a><strong>App:getGlobalPref</strong>&nbsp;(name)</dt>
+<dd>
+Get global preference. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: pref name 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>use this instead of setting directly, to make sure the proper key is used. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getGlobalPrefBinding"></a><strong>App:getGlobalPrefBinding</strong>&nbsp;(name, val)</dt>
+<dd>
+Get binding that uses the proper key.  <p>UI convenience function that combines getting a proper global preference key, with creating the binding...>/p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: pref name
+	</li>
+	
+	<li>
+	  <code><em>val</em></code>: pref value 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>use this for convenience, or bind directly to get-global-pref-key if you prefer. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getGlobalPrefKey"></a><strong>App:getGlobalPrefKey</strong>&nbsp;(name)</dt>
+<dd>
+Get global preference key for binding. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: global pref name. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>not usually needed since there's get-global-pref-binding function, <br>but this is still needed for binding section synopsis's. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getGlobalPrefName"></a><strong>App:getGlobalPrefName</strong>&nbsp;(key)</dt>
+<dd>
+Get global preference name given key. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>key</em></code>: global pref key. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>not usually needed, but useful for pref change handler functions when handling arrays of keys. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getGlobalPrefPairs"></a><strong>App:getGlobalPrefPairs</strong>&nbsp;(sortFunc)</dt>
+<dd>
+Get global preference iterator. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>sortFunc</em></code>: (boolean or function, default false) pass true for default name sort, or function for custom name sort. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>for iterating global preferences, without having to wade through non-globals. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>iterator function that returns name, value pairs, in preferred name sort order. <br>Note: the name returned is not a key. to translate to a key, call get-global-pref-key and pass the name. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getInfo"></a><strong>App:getInfo</strong>&nbsp;(name)</dt>
+<dd>
+Get property from info-lua. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: The name of the property to get. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getLogFileContents"></a><strong>App:getLogFileContents</strong>&nbsp;()</dt>
+<dd>
+Get log file contents as text string.  <p>Invented to support Dialog function (kluge) to copy log contents to clipboard.</p> 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getLogFilePath"></a><strong>App:getLogFilePath</strong>&nbsp;()</dt>
+<dd>
+Not usually needed, since show-log-file and send-log-file are both app interfaces.  In any case, it may be handy... 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getLrCompatibilityString"></a><strong>App:getLrCompatibilityString</strong>&nbsp;()</dt>
+<dd>
+Get friendly Lr compatibility display string. 
+
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>string: e.g. Lr2+Lr3 </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getLrVerMajor"></a><strong>App:getLrVerMajor</strong>&nbsp;()</dt>
+<dd>
+Get Lr major version number. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Use this if you need to know exact Lr (major) version. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getLrVersionName"></a><strong>App:getLrVersionName</strong>&nbsp;()</dt>
+<dd>
+Get Lightroom version name. 
+
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>e.g. Lightroom 3 </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getPathSep"></a><strong>App:getPathSep</strong>&nbsp;()</dt>
+<dd>
+Get path separator, appropriate for OS.
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getPlatformName"></a><strong>App:getPlatformName</strong>&nbsp;()</dt>
+<dd>
+Get OS platform name. 
+
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>'Windows' or 'Mac'. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getPlatformString"></a><strong>App:getPlatformString</strong>&nbsp;()</dt>
+<dd>
+Get friendly string for displaying Platform compatibility - depends on platform support array defined in info-lua. 
+
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>string: never nil. e.g. Windows+Mac </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getPluginId"></a><strong>App:getPluginId</strong>&nbsp;()</dt>
+<dd>
+Get plugin name as specified in info-lua. 
+
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>string: required by Lightroom. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getPluginName"></a><strong>App:getPluginName</strong>&nbsp;()</dt>
+<dd>
+Get plugin name as specified in info-lua. 
+
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>string: required by Lightroom. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getPluginUrl"></a><strong>App:getPluginUrl</strong>&nbsp;()</dt>
+<dd>
+Get plugin url as specified in info-lua. 
+
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>string: never nil, blank only if explicitly set to blank in info-lua, otherwise something like "unknown". </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getPref"></a><strong>App:getPref</strong>&nbsp;(name, presetName, expectedType, default)</dt>
+<dd>
+Get the value of the specified preference. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: Preference property name (format: string without dots). 
+	</li>
+	
+	<li>
+	  <code><em>presetName</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>expectedType</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>default</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Preference may be a member of a named set, or the un-named set.</pre></li>
+	
+	<li><pre class=example>See Preferences class for more info. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>preference value corresponding to name. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getPrefBinding"></a><strong>App:getPrefBinding</strong>&nbsp;(name, presetName, val)</dt>
+<dd>
+Get binding that uses the proper key.  <p>UI convenience function that combines getting a proper preference key, with creating the binding...>/p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: pref name
+	</li>
+	
+	<li>
+	  <code><em>presetName</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>val</em></code>: pref value 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>*** One can bind directly to props in plugin manager, since set-pref is wired to prop change<br> this is for prompts outside plugin manager, that will change plugin manager preset pref too.</pre></li>
+	
+	<li><pre class=example>use this for convenience, or bind directly to get-pref-key if you prefer. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getPrefKey"></a><strong>App:getPrefKey</strong>&nbsp;(name, presetName)</dt>
+<dd>
+Get preference key for binding. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: pref name. 
+	</li>
+	
+	<li>
+	  <code><em>presetName</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>not usually needed since most preset prefs are defined in plugin manager via binding to props wired to set-pref<br> and also there's the get-pref-binding function, but this could be used in unusual circumstances maybe - say if local pref being used in section synopsis. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getPrefName"></a><strong>App:getPrefName</strong>&nbsp;(key)</dt>
+<dd>
+Get preference name given key. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>key</em></code>: pref key. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>not usually needed, but useful for pref change handler functions when handling arrays of keys. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getPrefPairs"></a><strong>App:getPrefPairs</strong>&nbsp;(sortFunc)</dt>
+<dd>
+Get local preference iterator. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>sortFunc</em></code>: (boolean or function, default false) pass true for default name sort, or function for custom name sort. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>for iterating local preferences, without having to wade through globals. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>iterator function that returns name, value pairs, in preferred name sort order. <br>Note: the name returned is not a key. to translate to a key, call get-global-pref-key and pass the name. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getPresetName"></a><strong>App:getPresetName</strong>&nbsp;()</dt>
+<dd>
+Get active preset name. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getPresetNameItems"></a><strong>App:getPresetNameItems</strong>&nbsp;()</dt>
+<dd>
+Get preset names in popup-menu-compatible items format. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getPresetNames"></a><strong>App:getPresetNames</strong>&nbsp;(exclDefault)</dt>
+<dd>
+Get array of preset names, sorted alphabetically, except Default first. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>exclDefault</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getResource"></a><strong>App:getResource</strong>&nbsp;(name)</dt>
+<dd>
+Get plugin or framework resource reference. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Only use I know of at present is for displaying a vf-picture.</pre></li>
+	
+	<li><pre class=example>Supports png - Lr doc says what else...</pre></li>
+	
+	<li><pre class=example>Resource will be searched for in all require-paths, so plugin resources take priority (as long as they are in folder called 'Resource'). but will also return framework resources. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>abs path or nil if no resource. If Adobe changes type, so will this function. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getRunCount"></a><strong>App:getRunCount</strong>&nbsp;()</dt>
+<dd>
+Get number of times this plugin has been reloaded, or number times Lr has been restarted since prefs were reset. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getSettingsKey"></a><strong>App:getSettingsKey</strong>&nbsp;(name)</dt>
+<dd>
+Get (root) settings key, format undefined, and name. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getShellName"></a><strong>App:getShellName</strong>&nbsp;()</dt>
+<dd>
+Get name of explorer or finder. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getShortAppName"></a><strong>App:getShortAppName</strong>&nbsp;()</dt>
+<dd>
+Get short version of app-name, for use in cramped spaces (e.g. progress scope). 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getUserName"></a><strong>App:getUserName</strong>&nbsp;()</dt>
+<dd>
+Get name of user.  <p>Note: There is no API for entering a user name, however it will be read from shared properties when available.</p>  <p>It used to be critical before named preferences came along, now its just there in case you want to alter logic slightly depending on user name - I sometimes customize behavior for myself, that other users will never see...</p>  <p>You could make custom versions for a friend or client that does not require a separate plugin nor named preference set.</p> 
+
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>user's name: typically "_Anonymous_" if none. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getVersionString"></a><strong>App:getVersionString</strong>&nbsp;()</dt>
+<dd>
+Get plugin version number as a string.  <p>Preferrably without the build suffix, but manageable even with...</p> 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Correct functioning depends on compatible VERSION format, which is either:  <p>- major/minor/revision, or <br>- {version-number-string}{white-space}{build-info}</p>  <p>Plugin generator & releasor generate compatible version numbers / string format. <br>If you are using an other build/release tool, just make sure the xml-rpc-server recognizes <br>the value returned by this method and all should be well.</p>  <p>Even if build is tossed in with version number due to omission of expected white-space <br>it will still work as long as xml-rpc-server understands this...</p> </pre></li>
+	
+	<li><pre class=example>It is up to the xml-rpc-server implementation to make sure if there is a version mismatch between client version and server version, that the server version is always considered "newest".  <p>In other words, a string equality comparison is done, rather than a numerical version comparison, <br>to determine whether the server version shall be considered "newer".</p> </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>Unlike some similarly named app methods, the value returned by this one is used <br>not only for UI display but for checking version number on server via xml-rpc.  <p>Returns "unknown" if not parseable from info-lua-VERSION...</p> </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:getWarningCount"></a><strong>App:getWarningCount</strong>&nbsp;()</dt>
+<dd>
+Get number of warnings logged since logger was cleared (or app startup). 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:init"></a><strong>App:init</strong>&nbsp;()</dt>
+<dd>
+Synchronous initialization 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Called from Init.lua - initialization done here should be relatively quick and not yield or sleep, to eliminate race conditions between startup and intiation of asynchronous services. Use background task for asynchronous initialization ( with post-init termination if nothing periodic/in-the-background to do ). </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:initDone"></a><strong>App:initDone</strong>&nbsp;(s, m)</dt>
+<dd>
+Asserts (synchronous) initialization is complete. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>s</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>m</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Call at end of plugin's Init.lua module. </pre></li>
+	
+	<li><pre class=example>Dumps declared globals to debug log, if advanced debug enabled. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:initGlobalPref"></a><strong>App:initGlobalPref</strong>&nbsp;(name, dflt)</dt>
+<dd>
+Init global preference. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: global pref name.
+	</li>
+	
+	<li>
+	  <code><em>dflt</em></code>: global pref default value. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>a-kin to init-pref reglar, cept for global prefs... </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:initPref"></a><strong>App:initPref</strong>&nbsp;(name, default, presetName, values)</dt>
+<dd>
+Make sure support preference is initialized.  <p>Because of the way all this pref/prop stuff works, uninitialized prefs can be a problem, since they are saved into props via pairs() function that won't recognize nil items, thus items that should be blanked, may retain bogus values.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>default</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>presetName</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>values</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Pref value set to default only if nil.</p> </pre></li>
+	
+	<li><pre class=example>Make sure init-props is being called to init the props from the prefs afterward. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:isAdvDbgEna"></a><strong>App:isAdvDbgEna</strong>&nbsp;()</dt>
+<dd>
+Determines if advanced debug functionality is present and enabled.  May be useful externally before embarking in time consuming loops that are no-op if not enabled. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:isAdvDbgLogOk"></a><strong>App:isAdvDbgLogOk</strong>&nbsp;()</dt>
+<dd>
+Determine if advanced debug support and logger enabled to go with. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Typical use for determining whether its worthwhile to embark on some advanced debug support activity.</pre></li>
+	
+	<li><pre class=example>Consider using Debug proper instead. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>boolean: true iff advanced debug functionality is "all-systems-go". </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:isClassDebugEnabled"></a><strong>App:isClassDebugEnabled</strong>&nbsp;(name)</dt>
+<dd>
+Determine if class-filtered debug mode is in effect, and class of executing method is specifically enabled.  <p>Typically not called directly, but indirectly by Debug.logn function, although it can be called directly if desired...</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: Full-class-name, or pseudo-class-name(if not a true class) as registered. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:isDebugEnabled"></a><strong>App:isDebugEnabled</strong>&nbsp;()</dt>
+<dd>
+Determine if basic app-wide debug mode is in effect.  <p>Synonymous with log-verbose.</p> 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:isFirstRun"></a><strong>App:isFirstRun</strong>&nbsp;()</dt>
+<dd>
+Determine if this is the first time the plugin has been run, since init, or since prefs cleared. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:isLoggerEnabled"></a><strong>App:isLoggerEnabled</strong>&nbsp;()</dt>
+<dd>
+Determine if app has a logger that can be used.  <p>Purpose is to circumvent log loops or other functionality that only makes sense if there is a logger.</p>  <p>Presently it does not indicate if the logger is enabled for logging or not, however, if there is a logger, then it is enabled - for now. - Non-logging plugins are not even supported. But they don't have to log anything they don't want to, so it does not have to slow them down much - still the future may change this.</p> 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:isLr3"></a><strong>App:isLr3</strong>&nbsp;()</dt>
+<dd>
+Determines if plugin can support Lr3 functionality. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Returns false in Lr1 & Lr2, true in Lr3, will still return true in Lr4 (assuming deprecated items persist for one & only one version), false in Lr5. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:isLr4"></a><strong>App:isLr4</strong>&nbsp;()</dt>
+<dd>
+Determines if plugin can support new Lr4 functionality. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Returns false in Lr1, Lr2, & Lr3, true in Lr4, and will still return true in Lr5 (assuming deprecated items persist for one & only one version), false in Lr6. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:isLrVersionSupported"></a><strong>App:isLrVersionSupported</strong>&nbsp;()</dt>
+<dd>
+Determine if plugin supports current Lightroom version. 
+
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>true iff definitely yes. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:isMacSupported"></a><strong>App:isMacSupported</strong>&nbsp;()</dt>
+<dd>
+Determine if plugin supports Mac OS. 
+
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>true if definitely yes, false if definitely no, nil if unspecified. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:isPlatformSupported"></a><strong>App:isPlatformSupported</strong>&nbsp;()</dt>
+<dd>
+Determine if plugin supports current platform. 
+
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>true if definitely yes, false if definitely no, nil if unspecified. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:isPluginEnabled"></a><strong>App:isPluginEnabled</strong>&nbsp;(name, photo)</dt>
+<dd>
+Determine if metadata-supporting plugin is enabled. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: (string, default dummy_) name of alternative plugin metadata item (property) to be used.
+	</li>
+	
+	<li>
+	  <code><em>photo</em></code>: (lr-photo, default 1st photo of all) photo to use to check. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>This method presently only works when a metadata item is defined. Maybe one day it will also work even with no plugin metadata defined.</pre></li>
+	
+	<li><pre class=example>Only works from an async task. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>enabled (boolean) true iff valid property name and plugin is enabled. Throws error if not called from async task.</li>
+	
+	<li>error message indicating property name was bad or plugin is disabled. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:isRealMode"></a><strong>App:isRealMode</strong>&nbsp;()</dt>
+<dd>
+Real mode detection.  <p>Convenience function for readability: opposite of test mode.</p> 
+
+
+
+
+
+
+
+
+
+<h3>See also:</h3>
+<ul>
+	
+	<!-- <li><a href="#App:isTestMode "> -->
+	<li><a href="#App:isTestMode ">
+		App:isTestMode </li>
+	</a>
+	
+</ul>
+
+</dd>
+
+
+
+
+<dt><a name="App:isRelease"></a><strong>App:isRelease</strong>&nbsp;()</dt>
+<dd>
+Determines if plugin is in release state. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Its considered a release state if plugin extension is "lrplugin". </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:isTestMode"></a><strong>App:isTestMode</strong>&nbsp;()</dt>
+<dd>
+Test mode detection.  <p>Test mode was invented to support test-mode plugin operation, and especially file-ops (rc-common-modules), which were guaranteed not to modify any files unless real mode. For better or for worse, this functionality has been dropped from disk file-system class, but could still be used on an app-by-app basis.</p> 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>If test-mode functionality is desired, then set up a UI and bind to test-mode as global pref. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:isUser"></a><strong>App:isUser</strong>&nbsp;()</dt>
+<dd>
+Determine if non-anonymous user. 
+
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>boolean </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:isVerbose"></a><strong>App:isVerbose</strong>&nbsp;()</dt>
+<dd>
+Is app operating in verbose/debug mode, or normal. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:isWindowsSupported"></a><strong>App:isWindowsSupported</strong>&nbsp;()</dt>
+<dd>
+Determine if plugin supports Windows OS. 
+
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>true if definitely yes, false if definitely no, nil if unspecified. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:loadPrefSupportFile"></a><strong>App:loadPrefSupportFile</strong>&nbsp;(presetName)</dt>
+<dd>
+Load default or specified preference support file, or throw error. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>presetName</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Typically NOT called, since "assure..." is preferred to keep from over-doing it.. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:loadProps"></a><strong>App:loadProps</strong>&nbsp;(props)</dt>
+<dd>
+Loads (plugin manager) properties from named set or unnamed. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>props</em></code>: The properties to load. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Handles case when preference preset manager is installed, or not. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:log"></a><strong>App:log</strong>&nbsp;(message, ...)</dt>
+<dd>
+Log info, if more than one param, first is assumed to be a format string. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>message</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:logError"></a><strong>App:logError</strong>&nbsp;(message, ...)</dt>
+<dd>
+Count error and log it with number - supports LOC-based formatting. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>message</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:logInfo"></a><strong>App:logInfo</strong>&nbsp;(message, verbose)</dt>
+<dd>
+Log info (will append to whatever was "to-be-continued"). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>message</em></code>: informational message
+	</li>
+	
+	<li>
+	  <code><em>verbose</em></code>: set to App.verbose if the message should only be emitted if verbose logging is enabled. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:logInfoToBeContinued"></a><strong>App:logInfoToBeContinued</strong>&nbsp;(message, ...)</dt>
+<dd>
+Start or continue log entry, without terminating it. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>message</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Useful for starting a log line at the entrance to some code block, then finishing it upon exit, depending on status... </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:logObject"></a><strong>App:logObject</strong>&nbsp;(t)</dt>
+<dd>
+Log any lua variable, including complex tables with cross links. - debug only  <p>It could use a little primping, but it has served my purpose so I'm moving on.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>*** Deprecated - please use Debug function instead.</pre></li>
+	
+	<li><pre class=example>Can not be used to log _G, everything else thrown at it so far has worked.</pre></li>
+	
+	<li><pre class=example>Example: app:logObject( someTable ) </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:logPropertyTable"></a><strong>App:logPropertyTable</strong>&nbsp;(t, name)</dt>
+<dd>
+Log an observable property table. - debug only 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>No-op unless advanced debug logging is enabled. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:logStat"></a><strong>App:logStat</strong>&nbsp;(fmt, stat, nItemsString)</dt>
+<dd>
+Log statistical value, but only if non zero. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>fmt</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>stat</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>nItemsString</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:logTable"></a><strong>App:logTable</strong>&nbsp;(t)</dt>
+<dd>
+Log a simple key/value table. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>*** Deprecated - use Debug function instead.</pre></li>
+	
+	<li><pre class=example>No-op unless advanced debug enabled.</pre></li>
+	
+	<li><pre class=example>Does not re-curse. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:logVerbose"></a><strong>App:logVerbose</strong>&nbsp;(message, ...)</dt>
+<dd>
+Log verbose info, if more than one param, first is assumed to be a format string. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>message</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:logWarning"></a><strong>App:logWarning</strong>&nbsp;(message, ...)</dt>
+<dd>
+Count warning and log it with number - supports LOC-based formatting. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>message</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:makeFileLink"></a><strong>App:makeFileLink</strong>&nbsp;(linkPath, folderPath)</dt>
+<dd>
+Make file link. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>linkPath</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>folderPath</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:makeFolderLink"></a><strong>App:makeFolderLink</strong>&nbsp;(linkPath, folderPath)</dt>
+<dd>
+Make folder link. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>linkPath</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>folderPath</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:new"></a><strong>App:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance object. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: initial table - optional. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Called from init-lua once all globals have been initialized.</pre></li>
+	
+	<li><pre class=example>Reads info-lua and creates encapsulated worker-bee objects. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:newClass"></a><strong>App:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: initial table - optional. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:openFileInDefaultApp"></a><strong>App:openFileInDefaultApp</strong>&nbsp;(file, prompt)</dt>
+<dd>
+Open file in OS default app. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>file</em></code>: The file to open. 
+	</li>
+	
+	<li>
+	  <code><em>prompt</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Presently supports just one file, but could be enhanced to support multiple files.</pre></li>
+	
+	<li><pre class=example>throws error if attempt fails.</pre></li>
+	
+	<li><pre class=example>does NOT pre-check for file existence so do so before calling. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status true iff worked (false means user canceled).</li>
+	
+	<li>message non-nil iff didn't work. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:parseErrorMessage"></a><strong>App:parseErrorMessage</strong>&nbsp;(message)</dt>
+<dd>
+Attempts to break an error message (obtained via lua debug object) into pure text message component, filename, and line number as string. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>message</em></code>: (string, required) original error message 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>error-message sans filename/line-no</li>
+	
+	<li>filename or nil</li>
+	
+	<li>line number string or nil </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:parseToolkitId"></a><strong>App:parseToolkitId</strong>&nbsp;(pluginId)</dt>
+<dd>
+Parse Lr toolkit identifier and return components. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>pluginId</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:pcall"></a><strong>App:pcall</strong>&nbsp;(t)</dt>
+<dd>
+Shortcut app pcall 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:registerPreset"></a><strong>App:registerPreset</strong>&nbsp;(name, ord)</dt>
+<dd>
+Register preset. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>ord</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:resetWarningDialogs"></a><strong>App:resetWarningDialogs</strong>&nbsp;()</dt>
+<dd>
+Reset Lightroom warning dialogs and custom warning dialogs. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Be sure to call this instead of the lr-dialogs one. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:saveProps"></a><strong>App:saveProps</strong>&nbsp;(props)</dt>
+<dd>
+Save properties in preferences. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>props</em></code>: The properties to save. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>file-backing is read-only.</pre></li>
+	
+	<li><pre class=example>As coded, this only applies to named presets when preset-name property changes. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:sendKeys"></a><strong>App:sendKeys</strong>&nbsp;(text, noYield)</dt>
+<dd>
+Send unmodified keystrokes to lightroom.  <p>Unmodified meaning not enhanced by Ctrl/Cmd/Option/Alt/Shift...</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>text</em></code>: (string or table, required) if string: e.g. "p" or "u", maybe "g"...<br> if table, text.win and/or text.mac keystroke sequences, and maybe a hint: text.mod.<br> noYield can be passed as text member or separate parameter.
+	</li>
+	
+	<li>
+	  <code><em>noYield</em></code>: (boolean or number, default is true) -- yield or msec to sleep after sending keys. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Platform agnostic (os specific object does the right thing).</pre></li>
+	
+	<li><pre class=example>Direct keystrokes at Lightroom proper, NOT dialog boxes, nor metadata fields, ... </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status(boolean): true iff command to send keys executed without an error.</li>
+	
+	<li>message(string): if status successful: the command issued, else error message (which includes command issued). </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:sendMacEncKeys"></a><strong>App:sendMacEncKeys</strong>&nbsp;(keys, yieldSpec)</dt>
+<dd>
+Send mac modified keystrokes to lightroom, in proprietary encoded format as follows: 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>keys</em></code>: i.e. mash the modifiers together (any order, case sensitive), followed by a dash, followed by the keystrokes mashed together (order matters, but case does not).
+	</li>
+	
+	<li>
+	  <code><em>yieldSpec</em></code>: I've found, more times than not, a yield helps the keystrokes take effect. If yielding after sending the keys is causing more harm than good, set this arg to true. <br>          Set to numeric value for sleep before returning. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>e.g. 'CmdOptionCtrlShift-FS'</pre></li>
+	
+	<li><pre class=example>Direct keystrokes at Lightroom proper, NOT dialog boxes, nor metadata fields, ... </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status(boolean): true iff command to send keys executed without an error.</li>
+	
+	<li>message(string): if status successful: the command issued, else error message (which includes command issued). </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:sendWinAhkKeys"></a><strong>App:sendWinAhkKeys</strong>&nbsp;(keys, yieldSpec)</dt>
+<dd>
+Send windows modified keystrokes to lightroom in AHK encoded format. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>keys</em></code>: i.e. mash the modifiers together (any order, case sensitive), followed by a dash, followed by the keystrokes mashed together (order matters, but case does not).
+	</li>
+	
+	<li>
+	  <code><em>yieldSpec</em></code>: I've found, more times than not, a yield helps the keystrokes take effect. If yielding after sending the keys is causing more harm than good, set this arg to true. <br>          Set to numeric value for sleep before returning. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>e.g. '{Ctrl Down}s{Ctrl Up}' - note: {Ctrl}s doesn't cut it - probably whats wrong with vbs/powershell versions.</pre></li>
+	
+	<li><pre class=example>Direct keystrokes at Lightroom proper, NOT dialog boxes, nor metadata fields, ... </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status(boolean): true iff command to send keys executed without an error.</li>
+	
+	<li>message(string): if status successful: the command issued, else error message (which includes command issued). </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:service"></a><strong>App:service</strong>&nbsp;(t)</dt>
+<dd>
+Shortcut app pcall 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:setGlobalPref"></a><strong>App:setGlobalPref</strong>&nbsp;(name, val)</dt>
+<dd>
+Set global preference. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: pref name
+	</li>
+	
+	<li>
+	  <code><em>val</em></code>: pref value 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>use this instead of setting directly, to make sure the proper key is used. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:setPref"></a><strong>App:setPref</strong>&nbsp;(name, value, presetName)</dt>
+<dd>
+Set the specified preference to the specified value. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: Preference property name (format: string without dots).
+	</li>
+	
+	<li>
+	  <code><em>value</em></code>: Preference property value (type: simple - string, number, or boolean). 
+	</li>
+	
+	<li>
+	  <code><em>presetName</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Preference may be a member of a named set, or the un-named set.</pre></li>
+	
+	<li><pre class=example>See Preferences class for more info. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:setVerbose"></a><strong>App:setVerbose</strong>&nbsp;(verbose)</dt>
+<dd>
+To support turning verbosity on/off when plugin manager dialog box is not being displayed. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>verbose</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:show"></a><strong>App:show</strong>&nbsp;(message, ...)</dt>
+<dd>
+Show info to user - supports formatting. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>message</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>See Dialog class for param descriptions.</pre></li>
+	
+	<li><pre class=example>New calling option (info as table): local answer = app:show({ info="^1 is a ^2", actionPrefKey="promptOrNot", buttons={ { label="My OK Button", verb="ok" }, { label="3rd Button", verb='othered' } } }, "Jane", "Doe" ) -- note: buttons still need to be in a table when there's an action-pref. answer = app:show({ info="^1 is a ^2", okButton="My OK Button", cancelButton="Please Dont Cancel", otherButton="3rd Button" }, "John", "Buck" ) -- note: buttons are just strings, returns are fixed. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:showBezel"></a><strong>App:showBezel</strong>&nbsp;(opts, fmt, ...)</dt>
+<dd>
+Display momentary message - Like LrDialogs.showBezel, except if called from task, messages are guaranteed to be displayed for at least 1.2 seconds. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>opts</em></code>: (table/structure, optional) named options.. <br>    dur (number, default=3) will be clipped into range 1.2-10. If you need greater duration, call multiple times before bezel-time expires. <br>    holdoff (number, default=1.2) If called from task, will return in this many seconds - bezel may continue to be displayed after return; <br>    if not called from task, holdoff is ignored. <br>    unlike it's successor which interpreted negative holdoff to mean (no yield), this method always yields, because it may be required to avoid anamolous duplicate bezel/scope. <br>    It's my hope that "no yield" will never be needed.
+	</li>
+	
+	<li>
+	  <code><em>fmt</em></code>: (string, required) loc-compatible message to be displayed, with optional ^subs.
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: (any, optional) subs - converted to string prior to substitution. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Works in all Lr versions - 3 and up; if Lr5+, bezel is used, else modal progress dialog.</pre></li>
+	
+	<li><pre class=example>Does not need to be called from a task, but such is recommended if possible.</pre></li>
+	
+	<li><pre class=example>Usually returns in 1.2 seconds, but could be up to 12 seconds if the full 10 simultaneous tasks are in line for the bezel.</pre></li>
+	
+	<li><pre class=example>Worth noting: bezel display will be unconditionally overwritten by other plugins or Lr itself, thus one can not assume messages displayed in bezel have been or will be seen.. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:showDebugLog"></a><strong>App:showDebugLog</strong>&nbsp;()</dt>
+<dd>
+Open debug log in default app for viewing. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>wrapped internally </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:showError"></a><strong>App:showError</strong>&nbsp;(info, buttons, cancelButton, otherButton)</dt>
+<dd>
+Show error to user. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>info</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>buttons</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>cancelButton</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>otherButton</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>See Dialog class for param descriptions. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:showInfo"></a><strong>App:showInfo</strong>&nbsp;(info, actionPrefKey, buttons, cancelButton, otherButton)</dt>
+<dd>
+Show info to user. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>info</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>actionPrefKey</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>buttons</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>cancelButton</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>otherButton</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>See Dialog class for param descriptions. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:showLogFile"></a><strong>App:showLogFile</strong>&nbsp;()</dt>
+<dd>
+Shows log file to user by opening in default app for .log. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>I assume if no default set up, the OS will prompt user to do so(?)</pre></li>
+	
+	<li><pre class=example>Non-blocking. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:showWarning"></a><strong>App:showWarning</strong>&nbsp;(info, buttons, cancelButton, otherButton)</dt>
+<dd>
+Show warning to user. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>info</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>buttons</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>cancelButton</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>otherButton</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>See Dialog class for param descriptions. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:sleepTimer"></a><strong>App:sleepTimer</strong>&nbsp;(timer, interval)</dt>
+<dd>
+Sleep until times up, or global shutdown flag set. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>timer</em></code>: (App.Timer, required) will be auto-started. 
+	</li>
+	
+	<li>
+	  <code><em>interval</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Called by background tasks primarily, to sleep in 100 msec (or specified increments up to 1 second), checking shutdown flag each increment. <br>Returns when time elapsed or shutdown flag set. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:sleepUnlessShutdown"></a><strong>App:sleepUnlessShutdown</strong>&nbsp;(time, incr, doneFunc)</dt>
+<dd>
+Sleep until times up, or global shutdown flag set. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>time</em></code>: (incr, default = .1) amount of time to sleep before calling done-func or checking return time.
+	</li>
+	
+	<li>
+	  <code><em>incr</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>doneFunc</em></code>: (function, optional) function which returns true or non-nil to wake "pre-maturely". 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Called by background tasks primarily, to sleep in 100 msec (or specified increments up to 1 second), checking shutdown flag each increment. <br>Returns when time elapsed or shutdown flag set. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:switchPreset"></a><strong>App:switchPreset</strong>&nbsp;(props)</dt>
+<dd>
+Switch to another preference preset. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:touchFile"></a><strong>App:touchFile</strong>&nbsp;(path, time, justDate)</dt>
+<dd>
+Touch file(s) with current time or specified time. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>path</em></code>: (string, required) file or file-mask.
+	</li>
+	
+	<li>
+	  <code><em>time</em></code>: (number, default is current time)
+	</li>
+	
+	<li>
+	  <code><em>justDate</em></code>: (boolean, default is false) -- if true, sets the date only, time will be 12:00Am I assume. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status</li>
+	
+	<li>message</li>
+	
+	<li>content </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:uninstallPlugin"></a><strong>App:uninstallPlugin</strong>&nbsp;()</dt>
+<dd>
+Updates plugin to new version (must be already downloaded/available). 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:updatePlugin"></a><strong>App:updatePlugin</strong>&nbsp;()</dt>
+<dd>
+Updates plugin to new version (must be already downloaded/available). 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:waitUnlessShutdown"></a><strong>App:waitUnlessShutdown</strong>&nbsp;(start, t, incr)</dt>
+<dd>
+Sleep for a moment if time remaining. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>start</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>incr</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:yield"></a><strong>App:yield</strong>&nbsp;(count, maxCount)</dt>
+<dd>
+Yield unless too soon. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>count</em></code>: (number, required) initialize to zero before loop, then pass return value back in, in loop.
+	</li>
+	
+	<li>
+	  <code><em>maxCount</em></code>: (number, default 20 ) number of calls to burn before actually yielding 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Use instead of lr-tasks-yield in potentially lengthy loops, to avoid poor performance. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>count to be passed back in next call. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="App:yieldIfPossible"></a><strong>App:yieldIfPossible</strong>&nbsp;()</dt>
+<dd>
+Yield if called from task. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

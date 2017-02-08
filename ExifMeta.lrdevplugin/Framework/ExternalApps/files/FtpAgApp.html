@@ -1,0 +1,529 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/Convert.html">Convert.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/DngConverter.html">DngConverter.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ExifTool.html">ExifTool.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Ffmpeg.html">Ffmpeg.lua</a>
+	</li>
+
+	<li><strong>FtpAgApp.lua</strong></li>
+	
+	<li>
+		<a href="../files/ImageMagick.html">ImageMagick.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Java.html">Java.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Mogrify.html">Mogrify.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Sqlite.html">Sqlite.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>FtpAgApp.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#FtpAgApp:endOfJob">FtpAgApp:endOfJob</a>&nbsp;(srvcName, jobNum, taskNum, jobDir, index)</td>
+	<td class="summary">End job distinguished by directory.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#FtpAgApp:getPresence">FtpAgApp:getPresence</a>&nbsp;(tmo, fromName)</td>
+	<td class="summary">Returns lower case string indicative of whether app is responding to "hello" message.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#FtpAgApp:new">FtpAgApp:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#FtpAgApp:newClass">FtpAgApp:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#FtpAgApp:processMessage">FtpAgApp:processMessage</a>&nbsp;(msg)</td>
+	<td class="summary">Processor for incoming (unsolicited) messages.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#FtpAgApp:purgeFile">FtpAgApp:purgeFile</a>&nbsp;(srvcName, file, jobNum, taskNum, jobDir, index)</td>
+	<td class="summary">Purge a file as part of job distinguished by directory.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#FtpAgApp:purgeFolder">FtpAgApp:purgeFolder</a>&nbsp;(srvcName, file, jobNum, taskNum, jobDir, index)</td>
+	<td class="summary">Purge a folder as part of job distinguished by directory.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#FtpAgApp:setMessageCallback">FtpAgApp:setMessageCallback</a>&nbsp;(callbackFuncOrMeth, callbackObj)</td>
+	<td class="summary">Set custom callback for unsolicited messages.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#FtpAgApp:uploadFile">FtpAgApp:uploadFile</a>&nbsp;(srvcName, file, jobNum, taskNum, jobDir, index)</td>
+	<td class="summary">Upload a file as part of job distinguished by directory.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="FtpAgApp:endOfJob"></a><strong>FtpAgApp:endOfJob</strong>&nbsp;(srvcName, jobNum, taskNum, jobDir, index)</dt>
+<dd>
+End job distinguished by directory. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>srvcName</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>jobNum</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>taskNum</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>jobDir</em></code>: (string, required) path to jobdir to place "ref" file.
+	</li>
+	
+	<li>
+	  <code><em>index</em></code>: (number, required) command sequence number. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="FtpAgApp:getPresence"></a><strong>FtpAgApp:getPresence</strong>&nbsp;(tmo, fromName)</dt>
+<dd>
+Returns lower case string indicative of whether app is responding to "hello" message. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>tmo</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>fromName</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>query-status</li>
+	
+	<li>app-status</li>
+	
+	<li>more-info </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="FtpAgApp:new"></a><strong>FtpAgApp:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>pass pref-name, win-exe-name, or mac-pathed-name, if desired, else rely on defaults (but know what they are - see code). </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="FtpAgApp:newClass"></a><strong>FtpAgApp:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="FtpAgApp:processMessage"></a><strong>FtpAgApp:processMessage</strong>&nbsp;(msg)</dt>
+<dd>
+Processor for incoming (unsolicited) messages. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>msg</em></code>: message 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>simply logs received comment unless error - which gets alert/log treatment.</pre></li>
+	
+	<li><pre class=example>calling context can set it's own callback </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="FtpAgApp:purgeFile"></a><strong>FtpAgApp:purgeFile</strong>&nbsp;(srvcName, file, jobNum, taskNum, jobDir, index)</dt>
+<dd>
+Purge a file as part of job distinguished by directory. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>srvcName</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>file</em></code>: (string, required) path to local file to upload.
+	</li>
+	
+	<li>
+	  <code><em>jobNum</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>taskNum</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>jobDir</em></code>: (string, required) path to jobdir to place "ref" file.
+	</li>
+	
+	<li>
+	  <code><em>index</em></code>: (number, required) command sequence number. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="FtpAgApp:purgeFolder"></a><strong>FtpAgApp:purgeFolder</strong>&nbsp;(srvcName, file, jobNum, taskNum, jobDir, index)</dt>
+<dd>
+Purge a folder as part of job distinguished by directory. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>srvcName</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>file</em></code>: (string, required) path to local file to upload.
+	</li>
+	
+	<li>
+	  <code><em>jobNum</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>taskNum</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>jobDir</em></code>: (string, required) path to jobdir to place "ref" file.
+	</li>
+	
+	<li>
+	  <code><em>index</em></code>: (number, required) command sequence number. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="FtpAgApp:setMessageCallback"></a><strong>FtpAgApp:setMessageCallback</strong>&nbsp;(callbackFuncOrMeth, callbackObj)</dt>
+<dd>
+Set custom callback for unsolicited messages. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>callbackFuncOrMeth</em></code>: -- function (or method) to call (required) - passing message object as only parameter.
+	</li>
+	
+	<li>
+	  <code><em>callbackObj</em></code>: -- object (optional) in which case the previously mentioned will be called as object method. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Be careful to handl all possbilities, and try not to stomp on other callbacks.. </pre></ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>previous callback func-or-meth (nil if none).</li>
+	
+	<li>previous callback obj(ect) (nil if none). </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="FtpAgApp:uploadFile"></a><strong>FtpAgApp:uploadFile</strong>&nbsp;(srvcName, file, jobNum, taskNum, jobDir, index)</dt>
+<dd>
+Upload a file as part of job distinguished by directory. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>srvcName</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>file</em></code>: (string, required) path to local file to upload.
+	</li>
+	
+	<li>
+	  <code><em>jobNum</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>taskNum</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>jobDir</em></code>: (string, required) path to jobdir to place "ref" file.
+	</li>
+	
+	<li>
+	  <code><em>index</em></code>: (number, required) command sequence number. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

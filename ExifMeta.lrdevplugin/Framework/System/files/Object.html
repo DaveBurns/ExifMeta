@@ -1,0 +1,587 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/App.html">App.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Background.html">Background.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Call.html">Call.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/DebugScript.html">DebugScript.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ExternalApp.html">ExternalApp.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Gate.html">Gate.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Globals.html">Globals.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/InitFramework.html">InitFramework.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/LogFile.html">LogFile.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Mac.html">Mac.lua</a>
+	</li>
+
+	<li><strong>Object.lua</strong></li>
+	
+	<li>
+		<a href="../files/ObjectFactory.html">ObjectFactory.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/OperatingSystem.html">OperatingSystem.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Preferences.html">Preferences.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Presets.html">Presets.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Properties.html">Properties.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Reload.html">Reload.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Require.html">Require.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/RpcApp.html">RpcApp.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/RpcBackground.html">RpcBackground.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Service.html">Service.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Settings.html">Settings.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Sidekick.html">Sidekick.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Timer.html">Timer.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Updater.html">Updater.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/User.html">User.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Windows.html">Windows.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>Object.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#Object.createClass">Object.createClass</a>&nbsp;(register, ...)</td>
+	<td class="summary">Create a class from two or more parents.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Object.getClassItems">Object.getClassItems</a>&nbsp;()</td>
+	<td class="summary">Get registered classes/tables as item array suitable for combo box.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Object.getDebugFunction">Object.getDebugFunction</a>&nbsp;(name)</td>
+	<td class="summary">Get debug function.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Object.register">Object.register</a>&nbsp;(name, reg, _reg)</td>
+	<td class="summary">Register non-class/plain-table object (a.k.a pseudo-class) for inclusion on class-enable form, and/or fetch a debug function.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Object:getClassName">Object:getClassName</a>&nbsp;()</td>
+	<td class="summary">Get "leaf" class name.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Object:getFullClassName">Object:getFullClassName</a>&nbsp;()</td>
+	<td class="summary">Get unique full class name in dot notation (excludes 'Object' ancestry in inheritance path).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Object:getPropertyKeyName">Object:getPropertyKeyName</a>&nbsp;()</td>
+	<td class="summary">Get full class name suitable for indexing property table, which must not include dots.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Object:inherit">Object:inherit</a>&nbsp;(BaseClass)</td>
+	<td class="summary">Inherit base class members directly (via class object) instead of indirectly (via metatable) if need be.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Object:new">Object:new</a>&nbsp;(t)</td>
+	<td class="summary">Creates an object.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Object:newClass">Object:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Object:toString">Object:toString</a>&nbsp;()</td>
+	<td class="summary">Method for getting short synopsis-style display string for debugging/logging.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="Object.createClass"></a><strong>Object.createClass</strong>&nbsp;(register, ...)</dt>
+<dd>
+Create a class from two or more parents. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>register</em></code>: boolean true iff hybrid class should be registered for advanced debug support.
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: base classes. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>If only one parent, just use the 'new' method.</pre></li>
+	
+	<li><pre class=example>See in book "Programming in Lua: Multiple Inheritance".</pre></li>
+	
+	<li><pre class=example>@2011-01-19: Integrated properly into framework, including advanced debug support. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>Class object with multiple inheritance, plus debug function. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Object.getClassItems"></a><strong>Object.getClassItems</strong>&nbsp;()</dt>
+<dd>
+Get registered classes/tables as item array suitable for combo box. 
+
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>array of strings with full-name of all registered classes or pseudo-classes. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Object.getDebugFunction"></a><strong>Object.getDebugFunction</strong>&nbsp;(name)</dt>
+<dd>
+Get debug function. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>- if object is registered, it will be tied to plugin manager enable/disable, otherwise always enabled. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Object.register"></a><strong>Object.register</strong>&nbsp;(name, reg, _reg)</dt>
+<dd>
+Register non-class/plain-table object (a.k.a pseudo-class) for inclusion on class-enable form, and/or fetch a debug function. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: Registration and/or debug entity name.
+	</li>
+	
+	<li>
+	  <code><em>reg</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>_reg</em></code>: True or nil to register, false to forego registration, in which case this is really just a convenience function for defining a dbg function. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>need to register objects during init for advanced debugging - NOT upon each invocation of a menu item... </pre></ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>empty table     for syntactical convenience.</li>
+	
+	<li>debug function  (see app-debug-trace function for more info). </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Object:getClassName"></a><strong>Object:getClassName</strong>&nbsp;()</dt>
+<dd>
+Get "leaf" class name. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Most useful for debugging...</pre></li>
+	
+	<li><pre class=example>Short & informal..., but not necessarily unique. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>string: e.g. 'SpecialExport' </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Object:getFullClassName"></a><strong>Object:getFullClassName</strong>&nbsp;()</dt>
+<dd>
+Get unique full class name in dot notation (excludes 'Object' ancestry in inheritance path). 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Most useful for debugging...</pre></li>
+	
+	<li><pre class=example>Guaranteed to be unique. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>string: e.g. 'Export.SpecialExport' </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Object:getPropertyKeyName"></a><strong>Object:getPropertyKeyName</strong>&nbsp;()</dt>
+<dd>
+Get full class name suitable for indexing property table, which must not include dots. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Object:inherit"></a><strong>Object:inherit</strong>&nbsp;(BaseClass)</dt>
+<dd>
+Inherit base class members directly (via class object) instead of indirectly (via metatable) if need be. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>BaseClass</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>this is useful for classes like Export/Publish - Lightroom won't consult metatable for static member functions... </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Object:new"></a><strong>Object:new</strong>&nbsp;(t)</dt>
+<dd>
+Creates an object. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: Initialization table, for convenience - members could be assigned to table upon return for same effect. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Inheritable constructor method, for one-parent classes.</pre></li>
+	
+	<li><pre class=example>Called with class-name for creating classes derived from Object.</pre></li>
+	
+	<li><pre class=example>Called without class-name in derived class constructors for creating base Object functionality in derived instance.<br><blockquote> - Note: in this case, it must be called using dot notation (instead of colon notation), since function must be Object.new,<br> but self parameter must be derived class object.</blockquote> </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>object - as table, with metatable index set to derived class object, throws error if trouble. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Object:newClass"></a><strong>Object:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Object:toString"></a><strong>Object:toString</strong>&nbsp;()</dt>
+<dd>
+Method for getting short synopsis-style display string for debugging/logging. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Default is full class name - override for something better. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

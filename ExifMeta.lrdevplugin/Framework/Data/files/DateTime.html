@@ -1,0 +1,544 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li><strong>DateTime.lua</strong></li>
+	
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>DateTime.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#DateTime:formatDate">DateTime:formatDate</a>&nbsp;(time)</td>
+	<td class="summary">Format date in default format.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#DateTime:formatDateTime">DateTime:formatDateTime</a>&nbsp;(time)</td>
+	<td class="summary">Format date/time in default format.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#DateTime:formatTime">DateTime:formatTime</a>&nbsp;(time)</td>
+	<td class="summary">Format time in default format.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#DateTime:formatTimeDiff">DateTime:formatTimeDiff</a>&nbsp;(secs)</td>
+	<td class="summary">Convert a number of seconds to hours:mm:ss format.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#DateTime:formatTimeDiffMsec">DateTime:formatTimeDiffMsec</a>&nbsp;(secs)</td>
+	<td class="summary">Format time difference as number.msec  </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#DateTime:new">DateTime:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#DateTime:newClass">DateTime:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#DateTime:parseHhMmAmPmTime">DateTime:parseHhMmAmPmTime</a>&nbsp;(timeStr)</td>
+	<td class="summary">Parse time in HH:MM{AM/PM} format.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#DateTime:parseMmDdYyDate">DateTime:parseMmDdYyDate</a>&nbsp;(dateStr)</td>
+	<td class="summary">Parse date in MM-DD-YY format.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#DateTime:parseYyyyMmDdDate">DateTime:parseYyyyMmDdDate</a>&nbsp;(a, sep)</td>
+	<td class="summary">Parse date from string, when expressed year first, 4 digits followed by separator (default separator is dash, slash (forward or back), or underscore) and 1-2 char mo.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#DateTime:timeStruct">DateTime:timeStruct</a>&nbsp;(dt, ofs, includeJulianDay)</td>
+	<td class="summary">Format time as structure with named members (numerical values).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#DateTime:timeToUtcFormat">DateTime:timeToUtcFormat</a>&nbsp;(time, offset, dls)</td>
+	<td class="summary">Format time in UTC standard notation, with ms.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="DateTime:formatDate"></a><strong>DateTime:formatDate</strong>&nbsp;(time)</dt>
+<dd>
+Format date in default format. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>time</em></code>: date-time number (Lr SDK epoch) 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>string e.g. 2014-05-29 </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="DateTime:formatDateTime"></a><strong>DateTime:formatDateTime</strong>&nbsp;(time)</dt>
+<dd>
+Format date/time in default format. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>time</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="DateTime:formatTime"></a><strong>DateTime:formatTime</strong>&nbsp;(time)</dt>
+<dd>
+Format time in default format. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>time</em></code>: date-time number (Lr SDK epoch) 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>string e.g. 12:00:01 </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="DateTime:formatTimeDiff"></a><strong>DateTime:formatTimeDiff</strong>&nbsp;(secs)</dt>
+<dd>
+Convert a number of seconds to hours:mm:ss format. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>secs</em></code>: time difference in seconds. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Takes a number, not a string.</pre></li>
+	
+	<li><pre class=example>Uses lr-path-utils-remove-extension (floor) instead of lr-string-utils-number-to-string (may round up).</pre></li>
+	
+	<li><pre class=example>Reminder: Very small time differences wreak havoc - round to zero for sanity. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>string e.g. 12:00:01 </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="DateTime:formatTimeDiffMsec"></a><strong>DateTime:formatTimeDiffMsec</strong>&nbsp;(secs)</dt>
+<dd>
+Format time difference as number.msec 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>secs</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>*** deprecated - use num--fmt-prec instead. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="DateTime:new"></a><strong>DateTime:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="DateTime:newClass"></a><strong>DateTime:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="DateTime:parseHhMmAmPmTime"></a><strong>DateTime:parseHhMmAmPmTime</strong>&nbsp;(timeStr)</dt>
+<dd>
+Parse time in HH:MM{AM/PM} format.  <p>Motivation for creation: Originally created to support windows directory entry parsing.</p> <p>the unix version is in the ftp module for now (thats the only place its used).</p 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>timeStr</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Error handling is a bit weak. ###4</pre></li>
+	
+	<li><pre class=example>Will not work after 1-1-2070. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>hour (0-23), minute (0-59), else error message. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="DateTime:parseMmDdYyDate"></a><strong>DateTime:parseMmDdYyDate</strong>&nbsp;(dateStr)</dt>
+<dd>
+Parse date in MM-DD-YY format.  <p>Motivation for creation: Originally created to support windows directory entry parsing.</p> <p>the unix version is in the ftp module for now (thats the only place its used).</p 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>dateStr</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Error handling is a bit weak. ###4</pre></li>
+	
+	<li><pre class=example>Will not work anymore after 1-1-2070. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>4-digit year, month(1-12), day(1-31) numbers, else error message. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="DateTime:parseYyyyMmDdDate"></a><strong>DateTime:parseYyyyMmDdDate</strong>&nbsp;(a, sep)</dt>
+<dd>
+Parse date from string, when expressed year first, 4 digits followed by separator (default separator is dash, slash (forward or back), or underscore) and 1-2 char mo. then 1-2 char day. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>a</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>sep</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Examples: <br>    2013-12-31  (valid) <br>    2014/1/1    (valid) <br>    2014_01_01  (valid) <br>    14/01/01    (NOT valid) </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="DateTime:timeStruct"></a><strong>DateTime:timeStruct</strong>&nbsp;(dt, ofs, includeJulianDay)</dt>
+<dd>
+Format time as structure with named members (numerical values). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>dt</em></code>: Date-time number
+	</li>
+	
+	<li>
+	  <code><em>ofs</em></code>: optional utc offset in seconds.
+	</li>
+	
+	<li>
+	  <code><em>includeJulianDay</em></code>: (boolean, default=false) set true to have julian day included in time struct. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>table with members: year, month, day, hour, minute, second, dayOfWeek, and optionally: julianDay. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="DateTime:timeToUtcFormat"></a><strong>DateTime:timeToUtcFormat</strong>&nbsp;(time, offset, dls)</dt>
+<dd>
+Format time in UTC standard notation, with ms. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>time</em></code>: from arbitrary time zone.
+	</li>
+	
+	<li>
+	  <code><em>offset</em></code>: seconds from utc.
+	</li>
+	
+	<li>
+	  <code><em>dls</em></code>: flag for dls adjustment. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

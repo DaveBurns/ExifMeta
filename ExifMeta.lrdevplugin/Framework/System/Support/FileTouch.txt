@@ -1,0 +1,22 @@
+http://www.softtreetech.com/24x7/archive/47.htm
+
+Usage: FileTouch [/?] [/W] [/A] [/C] [/S] [/D date] [/T time] filemask
+
+Command line parameters:
+/? 	Print this help.
+	
+/W 	Change file modification date (Write date). This is the default.
+	
+/A 	Change file last access date (Access date).
+	
+/C 	Change file creation date (Create date).
+	
+/S 	Touch subfolders. By default only files are touched.
+	
+/D 	New file date. This switch must be followed by a date in mm-dd-yyyy format. If /D switch is not specified the current system date is used.
+	
+/T 	New file time. This switch must be followed by a time in hh:mm:ss 24-hour time format. If /T switch is not specified the current system time is used.
+	
+filemask 	The file mask to be used for the file search. Example: *.txt.
+
+Run FileTouch.exe without parameters from the DOS command prompt to see full description of the supported parameters. Multiple "change" switches can be used with  a single FileTouch command. For example, FileTouch /W /A /C *.txt will change all 3 dates for all found text files.

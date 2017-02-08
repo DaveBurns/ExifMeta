@@ -1,0 +1,601 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/Export.html">Export.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ExportFilter.html">ExportFilter.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/FtpExport.html">FtpExport.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/FtpPublish.html">FtpPublish.lua</a>
+	</li>
+
+	<li><strong>Publish.lua</strong></li>
+	
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>Publish.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#Publish:checkBeforeRendering">Publish:checkBeforeRendering</a>&nbsp;()</td>
+	<td class="summary">Remove photos not to be rendered, or whatever.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Publish:endDialogMethod">Publish:endDialogMethod</a>&nbsp;(props)</td>
+	<td class="summary">Do whatever when dialog box closing.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Publish:finale">Publish:finale</a>&nbsp;(service, status, message)</td>
+	<td class="summary">Perform export service wrap-up.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Publish:newClass">Publish:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Publish:newDialog">Publish:newDialog</a>&nbsp;(t)</td>
+	<td class="summary">Constructor to create the export object that represents the export dialog box.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Publish:newExport">Publish:newExport</a>&nbsp;(t)</td>
+	<td class="summary">Create a new export object.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Publish:processRenderedPhoto">Publish:processRenderedPhoto</a>&nbsp;(rendition, photoPath)</td>
+	<td class="summary">Process one rendered photo.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Publish:processRenderedPhotosMethod">Publish:processRenderedPhotosMethod</a>&nbsp;()</td>
+	<td class="summary">Method version of like-named static function.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Publish:processRenderingFailure">Publish:processRenderingFailure</a>&nbsp;(rendition, message)</td>
+	<td class="summary">Process one photo rendering failure.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Publish:propertyChangeHandlerMethod">Publish:propertyChangeHandlerMethod</a>&nbsp;(props, name, value)</td>
+	<td class="summary">Handle change to properties under authority of base export class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Publish:sectionsForBottomOfDialogMethod">Publish:sectionsForBottomOfDialogMethod</a>&nbsp;(vf, props)</td>
+	<td class="summary">Standard export sections for bottom of dialog.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Publish:sectionsForTopOfDialogMethod">Publish:sectionsForTopOfDialogMethod</a>&nbsp;(vf, props)</td>
+	<td class="summary">Standard export sections for top of dialog.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Publish:service">Publish:service</a>&nbsp;(service)</td>
+	<td class="summary">Service function of base export - processes renditions.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Publish:startDialogMethod">Publish:startDialogMethod</a>&nbsp;(props)</td>
+	<td class="summary">Do whatever when dialog box opening.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="Publish:checkBeforeRendering"></a><strong>Publish:checkBeforeRendering</strong>&nbsp;()</dt>
+<dd>
+Remove photos not to be rendered, or whatever. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Publish:endDialogMethod"></a><strong>Publish:endDialogMethod</strong>&nbsp;(props)</dt>
+<dd>
+Do whatever when dialog box closing.  <p>Nuthin yet...</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Call from derived class to ensure dialog is ended properly according to base class. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Publish:finale"></a><strong>Publish:finale</strong>&nbsp;(service, status, message)</dt>
+<dd>
+Perform export service wrap-up. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>service</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>status</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>message</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Override this method in derived class to log stats...</pre></li>
+	
+	<li><pre class=example>*** IMPORTANT: This method is critical to export integrity. Derived export class must remember to call it at end of special export finale method. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Publish:newClass"></a><strong>Publish:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Publish:newDialog"></a><strong>Publish:newDialog</strong>&nbsp;(t)</dt>
+<dd>
+Constructor to create the export object that represents the export dialog box.  <p>One of these objects is created when the export dialog box is presented, if it has not already been.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Publish:newExport"></a><strong>Publish:newExport</strong>&nbsp;(t)</dt>
+<dd>
+Create a new export object.  <p>One of these objects is created EACH time a new export is initiated, then killed at export completion - supports multiple concurrent exports, without interference (assuming a different set of photos is selected, otherwise all kinds of interference...)</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: Parameter table<ul> <li>exportContext <li>functionContext</ul> 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>Publish object </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Publish:processRenderedPhoto"></a><strong>Publish:processRenderedPhoto</strong>&nbsp;(rendition, photoPath)</dt>
+<dd>
+Process one rendered photo. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>rendition</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>photoPath</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Publish:processRenderedPhotosMethod"></a><strong>Publish:processRenderedPhotosMethod</strong>&nbsp;()</dt>
+<dd>
+Method version of like-named static function. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Base class implementation simply calls the export service method wrapped in an app call.</pre></li>
+	
+	<li><pre class=example>Derived export class can certainly override this method, but consider overriding the service & finale methods instead.</pre></li>
+	
+	<li><pre class=example>Called immediately after process-rendered-photos static "boot-strap" function. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Publish:processRenderingFailure"></a><strong>Publish:processRenderingFailure</strong>&nbsp;(rendition, message)</dt>
+<dd>
+Process one photo rendering failure. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>rendition</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>message</em></code>: error message generated by Lightroom. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Publish:propertyChangeHandlerMethod"></a><strong>Publish:propertyChangeHandlerMethod</strong>&nbsp;(props, name, value)</dt>
+<dd>
+Handle change to properties under authority of base export class.  <p>Presently there are none - but that could change</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>value</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Call from derived class to ensure base property changes are handled. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Publish:sectionsForBottomOfDialogMethod"></a><strong>Publish:sectionsForBottomOfDialogMethod</strong>&nbsp;(vf, props)</dt>
+<dd>
+Standard export sections for bottom of dialog.  <p>Reminder: Lightroom supports named export presets.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>vf</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>These sections can be combined with derived class's in their entirety, or strategically - presently there are none. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Publish:sectionsForTopOfDialogMethod"></a><strong>Publish:sectionsForTopOfDialogMethod</strong>&nbsp;(vf, props)</dt>
+<dd>
+Standard export sections for top of dialog.  <p>Presently seems like a good idea to replicate the plugin manager sections.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>vf</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>These sections can be combined with derived class's in their entirety, or strategically... </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Publish:service"></a><strong>Publish:service</strong>&nbsp;(service)</dt>
+<dd>
+Service function of base export - processes renditions.  <p>You can override this method in its entirety, OR just:</p><ul>  <li>checkBeforeRendering <li>processRenderedPhoto <li>processRenderingFailure <li>(and finale maybe)</ul> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>service</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Publish:startDialogMethod"></a><strong>Publish:startDialogMethod</strong>&nbsp;(props)</dt>
+<dd>
+Do whatever when dialog box opening.  <p>Nuthin to do so far - but that could change.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Call from derived class to ensure dialog is initialized according to base class. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

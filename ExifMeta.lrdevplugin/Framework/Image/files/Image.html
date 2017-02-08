@@ -1,0 +1,441 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li><strong>Image.lua</strong></li>
+	
+	<li>
+		<a href="../files/JpegUtils.html">JpegUtils.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/TiffUtils.html">TiffUtils.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Xmp.html">Xmp.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>Image.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#Image.mapCoordinates">Image.mapCoordinates</a>&nbsp;(orientation, top, left, bottom, right, angle, wholeDim)</td>
+	<td class="summary">Static function to map (presumably modified) image coordinates from "what you see" format to internal (xmp-compatible) format, taking orientation into consideration.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Image.normalizeCoordinates">Image.normalizeCoordinates</a>&nbsp;(orientation, top, left, bottom, right, angle, wholeDim)</td>
+	<td class="summary">Static function to normalize image coordinates from internal (xmp-compatible) format to "what you see" format, taking orientation into consideration.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Image:commit">Image:commit</a>&nbsp;(ets)</td>
+	<td class="summary">Commit all mogrification and exiftool'n transformations.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Image:getFile">Image:getFile</a>&nbsp;()</td>
+	<td class="summary">Get image file path.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Image:new">Image:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Image:newClass">Image:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Image:transferMetadata">Image:transferMetadata</a>&nbsp;(fromPhoto, fromPath, profile, toPath, fmtMeta, ets)</td>
+	<td class="summary">Transfer metadata from source "photo" (and/or file) to target *file* (not photo), as specified by prefs, using exiftool (exclusively) to write.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="Image.mapCoordinates"></a><strong>Image.mapCoordinates</strong>&nbsp;(orientation, top, left, bottom, right, angle, wholeDim)</dt>
+<dd>
+Static function to map (presumably modified) image coordinates from "what you see" format to internal (xmp-compatible) format, taking orientation into consideration. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>orientation</em></code>: As per exiftool'd xmp, *not* (catalog) db, not dev settings.
+	</li>
+	
+	<li>
+	  <code><em>top</em></code>: in fractional format (as opposed to pixels)
+	</li>
+	
+	<li>
+	  <code><em>left</em></code>: in fractional format (as opposed to pixels)
+	</li>
+	
+	<li>
+	  <code><em>bottom</em></code>: in fractional format (as opposed to pixels)
+	</li>
+	
+	<li>
+	  <code><em>right</em></code>: in fractional format (as opposed to pixels) 
+	</li>
+	
+	<li>
+	  <code><em>angle</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>wholeDim</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Assures coordinates are properly bounded within image, msg returned indicates type of correction needed, if any.</pre></li>
+	
+	<li><pre class=example>Orientation takes flip into account. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Image.normalizeCoordinates"></a><strong>Image.normalizeCoordinates</strong>&nbsp;(orientation, top, left, bottom, right, angle, wholeDim)</dt>
+<dd>
+Static function to normalize image coordinates from internal (xmp-compatible) format to "what you see" format, taking orientation into consideration. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>orientation</em></code>: As per exiftool'd xmp, *not* (catalog) db, not dev settings.
+	</li>
+	
+	<li>
+	  <code><em>top</em></code>: in fractional format (as opposed to pixels)
+	</li>
+	
+	<li>
+	  <code><em>left</em></code>: in fractional format (as opposed to pixels)
+	</li>
+	
+	<li>
+	  <code><em>bottom</em></code>: in fractional format (as opposed to pixels)
+	</li>
+	
+	<li>
+	  <code><em>right</em></code>: in fractional format (as opposed to pixels) 
+	</li>
+	
+	<li>
+	  <code><em>angle</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>wholeDim</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Assures coordinates are properly bounded within image, msg returned indicates type of correction needed, if any.</pre></li>
+	
+	<li><pre class=example>Orientation takes flip into account. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Image:commit"></a><strong>Image:commit</strong>&nbsp;(ets)</dt>
+<dd>
+Commit all mogrification and exiftool'n transformations. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>ets</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Image:getFile"></a><strong>Image:getFile</strong>&nbsp;()</dt>
+<dd>
+Get image file path. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Image:new"></a><strong>Image:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: (table, required) initial object table: must contain file & content (as currently programmed, said content will be written to said file). <br>        may also contain: assure-dir & dont-overwrite (passed to write-file disk method). 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>An unconventional contstructor which returns nil if can't be constructed, instead of throwing an error. </pre></ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>new image instance, or nil.</li>
+	
+	<li>error message if no new instance. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Image:newClass"></a><strong>Image:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Image:transferMetadata"></a><strong>Image:transferMetadata</strong>&nbsp;(fromPhoto, fromPath, profile, toPath, fmtMeta, ets)</dt>
+<dd>
+Transfer metadata from source "photo" (and/or file) to target *file* (not photo), as specified by prefs, using exiftool (exclusively) to write. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>fromPhoto</em></code>: (LrPhoto, required) from photo (corresponding file must exist on disk).
+	</li>
+	
+	<li>
+	  <code><em>fromPath</em></code>: (string, required) from photo path to source image file.
+	</li>
+	
+	<li>
+	  <code><em>profile</em></code>: (string or boolean, optional) sRGB, AdobeRGB, ProPhotoRGB, or true (to have auto-figured). If specified, said profile will be assigned.
+	</li>
+	
+	<li>
+	  <code><em>toPath</em></code>: (string, required) path to file on disk to receive metadata.
+	</li>
+	
+	<li>
+	  <code><em>fmtMeta</em></code>: (table, optional) batch aquired metadata to be transferred (read using SDK, written using exiftool), *if* specified by 'lrMeta' pref.
+	</li>
+	
+	<li>
+	  <code><em>ets</em></code>: (exiftool session, required) - theoretically may be omitted, in which case Image.exiftool will attempt to emulate a session - such has not been used much and may not work as well. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Metadata to transfer is specified in local prefs: exifMeta (read using exiftool), lrMeta (read via SDK), lrSpecialMeta (e.g. keywordTags, keywordTagsForExport, copyrightStat).</pre></li>
+	
+	<li><pre class=example>Derived from NxToo's transferLrMetadata function.</pre></li>
+	
+	<li><pre class=example>Some metadata will be read using SDK, some via exiftool, but all is written using exiftool (target is to-path, not to-photo).</pre></li>
+	
+	<li><pre class=example>e.g. used by catalog/previews get-image function. note: *not* used for recovery, since source file would be required, but is used for exporting (via the previews--get-image func).</pre></li>
+	
+	<li><pre class=example>This method is required if target may not be photo in catalog (but file on disk). see also: LrMetadata:transfer (if target is photo in catalog) and Xmp:transferMetadata. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status (boolean) true iff ok.</li>
+	
+	<li>message (string) if not ok. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

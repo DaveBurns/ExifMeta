@@ -1,0 +1,1112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/App.html">App.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Background.html">Background.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Call.html">Call.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/DebugScript.html">DebugScript.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ExternalApp.html">ExternalApp.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Gate.html">Gate.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Globals.html">Globals.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/InitFramework.html">InitFramework.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/LogFile.html">LogFile.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Mac.html">Mac.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Object.html">Object.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ObjectFactory.html">ObjectFactory.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/OperatingSystem.html">OperatingSystem.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Preferences.html">Preferences.lua</a>
+	</li>
+
+	<li><strong>Presets.lua</strong></li>
+	
+	<li>
+		<a href="../files/Properties.html">Properties.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Reload.html">Reload.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Require.html">Require.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/RpcApp.html">RpcApp.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/RpcBackground.html">RpcBackground.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Service.html">Service.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Settings.html">Settings.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Sidekick.html">Sidekick.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Timer.html">Timer.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Updater.html">Updater.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/User.html">User.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Windows.html">Windows.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>Presets.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#Preset:initPref">Preset:initPref</a>&nbsp;(name, dflt, values, presetName)</td>
+	<td class="summary">Sets preference based on property name.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Preset:savePrefInBackingFile">Preset:savePrefInBackingFile</a>&nbsp;(prefName, prefValue)</td>
+	<td class="summary">Save pref in backing file.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Presets:assurePreset">Presets:assurePreset</a>&nbsp;(sheetName, presetName)</td>
+	<td class="summary">Create or assure preset.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Presets:deletePreset">Presets:deletePreset</a>&nbsp;(props)</td>
+	<td class="summary">Delete active named set.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Presets:getGlobalKey">Presets:getGlobalKey</a>&nbsp;(name)</td>
+	<td class="summary">Get actual preference key corresponding to managed global preference name.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Presets:getGlobalPref">Presets:getGlobalPref</a>&nbsp;(name)</td>
+	<td class="summary">Get global preference value.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Presets:getGlobalPrefPairs">Presets:getGlobalPrefPairs</a>&nbsp;(sortFunc)</td>
+	<td class="summary">Get global preference pair iterator.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Presets:getPref">Presets:getPref</a>&nbsp;(propName, presetName, name)</td>
+	<td class="summary">Gets pref value corresponding to prop name.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Presets:getPrefSupportFile">Presets:getPrefSupportFile</a>&nbsp;()</td>
+	<td class="summary">Gets path to preference support file.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Presets:getPreset">Presets:getPreset</a>&nbsp;(presetName, reload)</td>
+	<td class="summary">Get object that represents settings associated with specified preset.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Presets:getPresetNames">Presets:getPresetNames</a>&nbsp;(sheetName)</td>
+	<td class="summary">Gets list of saved (registered) presets.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Presets:initGlobalPref">Presets:initGlobalPref</a>&nbsp;(name, dflt, values)</td>
+	<td class="summary">Initialize global preference value.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Presets:initPref">Presets:initPref</a>&nbsp;(name, dflt, presetName, values)</td>
+	<td class="summary">Sets preference based on property name.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Presets:isBackedByFile">Presets:isBackedByFile</a>&nbsp;()</td>
+	<td class="summary">Determine if preference file backing is supported by this plugin.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Presets:isPresetExisting">Presets:isPresetExisting</a>&nbsp;(_setName)</td>
+	<td class="summary">Checks if specified named set exists - case insensitive: for checking if duplicate before adding.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Presets:loadDefaults">Presets:loadDefaults</a>&nbsp;(props)</td>
+	<td class="summary">Load defaults into properties.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Presets:loadGlobalDefaults">Presets:loadGlobalDefaults</a>&nbsp;()</td>
+	<td class="summary">Load defaults into properties.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Presets:loadPrefFile">Presets:loadPrefFile</a>&nbsp;(file)</td>
+	<td class="summary">Load preference "backing" file.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Presets:loadProps">Presets:loadProps</a>&nbsp;(props)</td>
+	<td class="summary">Load properties from preset.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Presets:new">Presets:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructs a new preference manager.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Presets:newClass">Presets:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Presets:registerPreset">Presets:registerPreset</a>&nbsp;(presetName, presetNumber)</td>
+	<td class="summary">Register a preset.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Presets:saveProps">Presets:saveProps</a>&nbsp;(props)</td>
+	<td class="summary">Save propertiesavings into named or unamed set.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Presets:setGlobalPref">Presets:setGlobalPref</a>&nbsp;(name, val)</td>
+	<td class="summary">Set global preference value.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Presets:setPref">Presets:setPref</a>&nbsp;(name, value, presetName)</td>
+	<td class="summary">Sets global preference based on property name.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="Preset:initPref"></a><strong>Preset:initPref</strong>&nbsp;(name, dflt, values, presetName)</dt>
+<dd>
+Sets preference based on property name.  <p>Named or unamed.</p> <p>Is should not be necessary to init props to match here, provided props are loaded from prefs afterward.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: (string, required) preference name.
+	</li>
+	
+	<li>
+	  <code><em>dflt</em></code>: (any simple type, required) preference default value.
+	</li>
+	
+	<li>
+	  <code><em>values</em></code>: (array, optional) initial "pointer" values for table prefs, in case not only value is important, but pointer to value is too (e.g. popup). 
+	</li>
+	
+	<li>
+	  <code><em>presetName</em></code>: (string, default = current preset) preset name.
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Like all preference methods, this method is wrapped by app object - see App class for more info. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Preset:savePrefInBackingFile"></a><strong>Preset:savePrefInBackingFile</strong>&nbsp;(prefName, prefValue)</dt>
+<dd>
+Save pref in backing file. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>prefName</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>prefValue</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Note: this is different than the pref-mgr version, since it's intended to set persistent prefs in backing file.<br> If that's not what you want, then use the preference manager version, which is intended to set prefs in lr-prefs, thus masking the value in the backing file. </pre></ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status - t/f</li>
+	
+	<li>message - errm. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Presets:assurePreset"></a><strong>Presets:assurePreset</strong>&nbsp;(sheetName, presetName)</dt>
+<dd>
+Create or assure preset. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>sheetName</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>presetName</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Presets:deletePreset"></a><strong>Presets:deletePreset</strong>&nbsp;(props)</dt>
+<dd>
+Delete active named set. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>props</em></code>: Properties to load from some other set (presently the default/un-named set) once present set is deleted. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Throws error if active set is unamed, so check first. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Presets:getGlobalKey"></a><strong>Presets:getGlobalKey</strong>&nbsp;(name)</dt>
+<dd>
+Get actual preference key corresponding to managed global preference name. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>key suitable for binding. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Presets:getGlobalPref"></a><strong>Presets:getGlobalPref</strong>&nbsp;(name)</dt>
+<dd>
+Get global preference value. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>key is name prefixed by _global_ in the interest of keeping a clear separation, <br>between managed preference globals and unmanaged, and also preset preferences. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>the value - may be nil. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Presets:getGlobalPrefPairs"></a><strong>Presets:getGlobalPrefPairs</strong>&nbsp;(sortFunc)</dt>
+<dd>
+Get global preference pair iterator. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>sortFunc</em></code>: (boolean or function, default false) pass true for default name sort, or function for custom name sort. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>for iterating global preferences, without having to wade through non-globals. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>iterator function that returns name, value pairs, in preferred name sort order. <br>Note: the name returned is not a key. to translate to a key, call get-global-pref-key and pass the name. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Presets:getPref"></a><strong>Presets:getPref</strong>&nbsp;(propName, presetName, name)</dt>
+<dd>
+Gets pref value corresponding to prop name.  <p>Named or unamed.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>propName</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>presetName</em></code>: (string, default = current preset) preset name. 
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: (string, required) preference name.
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Like all preference methods, this method is wrapped by app object - see App class for more info. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Presets:getPrefSupportFile"></a><strong>Presets:getPrefSupportFile</strong>&nbsp;()</dt>
+<dd>
+Gets path to preference support file. 
+
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>full path</li>
+	
+	<li>filename </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Presets:getPreset"></a><strong>Presets:getPreset</strong>&nbsp;(presetName, reload)</dt>
+<dd>
+Get object that represents settings associated with specified preset. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>presetName</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>reload</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Presets:getPresetNames"></a><strong>Presets:getPresetNames</strong>&nbsp;(sheetName)</dt>
+<dd>
+Gets list of saved (registered) presets. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>sheetName</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>Array of strings suitable for combo box. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Presets:initGlobalPref"></a><strong>Presets:initGlobalPref</strong>&nbsp;(name, dflt, values)</dt>
+<dd>
+Initialize global preference value. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>dflt</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>values</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Like all preference methods, this method is wrapped by app object - see App class for more info. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Presets:initPref"></a><strong>Presets:initPref</strong>&nbsp;(name, dflt, presetName, values)</dt>
+<dd>
+Sets preference based on property name.  <p>Named or unamed.</p> <p>Is should not be necessary to init props to match here, provided props are loaded from prefs afterward.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: (string, required) preference name.
+	</li>
+	
+	<li>
+	  <code><em>dflt</em></code>: (any simple type, required) preference default value.
+	</li>
+	
+	<li>
+	  <code><em>presetName</em></code>: (string, default = current preset) preset name.
+	</li>
+	
+	<li>
+	  <code><em>values</em></code>: (array, optional) initial "pointer" values for table prefs, in case not only value is important, but pointer to value is too (e.g. popup). 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Like all preference methods, this method is wrapped by app object - see App class for more info. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Presets:isBackedByFile"></a><strong>Presets:isBackedByFile</strong>&nbsp;()</dt>
+<dd>
+Determine if preference file backing is supported by this plugin. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Presets:isPresetExisting"></a><strong>Presets:isPresetExisting</strong>&nbsp;(_setName)</dt>
+<dd>
+Checks if specified named set exists - case insensitive: for checking if duplicate before adding. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>_setName</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>@2010-11-22 - only called within pref mngr proper. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Presets:loadDefaults"></a><strong>Presets:loadDefaults</strong>&nbsp;(props)</dt>
+<dd>
+Load defaults into properties. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>defaults come from init-pref calls. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Presets:loadGlobalDefaults"></a><strong>Presets:loadGlobalDefaults</strong>&nbsp;()</dt>
+<dd>
+Load defaults into properties. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>defaults come from init-pref calls. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Presets:loadPrefFile"></a><strong>Presets:loadPrefFile</strong>&nbsp;(file)</dt>
+<dd>
+Load preference "backing" file.  <p>Presets not in lr-pref table, are looked for in preference backing file, if available.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>file</em></code>: The path to the file. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Up until 5/Aug/2011 this used to log errors instead of throwing them - not good enough (errors in backers not being detected).<br> Now calling context must take care to handle thrown errors to handle more gracefully if necessary. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Presets:loadProps"></a><strong>Presets:loadProps</strong>&nbsp;(props)</dt>
+<dd>
+Load properties from preset.  <p>Default set is handled like any other: properties are loaded whether set is registered or not.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Like all preference methods, this method is wrapped by app object - see App class for more info. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Presets:new"></a><strong>Presets:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructs a new preference manager.  <p>Installation procedure is going to have to be smart enough to deal with pre-existing directory upgrade.</p>  <p>This object manages named preference sets. Exclude and you just have the reglar set of unnamed (un-prefixed) prefs...</p>  <p>Param Table In:<blockquote> - name(id): set name. if missing, then default set.<br> - file-essential boolean.</blockquote></p>  <p>Object Table Out:<blockquote> - friendlyName: same as name/id except for default.<br> - file (path)<br> - prefs (name-val table)</blockquote></p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: input parameter table. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Subdirectory for supplemental files is 'Presets' in plugin directory.</pre></li>
+	
+	<li><pre class=example>See app class pref methods for more info. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>Preference manager object. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Presets:newClass"></a><strong>Presets:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Presets:registerPreset"></a><strong>Presets:registerPreset</strong>&nbsp;(presetName, presetNumber)</dt>
+<dd>
+Register a preset.  <p>Typically called in init-prefs to register a preset to be subsequently initialized, for when plugin is including built-in presets, in which case backing file if any, is explicitly provided in 'Presets' folder.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>presetName</em></code>: - Any name that can be used as part of a pref key.
+	</li>
+	
+	<li>
+	  <code><em>presetNumber</em></code>: - Ordinal number defining sequence in plugin manager. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Un-registering presets is done in the course of deleting a preset - no need for independent unreg method. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Presets:saveProps"></a><strong>Presets:saveProps</strong>&nbsp;(props)</dt>
+<dd>
+Save propertiesavings into named or unamed set.  <p>If named, sets 'name-existing' indicator into prefs.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>props</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Like all preference methods, this method is wrapped by app object - see App class for more info. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Presets:setGlobalPref"></a><strong>Presets:setGlobalPref</strong>&nbsp;(name, val)</dt>
+<dd>
+Set global preference value. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: (string, required) name of pref (actual key is a derivation).
+	</li>
+	
+	<li>
+	  <code><em>val</em></code>: (any non-table value, default nil) simple value for pref, nil to clear. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>key is name prefixed by _global_ in the interest of keeping a clear separation, <br>between managed preference globals and unmanaged, and also preset preferences. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Presets:setPref"></a><strong>Presets:setPref</strong>&nbsp;(name, value, presetName)</dt>
+<dd>
+Sets global preference based on property name.  <p>Named or unamed.</p> 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: (string, required) preference name.
+	</li>
+	
+	<li>
+	  <code><em>value</em></code>: (any simple type, required) preference value.
+	</li>
+	
+	<li>
+	  <code><em>presetName</em></code>: (string, default = current preset) preset name. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>like all preference methods, this method is wrapped by app object - see App class for more info. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

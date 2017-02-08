@@ -1,0 +1,837 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/App.html">App.lua</a>
+	</li>
+
+	<li><strong>Background.lua</strong></li>
+	
+	<li>
+		<a href="../files/Call.html">Call.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/DebugScript.html">DebugScript.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ExternalApp.html">ExternalApp.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Gate.html">Gate.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Globals.html">Globals.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/InitFramework.html">InitFramework.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/LogFile.html">LogFile.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Mac.html">Mac.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Object.html">Object.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/ObjectFactory.html">ObjectFactory.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/OperatingSystem.html">OperatingSystem.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Preferences.html">Preferences.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Presets.html">Presets.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Properties.html">Properties.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Reload.html">Reload.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Require.html">Require.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/RpcApp.html">RpcApp.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/RpcBackground.html">RpcBackground.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Service.html">Service.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Settings.html">Settings.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Sidekick.html">Sidekick.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Timer.html">Timer.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Updater.html">Updater.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/User.html">User.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Windows.html">Windows.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>Background.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#Background:clearError">Background:clearError</a>&nbsp;(id)</td>
+	<td class="summary">Clear error display (progress scope) </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Background:considerIdleProcessing">Background:considerIdleProcessing</a>&nbsp;(call)</td>
+	<td class="summary">Background process for processing next photo or video in the catalog.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Background:continue">Background:continue</a>&nbsp;()</td>
+	<td class="summary">Continue background task.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Background:displayError">Background:displayError</a>&nbsp;(errm, id, immediate, call)</td>
+	<td class="summary">Display background error as progress scope.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Background:displayErrorX">Background:displayErrorX</a>&nbsp;(options, fmt, ...)</td>
+	<td class="summary">Display error, named options first, so remainder can be used for formatting & params.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Background:finale">Background:finale</a>&nbsp;(call)</td>
+	<td class="summary">Background call finale.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Background:init">Background:init</a>&nbsp;(call)</td>
+	<td class="summary">Background init function.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Background:initDone">Background:initDone</a>&nbsp;(call)</td>
+	<td class="summary">call/called when background initialization is complete (after init hold-off time expires).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Background:isPausing">Background:isPausing</a>&nbsp;()</td>
+	<td class="summary">Rarely used, but helps long-running background tasks to abort if user is trying to pause for foreground purposes.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Background:main">Background:main</a>&nbsp;(call)</td>
+	<td class="summary">Background initializer and optional main loop.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Background:new">Background:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Background:newClass">Background:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Background:pause">Background:pause</a>&nbsp;(tmo)</td>
+	<td class="summary">Pause background task.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Background:process">Background:process</a>&nbsp;(call)</td>
+	<td class="summary">Background process function.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Background:quit">Background:quit</a>&nbsp;()</td>
+	<td class="summary">Signal background task to quit.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Background:start">Background:start</a>&nbsp;()</td>
+	<td class="summary">Start's background initialization, followed by periodic background processing - if desired.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Background:stop">Background:stop</a>&nbsp;(tmo)</td>
+	<td class="summary">Stop background task.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Background:waitForIdle">Background:waitForIdle</a>&nbsp;(tmo)</td>
+	<td class="summary">Wait for background task to finish.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Background:waitForInit">Background:waitForInit</a>&nbsp;(tmo, ival)</td>
+	<td class="summary">Wait for asynchronous initialization to complete.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="Background:clearError"></a><strong>Background:clearError</strong>&nbsp;(id)</dt>
+<dd>
+Clear error display (progress scope)
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>id</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Background:considerIdleProcessing"></a><strong>Background:considerIdleProcessing</strong>&nbsp;(call)</dt>
+<dd>
+Background process for processing next photo or video in the catalog. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>call</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Called when nothing else to do in background process. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Background:continue"></a><strong>Background:continue</strong>&nbsp;()</dt>
+<dd>
+Continue background task. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>No-op if not paused. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Background:displayError"></a><strong>Background:displayError</strong>&nbsp;(errm, id, immediate, call)</dt>
+<dd>
+Display background error as progress scope. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>errm</em></code>: - unparsed error message
+	</li>
+	
+	<li>
+	  <code><em>id</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>immediate</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>call</em></code>: - call object containing background context. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>base class uses "genericBackgroundErrorId" for generic background error id. Derived classes may define additional error IDs for special purposes... </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Background:displayErrorX"></a><strong>Background:displayErrorX</strong>&nbsp;(options, fmt, ...)</dt>
+<dd>
+Display error, named options first, so remainder can be used for formatting & params. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>options</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>fmt</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Background:finale"></a><strong>Background:finale</strong>&nbsp;(call)</dt>
+<dd>
+Background call finale. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>call</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>If overriding, you MUST set state to idle, or just call this from extended class method. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Background:init"></a><strong>Background:init</strong>&nbsp;(call)</dt>
+<dd>
+Background init function. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>call</em></code>: object - usually not needed, but its got the name, and context... just in case. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>override to do special initialization, if desired. <br>Try not to throw errors in init, but instead set initStatus to true or false depending on whether successful or not. <br>no need to call this method from extended class, yet. </pre></li>
+	
+	<li><pre class=example>if init is lengthy, check for shutdown sometimes and abort(return) if set - initStatus a dont care in that case. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Background:initDone"></a><strong>Background:initDone</strong>&nbsp;(call)</dt>
+<dd>
+call/called when background initialization is complete (after init hold-off time expires).
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>call</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Background:isPausing"></a><strong>Background:isPausing</strong>&nbsp;()</dt>
+<dd>
+Rarely used, but helps long-running background tasks to abort if user is trying to pause for foreground purposes. 
+
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Background:main"></a><strong>Background:main</strong>&nbsp;(call)</dt>
+<dd>
+Background initializer and optional main loop. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>call</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Background:new"></a><strong>Background:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: initialization table, including: <br>interval (number, default: 1 second) process frequency base-rate. Recommend .2 as normal minimum, .1 if process is quick and fast response is necessary. <br>minInitTime (number, default: 10 seconds), but recommend setting to 15 or 20 - so user has time to inspect startups in progress corner, or set to zero to suppress init progress indicator altogether. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Background:newClass"></a><strong>Background:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Background:pause"></a><strong>Background:pause</strong>&nbsp;(tmo)</dt>
+<dd>
+Pause background task. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>tmo</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>you must continue in finale method of call or service, lest background task dies forever. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Background:process"></a><strong>Background:process</strong>&nbsp;(call)</dt>
+<dd>
+Background process function. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>call</em></code>: object - usually not needed, but its got the name, and context... just in case. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Background:quit"></a><strong>Background:quit</strong>&nbsp;()</dt>
+<dd>
+Signal background task to quit. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Need not be called from task - does not wait for confirmation. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Background:start"></a><strong>Background:start</strong>&nbsp;()</dt>
+<dd>
+Start's background initialization, followed by periodic background processing - if desired. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Generally called from init module if background auto-start is enabled. also called from plugin manager for start/stop on demand. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Background:stop"></a><strong>Background:stop</strong>&nbsp;(tmo)</dt>
+<dd>
+Stop background task. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>tmo</em></code>: (number, required) - seconds to wait for stop confirmation. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>no-op if already stopped.</pre></li>
+	
+	<li><pre class=example>must be called from task - waits until stopped. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>confirmed (boolean) true iff stoppage confirmed. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Background:waitForIdle"></a><strong>Background:waitForIdle</strong>&nbsp;(tmo)</dt>
+<dd>
+Wait for background task to finish. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>tmo</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Dont call unless you know its on its way out, e.g. shutdown for reload. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Background:waitForInit"></a><strong>Background:waitForInit</strong>&nbsp;(tmo, ival)</dt>
+<dd>
+Wait for asynchronous initialization to complete. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>tmo</em></code>: - initial timeout in seconds - default is half second.
+	</li>
+	
+	<li>
+	  <code><em>ival</em></code>: - recheck interval if not finished initializing upon initial timeout - return immediately and do not prompt user if nil or zero. Ignored if tmo is zero. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Untested @2011-01-08 ###2 </pre></ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status - true iff init completed successfully.</li>
+	
+	<li>explanation - if status false, is error message. if status true, indicates some waiting was required. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

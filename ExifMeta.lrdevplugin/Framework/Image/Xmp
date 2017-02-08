@@ -1,0 +1,416 @@
+--[[
+        Image.lua
+--]]
+
+
+local Image, dbg = Object:newClass{ className = "Image", register = true }
+
+
+
+--- Constructor for extending class.
+--
+function Image:newClass( t )
+    return Object.newClass( self, t )
+end
+
+
+--- Constructor for new instance.
+--
+--  @return      new image instance, or nil.
+--  @return      error message if no new instance.
+--
+function Image:new( t )
+    local o = Object.new( self, t )
+    local s, m
+    if o.file and o.content then
+        s, m = fso:writeFile( o.file, o.content )
+        if s then
+            local p = {}
+            if o.degrees then
+                p[#p + 1] = "-rotate " .. o.degrees
+            end
+            if o.orient then
+                o:addOrientation( o.orient, p )
+            end
+            s, m = self:mogrify( p )
+        -- else return error below
+        end
+    else
+        s, m = false, "need file and content to create an image"
+    end
+    if s then
+        return o
+    else
+        return nil, m
+    end
+end
+
+
+
+--- Transfer metadata from source photo to target photo, using exiftool.
+--
+--  @usage Metadata to transfer is specified in local prefs.
+--
+function Image:transferMetadata( fromPhoto, fromPath, profile, toPath, fmtMeta, ets )
+    -- variables to return
+    local s, m = false, "unknown error"
+    app:call( Call:new{ name="Transfer Metadata", main=function( call )
+
+        assert( ets, "no ets" )
+        
+        local nMetaArgs = 0
+        local function addMetaArg( arg )
+            ets:addArg( arg )
+            nMetaArgs = nMetaArgs + 1
+        end
+        
+        ets:addArg( "-overwrite_original" )
+        local exifMeta = app:getPref( 'exifMeta' ) -- isolate config for exiftool metadata transfer.
+
+        if exifMeta then    
+            
+            ets:addArg( str:fmt( "-fast\n-fast2\n-X\n^1", fromPath ) ) -- '-fast2' means omit maker-notes. -fast means ignore JPEG metadata blocks that come after the image block (no effect on other formats).
+                -- I don't *think* Lightroom is storing any useful metadata after the main image block.
+            local content, comment = ets:execute()
+            if content then
+                app:logVerbose( "exif xml file obtained" )
+            elseif comment then
+                app:error( "Unable to obtain metadata using exiftool for icc profile info and such stuff, error message: ^1", comment )
+            elseif shutdown then
+                call:abort( "shutdown" )
+                return
+            else
+                app:error( "ets session execute returned bogus value(s)" )
+            end
+            -- _debugTrace( "x: ", content )
+            local tbl = xml:parseXml( content )
+            if not tbl then
+                app:error( "Unable to parse exiftool output for icc profile info and such stuff." )
+            end
+            ets:addArg( "-overwrite_original" )
+            local stf = ((tbl[2] or {}) [1]) or {}
+            for j = 1, #stf do
+                repeat
+                    local thng = stf[j]
+                    if thng == nil then
+                        break
+                    end
+                    
+                    local ns = thng.ns
+                    local name = thng.name
+                    
+                    local ref = exifMeta[ns]
+                    if ref then
+                        local t = ref[name]
+                        if t then -- meta include
+                            local value = thng[1]
+                            if str:is( value ) then
+                            
+                                addMetaArg( "-" .. thng.label .. "=" .. value )
+
+                            else
+                                dbg( "xar ", name )
+                            end
+                        else
+                        
+                        end
+                        
+                    else
+                    end                        
+                until true                    
+            end
+        else
+            app:logVerbose( "No exif-meta configured for transfer." )
+        end
+                    
+        if profile == 'AdobeRGB' then
+            local profilePath = LrPathUtils.child( _PLUGIN.path, 'AdobeRGB1998.icc' )
+            app:logVerbose( "Assigning icc profile via exif-tool: ^1", profilePath )
+            
+            addMetaArg( "-icc_profile<=" .. profilePath )
+
+        elseif profile == 'sRGB' then
+            app:logVerbose( "Not assigning sRGB profile." )
+        else
+            -- app:logWarn( "Invalid icc-profile (^1) - none being assigned, which means it will be treated as sRGB.", str:to( profile ) )
+        end
+        
+        local lrMeta = app:getPref( 'lrMeta' )
+        if lrMeta ~= nil then
+            for name, tag in pairs( lrMeta ) do
+                local value = cat:getFormattedMetadata( fromPhoto, name, fmtMeta ) -- most.
+                if value == nil then
+                    value = fromPhoto:getRawMetadata( name ) -- very few.
+                end
+                if value ~= nil then
+                    if type( value ) == 'string' then
+                        if value ~= "" then
+                            addMetaArg( '-' .. tag .. "=" .. value )
+                        else
+                            app:logVerbose( "xmp val blank: ^1", tag )
+                        end
+                    elseif type( value ) == 'number' then
+                        addMetaArg( "-" .. tag .. "=" .. value )
+                    elseif type( value ) == 'boolean' then
+                        addMetaArg( "-" .. tag .. "=" .. str:to( value ) )
+                    else
+                        app:logWarning( "Type?" .. type( value ) )
+                        addMetaArg( "-" .. tag .. "=" .. str:to( value ) )
+                    end
+                else
+                    app:logVerbose( "No lr metdata for " .. name )
+                end
+            end
+        else
+            app:logVerbose( "No Lr Metadata" )
+        end
+
+        local spec = app:getPref( 'lrSpecialMeta' )
+        if spec then
+            -- keywords:
+            local kwTags = spec.keywordTags
+            local kwTags4Exp = spec.keywordTagsForExport
+            local kwStr
+            if kwTags then
+                kwStr = fromPhoto:getFormattedMetadata( 'keywordTags' )
+            elseif kwTags4Exp then
+                kwStr = fromPhoto:getFormattedMetadata( 'keywordTagsForExport' )
+            else
+                app:logVerbose( "No keywords" )
+            end
+            if str:is( kwStr ) then
+                -- argFileBuf[#argFileBuf + 1] = str:fmt( '-sep ", " -keywords+="^1"', kwStr ) - couldn't get this to work.
+                local kwArr = str:split( kwStr, "," )
+                for i, key in ipairs( kwArr ) do -- this works...
+                    addMetaArg( "-keywords+=" .. key )
+                end
+            end 
+            -- copyright status
+            if spec.copyrightState then
+                local status = fromPhoto:getRawMetadata( 'copyrightState' )
+                if status == 'copyrighted' then
+                    addMetaArg( "-XMP-xmpRights:Marked=True" )
+                elseif status == 'public domain' then
+                    addMetaArg( "-XMP-xmpRights:Marked=False" )
+                -- else don't mark it.
+                end
+            end
+                    
+        else
+            app:logVerbose( "No special metadata like keywords." )
+        end        
+        
+        if nMetaArgs > 0 then
+       
+            ets:addArg( toPath )
+            
+            if LrFileUtils.exists( toPath ) then
+                app:logVerbose( "Raw jpg still exists: ^1", toPath )
+                
+                local rsp, msg = ets:execute()
+
+                if rsp then
+                    --app:log( "Metadata transferred using this command: " .. m )
+                    app:log( "Metadata transferred via exif-tool." )
+                else
+                    --app:error( "Unable to assign metadata and icc profile, error message: " .. m )
+                    app:error( "Unable to assign metadata and icc profile, error message: " .. str:to( msg ) )
+                end
+            else
+                app:error( "Can't do exiftool command - ^1 no longer exists.", toPath )
+            end
+        else
+            app:log( "*** No metadata to transfer." ) -- perfectly acceptable that the photo did not have any of the specified metadata, so no harm no foul, but always log a pseudo-warning,
+                -- since probably indicates a malcurrence.
+        end
+
+    end, finale=function( call, status, message )
+        -- normally deleted, but in case of error:
+        local original = toPath .. "_original"
+        if fso:existsAsFile( original ) then
+            LrFileUtils.delete( original )
+        end
+        local temp = toPath .. "_exiftool_tmp"
+        if fso:existsAsFile( temp ) then
+            local sts, msg = fso:moveFolderOrFile( temp, toPath )
+            if sts then
+                if app:getUserName() == "_RobCole_" then
+                    app:logWarning( "Cleaned up exiftool-tmp file." )
+                else
+                    app:logVerbose( "Cleaned up exiftool-tmp file." )
+                end
+            else
+                if status then
+                    status = false
+                    message = "Unable to rename exiftool temp file: " .. str:to ( msg )
+                else
+                    message = str:to ( message ) .. ". Also, unable to rename exiftool temp file: " .. str:to ( msg )
+                end
+            end
+        end
+        s, m = status, message
+    end } )
+    --Debug.showLogFile()
+    return s, m
+
+end
+
+
+
+function Image:mogrify( p, ... )
+    local mog = app:getPref( 'mogrify' )
+    if not str:is( mog ) then
+        return false, "cant find mogrify setting in plugin manager configuration"
+    end
+    local param
+    -- just dont call if p is nil.
+    if type( p ) == 'string' then
+        assert( p ~= "", "cant mogrify with a blank string" )
+        param = str:fmt( p, ...)
+    elseif type( p ) == 'table' then
+        if #p > 0 then
+            param = table.concat( p, " " )
+        else
+            app:logVerbose( "Unmogrified." )
+            return true, "not mogrified" -- not necessarily bad to not have anything to mog. If its is bad, then check before calling.
+        end
+    end
+    local s, m = app:executeCommand( mog, param, { self.file } )
+    return s, m
+end
+
+
+
+-- profile-name is name of profile that should rightfully be assigned to unmodified image data.
+-- 
+function Image:addColorProfile( icc, profileName, toProfile, param )
+    if icc == 'A' or ( icc == 'C' and profileName == 'AdobeRGB' and toProfile == 'AdobeRGB' ) then -- assignment
+        if profileName == 'AdobeRGB' then
+            local file = LrPathUtils.child( _PLUGIN.path, 'AdobeRGB1998.icc' )
+            if fso:existsAsFile( file ) then
+                -- local status, message = app:executeCommand( im, str:fmt( '"^1" -profile "^2"', self.file, file ), { self.file } )
+                param[#param + 1] = str:fmt( '-profile "^1"', file )
+            else
+                app:error( "Missing " .. file )
+            end
+        elseif profileName == 'sRGB' then -- note: this assumes the data *is* rgb, if its *not*, then do a convert instead.
+            app:logVerbose( "No assignment of color profile in case of sRGB" )
+        else
+            app:error( "ICC profile not supported: ^1", profileName ) 
+        end
+    elseif icc == 'C' and not ( profileName == 'sRGB' and toProfile == 'sRGB' ) then -- convert
+        if profileName == 'AdobeRGB' then
+            assert( toProfile == 'sRGB', "bad icc target profile" )
+            local file = LrPathUtils.child( _PLUGIN.path, 'AdobeRGB1998.icc' )
+            if fso:existsAsFile( file ) then
+                local file2 = LrPathUtils.child( _PLUGIN.path, 'sRGB_IEC61966-2-1_black_scaled.icc' ) -- this looks right.
+                -- local file2 = LrPathUtils.child( _PLUGIN.path, 'sRGB_IEC61966-2-1_no_black_scaling.icc' ) -- this closes the shadows too much.
+                if fso:existsAsFile( file2 ) then
+                    param[#param + 1] = str:fmt( '-profile "^1" -profile "^2"', file, file2 )
+                else
+                    app:error( "Missing " ..  file2 )
+                end
+            else
+                app:error( "Missing " .. file )
+            end
+        elseif profileName == 'sRGB' then
+            local file = LrPathUtils.child( _PLUGIN.path, 'sRGB_IEC61966-2-1_black_scaled.icc' )
+            if fso:existsAsFile( file ) then
+                local file2 = LrPathUtils.child( _PLUGIN.path, 'AdobeRGB1998.icc' )
+                if fso:existsAsFile( file2 ) then
+                    param[#param + 1] = str:fmt( '-profile "^1" -profile "^2"', file, file2 )
+                else
+                    app:error( "Missing " ..  file2 )
+                end
+            else
+                app:error( "Missing " .. file )
+            end
+        else
+            app:error( "ICC profile not supported: ^1", profileName ) 
+        end
+    elseif icc ~= 'A' and icc ~= 'C' then
+        app:callingError( "Bad icc op: ^1", icc )
+    elseif profileName == 'sRGB' then
+        assert( toProfile == 'sRGB', "icc profile mixup" )
+        app:logVerbose( "No need to convert from sRGB to sRGB" )
+    end
+end
+
+
+
+--[[ obs
+function Image:setRotation( degrees )
+    self.degrees = degrees
+    if self.file then
+        local s, m = self:mogrify( '-rotate ^1', degrees )
+        if s then
+            app:logVerbose( "Rotated ^1", degrees )
+        end
+        return s, m
+    else
+        app:logWarning( "Unable to set rotation if no file" )
+        return false, "@1/Oct/2011, unable to set rotation if no file."
+    end
+end
+--]]
+
+
+
+function Image:addOrientation( orient, param )
+    app:logVerbose( "Setting orientation of ^1 to ^2", self.file, orient  )
+    self.orient = orient
+    local degrees
+    -- local suspect = "not sure what to do"
+    local flop
+    if orient == 'AB' then -- unflipped/unrotated, or its flipped & rotated equivalent.
+        -- degrees = 0 - for purposes here, no need to rotate if 0 degrees.
+        return
+    elseif orient == 'BC' then
+        degrees = 90
+    elseif orient == 'CD' then
+        degrees = 180
+    elseif orient == 'DA' then
+        degrees = 270
+    elseif orient == 'BA' then -- flipped horizontal, no rotation.
+        flop = "-flop"
+    elseif orient == 'AD' then -- ", 90
+        flop = "-flop"
+        degrees = 90
+    elseif orient == 'DC' then -- ", 180 (which is equivalent to flipped vertically).
+        flop = "-flip"
+    elseif orient == 'CB' then -- ", 270
+        flop = "-flop"
+        degrees = 270
+    else
+        app:callingError( "^1 has '^2' db-orientation, which is not yet supported - please report error: ", str:to( self.file ), orient )
+    end
+    if flop then
+        param[#param + 1] = flop
+    end
+    if degrees then
+        param[#param + 1] = '-rotate ' .. degrees
+    end
+    return
+end
+
+
+--[[ obs
+function Image:getContent()
+    app:error( "get-content not implemented - you can get it by reading file instead." )
+    -- return self.content
+end
+function Image:getOrientation()
+    return self.orient
+end
+function Image:getRotation()
+    return self.degrees
+end
+--]]
+
+function Image:getFile()
+    return self.file
+end
+
+
+
+return Image

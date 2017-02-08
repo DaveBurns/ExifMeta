@@ -1,0 +1,1769 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li><strong>Table.lua</strong></li>
+	
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>Table.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:addItems">Table:addItems</a>&nbsp;(t, t2)</td>
+	<td class="summary">Adds items in one table to another.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:addToSet">Table:addToSet</a>&nbsp;(toSet, fromSet)</td>
+	<td class="summary">Add from set to set, or names array to set.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:appendArray">Table:appendArray</a>&nbsp;(t1, t2)</td>
+	<td class="summary">Appends one array to another.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:appendArrays">Table:appendArrays</a>&nbsp;(t1, ...)</td>
+	<td class="summary">Appends one array to another.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:arrayOfSortedKeys">Table:arrayOfSortedKeys</a>&nbsp;(t, sortFunc, reverse)</td>
+	<td class="summary">Get array of sorted keys.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:arraySlice">Table:arraySlice</a>&nbsp;(array, i1, i2)</td>
+	<td class="summary">Fetch specified slice of table treated as array (indexes are analogous to string.sub).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:combineArrays">Table:combineArrays</a>&nbsp;(t1, t2)</td>
+	<td class="summary">Like "append", except creates a new array.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:convertToArray">Table:convertToArray</a>&nbsp;(tbl, keyName, valueName, sorter)</td>
+	<td class="summary">Convert table to array - probably should be deprecated: has never been used, that I know of.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:copy">Table:copy</a>&nbsp;(t)</td>
+	<td class="summary">Make a shallow copy of a table.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:countItems">Table:countItems</a>&nbsp;(t, excl)</td>
+	<td class="summary">Count non-nil items in table.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:createArrayFromSet">Table:createArrayFromSet</a>&nbsp;(set, sort)</td>
+	<td class="summary">Create an array from a set.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:createSet">Table:createSet</a>&nbsp;(array, b)</td>
+	<td class="summary">Create a set from an array  </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:createSetI">Table:createSetI</a>&nbsp;(array)</td>
+	<td class="summary">Creates a set whose contained elements have index instead of true as their value.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:deepCopy">Table:deepCopy</a>&nbsp;(t)</td>
+	<td class="summary">Make a deep copy of a table.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:findInArray">Table:findInArray</a>&nbsp;(t1, item)</td>
+	<td class="summary">Searches for an item in an array (starting at index 1).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:getAnyKeyAndValue">Table:getAnyKeyAndValue</a>&nbsp;(t)</td>
+	<td class="summary">Get any key and value.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:getTable">Table:getTable</a>&nbsp;(a, nameToThrow)</td>
+	<td class="summary">Return a value which must be a table or nil.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:getValue">Table:getValue</a>&nbsp;(t, dotKeys)</td>
+	<td class="summary">Get (potentially nested) table value given specified key in dot-notation format.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:initVar">Table:initVar</a>&nbsp;(t, n, v, overwriteOk)</td>
+	<td class="summary">Failsafe way to add a member to a table that may already be closed for write access (strict write-access policy has been set).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:is">Table:is</a>&nbsp;(t, valueTitle)</td>
+	<td class="summary">Determine if passed parameter is a table with at least one non-nil element.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:isArray">Table:isArray</a>&nbsp;(t, valueTitle)</td>
+	<td class="summary">Determine if passed parameter represents a table containing values at numeric indexes.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:isEmpty">Table:isEmpty</a>&nbsp;(t)</td>
+	<td class="summary">Determine if table has no elements.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:isEquiv">Table:isEquiv</a>&nbsp;(t1, t2, eqFunc)</td>
+	<td class="summary">Determines if two tables (or non-table values) are equivalent.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:isEquivalent">Table:isEquivalent</a>&nbsp;(t1, t2)</td>
+	<td class="summary">Determines if two tables (or non-table values) are equivalent.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:isFoundInArray">Table:isFoundInArray</a>&nbsp;(t1, item)</td>
+	<td class="summary">Searches for an item in an array.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:isInArray">Table:isInArray</a>&nbsp;(array, item)</td>
+	<td class="summary">Determine if item is in array, if so return index (does not check for redundent items).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:isNotEmpty">Table:isNotEmpty</a>&nbsp;(t)</td>
+	<td class="summary">Determine if table has any elements.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:md5">Table:md5</a>&nbsp;(t)</td>
+	<td class="summary">Compute md5 over table elements.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:mergeArrays">Table:mergeArrays</a>&nbsp;(t1, t2)</td>
+	<td class="summary">Like "combine", except DOES check for item duplication.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:mergeSets">Table:mergeSets</a>&nbsp;(...)</td>
+	<td class="summary">Merge two or more sets.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:new">Table:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:newClass">Table:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:removeFromSet">Table:removeFromSet</a>&nbsp;(set, remove)</td>
+	<td class="summary">Add from set to set, or names array to set.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:replicate">Table:replicate</a>&nbsp;(item, count)</td>
+	<td class="summary">Create a table by replicating item, count times.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:reverseArray">Table:reverseArray</a>&nbsp;(t)</td>
+	<td class="summary">Reverse table array order.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:reverseInPlace">Table:reverseInPlace</a>&nbsp;(t)</td>
+	<td class="summary">Reverse an array in place.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:reverseSort">Table:reverseSort</a>&nbsp;(t, reverseSortFunc, dummy)</td>
+	<td class="summary">Sort a homogeneous table in reverse of what you can do with the normal table-sort function, including the stubborn last element.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:reverseSortCopy">Table:reverseSortCopy</a>&nbsp;(t, reverseSortFunc, dummy)</td>
+	<td class="summary">Creates a table sorted in reverse of what you can do with the normal table-sort function, including the stubborn last element.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:setStrict">Table:setStrict</a>&nbsp;(t, write, read)</td>
+	<td class="summary">Set table member access strictness policy.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:slice">Table:slice</a>&nbsp;(t, i1, i2)</td>
+	<td class="summary">Extract a table slice.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:sortReverse">Table:sortReverse</a>&nbsp;(t, func)</td>
+	<td class="summary">Sort table in place, reversed.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:sortReverseCopy">Table:sortReverseCopy</a>&nbsp;(t, func)</td>
+	<td class="summary">Sort table without altering it, and return a sorted copy, reversed.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#Table:sortedPairs">Table:sortedPairs</a>&nbsp;(t, sortFunc, reverse)</td>
+	<td class="summary">Return iterator that feeds k,v pairs back to the calling context, keys sorted according to the specified sort function.</td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="Table:addItems"></a><strong>Table:addItems</strong>&nbsp;(t, t2)</dt>
+<dd>
+Adds items in one table to another. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: a table of key-value pairs to be added to.
+	</li>
+	
+	<li>
+	  <code><em>t2</em></code>: a table of key-value pairs to add. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>adds all t2 items to t - nothing is returned.</pre></li>
+	
+	<li><pre class=example>Note: values of t2 will overwrite same-key values of t, so make sure thats what you want... </pre></li>
+	
+</ul>
+
+
+
+<h3>Return value:</h3>
+<ul>t       - the original table with additions.. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:addToSet"></a><strong>Table:addToSet</strong>&nbsp;(toSet, fromSet)</dt>
+<dd>
+Add from set to set, or names array to set. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>toSet</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>fromSet</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:appendArray"></a><strong>Table:appendArray</strong>&nbsp;(t1, t2)</dt>
+<dd>
+Appends one array to another. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t1</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>t2</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>the first array is added to directly, and then returned. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:appendArrays"></a><strong>Table:appendArrays</strong>&nbsp;(t1, ...)</dt>
+<dd>
+Appends one array to another. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t1</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>the first array is added to directly, and then returned. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:arrayOfSortedKeys"></a><strong>Table:arrayOfSortedKeys</strong>&nbsp;(t, sortFunc, reverse)</dt>
+<dd>
+Get array of sorted keys. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>sortFunc</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>reverse</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>used by sorted-pairs iterator function, dunno if anywhere else.. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:arraySlice"></a><strong>Table:arraySlice</strong>&nbsp;(array, i1, i2)</dt>
+<dd>
+Fetch specified slice of table treated as array (indexes are analogous to string.sub). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>array</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>i1</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>i2</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:combineArrays"></a><strong>Table:combineArrays</strong>&nbsp;(t1, t2)</dt>
+<dd>
+Like "append", except creates a new array. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t1</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>t2</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Does not check for item duplication. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>new array = combination of two passed arrays. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:convertToArray"></a><strong>Table:convertToArray</strong>&nbsp;(tbl, keyName, valueName, sorter)</dt>
+<dd>
+Convert table to array - probably should be deprecated: has never been used, that I know of. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>tbl</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>keyName</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>valueName</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>sorter</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:copy"></a><strong>Table:copy</strong>&nbsp;(t)</dt>
+<dd>
+Make a shallow copy of a table. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Useful for when you have a table and need to make a mod, but don't want to modify the original.</pre></li>
+	
+	<li><pre class=example>Shallow is OK when it doesn't matter if copy values point to same tables/functions as source (or all elements are non-table/non-function values). </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:countItems"></a><strong>Table:countItems</strong>&nbsp;(t, excl)</dt>
+<dd>
+Count non-nil items in table. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>excl</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>#table-name gives highest assigned item - won't span nil'd items, therefore: this function is for when some have been nil'd out. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:createArrayFromSet"></a><strong>Table:createArrayFromSet</strong>&nbsp;(set, sort)</dt>
+<dd>
+Create an array from a set. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>set</em></code>: (table, required) the set.
+	</li>
+	
+	<li>
+	  <code><em>sort</em></code>: (boolean true, or function, default=don't sort) true for default sort, or function for custom sort. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>for when you got a set, but you *need* an array.</pre></li>
+	
+	<li><pre class=example>synonym: 'createArray' (set implied). </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:createSet"></a><strong>Table:createSet</strong>&nbsp;(array, b)</dt>
+<dd>
+Create a set from an array 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>array</em></code>: (table) array
+	</li>
+	
+	<li>
+	  <code><em>b</em></code>: value for items in set to have - defaults to true. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>set </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:createSetI"></a><strong>Table:createSetI</strong>&nbsp;(array)</dt>
+<dd>
+Creates a set whose contained elements have index instead of true as their value. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>array</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:deepCopy"></a><strong>Table:deepCopy</strong>&nbsp;(t)</dt>
+<dd>
+Make a deep copy of a table. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>All table members will be new copied versions, *except* (@13/Dec/2013 6:22) for functions, which will still be references. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:findInArray"></a><strong>Table:findInArray</strong>&nbsp;(t1, item)</dt>
+<dd>
+Searches for an item in an array (starting at index 1). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t1</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>item</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>very inefficient to call this repeatedly in a loop. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>index or 0 if not found. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:getAnyKeyAndValue"></a><strong>Table:getAnyKeyAndValue</strong>&nbsp;(t)</dt>
+<dd>
+Get any key and value. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:getTable"></a><strong>Table:getTable</strong>&nbsp;(a, nameToThrow)</dt>
+<dd>
+Return a value which must be a table or nil. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>a</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>nameToThrow</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>never throws an error - use when nil is better than a variable of the wrong type. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:getValue"></a><strong>Table:getValue</strong>&nbsp;(t, dotKeys)</dt>
+<dd>
+Get (potentially nested) table value given specified key in dot-notation format. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>dotKeys</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:initVar"></a><strong>Table:initVar</strong>&nbsp;(t, n, v, overwriteOk)</dt>
+<dd>
+Failsafe way to add a member to a table that may already be closed for write access (strict write-access policy has been set). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: the table
+	</li>
+	
+	<li>
+	  <code><em>n</em></code>: variable name
+	</li>
+	
+	<li>
+	  <code><em>v</em></code>: initial value
+	</li>
+	
+	<li>
+	  <code><em>overwriteOk</em></code>: (boolean) set true if variable may already be initialized, and if so, passed value should supercede. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Subsequent accesses may be direct without error, even on closed table. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:is"></a><strong>Table:is</strong>&nbsp;(t, valueTitle)</dt>
+<dd>
+Determine if passed parameter is a table with at least one non-nil element. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>valueTitle</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Note: like str-is method, this function will throw error if non-nil argument isn't a table (e.g. is a string or boolean). </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:isArray"></a><strong>Table:isArray</strong>&nbsp;(t, valueTitle)</dt>
+<dd>
+Determine if passed parameter represents a table containing values at numeric indexes. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>valueTitle</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:isEmpty"></a><strong>Table:isEmpty</strong>&nbsp;(t)</dt>
+<dd>
+Determine if table has no elements. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Determine if specified variable includes at least one item in the table, either at a numeric index or as key/value pair. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>boolean </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:isEquiv"></a><strong>Table:isEquiv</strong>&nbsp;(t1, t2, eqFunc)</dt>
+<dd>
+Determines if two tables (or non-table values) are equivalent. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t1</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>t2</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>eqFunc</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>true iff equivalent members at same indexes, even if order returned by pairs is different. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:isEquivalent"></a><strong>Table:isEquivalent</strong>&nbsp;(t1, t2)</dt>
+<dd>
+Determines if two tables (or non-table values) are equivalent. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t1</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>t2</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return value:</h3>
+<ul>true iff equivalent members at same indexes, even if order returned by pairs is different. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:isFoundInArray"></a><strong>Table:isFoundInArray</strong>&nbsp;(t1, item)</dt>
+<dd>
+Searches for an item in an array. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t1</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>item</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>very inefficient to call this repeatedly in a loop. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>boolean </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:isInArray"></a><strong>Table:isInArray</strong>&nbsp;(array, item)</dt>
+<dd>
+Determine if item is in array, if so return index (does not check for redundent items). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>array</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>item</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>*** deprecated - use findInArray or isFoundInArray instead. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:isNotEmpty"></a><strong>Table:isNotEmpty</strong>&nbsp;(t)</dt>
+<dd>
+Determine if table has any elements. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Determine if specified variable includes at least one item in the table, either at a numeric index or as key/value pair. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>boolean </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:md5"></a><strong>Table:md5</strong>&nbsp;(t)</dt>
+<dd>
+Compute md5 over table elements. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:mergeArrays"></a><strong>Table:mergeArrays</strong>&nbsp;(t1, t2)</dt>
+<dd>
+Like "combine", except DOES check for item duplication. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t1</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>t2</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>good for coming up with a new array that includes all items from the passed arrays. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>new array. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:mergeSets"></a><strong>Table:mergeSets</strong>&nbsp;(...)</dt>
+<dd>
+Merge two or more sets. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>...</em></code>: zero or more sets actually - if zero: empty set will be returned, if one, a shallow copy of it will be returned, <br>if two then the first with common keyed elements overwritten by the second... 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>creates a new set by combining one or more sets. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>new set - values can be whatever (e.g. can be used for lookup too, not just a "pure" set..). </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:new"></a><strong>Table:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:newClass"></a><strong>Table:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:removeFromSet"></a><strong>Table:removeFromSet</strong>&nbsp;(set, remove)</dt>
+<dd>
+Add from set to set, or names array to set. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>set</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>remove</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>dont use - unless I'm missing something, this method is bugged and hasn't been tested(?) </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:replicate"></a><strong>Table:replicate</strong>&nbsp;(item, count)</dt>
+<dd>
+Create a table by replicating item, count times. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>item</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>count</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:reverseArray"></a><strong>Table:reverseArray</strong>&nbsp;(t)</dt>
+<dd>
+Reverse table array order. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>another way to achieve correct order when the sort function won't give it -<br> sort the opposite of what you want, then reverse. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>reversed array - the input table remains unaltered. </ul>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:reverseInPlace"></a><strong>Table:reverseInPlace</strong>&nbsp;(t)</dt>
+<dd>
+Reverse an array in place. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:reverseSort"></a><strong>Table:reverseSort</strong>&nbsp;(t, reverseSortFunc, dummy)</dt>
+<dd>
+Sort a homogeneous table in reverse of what you can do with the normal table-sort function, including the stubborn last element. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: the table
+	</li>
+	
+	<li>
+	  <code><em>reverseSortFunc</em></code>: -- a "reversed sense" sort function.
+	</li>
+	
+	<li>
+	  <code><em>dummy</em></code>: (same type as a array elements, optional if string or number type elements) 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>*** deprecated -- use proper sort function instead, then reverse the result - use table__sort-reverse instead. </pre></li>
+	
+	<li><pre class=example>My experience is that sometimes you want the exact opposite order than what a normal sort is capable of yielding.<br> in this case, simply having a unique dummy element (that is guaranteed to be "less" than any of the others) to push through solves the problem.</pre></li>
+	
+	<li><pre class=example>Returns nothing - sorts in place, like reglar table.sort function.</pre></li>
+	
+	<li><pre class=example>throws error if unable to sort properly. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:reverseSortCopy"></a><strong>Table:reverseSortCopy</strong>&nbsp;(t, reverseSortFunc, dummy)</dt>
+<dd>
+Creates a table sorted in reverse of what you can do with the normal table-sort function, including the stubborn last element. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: the table
+	</li>
+	
+	<li>
+	  <code><em>reverseSortFunc</em></code>: -- a "reversed sense" sort function.
+	</li>
+	
+	<li>
+	  <code><em>dummy</em></code>: (same type as a array elements, optional if string or number type elements) 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>*** deprecated -- use proper sort function instead, then reverse the result - use table__sort-reverse-copy instead. </pre></li>
+	
+	<li><pre class=example>My experience is that sometimes you want the exact opposite order than what a normal sort is capable of yielding.<br> in this case, simply having a unique dummy element (that is guaranteed to be "less" than any of the others) to push through solves the problem. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>"Reverse" sorted copy, if possible, otherwise original is returned - original array is always unmodified.</li>
+	
+	<li>Error message string if unable to sort properly. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:setStrict"></a><strong>Table:setStrict</strong>&nbsp;(t, write, read)</dt>
+<dd>
+Set table member access strictness policy. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: (table, required) the table to make strict access policy.
+	</li>
+	
+	<li>
+	  <code><em>write</em></code>: (boolean, default false) true => strict write access, false => lax.
+	</li>
+	
+	<li>
+	  <code><em>read</em></code>: (boolean, default false) true => strict read access, false => lax. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Do not use for _G - use global-specific set-strict method instead.</pre></li>
+	
+	<li><pre class=example>Useful for closing a table (strict) so accidental assignment or access is caught immediately.</pre></li>
+	
+	<li><pre class=example>Note: one can always use rawset and rawget directly to bypass strictness completely. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:slice"></a><strong>Table:slice</strong>&nbsp;(t, i1, i2)</dt>
+<dd>
+Extract a table slice. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>i1</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>i2</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:sortReverse"></a><strong>Table:sortReverse</strong>&nbsp;(t, func)</dt>
+<dd>
+Sort table in place, reversed. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: - the table
+	</li>
+	
+	<li>
+	  <code><em>func</em></code>: - a proper sort function. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:sortReverseCopy"></a><strong>Table:sortReverseCopy</strong>&nbsp;(t, func)</dt>
+<dd>
+Sort table without altering it, and return a sorted copy, reversed. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: - the table
+	</li>
+	
+	<li>
+	  <code><em>func</em></code>: - a proper sort function. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="Table:sortedPairs"></a><strong>Table:sortedPairs</strong>&nbsp;(t, sortFunc, reverse)</dt>
+<dd>
+Return iterator that feeds k,v pairs back to the calling context, keys sorted according to the specified sort function. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>sortFunc</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>reverse</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>sort-func may be nil, in which case default sort order is employed. </pre></ul>
+
+
+
+<h3>Return value:</h3>
+<ul>iterator function </ul>
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>

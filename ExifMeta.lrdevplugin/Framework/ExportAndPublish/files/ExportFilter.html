@@ -1,0 +1,1200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+	<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+</head>
+
+<body>
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+<div id="main">
+
+<div id="navigation">
+
+
+<h1>LuaDoc</h1>
+<ul>
+	
+	<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+
+<!-- Module list -->
+
+
+
+<!-- File list -->
+
+<h1>Files</h1>
+<ul>
+
+	<li>
+		<a href="../files/Export.html">Export.lua</a>
+	</li>
+
+	<li><strong>ExportFilter.lua</strong></li>
+	
+	<li>
+		<a href="../files/FtpExport.html">FtpExport.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/FtpPublish.html">FtpPublish.lua</a>
+	</li>
+
+	<li>
+		<a href="../files/Publish.html">Publish.lua</a>
+	</li>
+
+</ul>
+
+
+
+
+
+
+</div> <!-- id="navigation" -->
+
+<div id="content">
+
+<h1>File <code>ExportFilter.lua</code></h1>
+
+
+
+
+
+
+
+<h2>Functions</h2>
+<table class="function_list">
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter._getFilterName">ExportFilter._getFilterName</a>&nbsp;(id)</td>
+	<td class="summary">Compute filter name based on ID - MUST be same as extended filter class name.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter._getPropName">ExportFilter._getPropName</a>&nbsp;(filterName, pqName)</td>
+	<td class="summary">Get filter-specific property name, without having filter object.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter.assureFilter">ExportFilter.assureFilter</a>&nbsp;(id, props, starter)</td>
+	<td class="summary">Create export filter for either dialog or filter-context, and store in property table.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter.postProcessRenderedPhotos">ExportFilter.postProcessRenderedPhotos</a>&nbsp;(functionContext, filterContext)</td>
+	<td class="summary">Post process rendered photos.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter.sectionForFilterInDialog">ExportFilter.sectionForFilterInDialog</a>&nbsp;(vf, propertyTable)</td>
+	<td class="summary">This function will create the section displayed on the export dialog when this filter is added to the export session.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter.shouldRenderPhoto">ExportFilter.shouldRenderPhoto</a>&nbsp;(exportSettings, photo)</td>
+	<td class="summary">This function obtains access to the photos and removes entries that don't match the metadata filter.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter.startDialog">ExportFilter.startDialog</a>&nbsp;(propertyTable)</td>
+	<td class="summary">This optional function adds the observers for our required fields metachoice and metavalue so we can change the dialog depending if they have been populated.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter.updateFilterStatus">ExportFilter.updateFilterStatus</a>&nbsp;(extendedExportFilterClass, props, name, value)</td>
+	<td class="summary">This function will check the status of the Export Dialog to determine if all required fields have been populated.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter:allowExport">ExportFilter:allowExport</a>&nbsp;(message, ...)</td>
+	<td class="summary">Sets boolean status property to true (no problem detected), and status message as passed or generic "ok", - export may be enabled if no other filters from this plugin have denied.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter:cancelExport">ExportFilter:cancelExport</a>&nbsp;(autoLog)</td>
+	<td class="summary">Abort/cancel the export.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter:clearExportCondition">ExportFilter:clearExportCondition</a>&nbsp;()</td>
+	<td class="summary">Clears export condition, *if* no other filters in this plugin have denied it.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter:denyExport">ExportFilter:denyExport</a>&nbsp;(reason, ...)</td>
+	<td class="summary">Sets boolean status property to false (denied), and (always) sets status message to 'reason', thus disabling export.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter:getFilters">ExportFilter:getFilters</a>&nbsp;()</td>
+	<td class="summary">Get "pseudo-array" of filters, plus indexes of first and last, plus total from this plugin (and names).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter:getPropName">ExportFilter:getPropName</a>&nbsp;(namePart)</td>
+	<td class="summary">Get property name as combination of partially qualified name, and filter name.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter:getSectionTitle">ExportFilter:getSectionTitle</a>&nbsp;()</td>
+	<td class="summary">Get section-in-dialog title, prefixed by app-name if >1 filter in plugin.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter:new">ExportFilter:new</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for new instance (may serve dialog box only, or actual export filtering - which one depends on whether filter-context is passed in starter table.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter:newClass">ExportFilter:newClass</a>&nbsp;(t)</td>
+	<td class="summary">Constructor for extending class.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter:passRenditionsThrough">ExportFilter:passRenditionsThrough</a>&nbsp;(errm)</td>
+	<td class="summary">No-op (call from post-process-rendered-photos method if, for example, filter doesn't meet criteria for doing it's thing...).</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter:peruseRenditions">ExportFilter:peruseRenditions</a>&nbsp;(params)</td>
+	<td class="summary">Peruse renditions and return photo/video tables, candidate renditions, metadata cache.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter:postProcessRenderedPhotosFinale">ExportFilter:postProcessRenderedPhotosFinale</a>&nbsp;(call)</td>
+	<td class="summary">Generic finale method for photo processing method - assures exiftool session is closed (if assigned to standard member), and shows dialog box if problem, <br>    since there will be no error box shown if foreign export service.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter:processRenderedPhotosMethod">ExportFilter:processRenderedPhotosMethod</a>&nbsp;()</td>
+	<td class="summary">Process rendered photos method.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter:requireFilter">ExportFilter:requireFilter</a>&nbsp;(requiredFilterId, dependentFilterId)</td>
+	<td class="summary">Assures export filter position within this plugin.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter:requireFilterInDialog">ExportFilter:requireFilterInDialog</a>&nbsp;(id, nameOrTitle)</td>
+	<td class="summary">Called from update-filter-status method, to ensure main filter.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter:requireFilterInPost">ExportFilter:requireFilterInPost</a>&nbsp;(id, nameOrTitle)</td>
+	<td class="summary">Assure pre-requisite filter is (still) there.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter:sectionForFilterInDialogFinale">ExportFilter:sectionForFilterInDialogFinale</a>&nbsp;(call)</td>
+	<td class="summary">Generic finale method if section method is wrapped - override, ignore, or use as is..</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter:sectionForFilterInDialogGetStatusView">ExportFilter:sectionForFilterInDialogGetStatusView</a>&nbsp;(lines)</td>
+	<td class="summary">Get view object which presents labeled status, typically at bottom of section.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter:sectionForFilterInDialogMethod">ExportFilter:sectionForFilterInDialogMethod</a>&nbsp;()</td>
+	<td class="summary">return section for filter setup  </td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter:shouldRenderPhotoMethod">ExportFilter:shouldRenderPhotoMethod</a>&nbsp;(photo)</td>
+	<td class="summary">Determine if photo should pass go or not.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter:updateFilterStatusMethod">ExportFilter:updateFilterStatusMethod</a>&nbsp;(name, value)</td>
+	<td class="summary">Export setting property change handler - note: usually should be programmed to handle case when no name/value has been passed too, to check initial values even if nothing's changed yet.</td>
+	</tr>
+
+	<tr>
+	<td class="name" nowrap><a href="#ExportFilter:updateSynopsis">ExportFilter:updateSynopsis</a>&nbsp;()</td>
+	<td class="summary">Update synopsis  </td>
+	</tr>
+
+</table>
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+<h2><a name="functions"></a>Functions</h2>
+<dl class="function">
+
+
+
+<dt><a name="ExportFilter._getFilterName"></a><strong>ExportFilter._getFilterName</strong>&nbsp;(id)</dt>
+<dd>
+Compute filter name based on ID - MUST be same as extended filter class name. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>id</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>this function assumes id format "{whatev}.{class-name}" <br>    in other words, id will end with the name of the implementing class. <br>    if you prefer another naming convention, override this method, but realize the class name must be *somewhere* (verbatim) in the ID, or else you'll have to override constructor too (and maybe some other methods). </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter._getPropName"></a><strong>ExportFilter._getPropName</strong>&nbsp;(filterName, pqName)</dt>
+<dd>
+Get filter-specific property name, without having filter object. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>filterName</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>pqName</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>this function is implemented as a local function instead of an overridable class function because it's important that all filters <br>    in a plugin are having status property name computed the same way, regardless of their class heritage. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter.assureFilter"></a><strong>ExportFilter.assureFilter</strong>&nbsp;(id, props, starter)</dt>
+<dd>
+Create export filter for either dialog or filter-context, and store in property table. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>id</em></code>: (class, required) class of export filter object to be created, if creation is warranted (i.e. not already created with specified export settings & filter-context...).
+	</li>
+	
+	<li>
+	  <code><em>props</em></code>: (export setttings in the form of an observable property table) required if no filter-context in starter table.
+	</li>
+	
+	<li>
+	  <code><em>starter</em></code>: (table) optional: typically includes function-context & filter-context in case object is for export-run time (as opposed to dialog-box/set-up time). 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>in export class, registry is static array in base class, and object is cleaned up upon completion.</pre></li>
+	
+	<li><pre class=example>export filter registry is export properties themselves, and new objects replace old objects - note: there is no explicit cleanup, cleanup relies on "fact" that Lr will create new properties object at export time, and thus all previously registered filter objects will be wiped.</pre></li>
+	
+	<li><pre class=example>props are used as "registry" for constructed export filter object. Maybe not by the book, but no problems, yet.. - the advantage is that they are recreated by Lightroom each dialog-box/export, thus no explicit cleanup need be implemented. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter.postProcessRenderedPhotos"></a><strong>ExportFilter.postProcessRenderedPhotos</strong>&nbsp;(functionContext, filterContext)</dt>
+<dd>
+Post process rendered photos. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>functionContext</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>filterContext</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>override this function, or set it to nil. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter.sectionForFilterInDialog"></a><strong>ExportFilter.sectionForFilterInDialog</strong>&nbsp;(vf, propertyTable)</dt>
+<dd>
+This function will create the section displayed on the export dialog when this filter is added to the export session. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>vf</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>propertyTable</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>generally should be overridden, unless you just want the generic "nuthin' to see here" text where settings would otherwise be. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter.shouldRenderPhoto"></a><strong>ExportFilter.shouldRenderPhoto</strong>&nbsp;(exportSettings, photo)</dt>
+<dd>
+This function obtains access to the photos and removes entries that don't match the metadata filter. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>exportSettings</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>photo</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Worth noting: there is *no* filter-context at this stage, nor export session, nor export context... </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter.startDialog"></a><strong>ExportFilter.startDialog</strong>&nbsp;(propertyTable)</dt>
+<dd>
+This optional function adds the observers for our required fields metachoice and metavalue so we can change the dialog depending if they have been populated. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>propertyTable</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>generally should be overridden. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter.updateFilterStatus"></a><strong>ExportFilter.updateFilterStatus</strong>&nbsp;(extendedExportFilterClass, props, name, value)</dt>
+<dd>
+This function will check the status of the Export Dialog to determine if all required fields have been populated. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>extendedExportFilterClass</em></code>: (ExportFilter derivative, required) must be the class of extended export filter.
+	</li>
+	
+	<li>
+	  <code><em>props</em></code>: (prop-table) are common to all filters.
+	</li>
+	
+	<li>
+	  <code><em>name</em></code>: (string, optional) property table *key* (include 'LR_' prefix, or not, as appropriate). pass name if called due to property change, otherwise may be nil for generic update.
+	</li>
+	
+	<li>
+	  <code><em>value</em></code>: (any, optional) value correpsonding to name - makes no sense to pass if no name. 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>this function need not be overridden by base classes, as long as the ID in the observer is the extended class. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter:allowExport"></a><strong>ExportFilter:allowExport</strong>&nbsp;(message, ...)</dt>
+<dd>
+Sets boolean status property to true (no problem detected), and status message as passed or generic "ok", - export may be enabled if no other filters from this plugin have denied. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>message</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter:cancelExport"></a><strong>ExportFilter:cancelExport</strong>&nbsp;(autoLog)</dt>
+<dd>
+Abort/cancel the export. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>autoLog</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Must be called before rendering has started.</pre></li>
+	
+	<li><pre class=example>Best practice: log warning or error before calling this, but note - *** Log file may be suppressed if 'Reload After Export' is enabled in plugin manager. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status (boolean) true iff all renditions skipped.</li>
+	
+	<li>message (string) explains false status. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter:clearExportCondition"></a><strong>ExportFilter:clearExportCondition</strong>&nbsp;()</dt>
+<dd>
+Clears export condition, *if* no other filters in this plugin have denied it. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Lr itself keeps track of which plugins have set it, but NOT individual filters within a plugin - yeah: oops (Adobe). <br> it is for this reason the common status property was set up - universal for all plugin filters. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter:denyExport"></a><strong>ExportFilter:denyExport</strong>&nbsp;(reason, ...)</dt>
+<dd>
+Sets boolean status property to false (denied), and (always) sets status message to 'reason', thus disabling export. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>reason</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>...</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter:getFilters"></a><strong>ExportFilter:getFilters</strong>&nbsp;()</dt>
+<dd>
+Get "pseudo-array" of filters, plus indexes of first and last, plus total from this plugin (and names). 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>Do NOT traverse filters using ipairs, since first entries may be nil (ipairs quits on a nil).</pre></li>
+	
+	<li><pre class=example>You *can* traverse names array using ipairs, and index filters in loop body..</pre></li>
+	
+	<li><pre class=example>*** last may be greater than total (but will never be less).</pre></li>
+	
+	<li><pre class=example>There are no settings from other plugins in here, nor are they in list of export filters... <br>    such settings influence exporting, but are managed by Lightroom. No doubt the reason we can't initiate exports on the fly which include filters from other plugins. </pre></li>
+	
+</ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>filters (pseudo-array) aka "sparse" array, of filter IDs.</li>
+	
+	<li>first (numeric) index - can be used to index filters or names.</li>
+	
+	<li>last (numeric) index - can be used to index filters or names.</li>
+	
+	<li>total (numeric) number of export filters from this plugin.</li>
+	
+	<li>names (array) array of partially-qualified export filter names (not sparse), values include "other/unknown" entry if not from this plugin. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter:getPropName"></a><strong>ExportFilter:getPropName</strong>&nbsp;(namePart)</dt>
+<dd>
+Get property name as combination of partially qualified name, and filter name. Thus, each like property will be unique and determinate when multiple filters. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>namePart</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter:getSectionTitle"></a><strong>ExportFilter:getSectionTitle</strong>&nbsp;()</dt>
+<dd>
+Get section-in-dialog title, prefixed by app-name if >1 filter in plugin. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>one can always override this.. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter:new"></a><strong>ExportFilter:new</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for new instance (may serve dialog box only, or actual export filtering - which one depends on whether filter-context is passed in starter table. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>@19/Nov/2013 16:48, "extension" of ID must match class name. - this is not strictly necessary, but more of a sanity check - if too inflexible, delete the assertion (not tested). <br> in any case, class-name will need to be found as part of the ID, and had better be unique.</pre></li>
+	
+	<li><pre class=example>exportSettings or filterContext must be passed.</pre></li>
+	
+	<li><pre class=example>class name must be unique - NOT checked. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter:newClass"></a><strong>ExportFilter:newClass</strong>&nbsp;(t)</dt>
+<dd>
+Constructor for extending class. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>t</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter:passRenditionsThrough"></a><strong>ExportFilter:passRenditionsThrough</strong>&nbsp;(errm)</dt>
+<dd>
+No-op (call from post-process-rendered-photos method if, for example, filter doesn't meet criteria for doing it's thing...). 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>errm</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>- my experience: if post-process-rendered-photos function is defined, it will be called, and expected to operate. This method is therefore necessary to keep the ball rolling. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter:peruseRenditions"></a><strong>ExportFilter:peruseRenditions</strong>&nbsp;(params)</dt>
+<dd>
+Peruse renditions and return photo/video tables, candidate renditions, metadata cache. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>params</em></code>: (table) named parameters. <br>    rawIds (array, optional) raw ids for metadata cache, if desired. <br>    fmtIds (array, optional) fmt ids for metadata cache, if desired. <br>    call (object, required) calling context call object. 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>photos (array) of photos - may be empty, but never nil.</li>
+	
+	<li>videos (array) of videos - may be empty, but never nil.</li>
+	
+	<li>union (array) of photos & videos - may be empty, but never nil.</li>
+	
+	<li>unionCache (Cache) containing specified metadata for photos & videos - may be empty, but never nil.</li>
+	
+	<li>candidates (array) candidate renditions. It's possible to pare down candidates depending on filter - thus the name. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter:postProcessRenderedPhotosFinale"></a><strong>ExportFilter:postProcessRenderedPhotosFinale</strong>&nbsp;(call)</dt>
+<dd>
+Generic finale method for photo processing method - assures exiftool session is closed (if assigned to standard member), and shows dialog box if problem, <br>    since there will be no error box shown if foreign export service. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>call</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter:processRenderedPhotosMethod"></a><strong>ExportFilter:processRenderedPhotosMethod</strong>&nbsp;()</dt>
+<dd>
+Process rendered photos method. 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>ordinarily, derived type would override this method, but maybe not.. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter:requireFilter"></a><strong>ExportFilter:requireFilter</strong>&nbsp;(requiredFilterId, dependentFilterId)</dt>
+<dd>
+Assures export filter position within this plugin. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>requiredFilterId</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>dependentFilterId</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>can not assure position w.r.t. export filters of other plugins. </pre></ul>
+
+
+
+<h3>Return values:</h3>
+<ol>
+	
+	<li>status (boolean) true iff top/bottom filter, as desired.</li>
+	
+	<li>lastId (string) ID of top/bottom filter, if not as desired. </li>
+	
+</ol>
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter:requireFilterInDialog"></a><strong>ExportFilter:requireFilterInDialog</strong>&nbsp;(id, nameOrTitle)</dt>
+<dd>
+Called from update-filter-status method, to ensure main filter. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>id</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>nameOrTitle</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>preferrably called in edb when LR-export-filters.. changes, since that catches it at earliest point, <br>    on the down side, if multiple filters are present, you have to set through the prompt multiple times. - oh well, user shouldn't make that mistake more than once or twice.. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter:requireFilterInPost"></a><strong>ExportFilter:requireFilterInPost</strong>&nbsp;(id, nameOrTitle)</dt>
+<dd>
+Assure pre-requisite filter is (still) there. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>id</em></code>: (string, optional) If not passed, name/title will be the extension of the ID. 
+	</li>
+	
+	<li>
+	  <code><em>nameOrTitle</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>call in post-process photos method. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter:sectionForFilterInDialogFinale"></a><strong>ExportFilter:sectionForFilterInDialogFinale</strong>&nbsp;(call)</dt>
+<dd>
+Generic finale method if section method is wrapped - override, ignore, or use as is.. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>call</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter:sectionForFilterInDialogGetStatusView"></a><strong>ExportFilter:sectionForFilterInDialogGetStatusView</strong>&nbsp;(lines)</dt>
+<dd>
+Get view object which presents labeled status, typically at bottom of section. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>lines</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter:sectionForFilterInDialogMethod"></a><strong>ExportFilter:sectionForFilterInDialogMethod</strong>&nbsp;()</dt>
+<dd>
+return section for filter setup 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>typically overridden. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter:shouldRenderPhotoMethod"></a><strong>ExportFilter:shouldRenderPhotoMethod</strong>&nbsp;(photo)</dt>
+<dd>
+Determine if photo should pass go or not. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>photo</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+<h3>Usage:</h3>
+<ul>
+	
+	<li><pre class=example>if no-go, then it will be *silently* omitted, so if you want to make a fuss, it costs extra..</pre></li>
+	
+	<li><pre class=example>extras you may want to consider: file-format (consider video), virtual-copy, filename extension, smart preview, original source online/offline.. </pre></li>
+	
+</ul>
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter:updateFilterStatusMethod"></a><strong>ExportFilter:updateFilterStatusMethod</strong>&nbsp;(name, value)</dt>
+<dd>
+Export setting property change handler - note: usually should be programmed to handle case when no name/value has been passed too, to check initial values even if nothing's changed yet. <br>    Reminder: initial values may have come from an old (or hand-edited) preset, so all bets are off. 
+
+
+<h3>Parameters:</h3>
+<ul>
+	
+	<li>
+	  <code><em>name</em></code>: 
+	</li>
+	
+	<li>
+	  <code><em>value</em></code>: 
+	</li>
+	
+</ul>
+
+
+
+
+
+
+
+
+</dd>
+
+
+
+
+<dt><a name="ExportFilter:updateSynopsis"></a><strong>ExportFilter:updateSynopsis</strong>&nbsp;()</dt>
+<dd>
+Update synopsis 
+
+
+
+
+
+<h3>Usage:</h3>
+<ul><pre class=example>Default implementation here assumes enable/disable & status - override to customize.. </pre></ul>
+
+
+
+
+
+</dd>
+
+
+</dl>
+
+
+
+
+
+
+
+</div> <!-- id="content" -->
+
+</div> <!-- id="main" -->
+
+<div id="about">
+	<p><a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" /></a></p>
+</div> <!-- id="about" -->
+
+</div> <!-- id="container" -->	
+</body>
+</html>
