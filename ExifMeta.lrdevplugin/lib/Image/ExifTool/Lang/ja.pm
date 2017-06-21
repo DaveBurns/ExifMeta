@@ -11,7 +11,7 @@ package Image::ExifTool::Lang::ja;
 use strict;
 use vars qw($VERSION);
 
-$VERSION = '1.19';
+$VERSION = '1.21';
 
 %Image::ExifTool::Lang::ja::Translate = (
    'AEAperture' => 'AE絞り',
@@ -1377,6 +1377,7 @@ $VERSION = '1.19';
    'Country' => '国名',
    'Country-PrimaryLocationCode' => 'ISO国コード',
    'Country-PrimaryLocationName' => '国',
+   'CountryCode' => '撮影国コード',
    'CreateDate' => 'デジタルデータ作成日時',
    'CreationDate' => '作成日時',
    'CreativeStyle' => {
@@ -1401,6 +1402,7 @@ $VERSION = '1.19';
    'Creator' => '製作者',
    'CreatorAddress' => 'クリエーター　-　住所',
    'CreatorCity' => 'クリエーター　-　街',
+   'CreatorContactInfo' => '作成者のコン タクト先',
    'CreatorCountry' => 'クリエーター　-　国',
    'CreatorPostalCode' => 'クリエーター　-　郵便番号',
    'CreatorRegion' => 'クリエーター　-　国/州',
@@ -5080,6 +5082,7 @@ $VERSION = '1.19';
     },
    'Subject' => 'サブジェクト',
    'SubjectArea' => '対象領域',
+   'SubjectCode' => 'サブジェクトコード',
    'SubjectDistance' => '対象距離',
    'SubjectDistanceRange' => {
       Description => '被写体距離範囲',
@@ -5505,10 +5508,19 @@ $VERSION = '1.19';
       PrintConv => {
         'Daylight' => '昼光',
         'Flash' => 'ストロボ',
-        'High Color Rendering Fluorescent' => 'ハイカラーレンダリング蛍光灯',
+        'High Color Rendering Fluorescent (3700K)' => 'ハイカラーレンダリング蛍光灯 (1)',
+        'High Color Rendering Fluorescent (5000K)' => 'ハイカラーレンダリング蛍光灯 (3)',
+        'High Color Rendering Fluorescent (cool white)' => 'ハイカラーレンダリング蛍光灯 (2)',
+        'High Color Rendering Fluorescent (daylight)' => 'ハイカラーレンダリング蛍光灯 (4)',
+        'High Color Rendering Fluorescent (warm white)' => 'ハイカラーレンダリング蛍光灯 (0)',
         'Incandescent' => '電球',
         'None' => '無し',
-        'Standard Fluorescent' => '標準蛍光灯',
+        'Standard Fluorescent (3700K)' => '標準蛍光灯 (1)',
+        'Standard Fluorescent (5000K)' => '標準蛍光灯 (3)',
+        'Standard Fluorescent (6500K)' => '標準蛍光灯 (4)',
+        'Standard Fluorescent (cool white)' => '標準蛍光灯 (2)',
+        'Standard Fluorescent (high temperature mercury vapor)' => '標準蛍光灯 (5)',
+        'Standard Fluorescent (warm white)' => '標準蛍光灯 (0)',
       },
     },
    'WBAdjMode' => {
@@ -5798,7 +5810,7 @@ and values.
 
 =head1 AUTHOR
 
-Copyright 2003-2013, Phil Harvey (phil at owl.phy.queensu.ca)
+Copyright 2003-2015, Phil Harvey (phil at owl.phy.queensu.ca)
 
 This library is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

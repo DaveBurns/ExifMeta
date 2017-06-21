@@ -16,7 +16,7 @@ use strict;
 use vars qw($VERSION %sigmaLensTypes);
 use Image::ExifTool::Exif;
 
-$VERSION = '1.12';
+$VERSION = '1.14';
 
 # sigma LensType lookup (ref PH)
 %sigmaLensTypes = (
@@ -45,6 +45,7 @@ $VERSION = '1.12';
     1003 => 'Sigma 19mm F2.8', # (DP1 Merrill kit)
     1004 => 'Sigma 30mm F2.8', # (DP2 Merrill kit)
     1005 => 'Sigma 50mm F2.8 Macro', # (DP3 Merrill kit)
+    1007 => 'Sigma 30mm F2.8', # (DP2 Quattro kit)
     8900 => 'Sigma 70-300mm F4-5.6 DG OS', # (SD15)
     'A100' => 'Sigma 24-70mm F2.8 DG Macro', # (SD15)
     # 'FFFF' - seen this for a 28-70mm F2.8 lens
@@ -247,10 +248,10 @@ $VERSION = '1.12';
     0x001c => [ #PH
         {
             Name => 'PreviewImageSize',
-            Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
+            Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
             Notes => q{
-                PreviewImageStart for the SD1 and Merrill models, and PreviewImageSize for
-                others
+                PreviewImageStart for the SD1 and Merrill/Quattro models, and
+                PreviewImageSize for others
             },
             Writable => 'int16u',
             Count => 2,
@@ -267,10 +268,10 @@ $VERSION = '1.12';
     0x001d => [ #PH
         {
             Name => 'MakerNoteVersion',
-            Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
+            Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
             Notes => q{
-                PreviewImageLength for the SD1 and Merrill models, and MakerNoteVersion for
-                others
+                PreviewImageLength for the SD1 and Merrill/Quattro models, and
+                MakerNoteVersion for others
             },
             Writable => 'undef',
         },{
@@ -285,7 +286,7 @@ $VERSION = '1.12';
     # 0x001e - int16u: 0, 4, 13 - flash mode for other models?
     0x001e => { #PH
         Name => 'PreviewImageSize',
-        Condition => '$$self{Model} =~ /^SIGMA DP\d Merrill$/',
+        Condition => '$$self{Model} =~ /^SIGMA (DP\d (Merrill|Quattro))$/i',
         Notes => 'only valid for some models',
         Writable => 'int16u',
         Count => 2,
@@ -293,8 +294,11 @@ $VERSION = '1.12';
     0x001f => [ #PH
         {
             Name => 'AFPoint', # (NC -- invalid for SD9,SD14?)
-            Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-            Notes => 'MakerNoteVersion for the SD1 and Merrill models, and AFPoint for others',
+            Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+            Notes => q{
+                MakerNoteVersion for the SD1 and Merrill/Quattro models, and AFPoint for
+                others
+            },
             # values: "", "Center", "Center,Center", "Right,Right"
         },{
             Name => 'MakerNoteVersion',
@@ -305,35 +309,35 @@ $VERSION = '1.12';
     # 0x0021 - string: " " for most models, or int8u[2]: '3 3' for the DP3 Merrill
     0x0022 => { #PH (NC)
         Name => 'FileFormat',
-        Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'models other than the SD1 and Merrill models',
+        Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+        Notes => 'models other than the SD1 and Merrill/Quattro models',
         # values: "JPG", "JPG-S", "JPG-P", "X3F", "X3F-S"
     },
     # 0x0023 - string: "", 10, 83, 131, 145, 150, 152, 169
     0x0024 => { # (invalid for SD9,SD14?)
         Name => 'Calibration',
-        Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'models other than the SD1 and Merrill models',
+        Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+        Notes => 'models other than the SD1 and Merrill/Quattro models',
     },
     # 0x0025 - string: "", "0.70", "0.90"
     # 0x0026-2b - int32u: 0
     0x0026 => { #PH (NC)
         Name => 'FileFormat',
-        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'SD1 and Merrill models only',
+        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+        Notes => 'SD1 and Merrill/Quattro models only',
     },
     0x0027 => { #PH
         Name => 'LensType',
-        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'SD1 and Merrill models only',
+        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+        Notes => 'SD1 and Merrill/Quattro models only',
         SeparateTable => 'LensType',
         ValueConvInv => '$val=~s/\.\d+$//; $val', # (truncate decimal part)
         PrintConv => \%sigmaLensTypes,
     },
     0x002a => { #PH
         Name => 'LensFocalRange',
-        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'SD1 and Merrill models only',
+        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+        Notes => 'SD1 and Merrill/Quattro models only',
         Writable => 'rational64u',
         Count => 2,
         PrintConv => '$val=~s/ / to /; $val',
@@ -343,8 +347,8 @@ $VERSION = '1.12';
         Name => 'LensMaxApertureRange',
         # for most models this gives the max aperture at the long/short focal lengths,
         # but for some models this gives the min/max aperture
-        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'SD1 and Merrill models only',
+        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+        Notes => 'SD1 and Merrill/Quattro models only',
         Writable => 'rational64u',
         Count => 2,
         PrintConv => '$val=~s/ / to /; $val',
@@ -365,6 +369,7 @@ $VERSION = '1.12';
             5 => 'Neutral',
             6 => 'Portrait',
             7 => 'Landscape',
+            8 => 'FOV Classic Blue',
         },
     },
     # 0x002d - int32u: 0
@@ -373,10 +378,10 @@ $VERSION = '1.12';
     0x0030 => [ #PH
         {
             Name => 'LensApertureRange',
-            Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
+            Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
             Notes => q{
-                Calibration for the SD1 and Merrill models, and LensApertureRange for
-                others. Note that LensApertureRange changes with focal length, and some
+                Calibration for the SD1 and Merrill/Quattro models, and LensApertureRange
+                for others. Note that LensApertureRange changes with focal length, and some
                 models report the maximum aperture here
             },
         },{
@@ -385,8 +390,8 @@ $VERSION = '1.12';
     ],
     0x0031 => { #PH
         Name => 'FNumber',
-        Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'models other than the SD1 and Merrill models',
+        Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+        Notes => 'models other than the SD1 and Merrill/Quattro models',
         Writable => 'rational64u',
         PrintConv => 'sprintf("%.1f",$val)',
         PrintConvInv => '$val',
@@ -394,8 +399,8 @@ $VERSION = '1.12';
     },
     0x0032 => { #PH
         Name => 'ExposureTime',
-        Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'models other than the SD1 and Merrill models',
+        Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+        Notes => 'models other than the SD1 and Merrill/Quattro models',
         Writable => 'rational64u',
         PrintConv => 'Image::ExifTool::Exif::PrintExposureTime($val)',
         PrintConvInv => 'Image::ExifTool::Exif::ConvertFraction($val)',
@@ -403,8 +408,8 @@ $VERSION = '1.12';
     },
     0x0033 => { #PH
         Name => 'ExposureTime2',
-        Condition => '$$self{Model} !~ / (SD1|SD9|SD15|Merrill)$/',
-        Notes => 'models other than the SD1, SD9, SD15 and Merrill models',
+        Condition => '$$self{Model} !~ / (SD1|SD9|SD15|Merrill|Quattro)$/',
+        Notes => 'models other than the SD1, SD9, SD15 and Merrill/Quattro models',
         Writable => 'string',
         ValueConv => '$val * 1e-6',
         ValueConvInv => 'int($val * 1e6 + 0.5)',
@@ -413,15 +418,15 @@ $VERSION = '1.12';
     },
     0x0034 => { #PH
         Name => 'BurstShot',
-        Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'models other than the SD1 and Merrill models',
+        Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+        Notes => 'models other than the SD1 and Merrill/Quattro models',
         Writable => 'int32u',
     },
     # 0x0034 - int32u: 0,1,2,3 or 4
     0x0035 => { #PH
         Name => 'ExposureCompensation',
-        Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'models other than the SD1 and Merrill models',
+        Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+        Notes => 'models other than the SD1 and Merrill/Quattro models',
         Writable => 'rational64s',
         # add a '+' sign to positive values
         PrintConv => '$val and $val =~ s/^(\d)/\+$1/; $val',
@@ -431,28 +436,28 @@ $VERSION = '1.12';
     # 0x0037-38 - string: ""
     0x0039 => { #PH (invalid for SD9, SD14?)
         Name => 'SensorTemperature',
-        Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'models other than the SD1 and Merrill models',
+        Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+        Notes => 'models other than the SD1 and Merrill/Quattro models',
         # (string format)
         PrintConv => 'IsInt($val) ? "$val C" : $val',
         PrintConvInv => '$val=~s/ ?C$//; $val',
     },
     0x003a => { #PH
         Name => 'FlashExposureComp',
-        Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'models other than the SD1 and Merrill models',
+        Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+        Notes => 'models other than the SD1 and Merrill/Quattro models',
         Writable => 'rational64s',
     },
     0x003b => { #PH (how is this different from other Firmware?)
         Name => 'Firmware',
-        Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'models other than the SD1 and Merrill models',
+        Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+        Notes => 'models other than the SD1 and Merrill/Quattro models',
         Priority => 0,
     },
     0x003c => { #PH
         Name => 'WhiteBalance',
-        Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'models other than the SD1 and Merrill models',
+        Condition => '$$self{Model} !~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+        Notes => 'models other than the SD1 and Merrill/Quattro models',
         Priority => 0,
     },
     0x003d => { #PH (new for SD15 and SD1)
@@ -461,13 +466,13 @@ $VERSION = '1.12';
     },
     0x0048 => { #PH
         Name => 'LensApertureRange',
-        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'SD1 and Merrill models only',
+        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+        Notes => 'SD1 and Merrill/Quattro models only',
     },
     0x0049 => { #PH
         Name => 'FNumber',
-        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'SD1 and Merrill models only',
+        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+        Notes => 'SD1 and Merrill/Quattro models only',
         Writable => 'rational64u',
         PrintConv => 'sprintf("%.1f",$val)',
         PrintConvInv => '$val',
@@ -475,63 +480,73 @@ $VERSION = '1.12';
     },
     0x004a => { #PH
         Name => 'ExposureTime',
-        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'SD1 and Merrill models only',
+        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+        Notes => 'SD1 and Merrill/Quattro models only',
         Writable => 'rational64u',
         PrintConv => 'Image::ExifTool::Exif::PrintExposureTime($val)',
         PrintConvInv => 'Image::ExifTool::Exif::ConvertFraction($val)',
         Priority => 0,
     },
-    0x004b => { #PH
+    0x004b => [{ #PH
         Name => 'ExposureTime2',
         Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'SD1 and Merrill models only',
+        Notes => 'SD1 and Merrill/Quattro models only',
         Writable => 'string',
         PrintConv => 'Image::ExifTool::Exif::PrintExposureTime($val)',
         PrintConvInv => 'Image::ExifTool::Exif::ConvertFraction($val)',
-    },
+    },{
+        Name => 'ExposureTime2',
+        Condition => '$$self{Model} =~ /^SIGMA dp\d Quattro$/i',
+        Notes => 'SD1 and Merrill/Quattro models only',
+        Writable => 'string',
+        ValueConv => '$val / 1000000',
+        ValueConvInv => '$val * 1000000',
+        PrintConv => 'Image::ExifTool::Exif::PrintExposureTime($val)',
+        PrintConvInv => 'Image::ExifTool::Exif::ConvertFraction($val)',
+    }],
     0x004d => { #PH
         Name => 'ExposureCompensation',
-        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'SD1 and Merrill models only',
+        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+        Notes => 'SD1 and Merrill/Quattro models only',
         Writable => 'rational64s',
         # add a '+' sign to positive values
         PrintConv => '$val and $val =~ s/^(\d)/\+$1/; $val',
         PrintConvInv => '$val',
     },
+    # 0x0054 - string: "F20","F23"
     0x0055 => { #PH
         Name => 'SensorTemperature',
-        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'SD1 and Merrill models only',
+        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+        Notes => 'SD1 and Merrill/Quattro models only',
         # (string format)
         PrintConv => 'IsInt($val) ? "$val C" : $val',
         PrintConvInv => '$val=~s/ ?C$//; $val',
     },
     0x0056 => { #PH (NC)
         Name => 'FlashExposureComp',
-        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'SD1 and Merrill models only',
+        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+        Notes => 'SD1 and Merrill/Quattro models only',
         Writable => 'rational64s',
     },
     0x0057 => { #PH (how is this different from other Firmware?)
         Name => 'Firmware',
-        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'SD1 and Merrill models only',
+        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+        Notes => 'SD1 and Merrill/Quattro models only',
         Priority => 0,
     },
     0x0058 => { #PH
         Name => 'WhiteBalance',
-        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'SD1 and Merrill models only',
+        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+        Notes => 'SD1 and Merrill/Quattro models only',
         Priority => 0,
     },
     0x0059 => { #PH
         Name => 'DigitalFilter',
-        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d Merrill)$/',
-        Notes => 'SD1 and Merrill models only',
+        Condition => '$$self{Model} =~ /^SIGMA (SD1( Merrill)?|DP\d (Merrill|Quattro))$/i',
+        Notes => 'SD1 and Merrill/Quattro models only',
         # seen: Standard, Landscape,Monochrome,Neutral,Portrait,Sepia,Vivid
     },
-    # 0x005a/b/c = 0/10 for the SD1
+    # 0x005a/b/c - rational64s: 0/10 for the SD1
 );
 
 1;  # end
@@ -553,7 +568,7 @@ Sigma and Foveon maker notes in EXIF information.
 
 =head1 AUTHOR
 
-Copyright 2003-2013, Phil Harvey (phil at owl.phy.queensu.ca)
+Copyright 2003-2015, Phil Harvey (phil at owl.phy.queensu.ca)
 
 This library is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

@@ -1,7 +1,7 @@
 --[[
         User-editable configuration for exif-meta.
         
-        a.k.a. stuff I was too lazy to put in plugin preferences...
+        a.k.a. "stuff I was too lazy to make a UI for".
 --]]
 
 
@@ -26,7 +26,7 @@ local _t = {}
             - or set to one of the standard path names, as supported by Lightroom SDK (see LrPathUtils.getStandardFilePath in API doc) - typically 'temp'.
 --]]
 _t.exifTempDir = nil -- so its same as its been forever...
--- _t.exifTempDir = 'temp' -- uncomment this to use system temp folder, if you have it mapped to high-speed device.
+-- _t.exifTempDir = 'temp' -- uncomment this to use system temp folder, if you have it mapped to high-speed device (e.g. ram-disk).
 
 
 
@@ -45,6 +45,9 @@ _t.exifTempDir = nil -- so its same as its been forever...
 local _ts1 = {}
 
 --   A D O B E   P R O P E R
+
+_ts1[#_ts1 + 1] = "'com.adobe.userComment'"
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
 
 _ts1[#_ts1 + 1] = '{ "com.adobe.label", label = "File Info" }'
 _ts1[#_ts1 + 1] = "'com.adobe.filename'"
@@ -141,11 +144,12 @@ _ts1[#_ts1 + 1] = "'com.adobe.isoCountryCode'"
 -- _ts1[#_ts1 + 1] = "'com.adobe.provider'"
 -- _ts1[#_ts1 + 1] = "'com.adobe.source'"
 
--- _ts1[#_ts1 + 1] = "'com.adobe.separator'"
--- _ts1[#_ts1 + 1] = '{ "com.adobe.label", label = "Copyright" }'
--- _ts1[#_ts1 + 1] = "'com.adobe.copyright'"
--- _ts1[#_ts1 + 1] = "'com.adobe.rightsUsageTerms'"
--- _ts1[#_ts1 + 1] = "'com.adobe.copyrightInfoURL'"
+_ts1[#_ts1 + 1] = "'com.adobe.separator'"
+_ts1[#_ts1 + 1] = '{ "com.adobe.label", label = "Copyright" }'
+_ts1[#_ts1 + 1] = "'com.adobe.copyright'"
+_ts1[#_ts1 + 1] = "'com.adobe.copyrightState'" -- copyright status.
+_ts1[#_ts1 + 1] = "'com.adobe.rightsUsageTerms'"
+_ts1[#_ts1 + 1] = "'com.adobe.copyrightInfoURL'"
 
 
 -- _ts1[#_ts1 + 1] = "'com.adobe.separator'"
@@ -198,6 +202,11 @@ _ts1[#_ts1 + 1] = "'com.robcole.lightroom.ChangeManager.*'"
 
 --   c u s t o m   m e t a d a t a
 _ts1[#_ts1 + 1] = "'com.robcole.lightroom.metadata.RC_CustomMetadata.*'"  -- my version of custom metadata.
+
+
+
+--   m e t a d a t a   e x t e n s i o n s
+_ts1[#_ts1 + 1] = "'com.robcole.MetadataExtensions.*'"
 
 
 
@@ -288,13 +297,15 @@ _ts1[#_ts1 + 1] = "'com.robcole.DevMeta.CropHeight'"
 _ts1[#_ts1 + 1] = "'com.robcole.DevMeta.retouched'"
 _ts1[#_ts1 + 1] = "'com.robcole.DevMeta.redeye'"
 _ts1[#_ts1 + 1] = "'com.robcole.DevMeta.gradients'"
+_ts1[#_ts1 + 1] = "'com.robcole.DevMeta.radGradients'"
 _ts1[#_ts1 + 1] = "'com.robcole.DevMeta.brushes'"
 _ts1[#_ts1 + 1] = "'com.adobe.separator'"
 _ts1[#_ts1 + 1] = "'com.robcole.DevMeta.stackPos'"
 _ts1[#_ts1 + 1] = "'com.robcole.DevMeta.pixelCount'"
 _ts1[#_ts1 + 1] = "'com.robcole.DevMeta.aspectRatio'"
 
-
+--   source-photo plugin.
+_ts1[#_ts1 + 1] = "'com.robcole.SourcePhoto.*'"
 
 --   n x   t o o & e y
 _ts1[#_ts1 + 1] = "'com.robcole.lightroom.NxToo.*'"
@@ -410,6 +421,70 @@ _t.maxTags = 7
 
 
 --[[
+        Exif metadata name prefixes in mixed case.
+        
+        Index is lower case 1-5 character camera make prefix.
+--]]
+local namePrefixes = {
+    ['canon'] = "Canon",
+    ['fuji'] = "Fuji",
+    ['nikon'] = "Nikon",
+    ['panas'] = "Panasonic",
+    ['sony'] = "Sony",
+    -- add more here if desired.
+}
+
+
+
+--[[
+        Nikon's 51-point autofocusing system (e.g. D3, D4, D300, D700, D800).
+        
+        Note: first character is row number, so don't change that unless you change corresponding code below in getNameAndValue function.
+              (the other characters you can change freely).
+--]]
+local nikonAf51Points = {
+              A1="1-4", A2="1-3", A3="1-2", A4="1-1", A5="1(0)", A6="1+1", A7="1+2", A8="1+3", A9="1+4",
+    B1="2-5", B2="2-4", B3="2-3", B4="2-2", B5="2-1", B6="2(0)", B7="2+1", B8="2+2", B9="2+3", B10="2+4", B11="2+5",
+    C1="3-5", C2="3-4", C3="3-3", C4="3-2", C5="3-1", C6="3(0)", C7="3+1", C8="3+2", C9="3+3", C10="3+4", C11="3+5",
+    D1="4-5", D2="4-4", D3="4-3", D4="4-2", D5="4-1", D6="4(0)", D7="4+1", D8="4+2", D9="4+3", D10="4+4", D11="4+5",
+              E1="5-4", E2="5-3", E3="5-2", E4="5-1", E5="5(0)", E6="5+1", E7="5+2", E8="5+3", E9="5+4",
+}
+
+
+
+--[[        
+        Consider option: '*' suffix to distinguish cross-type sensors, if that seems pertinent: it's the center 3 columns (15 points) for most models.
+        
+        Examples:
+            local crossTypeSuffix = nil -- let plugin decide (it will omit cross-type distinction).
+            local crossTypeSuffix = '*' -- append asterisk to distinguish cross-type sensors.
+--]]
+local crossTypeSuffix = '*'
+
+
+
+-- apply cross-type suffix to D3/300 & compatibles (not sure if this is same for D4...).
+if str:is( crossTypeSuffix ) then
+    nikonAf51Points.A4 = nikonAf51Points.A4 .. crossTypeSuffix
+    nikonAf51Points.A5 = nikonAf51Points.A5 .. crossTypeSuffix
+    nikonAf51Points.A6 = nikonAf51Points.A6 .. crossTypeSuffix
+    nikonAf51Points.B5 = nikonAf51Points.B5 .. crossTypeSuffix
+    nikonAf51Points.B6 = nikonAf51Points.B6 .. crossTypeSuffix
+    nikonAf51Points.B7 = nikonAf51Points.B7 .. crossTypeSuffix
+    nikonAf51Points.C5 = nikonAf51Points.C5 .. crossTypeSuffix
+    nikonAf51Points.C6 = nikonAf51Points.C6 .. crossTypeSuffix
+    nikonAf51Points.C7 = nikonAf51Points.C7 .. crossTypeSuffix
+    nikonAf51Points.D5 = nikonAf51Points.D5 .. crossTypeSuffix
+    nikonAf51Points.D6 = nikonAf51Points.D6 .. crossTypeSuffix
+    nikonAf51Points.D7 = nikonAf51Points.D7 .. crossTypeSuffix
+    nikonAf51Points.E4 = nikonAf51Points.E4 .. crossTypeSuffix
+    nikonAf51Points.E5 = nikonAf51Points.E5 .. crossTypeSuffix
+    nikonAf51Points.E6 = nikonAf51Points.E6 .. crossTypeSuffix
+end
+
+
+
+--[[
         Function to map name and value from exif to preferred name, and or value format.
         
         *** Instructions: Return string for name, and string value (array of strings for mapped value may be implemented some day, but @15/Sep/2013 18:03, hasn't been).
@@ -480,6 +555,281 @@ _t.getNameAndValue = function( params )
         return params.name, params.value
     end
 end
+
+
+
+--[[
+        Table to string delimiter.
+        
+        Examples:
+            _t.tableToStringDelimiter = ", " -- comma-space.
+            _t.tableToStringDelimiter = " | " -- no vbars in data, so a better delimiter than comma.
+            _t.tableToStringDelimiter = "\n" -- I like mine on separate lines.
+            _t.tableToStringDelimiter = nil -- let plugin decide. @8/Jan/2015 19:41 will decide " | " (space-vbar-space).
+--]]
+_t.tableToStringDelimiter = nil
+
+
+
+--[[
+        Define special handling of table metadata (in addition to being converted to string for big-block and individual text field).
+        
+        left is metadata table name/id, right is lua table which defines handling - all members are optional, including: parentKeywordPath, parentSynonyms, parentIncludeOnExport, childIncludeOnExport.
+        
+        Notes:
+            * child synonyms are not supported.
+            * parent-synonyms, if supplied, must be in table form, more specifically: an array of strings.
+            * to put keywords in root, enter "" or "/" as parent keyword path. for parent-keyword-path to match metadata table name, set to nil.
+            * parent keyword path may begin with a slash, or not - won't affect anything.
+--]]
+local tableToKeywordDefs = {
+    RegionName = { parentKeywordPath = "/RegionNames" }
+}        
+        
+
+
+--[[
+        Function to translate a table of metadata values into it's string representation.
+        
+        May include additional custom handling too, if specified above, e.g. to write table values as keywords.
+        
+        *** BEWARE: xmlTbl param is proprietary format and is both undocumented and subject to deprecation in the future.
+            if you start getting no-xml-table errors, you'll need to recode for the new format - sorry for the inconvenience.
+        
+        Examples:
+            _t.tableToString = nil -- let plugin decide. @8/Jan/2015 19:49 it will decide to concat text values with above-specified delimiter.
+            _t.tableToString = tableToString_custom -- use the custom version in this file.
+--]]
+local function tableToString_custom( params )
+    local photo = params.photo or error( "no photo" )
+    local label = params.label or error( "no label" ) -- ns:name
+    local group = params.group or error( "no group" ) -- ns
+    local compName = params.compName or error( "no comp-name" ) -- name (ID).
+    local delim = params.delim or error( "no delim" ) -- default before calling.
+    local xmlTbl = params.xmlTbl or error( "no xml table" )
+    --Debug.pause( label, group, compName, delim, #( xmlTbl or {} ) )
+    local nameBuf = {} -- keyword name bufffer
+    for i, v in ipairs( xmlTbl ) do
+        local value = v[1]
+        local typ = type( value )
+        if typ == 'string' then
+            nameBuf[#nameBuf + 1] = value
+        elseif typ ~= 'table' then -- won't be a function.
+            nameBuf[#nameBuf + 1] = tostring( value ) -- should be usable, e.g. number.
+        else -- table
+            return nil -- skip table of tables - not implemented, yet.
+        end
+    end
+    local kwDef = tableToKeywordDefs[compName]
+    if kwDef then -- table metadata to become keywords and applied to photo.
+        local cache = lrMeta:createCache{ photos={ photo }, rawIds={ 'keywords' } } -- a little unusual caching metadata for one photo, but it may need to be accessed repeatedly, so..
+        local parentKeywordPath = kwDef.parentKeywordPath or compName
+        local parentKeyword, noParent
+        if parentKeywordPath ~= "" and parentKeywordPath ~= "/" then -- comp-name or non-root.
+            parentKeyword, noParent = keywords:assureKeyword( parentKeywordPath, kwDef.parentSynonyms or nil, var:value( kwDef.parentIncludeOnExport, true ) )
+        else -- root
+            parentKeywordPath = ""
+            parentKeyword = true -- not used except as flag.
+        end
+        if parentKeyword then
+            local inclOnExp = var:value( kwDef.childIncludeOnExport, true )
+            for i, name in ipairs( nameBuf ) do
+                if str:is( name ) then
+                    local keywordPath = parentKeywordPath.."/"..name
+                    local childKeyword, noChild = keywords:assureKeyword( keywordPath, nil, inclOnExp ) -- child synonums not (yet) supported.
+                    if childKeyword then
+                        local applied, qual = keywords:applyKeyword( photo, childKeyword, cache )
+                        if applied then
+                            if qual then
+                                app:logV( "Keyword was already applied: ^1", keywordPath )
+                            else
+                                app:logV( "Applied keyword: ^1", keywordPath )
+                            end
+                        else
+                            app:logW( qual )
+                        end
+                    else
+                        app:logW( noChild )
+                    end
+                else
+                    Debug.pause( "?" )
+                end    
+            end
+        else
+            app:logW( noParent )
+        end
+    -- else dont care..
+    end    
+    return table.concat( nameBuf, delim )
+end
+_t.tableToString = nil -- tableToString_custom
+
+
+
+
+--------------------------------------------
+--        Elare Plugin Framework preferences.
+---------------------------------------------
+--        (not all are used in every plugin)
+---------------------------------------------
+--        Note: If plugin defines a UI for these,
+--        then values in here will be ineffective.
+--------------------------------------------
+
+
+
+--[[
+        ChangeManager toolkit ID, used for determining photo lock status from other (non-ChangeManager) plugins,
+        and/or for pausing ChangeManager's background task from other plugins.
+        
+        Leave this nil if you don't use ChangeManager (or at least not for the locking feature),
+        or if you want leave it up to the plugin to determine whether ChangeManager is installed and what it's ID is.
+        
+        Or, you can set an explicit value if you are using a bastardized version of it, or have more than one version installed.
+        
+        Examples:
+        
+            _t.changeManagerId = nil -- ChangeManager not used, or let plugin figure it.
+            _t.changeManagerId = "com.robcole.debug.ChangeManagerDebug" -- running special debug version of ChangeManager.
+--]]
+_t.changeManagerId = nil
+
+
+
+--[[
+        Save Metadata Mode - what technique used when metadata must be saved.
+        
+        Examples:
+        
+            _t.saveMetadataMode = 'auto'       -- automatic (scripted keystroke method, which may not work on some systems).
+            _t.saveMetadataMode = 'manual'     -- manual (no keystrokes issued, user must take responsibility each time, then answer a prompt).
+            _t.saveMetadataMode = nil          -- let plugin decide.
+--]]
+_t.saveMetadataMode = nil
+
+
+
+--[[
+        Keyboard character issued to save metadata.
+        
+        Examples:
+        
+            _t.saveMetadataKeyChar = 's'        -- std english keyboards.
+            _t.saveMetadataKeyChar = nil        -- let plugin decide
+--]]
+_t.saveMetadataKeyChar = nil
+
+
+
+--[[
+        How long (in seconds) metadata save box is displayed in manual mode to give user a chance to save metadata manually.
+        
+        Examples:
+        
+            _t.delayForManualMetadataSaveBox = 2          -- 2 seconds.
+            _t.delayForManualMetadataSaveBox = nil        -- let plugin decide
+--]]
+_t.delayForManualMetadataSaveBox = nil
+
+
+
+--[[
+        Maximum time to wait (in seconds) in manual mode, before giving up on metadata read.
+        
+        *** Despite the name, applies in Windows too.
+        
+        Examples:
+        
+            _t.timeRequiredToReadMetadataOnMac = 7          -- 7 seconds.
+            _t.timeRequiredToReadMetadataOnMac = nil        -- let plugin decide
+--]]
+_t.timeRequiredToReadMetadataOnMac = nil
+
+
+
+--[[
+        Read Metadata Mode - what technique used when metadata must be read.
+        
+        *** Best *not* to set this to 'auto' if using Mac.
+        
+        Examples:
+        
+            _t.readMetadataMode = 'auto'       -- automatic (scripted keystroke method, which may not work on some systems).
+            _t.readMetadataMode = 'manual'     -- manual (no keystrokes issued, user must take responsibility each time, then answer a prompt).
+            _t.readMetadataMode = nil          -- let plugin decide.
+--]]
+_t.readMetadataMode = nil
+
+
+
+--[[
+        Alt-keyboard character issued to read metadata.
+        
+        *** Does not apply on Mac.
+        
+        Examples:
+        
+            _t.readMetadataKeyChar = 'mr'        -- std english keyboards.
+            _t.readMetadataKeyChar = nil        -- let plugin decide
+--]]
+_t.readMetadataKeySeq = nil
+
+
+
+--[[
+        Keyboard character issued to invoke grid mode of library module.
+        
+        Examples:
+        
+            _t.gridModeChar = 'g'        -- std english keyboards.
+            _t.gridModeChar = nil        -- let plugin decide
+--]]
+_t.gridModeChar = nil
+
+
+
+--[[
+        Base time to wait (in seconds) for various time-sensitive operations that involve delays for settling time in Lightroom.
+        
+        Examples:
+        
+            _t.timebase = .1          -- 1/10th of a second.
+            _t.timebase = nil        -- let plugin decide
+--]]
+_t.timebase = nil
+
+
+
+--[[
+        Determines whether picked photos should be subject to deletion or not, when deleting photos.
+        
+        Examples:
+        
+            _t.preservePicks = true -- do not delete photos with pick flag set.
+            _t.preservePicks = false -- ok to delete picked photos too.
+            _t.preservePicks = nil -- let plugin decide (usually: ok to delete picked photos too).
+--]]
+_t.preservePicks = nil
+
+
+
+--[[
+        Filesystem time tolerance, used in conjunction with save-metadata validation.
+        
+        Smaller numbers assure no false positives, but may result in occasional or persistent inability to validate metadata saving.
+        Larger numbers are less likely to have save-metadata validation timeouts, but run the risk of metadata being considered saved, when it wasn't yet.
+        
+        Most local file-systems are reporting times to Lr to the nearest second, +/- 1 second, so a file-system
+        time tolerance of 2 is minimal. You may however need to bump this to 3 or 4, but local filesystem should not require more.
+        Network filesystems may require up to several seconds. More than a dozen seconds or so would make me uneasy (may cause unreliable results).
+        
+        Examples:
+            _t.fsTimeTolerance = 2 -- set to minimal (which @13/Nov/2013, is also the default).
+            _t.fsTimeTolerance = 4 -- doubled to increase reliability of save-metadata validation.
+            _t.fsTimeTolerance = 8 -- doubled to accomodate network file-system.
+            _t.fsTimeTolerance = nil -- let plugin decide (@13/Nov/2013, it will decide: 2).
+--]]
+_t.fsTimeTolerance = nil
 
 
 

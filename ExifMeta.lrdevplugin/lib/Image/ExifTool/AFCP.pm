@@ -14,7 +14,7 @@ use strict;
 use vars qw($VERSION);
 use Image::ExifTool qw(:DataAccess :Utils);
 
-$VERSION = '1.05';
+$VERSION = '1.06';
 
 sub ProcessAFCP($$);
 
@@ -69,7 +69,7 @@ for the AFCP specification.
 # - returns Fixup reference in dirInfo hash when writing
 sub ProcessAFCP($$)
 {
-    my ($exifTool, $dirInfo) = @_;
+    my ($et, $dirInfo) = @_;
     my $raf = $$dirInfo{RAF};
     my $curPos = $raf->Tell();
     my $offset = $$dirInfo{Offset} || 0;    # offset from end of file
@@ -119,14 +119,14 @@ NoAFCP: for (;;) {
         $$dirInfo{DirLen} = $endPos - ($startPos + $fix);
 
         $rtnVal = 1;
-        my $verbose = $exifTool->Options('Verbose');
-        my $out = $exifTool->Options('TextOut');
+        my $verbose = $et->Options('Verbose');
+        my $out = $et->Options('TextOut');
         my $outfile = $$dirInfo{OutFile};
         if ($outfile) {
             # allow all AFCP information to be deleted
-            if ($exifTool->{DEL_GROUP}->{AFCP}) {
+            if ($$et{DEL_GROUP}{AFCP}) {
                 $verbose and print $out "  Deleting AFCP\n";
-                ++$exifTool->{CHANGED};
+                ++$$et{CHANGED};
                 last;
             }
             $dirBuff = $valBuff = '';
@@ -135,26 +135,26 @@ NoAFCP: for (;;) {
             $fixup or $fixup = $$dirInfo{Fixup} = new Image::ExifTool::Fixup;
             $vers = substr($buff, 4, 2); # get version number
         } else {
-            $exifTool->DumpTrailer($dirInfo) if $verbose or $exifTool->{HTML_DUMP};
+            $et->DumpTrailer($dirInfo) if $verbose or $$et{HTML_DUMP};
         }
         # read AFCP directory data
         my $numEntries = Get16u(\$buff, 6);
         my $dir;
         unless ($raf->Read($dir, 12 * $numEntries) == 12 * $numEntries) {
-            $exifTool->Error('Error reading AFCP directory', 1);
+            $et->Error('Error reading AFCP directory', 1);
             last;
         }
         if ($verbose > 2 and not $outfile) {
             my $dat = $buff . $dir;
             print $out "  AFCP Directory:\n";
-            Image::ExifTool::HexDump(\$dat, undef,
+            HexDump(\$dat, undef,
                 Addr   => $$dirInfo{DataPos},
                 Width  => 12,
-                Prefix => $exifTool->{INDENT},
+                Prefix => $$et{INDENT},
                 Out => $out,
             );
         }
-        $fix and $exifTool->Warn("Adjusted AFCP offsets by $fix", 1);
+        $fix and $et->Warn("Adjusted AFCP offsets by $fix", 1);
 #
 # process AFCP directory
 #
@@ -171,7 +171,7 @@ NoAFCP: for (;;) {
             {
                 if ($outfile) {
                     # rewrite this information
-                    my $tagInfo = $exifTool->GetTagInfo($tagTablePtr, $tag);
+                    my $tagInfo = $et->GetTagInfo($tagTablePtr, $tag);
                     if ($tagInfo and $$tagInfo{SubDirectory}) {
                         my %subdirInfo = (
                             DataPt => \$buff,
@@ -181,7 +181,7 @@ NoAFCP: for (;;) {
                             Parent => 'AFCP',
                         );
                         my $subTable = GetTagTable($tagInfo->{SubDirectory}->{TagTable});
-                        my $newDir = $exifTool->WriteDirectory(\%subdirInfo, $subTable);
+                        my $newDir = $et->WriteDirectory(\%subdirInfo, $subTable);
                         if (defined $newDir) {
                             $size = length $newDir;
                             $buff = $newDir;
@@ -192,7 +192,7 @@ NoAFCP: for (;;) {
                     $valBuff .= $buff;
                 } else {
                     # extract information
-                    $exifTool->HandleTag($tagTablePtr, $tag, $buff,
+                    $et->HandleTag($tagTablePtr, $tag, $buff,
                         DataPt => \$buff,
                         Size => $size,
                         Index => $index,
@@ -200,7 +200,7 @@ NoAFCP: for (;;) {
                     );
                 }
             } else {
-                $exifTool->Warn("Bad AFCP directory");
+                $et->Warn("Bad AFCP directory");
                 $rtnVal = -1 if $outfile;
                 last;
             }
@@ -262,7 +262,7 @@ scanning for AFCP information.
 
 =head1 AUTHOR
 
-Copyright 2003-2013, Phil Harvey (phil at owl.phy.queensu.ca)
+Copyright 2003-2015, Phil Harvey (phil at owl.phy.queensu.ca)
 
 This library is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

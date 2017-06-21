@@ -17,7 +17,7 @@ use Image::ExifTool qw(:DataAccess :Utils);
 use Image::ExifTool::Exif;
 use Image::ExifTool::RIFF;
 
-$VERSION = '1.20';
+$VERSION = '1.21';
 
 sub ProcessASF($$;$);
 sub ProcessContentDescription($$$);
@@ -405,8 +405,8 @@ my %advancedContentEncryption = (
         Name => 'StreamType',
         Format => 'binary[16]',
         RawConv => sub { # set ASF_STREAM_TYPE for use in conditional tags
-            my ($val, $exifTool) = @_;
-            $exifTool->{ASF_STREAM_TYPE} = $streamType{GetGUID($val)} || '';
+            my ($val, $et) = @_;
+            $$et{ASF_STREAM_TYPE} = $streamType{GetGUID($val)} || '';
             return $val;
         },
         ValueConv => 'Image::ExifTool::ASF::GetGUID($val)',
@@ -524,7 +524,7 @@ sub GetGUID($)
 # Returns: 1 on success
 sub ProcessContentDescription($$$)
 {
-    my ($exifTool, $dirInfo, $tagTablePtr) = @_;
+    my ($et, $dirInfo, $tagTablePtr) = @_;
     my $dataPt = $$dirInfo{DataPt};
     my $dirLen = $$dirInfo{DirLen};
     return 0 if $dirLen < 10;
@@ -535,8 +535,8 @@ sub ProcessContentDescription($$$)
         my $len = shift @len;
         next unless $len;
         return 0 if $pos + $len > $dirLen;
-        my $val = $exifTool->Decode(substr($$dataPt,$pos,$len),'UCS2','II');
-        $exifTool->HandleTag($tagTablePtr, $tag, $val);
+        my $val = $et->Decode(substr($$dataPt,$pos,$len),'UCS2','II');
+        $et->HandleTag($tagTablePtr, $tag, $val);
         $pos += $len;
     }
     return 1;
@@ -548,12 +548,12 @@ sub ProcessContentDescription($$$)
 # Returns: 1 on success
 sub ProcessContentBranding($$$)
 {
-    my ($exifTool, $dirInfo, $tagTablePtr) = @_;
+    my ($et, $dirInfo, $tagTablePtr) = @_;
     my $dataPt = $$dirInfo{DataPt};
     my $dirLen = $$dirInfo{DirLen};
     return 0 if $dirLen < 40;
     # decode banner image type
-    $exifTool->HandleTag($tagTablePtr, 0, unpack('V', $$dataPt));
+    $et->HandleTag($tagTablePtr, 0, unpack('V', $$dataPt));
     # decode banner image, banner URL and copyright URL
     my $pos = 4;
     my $tag;
@@ -564,7 +564,7 @@ sub ProcessContentBranding($$$)
         next unless $size;
         return 0 if $pos + $size > $dirLen;
         my $val = substr($$dataPt, $pos, $size);
-        $exifTool->HandleTag($tagTablePtr, $tag, $val);
+        $et->HandleTag($tagTablePtr, $tag, $val);
         $pos += $size;
     }
     return 1;
@@ -577,10 +577,10 @@ sub ProcessContentBranding($$$)
 # Returns: converted value
 sub ReadASF($$$$$)
 {
-    my ($exifTool, $dataPt, $pos, $format, $size) = @_;
+    my ($et, $dataPt, $pos, $format, $size) = @_;
     my @vals;
     if ($format == 0) { # unicode string
-        $vals[0] = $exifTool->Decode(substr($$dataPt,$pos,$size),'UCS2','II');
+        $vals[0] = $et->Decode(substr($$dataPt,$pos,$size),'UCS2','II');
     } elsif ($format == 2) { # 4-byte boolean
         @vals = ReadValue($dataPt, $pos, 'int32u', undef, $size);
         foreach (@vals) {
@@ -604,12 +604,12 @@ sub ReadASF($$$$$)
 # Returns: 1 on success
 sub ProcessExtendedContentDescription($$$)
 {
-    my ($exifTool, $dirInfo, $tagTablePtr) = @_;
+    my ($et, $dirInfo, $tagTablePtr) = @_;
     my $dataPt = $$dirInfo{DataPt};
     my $dirLen = $$dirInfo{DirLen};
     return 0 if $dirLen < 2;
     my $count = Get16u($dataPt, 0);
-    $exifTool->VerboseDir($dirInfo, $count);
+    $et->VerboseDir($dirInfo, $count);
     my $pos = 2;
     my $i;
     for ($i=0; $i<$count; ++$i) {
@@ -623,8 +623,8 @@ sub ProcessExtendedContentDescription($$$)
         my ($dType, $dLen) = unpack("x${pos}v2", $$dataPt);
         $pos += 4;
         return 0 if $pos + $dLen > $dirLen;
-        my $val = ReadASF($exifTool,$dataPt,$pos,$dType,$dLen);
-        $exifTool->HandleTag($tagTablePtr, $tag, $val,
+        my $val = ReadASF($et,$dataPt,$pos,$dType,$dLen);
+        $et->HandleTag($tagTablePtr, $tag, $val,
             DataPt => $dataPt,
             Start  => $pos,
             Size   => $dLen,
@@ -640,12 +640,12 @@ sub ProcessExtendedContentDescription($$$)
 # Returns: 1 on success
 sub ProcessMetadata($$$)
 {
-    my ($exifTool, $dirInfo, $tagTablePtr) = @_;
+    my ($et, $dirInfo, $tagTablePtr) = @_;
     my $dataPt = $$dirInfo{DataPt};
     my $dirLen = $$dirInfo{DirLen};
     return 0 if $dirLen < 2;
     my $count = Get16u($dataPt, 0);
-    $exifTool->VerboseDir($dirInfo, $count);
+    $et->VerboseDir($dirInfo, $count);
     my $pos = 2;
     my $i;
     for ($i=0; $i<$count; ++$i) {
@@ -656,8 +656,8 @@ sub ProcessMetadata($$$)
         my $tag = Image::ExifTool::Decode(undef,substr($$dataPt,$pos,$nameLen),'UCS2','II','Latin');
         $tag =~ s/^WM\///; # remove leading "WM/"
         $pos += $nameLen;
-        my $val = ReadASF($exifTool,$dataPt,$pos,$dType,$dLen);
-        $exifTool->HandleTag($tagTablePtr, $tag, $val,
+        my $val = ReadASF($et,$dataPt,$pos,$dType,$dLen);
+        $et->HandleTag($tagTablePtr, $tag, $val,
             DataPt => $dataPt,
             Start  => $pos,
             Size   => $dLen,
@@ -673,25 +673,25 @@ sub ProcessMetadata($$$)
 # Returns: 1 on success
 sub ProcessPicture($$$)
 {
-    my ($exifTool, $dirInfo, $tagTablePtr) = @_;
+    my ($et, $dirInfo, $tagTablePtr) = @_;
     my $dataPt = $$dirInfo{DataPt};
     my $dirStart = $$dirInfo{DirStart};
     my $dirLen = $$dirInfo{DirLen};
     return 0 unless $dirLen > 9;
     # extract picture type and length
     my ($type, $picLen) = unpack("x${dirStart}CV", $$dataPt);
-    $exifTool->VerboseDir('Picture');
-    $exifTool->HandleTag($tagTablePtr, 0, $type);
+    $et->VerboseDir('Picture');
+    $et->HandleTag($tagTablePtr, 0, $type);
     # extract mime type and description strings (null-terminated unicode strings)
     my $n = $dirLen - 5 - $picLen;
     return 0 if $n & 0x01 or $n < 4;
     my $str = substr($$dataPt, $dirStart+5, $n);
     if ($str =~ /^((?:..)*?)\0\0((?:..)*?)\0\0/s) {
         my ($mime, $desc) = ($1, $2);
-        $exifTool->HandleTag($tagTablePtr, 1, $exifTool->Decode($mime,'UCS2','II'));
-        $exifTool->HandleTag($tagTablePtr, 2, $exifTool->Decode($desc,'UCS2','II')) if length $desc;
+        $et->HandleTag($tagTablePtr, 1, $et->Decode($mime,'UCS2','II'));
+        $et->HandleTag($tagTablePtr, 2, $et->Decode($desc,'UCS2','II')) if length $desc;
     }
-    $exifTool->HandleTag($tagTablePtr, 3, substr($$dataPt, $dirStart+5+$n, $picLen));
+    $et->HandleTag($tagTablePtr, 3, substr($$dataPt, $dirStart+5+$n, $picLen));
     return 1;
 }
 
@@ -701,12 +701,12 @@ sub ProcessPicture($$$)
 # Returns: 1 on success
 sub ProcessCodecList($$$)
 {
-    my ($exifTool, $dirInfo, $tagTablePtr) = @_;
+    my ($et, $dirInfo, $tagTablePtr) = @_;
     my $dataPt = $$dirInfo{DataPt};
     my $dirLen = $$dirInfo{DirLen};
     return 0 if $dirLen < 20;
     my $count = Get32u($dataPt, 16);
-    $exifTool->VerboseDir($dirInfo, $count);
+    $et->VerboseDir($dirInfo, $count);
     my $pos = 20;
     my $i;
     my %codecType = ( 1 => 'Video', 2 => 'Audio' );
@@ -717,13 +717,13 @@ sub ProcessCodecList($$$)
         my $nameLen = Get16u($dataPt, $pos + 2) * 2;
         $pos += 4;
         return 0 if $pos + $nameLen + 2 > $dirLen;
-        my $name = $exifTool->Decode(substr($$dataPt,$pos,$nameLen),'UCS2','II');
-        $exifTool->HandleTag($tagTablePtr, "${type}Name", $name);
+        my $name = $et->Decode(substr($$dataPt,$pos,$nameLen),'UCS2','II');
+        $et->HandleTag($tagTablePtr, "${type}Name", $name);
         my $descLen = Get16u($dataPt, $pos + $nameLen) * 2;
         $pos += $nameLen + 2;
         return 0 if $pos + $descLen + 2 > $dirLen;
-        my $desc = $exifTool->Decode(substr($$dataPt,$pos,$descLen),'UCS2','II');
-        $exifTool->HandleTag($tagTablePtr, "${type}Description", $desc);
+        my $desc = $et->Decode(substr($$dataPt,$pos,$descLen),'UCS2','II');
+        $et->HandleTag($tagTablePtr, "${type}Description", $desc);
         my $infoLen = Get16u($dataPt, $pos + $descLen);
         $pos += $descLen + 2 + $infoLen;
     }
@@ -736,9 +736,9 @@ sub ProcessCodecList($$$)
 # Returns: 1 on success, 0 if this wasn't a valid ASF file
 sub ProcessASF($$;$)
 {
-    my ($exifTool, $dirInfo, $tagTablePtr) = @_;
+    my ($et, $dirInfo, $tagTablePtr) = @_;
     my $raf = $$dirInfo{RAF};
-    my $verbose = $exifTool->Options('Verbose');
+    my $verbose = $et->Options('Verbose');
     my $rtnVal = 0;
     my $pos = 0;
     my ($buff, $err, @parentTable, @childEnd);
@@ -750,9 +750,9 @@ sub ProcessASF($$;$)
         unless ($tagTablePtr) {
             # verify this is a valid ASF file
             last unless $tag eq '75B22630-668E-11CF-A6D9-00AA0062CE6C';
-            my $fileType = $exifTool->{FILE_EXT};
+            my $fileType = $$et{FILE_EXT};
             $fileType = 'ASF' unless $fileType and $fileType =~ /^(ASF|WMV|WMA|DIVX)$/;
-            $exifTool->SetFileType($fileType);
+            $et->SetFileType($fileType);
             SetByteOrder('II');
             $tagTablePtr = GetTagTable('Image::ExifTool::ASF::Main');
             $rtnVal = 1;
@@ -765,9 +765,9 @@ sub ProcessASF($$;$)
         if ($size > 0x7fffffff) {
             if ($size > 0x7fffffff * 4294967296) {
                 $err = 'Invalid ASF object size';
-            } elsif ($exifTool->Options('LargeFileSupport')) {
+            } elsif ($et->Options('LargeFileSupport')) {
                 if ($raf->Seek($size, 1)) {
-                    $exifTool->VPrint(0, "  Skipped large ASF object ($size bytes)\n");
+                    $et->VPrint(0, "  Skipped large ASF object ($size bytes)\n");
                     $pos += $size;
                     next;
                 }
@@ -781,10 +781,10 @@ sub ProcessASF($$;$)
         if (@childEnd and $pos >= $childEnd[-1]) {
             pop @childEnd;
             $tagTablePtr = pop @parentTable;
-            $exifTool->{INDENT} = substr($exifTool->{INDENT},0,-2);
+            $$et{INDENT} = substr($$et{INDENT},0,-2);
         }
-        my $tagInfo = $exifTool->GetTagInfo($tagTablePtr, $tag);
-        $verbose and $exifTool->VerboseInfo($tag, $tagInfo);
+        my $tagInfo = $et->GetTagInfo($tagTablePtr, $tag);
+        $verbose and $et->VerboseInfo($tag, $tagInfo);
         if ($tagInfo) {
             my $subdir = $$tagInfo{SubDirectory};
             if ($subdir) {
@@ -794,7 +794,7 @@ sub ProcessASF($$;$)
                         my $s = $$subdir{Size};
                         if ($verbose > 2) {
                             $raf->Read($buff, $s) == $s or $err = 'Truncated file', last;
-                            $exifTool->VerboseDump(\$buff);
+                            $et->VerboseDump(\$buff);
                         } elsif (not $raf->Seek($s, 1)) {
                             $err = 'Seek error';
                             last;
@@ -805,8 +805,8 @@ sub ProcessASF($$;$)
                         $tagTablePtr = $subTable;
                         $pos += $$subdir{Size};
                         if ($verbose) {
-                            $exifTool->{INDENT} .= '| ';
-                            $exifTool->VerboseDir($$tagInfo{Name});
+                            $$et{INDENT} .= '| ';
+                            $et->VerboseDir($$tagInfo{Name});
                         }
                         next;
                     }
@@ -817,9 +817,9 @@ sub ProcessASF($$;$)
                         DirLen => $size,
                         DirName => $$tagInfo{Name},
                     );
-                    $exifTool->VerboseDump(\$buff) if $verbose > 2;
-                    unless ($exifTool->ProcessDirectory(\%subdirInfo, $subTable, $$subdir{ProcessProc})) {
-                        $exifTool->Warn("Error processing $$tagInfo{Name} directory");
+                    $et->VerboseDump(\$buff) if $verbose > 2;
+                    unless ($et->ProcessDirectory(\%subdirInfo, $subTable, $$subdir{ProcessProc})) {
+                        $et->Warn("Error processing $$tagInfo{Name} directory");
                     }
                     $pos += $size;
                     next;
@@ -831,14 +831,14 @@ sub ProcessASF($$;$)
         }
         if ($verbose > 2) {
             $raf->Read($buff, $size) == $size or $err = 'Truncated file', last;
-            $exifTool->VerboseDump(\$buff);
+            $et->VerboseDump(\$buff);
         } elsif (not $raf->Seek($size, 1)) { # skip the block
             $err = 'Seek error';
             last;
         }
         $pos += $size;
     }
-    $err and $exifTool->Warn($err);
+    $err and $et->Warn($err);
     return $rtnVal;
 }
 
@@ -862,7 +862,7 @@ Windows Media Audio (WMA) and Windows Media Video (WMV) files.
 
 =head1 AUTHOR
 
-Copyright 2003-2013, Phil Harvey (phil at owl.phy.queensu.ca)
+Copyright 2003-2015, Phil Harvey (phil at owl.phy.queensu.ca)
 
 This library is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

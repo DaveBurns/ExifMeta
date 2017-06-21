@@ -967,7 +967,7 @@ end
 
 --- Try to select photos - return status of attempt (no error message).
 --
---  @usage 150msec max if photos not being selected.
+--  @usage 200msec (1/5 second) max if photos not being selected.
 --
 --  @param photos (array of LrPhoto, required) photos to be selected.
 --  @param target (LrPhoto, optional) photo to be most-selected. If passed, must be in photos array; if not passed first photo in array will be most-selected.
@@ -1024,6 +1024,44 @@ function Catalog:tryToSelectPhotos( photos, target )
     end
     -- try without changing anything (maybe Lr is just having a slow hair day..).
     doSelect() -- and check validity (loads status and sets or clears errmsg).
+    if not status then
+        if app:isVerbose() or app:isAdvDbgEna() then -- one (or both) of the trouble-shooting modes is enabled.
+            app:log( "^1 photos to be selected were not selected - gonna try to find out why..", #photos )
+            -- determine if photos to be selected should be selectable.
+            local filmSet = {}
+            local nSelectable = 0
+            for i, src in ipairs( catalog:getActiveSources() ) do
+                local _photos = cat:getPhotosInSource( src, true, false, true ) -- ( anySource, assumeSubfoldersToo, ignoreIfNotTop, ignoreIfBuried )
+                nSelectable = nSelectable + #_photos
+                for i, _p in ipairs( _photos ) do
+                    filmSet[_p] = true
+                end
+            end
+            -- film-set is essentially those photos in the filmstrip that should be selectable (granted, the filter could be denying them, so test is not 100% - if photo on the list, it might not be selectable, but if photo NOT on the list, then it won't be selectable).
+            local allGood = true
+            for i, p in ipairs( photos ) do
+                if filmSet[p] then -- photo should have been selectable
+                    -- 
+                else
+                    app:logW( "Photo to be selected (^1) does not seem to be selectable (but ^2 are) - maybe that's the problem..", cat:getPhotoNameDisp( p, true ), nSelectable )
+                    allGood = false
+                end
+            end
+            if allGood then
+                app:log( "All photos to be selected seem to be selectable - trying again.." )
+                doSelect()
+            -- else warnings have been logged.
+            end
+        else
+            -- it seems the checking-then-retrying in debug/verbose modes is sometimes actually helping to make the selection,
+            -- so here (@12/Jan/2015 13:58), even in normal op mode, there will be one more attempt made before throwing in the towel.
+            -- dont sleep extra, since this is supposed to just be a trial - external logic may do things like turn filters off and select folders or put into collection..
+            catalog:setSelectedPhotos( mostSel, photos )
+            LrTasks.sleep( .05 )
+            checkValidity() -- set final status/errmsg.
+        end
+    -- else selection attempt succeeded.
+    end
     return status, errmsg or "no error message"
 end
 
@@ -2487,47 +2525,72 @@ function Catalog:assurePhotoIsSelected( photo, photoPath )
     elseif photo and not photoPath then
         photoPath = photo:getRawMetadata( 'path' )
     end
+    
+    local function isPhotoSelected()
+        return catalog:getTargetPhoto() == photo and #catalog:getTargetPhotos() == 1    
+    end
+    
+    local function selectPhoto()
+        for i = 1, 3 do -- try for up to 1/3 of a second to select photo and read it back.
+            catalog:setSelectedPhotos( photo, { photo } ) -- note: this will set the photo selection, but it won't necessarily *be* selected (in UI) after calling,
+            -- especially, as example, immediately after importing, before Lr has had a chance to fully load, in which case, beware - handle appropriately in calling context.
+            LrTasks.sleep( .05 )
+            if isPhotoSelected() then
+                return true
+            else
+                LrTasks.sleep( .05 )
+            end
+        end
+    end
+    
     if photo then
         
-        catalog:setSelectedPhotos( photo, { photo } ) -- note: this will set the photo selection, but it won't necessarily *be* selected (in UI) after calling,
-            -- especially, as example, immediately after importing, before Lr has had a chance to fully load, in which case, beware - handle appropriately in calling context.
-        if catalog:getTargetPhoto() ~= photo then -- photo not selected (not visible or not in filmstrip).
-            local folderPath = LrPathUtils.parent( photoPath )
-            local lrFolder = cat:getFolderByPath( folderPath ) -- method changed in 2014, if OK by 2016 - delete comment.
-            local found = false
-            if lrFolder then
-            
-                -- Note: No way to assure photo is selected, unless source becomes exclusive.
-                
-                local s, m = catalog:setActiveSources{ lrFolder } -- Note: calling context must restore active sources if need be.
-                if s then                    
-                    app:logVerbose( "Set lr-folder as active source: ^1", folderPath )
-                else
-                    app:logW( "Unable to assure photo is selected - unable to set active source to folder containing photo." )
-                    return false -- can't assure photo selected if can't assure source is set.
-                end
-                catalog:setSelectedPhotos( photo, { photo } )
-    			if catalog:getTargetPhoto() ~= photo then -- photo not selected (not visible or not in filmstrip).
-    				app:logVerbose( "Unable to select photo (^1) in newly set source folder (^2)", photoPath, lrFolder:getName() ) -- got this error once even though it was selected.
-    			    -- may be due to stackage or lib filter.
-    			else
-    				app:logInfo( "Photo in newly selected source now selected: " .. photoPath )
-    				return true
-    			end
-    			
-            else
-                app:logW( "Unable to locate folder (in catalog) by path: ^1", folderPath )
-                return false
-            end
-        else -- selected properly already.
-            app:logVerbose( "Photo already selected: ^1", photoPath )
+        if isPhotoSelected() then
+            app:logV( "Photo was already selected: ^1", photoPath )
             return true
+        end
+        -- photo not selected.        
+        
+        if selectPhoto() then
+            return true
+        end
+
+        -- fall-through => not selected.        
+        
+        -- reminder: this algorithm depends on folder of origin being activated, since next step is to assure photo not buried in *folder* stack.
+        
+        local folderPath = LrPathUtils.parent( photoPath )
+        local lrFolder = cat:getFolderByPath( folderPath ) -- method changed in 2014, if OK by 2016 - delete comment.
+        local found = false
+        if lrFolder then
+        
+            -- Note: No way to assure photo is selected, unless source becomes exclusive.
+            
+            local s, m = catalog:setActiveSources{ lrFolder } -- Note: calling context must restore active sources if need be.
+            if s then                    
+                app:logVerbose( "Set lr-folder as active source: ^1", folderPath )
+            else
+                app:logW( "Unable to assure photo is selected - unable to set active source to folder containing photo." )
+                return false -- can't assure photo selected if can't assure source is set.
+            end
+			if selectPhoto() then
+				app:log( "Photo in newly selected source now selected: ^1", photoPath )
+				return true
+			else -- photo not selected (not visible or not in filmstrip).
+				app:logV( "Unable to select photo (^1) in newly set source folder (^2)", photoPath, lrFolder:getName() ) -- got this error once even though it was selected.
+			    -- may be due to stackage or lib filter.
+			end
+			
+        else
+            app:logW( "Unable to locate folder (in catalog) by path: ^1", folderPath )
+            return false
         end
     else
         app:logWarning( "No photo for path: " .. photoPath )
         return false
     end
     -- fall-through => not able to select existing photo.
+    -- same logic as "is-buried-in-stack" method, but has enhanced logging, so keeping here.
     local isStacked = photo:getRawMetadata( 'isInStackInFolder' )
     if isStacked then
         local stackPos = photo:getRawMetadata( 'stackPositionInFolder' )
@@ -2536,34 +2599,24 @@ function Catalog:assurePhotoIsSelected( photo, photoPath )
         else
             local collapsed = photo:getRawMetadata( 'stackInFolderIsCollapsed' )
             if collapsed then
-                app:logWarning( "Photo can not be selected when buried in collapsed stack: " .. photoPath )
-                return false -- impossible to select, despite lib filter setting.
+                app:logW( "Photo can not be selected when buried in collapsed stack: " .. photoPath )
+                return false -- impossible to select, regardless of lib filter setting.
             else
-                app:logVerbose( "Unable to select stacked photo despite not being collapsed in folder of origin: " .. photoPath ) -- may still be due to lib filter.
+                app:logV( "So far, unable to select stacked photo despite not being collapsed in folder of origin: " .. photoPath ) -- may still be due to lib filter.
             end
         end
     else
-        app:logVerbose( "Unable to select photo that is not in a stack: " .. photoPath )
+        app:logV( "So far, unable to select photo that is not in a stack: " .. photoPath )
     end
     -- fall-through => unable to select photo not buried in stack, try for lib-filtering next.
-    self:clearViewFilter()
-    -- I thought no delay needed in previous Lr versions, but now (@Lr5.2RC) it seems there needs to be a delay.
-    local timebase = app:getPref( 'timebase' )
-    if timebase then
-        dbgf( "Delay (in seconds) after lib filter cleared, in hopes to obtain requisite photo selection: ^1", timebase )
-    else
-        timebase = .1
-        dbgf( "Unable to obtain timebase, from which to derive delay - time to wait lib filter cleared, in hopes to obtain requisite photo selection - using a default delay (based on guess): ^1 second.", timebase )
-    end
-    LrTasks.sleep( timebase ) -- change text logged above if delay not equal to timebase.
+    self:clearViewFilter() -- requires settling.
     -- Note: filter should be restored externally after selected photo processed, when appropriate.
-    catalog:setSelectedPhotos( photo, { photo } )
-	if catalog:getTargetPhoto() ~= photo then -- photo not selected (not visible or not in filmstrip).
-		app:logWarning( "Unable to select photo (^1) even without lib filter", photoPath )
-		return false
-	else
+	if selectPhoto() then
 		app:log( "Photo selected by lifting the lib filter: ^1", photoPath )
 		return true
+	else -- photo not selected (not visible or not in filmstrip).
+		app:logWarning( "Unable to select photo (^1) even without lib filter", photoPath )
+		return false
 	end
 end
 

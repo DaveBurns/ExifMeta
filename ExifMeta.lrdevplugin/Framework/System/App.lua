@@ -1450,7 +1450,7 @@ function App:showBezel( opts, fmt, ... )
     local np = NamedParameters:new( opts or {} ) -- assure options are a table, even if empty.
     local dur = np:get( 'dur', 3 )
     local holdoff = np:get( 'holdoff', 1.2 ) -- default holdoff in previous version was 3, which gave time to do something - e.g. reload plugin, after killing an error box.. - if such cases present, just add a delay upon return.
-    np:done() -- no other options are expected, so notify if passed..
+    np:done( 'we' ) -- 'we' comes along for the ride when show-bezel being called by alertLogW..
     if LrTasks.canYield() then
         local s, m = self.bezelGate:enter() -- one at a time - up to 10.
         -- note: I could implement an inter-plugin gate using intercom, but it still wouldn't stop foreign (non-elare) plugins from usurpting - I give up..

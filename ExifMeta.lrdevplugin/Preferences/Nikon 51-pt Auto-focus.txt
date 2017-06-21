@@ -620,7 +620,7 @@ end
         Table to string delimiter.
         
         Examples:
-            _t.tableToStringDelimiter = ", " -- comma, no space.
+            _t.tableToStringDelimiter = ", " -- comma-space.
             _t.tableToStringDelimiter = " | " -- no vbars in data, so a better delimiter than comma.
             _t.tableToStringDelimiter = "\n" -- I like mine on separate lines.
             _t.tableToStringDelimiter = nil -- let plugin decide. @8/Jan/2015 19:41 will decide " | " (space-vbar-space).
@@ -630,19 +630,95 @@ _t.tableToStringDelimiter = nil
 
 
 --[[
-        Function to translate a table of metadata values into a string representation.
+        Define special handling of table metadata (in addition to being converted to string for big-block and individual text field).
+        
+        left is metadata table name/id, right is lua table which defines handling - all members are optional, including: parentKeywordPath, parentSynonyms, parentIncludeOnExport, childIncludeOnExport.
+        
+        Notes:
+            * child synonyms are not supported.
+            * parent-synonyms, if supplied, must be in table form, more specifically: an array of strings.
+            * to put keywords in root, enter "" or "/" as parent keyword path. for parent-keyword-path to match metadata table name, set to nil.
+            * parent keyword path may begin with a slash, or not - won't affect anything.
+--]]
+local tableToKeywordDefs = {
+    RegionName = { parentKeywordPath = "/RegionNames" }
+}        
+        
+
+
+--[[
+        Function to translate a table of metadata values into it's string representation.
+        
+        May include additional custom handling too, if specified above, e.g. to write table values as keywords.
+        
+        *** BEWARE: xmlTbl param is proprietary format and is both undocumented and subject to deprecation in the future.
+            if you start getting no-xml-table errors, you'll need to recode for the new format - sorry for the inconvenience.
         
         Examples:
             _t.tableToString = nil -- let plugin decide. @8/Jan/2015 19:49 it will decide to concat text values with above-specified delimiter.
             _t.tableToString = tableToString_custom -- use the custom version in this file.
 --]]
 local function tableToString_custom( params )
-    local delim = params.delim or error( "no delim" )
-    local xmlTbl = params.xmlTbl or error( "no xml-tbl" )
-    Debug.pause( "table-to-string function not yet implemented - skipping (for now)", delim, #xmlTbl )
-    return nil -- return "nil comma nil" (i.o.w. skip).
-    -- return nil, "not yet implemented" -- error
-    -- return myString -- preferred custom value.
+    local photo = params.photo or error( "no photo" )
+    local label = params.label or error( "no label" ) -- ns:name
+    local group = params.group or error( "no group" ) -- ns
+    local compName = params.compName or error( "no comp-name" ) -- name (ID).
+    local delim = params.delim or error( "no delim" ) -- default before calling.
+    local xmlTbl = params.xmlTbl or error( "no xml table" )
+    --Debug.pause( label, group, compName, delim, #( xmlTbl or {} ) )
+    local nameBuf = {} -- keyword name bufffer
+    for i, v in ipairs( xmlTbl ) do
+        local value = v[1]
+        local typ = type( value )
+        if typ == 'string' then
+            nameBuf[#nameBuf + 1] = value
+        elseif typ ~= 'table' then -- won't be a function.
+            nameBuf[#nameBuf + 1] = tostring( value ) -- should be usable, e.g. number.
+        else -- table
+            return nil -- skip table of tables - not implemented, yet.
+        end
+    end
+    local kwDef = tableToKeywordDefs[compName]
+    if kwDef then -- table metadata to become keywords and applied to photo.
+        local cache = lrMeta:createCache{ photos={ photo }, rawIds={ 'keywords' } } -- a little unusual caching metadata for one photo, but it may need to be accessed repeatedly, so..
+        local parentKeywordPath = kwDef.parentKeywordPath or compName
+        local parentKeyword, noParent
+        if parentKeywordPath ~= "" and parentKeywordPath ~= "/" then -- comp-name or non-root.
+            parentKeyword, noParent = keywords:assureKeyword( parentKeywordPath, kwDef.parentSynonyms or nil, var:value( kwDef.parentIncludeOnExport, true ) )
+        else -- root
+            parentKeywordPath = ""
+            parentKeyword = true -- not used except as flag.
+        end
+        if parentKeyword then
+            local inclOnExp = var:value( kwDef.childIncludeOnExport, true )
+            for i, name in ipairs( nameBuf ) do
+                if str:is( name ) then
+                    local keywordPath = parentKeywordPath.."/"..name
+                    local childKeyword, noChild = keywords:assureKeyword( keywordPath, nil, inclOnExp ) -- child synonums not (yet) supported.
+                    if childKeyword then
+                        local applied, qual = keywords:applyKeyword( photo, childKeyword, cache )
+                        if applied then
+                            if qual then
+                                app:logV( "Keyword was already applied: ^1", keywordPath )
+                            else
+                                app:logV( "Applied keyword: ^1", keywordPath )
+                            end
+                        else
+                            app:logW( qual )
+                        end
+                    else
+                        app:logW( noChild )
+                    end
+                else
+                    Debug.pause( "?" )
+                end    
+            end
+        else
+            app:logW( noParent )
+        end
+    -- else dont care..
+    end    
+    return table.concat( nameBuf, delim )
 end
 _t.tableToString = nil -- tableToString_custom
 

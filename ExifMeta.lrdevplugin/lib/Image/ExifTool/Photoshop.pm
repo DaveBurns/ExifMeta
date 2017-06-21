@@ -19,7 +19,7 @@
 #               4) http://www.fileformat.info/format/psd/egff.htm
 #               5) http://www.telegraphics.com.au/svn/psdparse/trunk/resources.c
 #               6) http://libpsd.graphest.com/files/Photoshop%20File%20Formats.pdf
-#               7) http://www.adobe.com/devnet-apps/photoshop/fileformatashtml/PhotoshopFileFormats.htm
+#               7) http://www.adobe.com/devnet-apps/photoshop/fileformatashtml/
 #------------------------------------------------------------------------------
 
 package Image::ExifTool::Photoshop;
@@ -28,7 +28,7 @@ use strict;
 use vars qw($VERSION $AUTOLOAD $iptcDigestInfo);
 use Image::ExifTool qw(:DataAccess :Utils);
 
-$VERSION = '1.42';
+$VERSION = '1.46';
 
 sub ProcessPhotoshop($$$);
 sub WritePhotoshop($$$);
@@ -48,6 +48,22 @@ my %psdMap = (
     PrintIM      => 'IFD0',
     InteropIFD   => 'ExifIFD',
     MakerNotes   => 'ExifIFD',
+);
+
+# tag information for PhotoshopThumbnail and PhotoshopBGRThumbnail
+my %thumbnailInfo = (
+    Writable => 'undef',
+    Protected => 1,
+    RawConv => 'my $img=substr($val,0x1c); $self->ValidateImage(\$img,$tag)',
+    ValueConvInv => q{
+        my $et = new Image::ExifTool;
+        my @tags = qw{ImageWidth ImageHeight FileType};
+        my $info = $et->ImageInfo(\$val, @tags);
+        my ($w, $h, $type) = @$info{@tags};
+        $w and $h and $type eq 'JPEG' or warn("Not a valid JPEG image\n"), return undef;
+        my $wbytes = int(($w * 24 + 31) / 32) * 4;
+        return pack('N6n2', 1, $w, $h, $wbytes, $wbytes * $h, length($val), 24, 1) . $val;
+    },
 );
 
 # Photoshop APP13 tag table
@@ -109,7 +125,7 @@ my %psdMap = (
     0x0409 => {
         Name => 'PhotoshopBGRThumbnail',
         Notes => 'this is a JPEG image, but in BGR format instead of RGB',
-        RawConv => 'my $img=substr($val,0x1c);$self->ValidateImage(\$img,$tag)',
+        %thumbnailInfo,
     },
     0x040a => {
         Name => 'CopyrightFlag',
@@ -129,7 +145,7 @@ my %psdMap = (
     },
     0x040c => {
         Name => 'PhotoshopThumbnail',
-        RawConv => 'my $img=substr($val,0x1c);$self->ValidateImage(\$img,$tag)',
+        %thumbnailInfo,
     },
     0x040d => {
         Name => 'GlobalAngle',
@@ -197,7 +213,7 @@ my %psdMap = (
             if (lc($val) eq 'new' or lc($val) eq 'old') {
                 {
                     local $SIG{'__WARN__'} = sub { };
-                    return lc($val) if eval 'require Digest::MD5';
+                    return lc($val) if eval { require Digest::MD5 };
                 }
                 warn "Digest::MD5 must be installed\n";
                 return undef;
@@ -238,6 +254,7 @@ my %psdMap = (
     0x043d => { Unknown => 1, Name => 'WindowsDEVMODE' }, #7
     0x043e => { Unknown => 1, Name => 'AutoSaveFilePath' }, #7
     0x043f => { Unknown => 1, Name => 'AutoSaveFormat' }, #7
+    0x0440 => { Unknown => 1, Name => 'PathSelectionState' }, #7
     # 0x07d0-0x0bb6 Path information
     0x0bb7 => {
         Name => 'ClippingPathName',
@@ -248,8 +265,10 @@ my %psdMap = (
             return Image::ExifTool::Photoshop::ConvertPascalString($self,$val);
         },
     },
+    0x0bb8 => { Unknown => 1, Name => 'OriginPathInfo' }, #7
     # 0x0fa0-0x1387 - plug-in resources (ref 7)
     0x1b58 => { Unknown => 1, Name => 'ImageReadyVariables' }, #7
+    0x1b59 => { Unknown => 1, Name => 'ImageReadyDataSets' }, #7
     0x1f40 => { Unknown => 1, Name => 'LightroomWorkflow' }, #7
     0x2710 => { Unknown => 1, Name => 'PrintFlagsInfo' },
 );
@@ -377,7 +396,7 @@ sub AUTOLOAD
 # Returns: Strings, concatenated with ', '
 sub ConvertPascalString($$)
 {
-    my ($exifTool, $inStr) = @_;
+    my ($et, $inStr) = @_;
     my $outStr = '';
     my $len = length($inStr);
     my $i=0;
@@ -388,8 +407,8 @@ sub ConvertPascalString($$)
         $outStr .= substr($inStr, $i+1, $n);
         $i += $n + 1;
     }
-    my $charset = $exifTool->Options('CharsetPhotoshop') || 'Latin';
-    return $exifTool->Decode($outStr, $charset);
+    my $charset = $et->Options('CharsetPhotoshop') || 'Latin';
+    return $et->Decode($outStr, $charset);
 }
 
 #------------------------------------------------------------------------------
@@ -399,15 +418,15 @@ sub ConvertPascalString($$)
 # Returns: 1 on success
 sub ProcessPhotoshop($$$)
 {
-    my ($exifTool, $dirInfo, $tagTablePtr) = @_;
+    my ($et, $dirInfo, $tagTablePtr) = @_;
     my $dataPt = $$dirInfo{DataPt};
     my $pos = $$dirInfo{DirStart};
     my $dirEnd = $pos + $$dirInfo{DirLen};
-    my $verbose = $exifTool->Options('Verbose');
+    my $verbose = $et->Options('Verbose');
     my $success = 0;
 
     SetByteOrder('MM');     # Photoshop is always big-endian
-    $verbose and $exifTool->VerboseDir('Photoshop', 0, $$dirInfo{DirLen});
+    $verbose and $et->VerboseDir('Photoshop', 0, $$dirInfo{DirLen});
 
     # scan through resource blocks:
     # Format: 0) Type, 4 bytes - '8BIM' (or the rare 'PHUT', 'DCSR' or 'AgHg')
@@ -424,7 +443,7 @@ sub ProcessPhotoshop($$$)
             $ttPtr = GetTagTable('Image::ExifTool::Photoshop::Unknown');
         } else {
             $type =~ s/([^\w])/sprintf("\\x%.2x",ord($1))/ge;
-            $exifTool->Warn(qq{Bad Photoshop IRB resource "$type"});
+            $et->Warn(qq{Bad Photoshop IRB resource "$type"});
             last;
         }
         my $tag = Get16u($dataPt, $pos + 4);
@@ -435,13 +454,13 @@ sub ProcessPhotoshop($$$)
         $pos += $nameLen;
         ++$pos unless $nameLen & 0x01;
         if ($pos + 4 > $dirEnd) {
-            $exifTool->Warn("Bad Photoshop resource block");
+            $et->Warn("Bad Photoshop resource block");
             last;
         }
         my $size = Get32u($dataPt, $pos);
         $pos += 4;
         if ($size + $pos > $dirEnd) {
-            $exifTool->Warn("Bad Photoshop resource data size $size");
+            $et->Warn("Bad Photoshop resource data size $size");
             last;
         }
         $success = 1;
@@ -451,14 +470,14 @@ sub ProcessPhotoshop($$$)
         } else {
             $name = '';
         }
-        my $tagInfo = $exifTool->GetTagInfo($ttPtr, $tag);
+        my $tagInfo = $et->GetTagInfo($ttPtr, $tag);
         # append resource name to value if requested (braced by "/#...#/")
         if ($tagInfo and defined $$tagInfo{SetResourceName} and
             $$tagInfo{SetResourceName} eq '1' and $name !~ m{/#})
         {
             $val = substr($$dataPt, $pos, $size) . '/#' . $name . '#/';
         }
-        $exifTool->HandleTag($ttPtr, $tag, $val,
+        $et->HandleTag($ttPtr, $tag, $val,
             TagInfo => $tagInfo,
             Extra   => $extra,
             DataPt  => $dataPt,
@@ -479,7 +498,7 @@ sub ProcessPhotoshop($$$)
 # Returns: 1 if this was a valid PSD file, -1 on write error
 sub ProcessPSD($$)
 {
-    my ($exifTool, $dirInfo) = @_;
+    my ($et, $dirInfo) = @_;
     my $raf = $$dirInfo{RAF};
     my $outfile = $$dirInfo{OutFile};
     my ($data, $err, $tagTablePtr);
@@ -487,7 +506,7 @@ sub ProcessPSD($$)
     $raf->Read($data, 30) == 30 or return 0;
     $data =~ /^8BPS\0([\x01\x02])/ or return 0;
     SetByteOrder('MM');
-    $exifTool->SetFileType($1 eq "\x01" ? 'PSD' : 'PSB'); # set the FileType tag
+    $et->SetFileType($1 eq "\x01" ? 'PSD' : 'PSB'); # set the FileType tag
     my %dirInfo = (
         DataPt => \$data,
         DirStart => 0,
@@ -499,12 +518,12 @@ sub ProcessPSD($$)
         $raf->Read($data, $len) == $len or return -1;
         Write($outfile, $data) or $err = 1; # write color mode data
         # initialize map of where things are written
-        $exifTool->InitWriteDirs(\%psdMap);
+        $et->InitWriteDirs(\%psdMap);
     } else {
         # process the header
         $tagTablePtr = GetTagTable('Image::ExifTool::Photoshop::Header');
         $dirInfo{DirLen} = 30;
-        $exifTool->ProcessDirectory(\%dirInfo, $tagTablePtr);
+        $et->ProcessDirectory(\%dirInfo, $tagTablePtr);
         $raf->Seek($len, 1) or $err = 1;    # skip over color mode data
     }
     $raf->Read($data, 4) == 4 or $err = 1;
@@ -515,7 +534,7 @@ sub ProcessPSD($$)
     my $rtnVal = 1;
     if ($outfile) {
         # rewrite IRB resources
-        $data = WritePhotoshop($exifTool, \%dirInfo, $tagTablePtr);
+        $data = WritePhotoshop($et, \%dirInfo, $tagTablePtr);
         if ($data) {
             $len = Set32u(length $data);
             Write($outfile, $len, $data) or $err = 1;
@@ -525,7 +544,7 @@ sub ProcessPSD($$)
                 my $tbuf = '';
                 $$trailInfo{OutFile} = \$tbuf;  # rewrite trailer(s)
                 # rewrite all trailers to buffer
-                if ($exifTool->ProcessTrailers($trailInfo)) {
+                if ($et->ProcessTrailers($trailInfo)) {
                     my $copyBytes = $$trailInfo{DataPos} - $raf->Tell();
                     if ($copyBytes >= 0) {
                         # copy remaining PSD file up to start of trailer
@@ -536,9 +555,9 @@ sub ProcessPSD($$)
                             $copyBytes -= $n;
                         }
                         # write the trailer (or not)
-                        $exifTool->WriteTrailerBuffer($trailInfo, $outfile) or $err = 1;
+                        $et->WriteTrailerBuffer($trailInfo, $outfile) or $err = 1;
                     } else {
-                        $exifTool->Warn('Overlapping trailer');
+                        $et->Warn('Overlapping trailer');
                         undef $trailInfo;
                     }
                 } else {
@@ -556,12 +575,12 @@ sub ProcessPSD($$)
         }
         $rtnVal = -1 if $err;
     } elsif ($err) {
-        $exifTool->Warn('File format error');
+        $et->Warn('File format error');
     } else {
-        ProcessPhotoshop($exifTool, \%dirInfo, $tagTablePtr);
+        ProcessPhotoshop($et, \%dirInfo, $tagTablePtr);
         # process trailers if they exist
         my $trailInfo = Image::ExifTool::IdentifyTrailer($raf);
-        $exifTool->ProcessTrailers($trailInfo) if $trailInfo;
+        $et->ProcessTrailers($trailInfo) if $trailInfo;
     }
     return $rtnVal;
 }
@@ -599,7 +618,7 @@ be preserved when copying Photoshop information via user-defined tags.
 
 =head1 AUTHOR
 
-Copyright 2003-2013, Phil Harvey (phil at owl.phy.queensu.ca)
+Copyright 2003-2015, Phil Harvey (phil at owl.phy.queensu.ca)
 
 This library is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
@@ -616,7 +635,7 @@ under the same terms as Perl itself.
 
 =item L<http://libpsd.graphest.com/files/Photoshop%20File%20Formats.pdf>
 
-=item L<http://www.adobe.com/devnet-apps/photoshop/fileformatashtml/PhotoshopFileFormats.htm>
+=item L<http://www.adobe.com/devnet-apps/photoshop/fileformatashtml/>
 
 =back
 

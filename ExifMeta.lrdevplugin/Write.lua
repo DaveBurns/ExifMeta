@@ -68,7 +68,13 @@ function Write.main()
         local props = LrBinding.makePropertyTable( call.context )
         app:initGlobalPref( 'autoXmp', false )
         app:initGlobalPref( 'doCaptureTime', false )
-        app:initGlobalPref( 'incrSeconds', true )
+        local _incrSeconds = app:getGlobalPref( 'incrSeconds' )
+        if _incrSeconds then -- was checked in legacy version.
+            app:setGlobalPref( 'incrInSeconds', 1 ) -- set it to equivalent value in new version: one.
+            app:setGlobalPref( 'incrSeconds', nil ) -- clear remnant from legacy version. 
+        else -- wasn't checked, or never initialized
+            app:initGlobalPref( 'incrInSeconds', 0 ) -- assure init as number, default to zero.
+        end
         app:initGlobalPref( 'year', 2012 )
         app:initGlobalPref( 'month', 1 )
         app:initGlobalPref( 'day', 1 )
@@ -124,8 +130,15 @@ function Write.main()
             app:setGlobalPref( 'preset', "" ) -- custom
         end
         local presets = nil
+        local function getStampNum()
+            return LrDate.timeFromComponents( app:getGlobalPref( 'year' ), app:getGlobalPref( 'month' ), app:getGlobalPref( 'day' ), app:getGlobalPref( 'hour' ), app:getGlobalPref( 'minute' ), app:getGlobalPref( 'second' ), 'local' )
+        end
+        local function getStampStr( timeNum )
+            assert( type( timeNum) == 'number', "?" )
+            return LrDate.timeToUserFormat( timeNum, "%Y:%m:%d %H:%M:%S" ) -- local timezone implied, exiftool compatible format.
+        end
         local function updateEgCapTime()
-            props.egCapTime = string.format( "e.g. %04u/%02u/%02u %02u:%02u:%02u", app:getGlobalPref( 'year' ), app:getGlobalPref( 'month' ), app:getGlobalPref( 'day' ), app:getGlobalPref( 'hour' ), app:getGlobalPref( 'minute' ), app:getGlobalPref( 'second' ) )
+            props.egCapTime = getStampStr( getStampNum() )
         end
         updateEgCapTime()
         local function chgHdlr( id, props, key, value )
@@ -436,10 +449,24 @@ function Write.main()
                     bind_to_object = prefs,
                     value = app:getGlobalPrefBinding ('doCaptureTime' ),
                 },
-                vf:checkbox {
-                    title = "Increment seconds",
+                vf:spacer{ width=1 },
+                vf:edit_field {
+                    tooltip = "Inter-photo time increment, in seconds - zero => all photos set to same time; 1 => each photo one second after the previous; 86400 => each photo one day after the previous..",
                     bind_to_object = prefs,
-                    value = app:getGlobalPrefBinding ('incrSeconds' ),
+                    precision = 0,
+                    width_in_digits = 5, -- generally this will be zero or one, but why not support display of up to ~86400 (seconds per day).
+                    min = 0,
+                    max = math.huge, -- no reason to impose arbitrary limitation
+                    value = app:getGlobalPrefBinding ('incrInSeconds' ),
+                },
+                vf:static_text {
+                    title=bind {
+                        key = app:getGlobalPrefKey( 'incrInSeconds' ),
+                        bind_to_object = prefs,
+                        transform = function()
+                            return str:phrase( app:getGlobalPref( 'incrInSeconds' ), "second between photos", "seconds between photos" )
+                        end
+                    },
                 },
                 vf:spacer{ width=1 },
                 vf:static_text {
@@ -687,7 +714,8 @@ function Write.main()
         local function doit()
             app:call( Service:new{ name="Exif Write", async=false, progress={ caption="Working - please wait..." }, main=function( srvc )
                 srvc.stats = {
-                    nWritten = 0,
+                    nFilesWritten = 0,
+                    nPhotosUpdated = 0,
                 }
                 assert( call.testRun ~= nil, "program failure" )
                 if not app:getGlobalPref( 'doCaptureTime' ) and not app:getGlobalPref( 'doAddl' ) then
@@ -732,13 +760,7 @@ function Write.main()
                     app:show{ warning="Unable to obtain exiftool version number: ^1", errm }
                     return
                 end
-                
-                local second = app:getGlobalPref( 'second' )
-                local function getStamp()
-                    return string.format( '-DateTimeOriginal=%04u:%02u:%02u %02u:%02u:%02u', app:getGlobalPref( 'year' ), app:getGlobalPref( 'month' ), app:getGlobalPref( 'day' ), app:getGlobalPref( 'hour' ), app:getGlobalPref( 'minute' ), second )
-                end
-                local capStatic = getStamp()
-                
+
                 local autoXmp = app:getGlobalPref( 'autoXmp' )
                 assert( autoXmp ~= nil, "bad pref" )
                 
@@ -762,6 +784,10 @@ function Write.main()
                     app:log( "Not saving metadata automatically before-hand - hopefully you've done it manually." )
                 end
                 call.read = {} -- metadata
+                local readSet = {}
+
+                local capTimeNum = getStampNum()
+                assert( type( capTimeNum ) == 'number', "?" )                
                 
                 for i, photo in ipairs( call.all ) do
                 
@@ -803,80 +829,91 @@ function Write.main()
                             app:logWarning( "File is missing: '^1' - this photo is being skipped.", xmpPath ) -- same as photo path.
                             break
                         end
-    
-                        if app:getGlobalPref( 'saveOrig' ) then
-                            -- no arg
-                        else
-                            srvc.ets:addArg( "-overwrite_original" )
-                        end
-                        if app:getGlobalPref( 'doCaptureTime' ) then
-                            if app:getGlobalPref( 'incrSeconds' ) then
-                                srvc.ets:addArg( getStamp() )
-                                second = second + 1
-                                if second >= 60 then
-                                    minute = minute + 1
-                                    second = 0
-                                    if minute >= 60 then
-                                        hour = hour + 1
-                                        minute = 0
-                                        if hour >= 24 then
-                                            day = day + 1
-                                            hour = 0
-                                            if day > 28 then
-                                                app:logWarning( "Day may have rolled over to next month due to seconds increment - not sure how exiftool will interpret. To be safe, either make starting time earlier, select fewer photos, or un-check 'Increment seconds'." )
-                                            end
-                                        end
-                                    end
-                                end
+
+                        -- Do exiftooleanization to one file (photo or xmp sidecar).    
+                        local function doIt( selector, file )
+                            if app:getGlobalPref( 'saveOrig' ) then
+                                -- no arg
                             else
-                                srvc.ets:addArg( capStatic )
+                                srvc.ets:addArg( "-overwrite_original" )
                             end
-                        -- else don't
-                        end
-                        if app:getGlobalPref( 'doAddl' ) then
-                            for i = 1, maxTags do
-                                local tagName = 'tagName_' .. i
-                                local tagValue = 'tagValue_' .. i
-                                local tag = app:getGlobalPref( tagName )
-                                if str:is( tag ) then
-                                    local value = app:getGlobalPref( tagValue )
-                                    local arg
-                                    if str:is( value ) then
-                                        arg = str:fmtx( "-^1=^2", tag, value ) -- no need to wrap value since tag will also be wrapped in quotes.
-                                    else
-                                        arg = str:fmtx( "-^1", tag ) -- no need to wrap value since tag will also be wrapped in quotes.
+                            if app:getGlobalPref( 'doCaptureTime' ) then
+                                local stamp = getStampStr( capTimeNum )
+                                local exifTag = str:fmtx( "-exifIFD:DateTimeOriginal=^1", stamp )
+                                local xmpTag = str:fmtx( "-xmp:DateTimeOriginal=^1", stamp )
+                                if selector == 1 then -- exif
+                                    srvc.ets:addArg( exifTag )
+                                elseif selector == 2 then -- xmp
+                                    srvc.ets:addArg( xmpTag )
+                                else -- both
+                                    assert( selector == 3, "?" )
+                                    srvc.ets:addArg( exifTag )
+                                    srvc.ets:addArg( xmpTag )
+                                end
+                            -- else don't do capture time.
+                            end
+                            if app:getGlobalPref( 'doAddl' ) then
+                                for i = 1, maxTags do
+                                    local tagName = 'tagName_' .. i
+                                    local tagValue = 'tagValue_' .. i
+                                    local tag = app:getGlobalPref( tagName )
+                                    if str:is( tag ) then
+                                        local value = app:getGlobalPref( tagValue )
+                                        local arg
+                                        if str:is( value ) then
+                                            arg = str:fmtx( "-^1=^2", tag, value ) -- no need to wrap value since tag will also be wrapped in quotes.
+                                        else
+                                            arg = str:fmtx( "-^1", tag ) -- no need to wrap value since tag will also be wrapped in quotes.
+                                        end
+                                        srvc.ets:addArg( arg )
                                     end
-                                    srvc.ets:addArg( arg )
                                 end
                             end
+                            local p = srvc.ets:getArgumentString()
+                            if not call.testRun then
+                                if srvc.ets:isSession() then
+                                    app:log( "Invoking exiftool upon target (^1) in session mode (arguments do not need quotes), with arguments: ^2", file, p )
+                                else
+                                    app:log( "Invoking exiftool upon target (^1) in one-shot mode (quotes around entire -tag=value parameter obviates need for quotes around value), with arguments: ^2", file, p )
+                                end
+                                
+                                -- pre 15/Jan/2015 20:49
+                                srvc.ets:setTarget( file ) -- after this, files *will* be modified upon execute *or* closing, and session must be closed so exiftool will exit.
+                                srvc.ets:execute() -- this is now hot.
+                                
+                                srvc.stats.nFilesWritten = srvc.stats.nFilesWritten + 1
+                            else
+                                if srvc.ets:isSession() then
+                                    app:log( "Would invoke exiftool upon target (^1) in session mode (arguments do not need quotes), with arguments: ^2", file, p )
+                                else
+                                    app:log( "Would invoke exiftool upon target (^1) in one-shot mode (quotes around entire -tag=value parameter obviates need for quotes around value), with arguments: ^2", file, p )
+                                end
+                                
+                                -- reminder: do not set targets.
+                                srvc.ets:clearArgumentString()
+                                
+                                srvc.stats.nFilesWritten = srvc.stats.nFilesWritten + 1
+                            end
+                            if not readSet[photo] then
+                                call.read[#call.read + 1] = photo
+                                srvc.stats.nPhotosUpdated = srvc.stats.nPhotosUpdated + 1
+                                readSet[photo] = true
+                            end
+                        
                         end
                         
-                        local p = srvc.ets:getArgumentString()
-                        if not call.testRun then
-                            if srvc.ets:isSession() then
-                                app:log( "Invoking exiftool upon target in session mode (arguments do not need quotes), with arguments: ^1", p )
-                            else
-                                app:log( "Invoking exiftool upon target in one-shot mode (quotes around entire -tag=value parameter obviates need for quotes around value), with arguments: ^1", p )
-                            end
-                            
-                            --srvc.ets:clearArgumentString()
-                            srvc.ets:setTargets( targetPaths ) -- after this, files *will* be modified upon execute *or* closing, and session must be closed so exiftool will exit.
-                            srvc.ets:execute() -- this is now hot.
-                            
-                            srvc.stats.nWritten = srvc.stats.nWritten + 1
-                        else
-                            if srvc.ets:isSession() then
-                                app:log( "Would invoke exiftool upon target in session mode (arguments do not need quotes), with arguments: ^1", p )
-                            else
-                                app:log( "Would invoke exiftool upon target in one-shot mode (quotes around entire -tag=value parameter obviates need for quotes around value), with arguments: ^1", p )
-                            end
-                            
-                            -- reminder: do not set targets.
-                            srvc.ets:clearArgumentString()
-                            
-                            srvc.stats.nWritten = srvc.stats.nWritten + 1
+                        if xmpPath == photoPath then -- all in one.
+                            doIt( 3, photoPath ) -- do both tags (exif+xmp) to one common file.
+                        else -- separate - do raw then xmp sidecar.
+                            doIt( 1, photoPath ) -- exif tag
+                            doIt( 2, xmpPath ) -- xmp tag.
                         end
-                        call.read[#call.read + 1] = photo
+                        local incr = app:getGlobalPref( 'incrInSeconds' ) -- numeric (should never be nil, but won't hurt to check..).
+                        if incr and ( incr > 0 ) then -- user entered non-zero value.
+                            capTimeNum = capTimeNum + incr -- change cap-time-num for next time
+                        -- else leave cap-time-num as set for next time.
+                        end
+
                     until true                
                 end -- for photo
 
@@ -903,12 +940,20 @@ function Write.main()
                 exifTool:closeSession( srvc.ets ) -- @10/Sep/2012 4:46 - handles nil OK. Warning: closing a true exiftool session will execute open session if pending.
                 app:log()
                 if not call.testRun then
-                    app:log( "^1 modified.", str:nItems( srvc.stats.nWritten, "photos" ) )
-                    if srvc.stats.nWritten > 0 then
+                    if srvc.stats.nFilesWritten == srvc.stats.nPhotosUpdated then
+                        app:log( "^1 modified.", str:nItems( srvc.stats.nFilesWritten, "photo files" ) )
+                    else
+                        app:log( "^1 (^2) modified.", str:nItems( srvc.stats.nFilesWritten, "files" ), str:nItems( srvc.stats.nPhotosUpdated, "photos" ) )
+                    end
+                    if srvc.stats.nFilesWritten > 0 then
                         app:log( "You may need to read metadata for changes to be incorporated in Lightroom." )
                     end
                 else
-                    app:log( "^1 would have been modified.", str:nItems( srvc.stats.nWritten, "photos" ) )
+                    if srvc.stats.nFilesWritten == srvc.stats.nPhotosUpdated then
+                        app:log( "^1 would have been modified.", str:nItems( srvc.stats.nFilesWritten, "photo files" ) )
+                    else
+                        app:log( "^1 (^2) would have been modified.", str:nItems( srvc.stats.nFilesWritten, "files" ), str:nItems( srvc.stats.nPhotosUpdated, "photos" ) )
+                    end
                 end
             end } )
         end

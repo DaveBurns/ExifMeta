@@ -1,0 +1,42 @@
+rc Exif Meta, Version: 5.11
+
+First-time Installation & Configuration
+=======================================
+
+*** See below for subsequent installations / updating.
+
+-  Unzip the downloaded plugin into a folder of your choosing (I recommend putting in "Documents/FromOthers/RobCole", but can go anywhere,
+   *except* do NOT put in "Program Files" folder or in with operating system files...), and remember its location for step 4.
+   (plugin is used in place and therefore must not be moved after installation)
+-  Open Lightroom's Plugin Manager (on the File Menu).
+-  Click the 'Add' Button (lower left).
+-  Use the mouse to select the folder whose name ends with '.lrplugin' (including the dot, but not the apostrophes),
+   which is *inside* the folder where the plugin was unzipped in step 1.
+   *** Make sure you are *not* selecting the plugin's parent folder which has '(lrplugin)' in the name - instead, double-click it to get inside, *then* select the proper folder.
+   *** If you inadvertently double-click the .lrplugin folder, then click the "Back" button to go back.
+   *** Mac users: the correct folder to select will probably appear as a "plugin", instead of a folder proper.
+-  Click the 'Select Folder' button (or something to that effect, e.g. correct button may also be labeled 'OK').
+   If you have the wrong folder selected, Lr will lodge a complaint such as: "An error occurred while attempting to load this plug-in". If that happens, try it again.
+-  Review the information presented by the plugin manager, and edit settings if necessary or desirable.
+-  Click 'Done'.
+
+
+Updating
+========
+
+-  Open Lightroom's Plugin Manager (on the File Menu).
+-  Click the 'Check for Update' button.
+-  Download and unzip an updated version.
+-  Click 'Update Plugin'.
+
+
+To Unintall
+===========
+
+-  Open Lightroom's Plugin Manager (on the File Menu).
+-  Click the 'Uninstall' button.
+
+
+See http://www.robcole.com/Rob/ProductsAndServices/ExifMetaLrPlugin for more information.
+
+Rob Cole    www.robcole.com

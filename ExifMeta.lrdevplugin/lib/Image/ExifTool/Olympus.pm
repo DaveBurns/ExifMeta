@@ -26,6 +26,8 @@
 #              18) Tomasz Kawecki private communication
 #              19) Brad Grier private communication
 #              20) Niels Kristian Bech Jensen private communication
+#              21) Iliah Borg private communication (LibRaw)
+#              22) Herbert Kauer private communication
 #------------------------------------------------------------------------------
 
 package Image::ExifTool::Olympus;
@@ -35,7 +37,7 @@ use vars qw($VERSION);
 use Image::ExifTool::Exif;
 use Image::ExifTool::APP12;
 
-$VERSION = '2.08';
+$VERSION = '2.26';
 
 sub PrintLensInfo($$$);
 
@@ -74,7 +76,7 @@ my %olympusLensTypes = (
     '0 10 10' => 'Olympus M.Zuiko Digital ED 12-50mm F3.5-6.3 EZ', #PH
     '0 11 10' => 'Olympus M.Zuiko Digital 45mm F1.8', #17
     '0 12 10' => 'Olympus M.Zuiko Digital ED 60mm F2.8 Macro', #20
-    '0 13 10' => 'Olympus M.Zuiko Digital ED 14-42mm F3.5-5.6 II R', #PH
+    '0 13 10' => 'Olympus M.Zuiko Digital 14-42mm F3.5-5.6 II R', #PH/20
     '0 14 10' => 'Olympus M.Zuiko Digital ED 40-150mm F4.0-5.6 R', #19
   # '0 14 10.1' => 'Olympus M.Zuiko Digital ED 14-150mm F4.0-5.6 II', #11 (questionable & unconfirmed)
     '0 15 00' => 'Olympus Zuiko Digital ED 7-14mm F4.0',
@@ -83,8 +85,12 @@ my %olympusLensTypes = (
     '0 17 00' => 'Olympus Zuiko Digital Pro ED 35-100mm F2.0', #7
     '0 18 00' => 'Olympus Zuiko Digital 14-45mm F3.5-5.6',
     '0 18 10' => 'Olympus M.Zuiko Digital ED 75-300mm F4.8-6.7 II', #20
+    '0 19 10' => 'Olympus M.Zuiko Digital ED 12-40mm F2.8 Pro', #PH
     '0 20 00' => 'Olympus Zuiko Digital 35mm F3.5 Macro', #9
+    '0 20 10' => 'Olympus M.Zuiko Digital ED 40-150mm F2.8 Pro', #20
+    '0 21 10' => 'Olympus M.Zuiko Digital ED 14-42mm F3.5-5.6 EZ', #20
     '0 22 00' => 'Olympus Zuiko Digital 17.5-45mm F3.5-5.6', #9
+    '0 22 10' => 'Olympus M.Zuiko Digital 25mm F1.8', #20
     '0 23 00' => 'Olympus Zuiko Digital ED 14-42mm F3.5-5.6', #PH
     '0 24 00' => 'Olympus Zuiko Digital ED 40-150mm F4.0-5.6', #PH
     '0 30 00' => 'Olympus Zuiko Digital ED 50-200mm F2.8-3.5 SWD', #7
@@ -141,8 +147,13 @@ my %olympusLensTypes = (
     '2 17 10' => 'Lumix G X Vario 35-100mm F2.8 Power OIS', #PH
     '2 18 10' => 'Lumix G Vario 14-42mm F3.5-5.6 II Asph. Mega OIS', #20
     '2 19 10' => 'Lumix G Vario 14-140mm F3.5-5.6 Asph. Power OIS', #20
+    '2 20 10' => 'Lumix G Vario 12-32mm F3.5-5.6 Asph. Mega OIS', #20
+    '2 21 10' => 'Leica DG Nocticron 42.5mm F1.2 Asph. Power OIS', #20
+    '2 22 10' => 'Leica DG Summilux 15mm F1.7 Asph.', #20
     '3 01 00' => 'Leica D Vario Elmarit 14-50mm F2.8-3.5 Asph.',
     '3 02 00' => 'Leica D Summilux 25mm F1.4 Asph.',
+    # Tamron lenses
+    '5 01 10' => 'Tamron 14-150mm F3.5-5.8 Di III', #20 (model C001)
 );
 
 # lookup for Olympus camera types (ref PH)
@@ -311,14 +322,24 @@ my %olympusCameraTypes = (
     D4535 => 'SP-620UZ',
     D4536 => 'TG-320',
     D4537 => 'VR340,D750',
+    D4538 => 'VG160,X990,D745',
     D4541 => 'SZ-12',
     D4545 => 'VH410',
+    D4546 => 'XZ-10', #21
     D4547 => 'TG-2',
     D4548 => 'TG-830',
     D4549 => 'TG-630',
     D4550 => 'SH-50',
     D4553 => 'SZ-16,DZ-105',
     D4562 => 'SP-820UZ',
+    D4566 => 'SZ-15',
+    D4572 => 'STYLUS1',
+    D4574 => 'TG-3',
+    D4575 => 'TG-850',
+    D4579 => 'SP-100EE',
+    D4580 => 'SH-60',
+    D4581 => 'SH-1',
+    D4582 => 'TG-835',
     D4809 => 'C2500L',
     D4842 => 'E-10',
     D4856 => 'C-1',
@@ -351,6 +372,9 @@ my %olympusCameraTypes = (
     S0043 => 'E-PM2',
     S0044 => 'E-P5',
     S0045 => 'E-PL6',
+    S0046 => 'E-PL7', #21
+    S0047 => 'E-M1',
+    S0051 => 'E-M10',
     SR45 => 'D220',
     SR55 => 'D320L',
     SR83 => 'D340L',
@@ -551,8 +575,8 @@ my %indexInfo = (
         Name => 'SpecialMode',
         Notes => q{
             3 numbers: 1. Shooting mode: 0=Normal, 2=Fast, 3=Panorama;
-            2. Sequence Number; 3. Panorama Direction: 1=Left-Right,
-            2=Right-Left, 3=Bottom-Top, 4=Top-Bottom
+            2. Sequence Number; 3. Panorama Direction: 1=Left-right,
+            2=Right-left, 3=Bottom-Top, 4=Top-Bottom
         },
         Writable => 'int32u',
         Count => 3,
@@ -588,7 +612,7 @@ my %indexInfo = (
                 2 => 'SHQ (Fine)',
                 6 => 'RAW', #PH - C5050WZ
             );
-            my %t2 = ( # all other types
+            my %t2 = ( # all other types (except D4322, ref 22)
                 1 => 'SQ (Low)',
                 2 => 'HQ (Normal)',
                 3 => 'SHQ (Fine)',
@@ -597,7 +621,7 @@ my %indexInfo = (
                 6 => 'Small-Fine', #PH
                 33 => 'Uncompressed', #PH - C2100Z
             );
-            my $conv = $self->{CameraType} =~ /^SX(?!151\b)/ ? \%t1 : \%t2;
+            my $conv = $self->{CameraType} =~ /^(SX(?!151\b)|D4322)/ ? \%t1 : \%t2;
             return $$conv{$val} ? $$conv{$val} : "Unknown ($val)";
         },
         # (no PrintConvInv because we don't know CameraType at write time)
@@ -615,7 +639,11 @@ my %indexInfo = (
         Name => 'BWMode',
         Description => 'Black And White Mode',
         Writable => 'int16u',
-        PrintConv => \%offOn,
+        PrintConv => {
+            0 => 'Off',
+            1 => 'On',
+            6 => '(none)', #22
+        },
     },
     0x0204 => {
         Name => 'DigitalZoom',
@@ -675,7 +703,14 @@ my %indexInfo = (
     },
     0x0303 => { Name => 'WhiteBalanceBracket',  Writable => 'int16u' }, #11
     0x0304 => { Name => 'WhiteBalanceBias',     Writable => 'int16u' }, #11
-   # 0x0305 => 'PrintMaching', ? #11
+   # 0x0305 => 'PrintMatching', ? #11
+    0x0401 => { #21
+        Name => 'BlackLevel',
+        Condition => '$format eq "int32u" and $count == 4',
+        Writable => 'int32u',
+        Count => 4,
+        Notes => 'found in Epson ERF images',
+    },
     0x0403 => { #11
         Name => 'SceneMode',
         Writable => 'int16u',
@@ -1498,7 +1533,7 @@ my %indexInfo = (
         # 5: 0, 16(new Lumix lenses)
         ValueConv => 'my @a=split(" ",$val); sprintf("%x %.2x %.2x",@a[0,2,3])',
         # set unknown values to zero when writing
-        ValueConvInv => 'my @a=split(" ",$val); hex($a[0])." 0 ".hex($a[1]).hex($a[2])." 0 0"',
+        ValueConvInv => 'my @a=split(" ",$val); hex($a[0])." 0 ".hex($a[1])." ".hex($a[2])." 0 0"',
         PrintConv => \%olympusLensTypes,
     },
     # apparently the first 3 digits of the lens s/n give the type (ref 4):
@@ -1679,7 +1714,7 @@ my %indexInfo = (
             1027 => 'Spot+Shadow control', #6
         },
     },
-    0x203 => { Name => 'ExposureShift', Writable => 'rational64s' }, #11 (some E-models only)
+    0x203 => { Name => 'ExposureShift', Writable => 'rational64s' }, #11 (some models only)
     0x204 => { #11 (XZ-1)
         Name => 'NDFilter',
         PrintConv => \%offOn,
@@ -1703,17 +1738,20 @@ my %indexInfo = (
             1 => 'Sequential shooting AF',
             2 => 'Continuous AF',
             3 => 'Multi AF',
-            5 => 'Face detect', #11
+            4 => 'Face detect', #11
             10 => 'MF',
-        }, { BITMASK => { #11
-            0 => 'S-AF',
-            2 => 'C-AF',
-            4 => 'MF',
-            5 => 'Face detect',
-            6 => 'Imager AF',
-            7 => 'Live View Magnification Frame',
-            8 => 'AF sensor',
-        }}],
+        }, {
+            0 => '(none)',
+            BITMASK => { #11
+                0 => 'S-AF',
+                2 => 'C-AF',
+                4 => 'MF',
+                5 => 'Face detect',
+                6 => 'Imager AF',
+                7 => 'Live View Magnification Frame',
+                8 => 'AF sensor',
+            },
+        }],
     },
     0x302 => { #6
         Name => 'FocusProcess',
@@ -1752,9 +1790,15 @@ my %indexInfo = (
         ValueConv => '$val =~ s/\S* //; $val', # ignore first undefined value
         ValueConvInv => '"undef $val"',
         PrintConv => q{
-            return $val if $val =~ /undef/;
+            return 'n/a' if $val =~ /undef/;
             sprintf("(%d%%,%d%%) (%d%%,%d%%)", map {$_ * 100} split(" ",$val));
-        }
+        },
+        PrintConvInv => q{
+            return 'undef undef undef undef' if $val eq 'n/a';
+            my @nums = $val =~ /\d+(?:\.\d+)?/g;
+            return undef unless @nums == 4;
+            join ' ', map {$_ / 100} @nums;
+        },
     },
     0x306 => { #11
         Name => 'AFFineTune',
@@ -1807,7 +1851,8 @@ my %indexInfo = (
     0x404 => { #11
         Name => 'FlashControlMode',
         Writable => 'int16u',
-        Count => 3,
+        Count => -1,
+        Notes => '3 or 4 values',
         PrintConv => [{
             0 => 'Off',
             3 => 'TTL',
@@ -1818,38 +1863,52 @@ my %indexInfo = (
     0x405 => { #11
         Name => 'FlashIntensity',
         Writable => 'rational64s',
-        Count => 3,
-        PrintConv => '$val eq "undef undef undef" ? "n/a" : $val',
-        PrintConvInv => '$val eq "n/a" ? "undef undef undef" : $val',
+        Count => -1,
+        Notes => '3 or 4 values',
+        PrintConv => {
+            OTHER => sub { shift },
+            'undef undef undef' => 'n/a',
+            'undef undef undef undef' => 'n/a (x4)',
+        },
     },
     0x406 => { #11
         Name => 'ManualFlashStrength',
         Writable => 'rational64s',
-        Count => 3,
-        PrintConv => '$val eq "undef undef undef" ? "n/a" : $val',
-        PrintConvInv => '$val eq "n/a" ? "undef undef undef" : $val',
+        Count => -1,
+        Notes => '3 or 4 values',
+        PrintConv => {
+            OTHER => sub { shift },
+            'undef undef undef' => 'n/a',
+            'undef undef undef undef' => 'n/a (x4)',
+        },
     },
     0x500 => { #6
         Name => 'WhiteBalance2',
         Writable => 'int16u',
         PrintConv => {
             0 => 'Auto',
+            1 => 'Auto (Keep Warm Color Off)', #21
             16 => '7500K (Fine Weather with Shade)',
             17 => '6000K (Cloudy)',
             18 => '5300K (Fine Weather)',
             20 => '3000K (Tungsten light)',
             21 => '3600K (Tungsten light-like)',
+            22 => 'Auto Setup', #21
+            23 => '5500K (Flash)', #21
             33 => '6600K (Daylight fluorescent)',
             34 => '4500K (Neutral white fluorescent)',
             35 => '4000K (Cool white fluorescent)',
+            36 => 'White Fluorescent', #21
             48 => '3600K (Tungsten light-like)',
-            256 => 'Custom WB 1',
-            257 => 'Custom WB 2',
-            258 => 'Custom WB 3',
-            259 => 'Custom WB 4',
-            512 => 'Custom WB 5400K',
-            513 => 'Custom WB 2900K',
-            514 => 'Custom WB 8000K',
+            67 => 'Underwater', #21
+            256 => 'One Touch WB 1', #21
+            257 => 'One Touch WB 2', #21
+            258 => 'One Touch WB 3', #21
+            259 => 'One Touch WB 4', #21
+            512 => 'Custom WB 1', #21
+            513 => 'Custom WB 2', #21
+            514 => 'Custom WB 3', #21
+            515 => 'Custom WB 4', #21
         },
     },
     0x501 => { #PH/4
@@ -1981,6 +2040,7 @@ my %indexInfo = (
         Name => 'NoiseReduction',
         Writable => 'int16u',
         PrintConv => {
+            0 => '(none)',
             BITMASK => {
                 0 => 'Noise Reduction',
                 1 => 'Noise Filter',
@@ -2259,6 +2319,14 @@ my %indexInfo = (
         Writable => 'int16u',
         PrintConv => \%offOn,
     },
+    0x908 => { #PH (NC, E-M1)
+        Name => 'DateTimeUTC',
+        Writable => 'string',
+        Groups => { 2 => 'Time' },
+        Shift => 'Time',
+        PrintConv => '$self->ConvertDateTime($val)',
+        PrintConvInv => '$self->InverseDateTime($val,undef,1)',
+    },
 );
 
 # Olympus RAW processing IFD (ref 6)
@@ -2304,6 +2372,7 @@ my %indexInfo = (
         Name => 'RawDevNoiseReduction',
         Writable => 'int16u',
         PrintConv => { #11
+            0 => '(none)',
             BITMASK => {
                 0 => 'Noise Reduction',
                 1 => 'Noise Filter',
@@ -2325,6 +2394,7 @@ my %indexInfo = (
         Name => 'RawDevSettings',
         Writable => 'int16u',
         PrintConv => { #11
+            0 => '(none)',
             BITMASK => {
                 0 => 'WB Color Temp',
                 1 => 'WB Gray Point',
@@ -2380,6 +2450,7 @@ my %indexInfo = (
         Name => 'RawDevNoiseReduction',
         Writable => 'int16u',
         PrintConv => {
+            0 => '(none)',
             BITMASK => {
                 0 => 'Noise Reduction',
                 1 => 'Noise Filter',
@@ -2457,6 +2528,7 @@ my %indexInfo = (
         Count => 4,
     },
     0x100 => { Name => 'WB_RBLevels',       Writable => 'int16u', Count => 2 }, #6
+    # 0x101 - in-camera AutoWB unless it is all 0's or all 256's (ref 21)
     0x102 => { Name => 'WB_RBLevels3000K',  Writable => 'int16u', Count => 2 }, #11
     0x103 => { Name => 'WB_RBLevels3300K',  Writable => 'int16u', Count => 2 }, #11
     0x104 => { Name => 'WB_RBLevels3600K',  Writable => 'int16u', Count => 2 }, #11
@@ -2486,6 +2558,8 @@ my %indexInfo = (
     0x11d => { Name => 'WB_GLevel6600K',    Writable => 'int16u' }, #11
     0x11e => { Name => 'WB_GLevel7500K',    Writable => 'int16u' }, #11
     0x11f => { Name => 'WB_GLevel',         Writable => 'int16u' }, #11
+    # 0x121 = WB preset for flash (about 6000K) (ref 21)
+    # 0x125 = WB preset for underwater (ref 21)
     0x200 => { #6
         Name => 'ColorMatrix',
         Writable => 'int16u',
@@ -2527,12 +2601,19 @@ my %indexInfo = (
     },
     # 0x800 LensDistortionParams, float[9] (ref 11)
     # 0x801 LensShadingParams, int16u[16] (ref 11)
+    0x0805 => { #21
+        Name => 'SensorCalibration',
+        Notes => '2 numbers: 1. recommended maximum, 2. calibration midpoint',
+        Writable => 'int16s',
+        Count => 2,
+    },
     # 0x1010-0x1012 are the processing options used in camera or in
     # Olympus software, which 0x050a-0x050c are in-camera only (ref 6)
     0x1010 => { #PH/4
         Name => 'NoiseReduction2',
         Writable => 'int16u',
         PrintConv => {
+            0 => '(none)',
             BITMASK => {
                 0 => 'Noise Reduction',
                 1 => 'Noise Filter',
@@ -2624,6 +2705,14 @@ my %indexInfo = (
         Count => 12,
         Notes => 'X/Y offset and width/height of the cropped face detect frame',
     },
+    0x1306 => { #PH (NC, E-M1)
+        Name => 'CameraTemperature',
+        Writable => 'int16u',
+        Format => 'int16s', #(NC)
+        ValueConv => '$val ? $val : undef', # zero for some models (how to differentiate from 0 C?)
+        Notes => 'this seems to be in degrees C only for some models',
+    },
+    # 0x1905 - focal length (PH, E-M1)
 );
 
 # Olympus Focus Info IFD
@@ -2828,17 +2917,41 @@ my %indexInfo = (
     },
     0x1500 => [{ #6
         Name => 'SensorTemperature',
-        Condition => '$$self{Model} =~ /E-(1|M5)\b/',
+        # (Stylus 1 stores values like "34 0 0")
+        Condition => '$$self{Model} =~ /E-(1|M5)\b/ || $count != 1',
         Writable => 'int16s',
-        PrintConv => '"$val C"',
+        PrintConv => '$val=~s/ 0 0$//; "$val C"',
         PrintConvInv => '$val=~s/ ?C$//; $val',
     },{
         Name => 'SensorTemperature',
         Writable => 'int16s',
-        RawConv => '($val and $val != -32768) ? $val : undef', # ignore 0 and -32768
-        ValueConv => '-2*(($val/135)**2)+55', #11
+        RawConv => '($val and $val ne "-32768") ? $val : undef', # ignore 0 and -32768
+        # ValueConv => '-2*(($val/135)**2)+55', #11
+        ValueConv => '84 - 3 * $val / 26', #http://u88.n24.queensu.ca/exiftool/forum/index.php/topic,5423.0.html
+        ValueConvInv => 'int((84 - $val) * 26 / 3 + 0.5)',
         PrintConv => 'sprintf("%.1f C",$val)',
         PrintConvInv => '$val=~s/ ?C$//; $val',
+        # data from test shots by Eric Sibert:
+        #    E-510           E-620
+        # Raw  Ambient    Raw  Ambient
+        # ---  -------    ---  -------
+        # 534    22.7     518    22.7
+        # 550    20.6     531    19.3
+        # 552    20.8     533    17.9
+        # 558    19.3     582    17.2
+        # 564    19.1     621    12.3
+        # 567    17.8     634     9.7
+        # 576    18.6     650     8.0
+        # 582    17.2     660     7.7
+        # 599    13.8     703     3.3
+        # 631    10.7     880   -20.6
+        # 642    12.4     880   -20.6
+        # 652     9.6     892   -24.4
+        # 692     5.2     892   -22.7
+        # 714     3.3
+        # 895   -19.8
+        # 895   -19.2
+        # 900   -21.7
     }],
     0x1600 => { # ref http://fourthirdsphoto.com/vbb/showpost.php?p=107607&postcount=15
         Name => 'ImageStabilization',
@@ -2859,7 +2972,7 @@ my %indexInfo = (
 %Image::ExifTool::Olympus::RawInfo = (
     WRITE_PROC => \&Image::ExifTool::Exif::WriteExif,
     CHECK_PROC => \&Image::ExifTool::Exif::CheckExif,
-    NOTES => 'These tags are found only in ORF images of some models (ie. C8080WZ).',
+    NOTES => 'These tags are found only in ORF images of some models (eg. C8080WZ).',
     GROUPS => { 0 => 'MakerNotes', 2 => 'Camera' },
     0x000 => {
         Name => 'RawInfoVersion',
@@ -2986,7 +3099,7 @@ my %indexInfo = (
         Name => 'ExposureUnknown',
         Unknown => 1,
         Format => 'int32u',
-        # this conversion doesn't work for all models (ie. gives "1/100000")
+        # this conversion doesn't work for all models (eg. gives "1/100000")
         ValueConv => '$val ? 10 / $val : 0',
         PrintConv => 'Image::ExifTool::Exif::PrintExposureTime($val)',
     },
@@ -3527,8 +3640,8 @@ sub PrintAFAreas($)
 # Returns: 1 if this looked like a valid ORF file, 0 otherwise
 sub ProcessORF($$)
 {
-    my ($exifTool, $dirInfo) = @_;
-    return $exifTool->ProcessTIFF($dirInfo);
+    my ($et, $dirInfo) = @_;
+    return $et->ProcessTIFF($dirInfo);
 }
 
 1;  # end
@@ -3550,7 +3663,7 @@ Olympus or Epson maker notes in EXIF information.
 
 =head1 AUTHOR
 
-Copyright 2003-2013, Phil Harvey (phil at owl.phy.queensu.ca)
+Copyright 2003-2015, Phil Harvey (phil at owl.phy.queensu.ca)
 
 This library is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

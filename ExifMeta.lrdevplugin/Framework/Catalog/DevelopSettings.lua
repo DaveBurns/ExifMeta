@@ -661,7 +661,7 @@ function DevelopSettings:transferAdjustments( params )
     else
         toDev = fromDev
     end
-    local s, m = developSettings:adjustPhotos( toPhotos, str:fmtx( "Adjustments From ^1", fromName ), toDev, tmo )
+    local s, m = self:adjustPhotos( toPhotos, str:fmtx( "Adjustments From ^1", fromName ), toDev, tmo )
     return s, m
 end
 
@@ -864,7 +864,20 @@ function DevelopSettings:assurePv2012BasicSettings( photo, dev, tmo, atFlag, exp
             steadyState = dev2
         until true
         count = count + 1
-        if count > maxCount then
+        if count == ( maxCount / 2 ) then -- half way..
+            -- ###1 NOTE: this clause added 11/Jan/2015 3:22 unconditionally because it's required for reliable settling, *BUT* it means calling context must save photo selection and restore afterward if desirable.
+            local s, m = gui:switchModule( 'lib' )
+            if not s then
+                Debug.pause( "Unable to switch to library module for basic adjustment settling." )
+                app:log( "*** ^1", m ) -- pseudo warning - don't want this causing a stink if user was already in lib module but kbd stuffing not functioning.
+            end
+            local s = cat:assurePhotoIsSelected( photo ) -- logs a plenty.. (so no "q" or "m" returned).
+            if s then
+                app:log( "Selected photo so it's settings will settle.." )
+            else
+                app:logW( "Tried to select photo so it's settings would settle, but couldn't - ^1", q )
+            end
+        elseif count > maxCount then
             -- probably should be verbose, but it generally indicates a problem I want to track down whether user has V-logging enabled, so...
             app:log( "Basic settings did not settle as expected - current values:" )
             app:log( "Exposure: ^1, Contrast: ^2, Highlights: ^3, Shadows: ^4, Whites: ^5, Blacks: ^6, Clarity: ^7",
@@ -910,7 +923,20 @@ function DevelopSettings:assureLegacyBasicSettings( photo, dev )
             return dev2
         until true
         count = count + 1
-        if count > 60 then -- 6 seconds.
+        if count == 30 then
+            -- ###1 NOTE: this clause added 11/Jan/2015 3:22 unconditionally because it's required for reliable settling, *BUT* it means calling context must save photo selection and restore afterward if desirable.
+            local s, m = gui:switchModule( 'lib' )
+            if not s then
+                Debug.pause( "Unable to switch to library module for basic legacy adjustment settling." )
+                app:log( "*** ^1", m ) -- pseudo warning - don't want this causing a stink if user was already in lib module but kbd stuffing not functioning.
+            end
+            local s = cat:assurePhotoIsSelected( photo ) -- logs a plenty.. (so no "q" or "m" returned).
+            if s then
+                app:log( "Selected photo so it's legacy settings will settle.." )
+            else
+                app:logW( "Tried to select photo so it's legacy settings would settle, but couldn't - ^1", q )
+            end
+        elseif count > 60 then -- 6 seconds.
             return dev2, "Legacy settings have not settled (after a good 6 second wait)."
         end
         LrTasks.sleep( .1 ) -- give dev settings another moment.
@@ -924,7 +950,7 @@ end
 
 --- Assure stabilized basic settings, of any process version.
 --
-function DevelopSettings:assureBasicSettings( photo, dev )
+function DevelopSettings:assureBasicSettings( photo, dev, tmo )
     local oldSettings = dev or self:getDevelopSettings( photo )
     local errm
     local sleptEnough
@@ -932,12 +958,12 @@ function DevelopSettings:assureBasicSettings( photo, dev )
         local pv = oldSettings.ProcessVersion
         if pv ~= nil then
             if str:getFirstChar( pv ) == '6' then -- PV2012
-                oldSettings, errm = developSettings:assurePv2012BasicSettings( photo, oldSettings )
+                oldSettings, errm = self:assurePv2012BasicSettings( photo, oldSettings, tmo ) -- tmo defaults to 10 seconds.
                 --Debug.pause( oldSettings, errm )
                 -- 6 seconds of sleep built-in.
                 return
             elseif str:getFirstChar( pv ) == '5' then -- legacy
-                oldSettings, errm = developSettings:assureLegacyBasicSettings( photo, oldSettings )
+                oldSettings, errm = self:assureLegacyBasicSettings( photo, oldSettings ) -- @9/Jan/2015 4:01, legacy tmo is hard-coded (6 seconds), tmo )
                 --Debug.pause( oldSettings, errm )
                 -- 6 seconds of sleep built-in.
                 return

@@ -8,6 +8,7 @@
 # References:   1) http://www.ozhiker.com/electronics/pjmt/jpeg_info/ricoh_mn.html
 #               2) http://homepage3.nifty.com/kamisaka/makernote/makernote_ricoh.htm
 #               3) Tim Gray private communication (GR)
+#               4) https://github.com/atotto/ricoh-theta-tools/
 #------------------------------------------------------------------------------
 
 package Image::ExifTool::Ricoh;
@@ -17,7 +18,7 @@ use vars qw($VERSION);
 use Image::ExifTool qw(:DataAccess :Utils);
 use Image::ExifTool::Exif;
 
-$VERSION = '1.25';
+$VERSION = '1.28';
 
 sub ProcessRicohText($$$);
 sub ProcessRicohRMETA($$$);
@@ -47,7 +48,7 @@ my %ricohLensIDs = (
     0x0002 => { #PH
         Name => 'FirmwareVersion',
         Writable => 'string',
-        # ie. "Rev0113" is firmware version 1.13
+        # eg. "Rev0113" is firmware version 1.13
         PrintConv => '$val=~/^Rev(\d+)$/ ? sprintf("%.2f",$1/100) : $val',
         PrintConvInv => '$val=~/^(\d+)\.(\d+)$/ ? sprintf("Rev%.2d%.2d",$1,$2) : $val',
     },
@@ -421,6 +422,47 @@ my %ricohLensIDs = (
             },
         },
     ],
+    0x4001 => {
+        Name => 'ThetaSubdir',
+        Groups => { 1 => 'MakerNotes' },    # SubIFD needs group 1 set
+        Flags => 'SubIFD',
+        SubDirectory => {
+            TagTable => 'Image::ExifTool::Ricoh::ThetaSubdir',
+            Start => '$val',
+        },
+    },
+);
+
+# Ricoh type 2 maker notes (ref PH)
+# (similar to Kodak::Type11 and GE::Main)
+%Image::ExifTool::Ricoh::Type2 = (
+    GROUPS => { 0 => 'MakerNotes', 2 => 'Camera' },
+    NOTES => q{
+        Tags written by models such as the Ricoh HZ15 and the Pentax XG-1.  These
+        are not writable due to numerous formatting errors as written by these
+        cameras.
+    },
+    # 0x104 - int32u: 1
+    # 0x200 - int32u[3]: 0 0 0
+    # 0x202 - int16u: 0 (GE Macro?)
+    # 0x203 - int16u: 0,3 (Kodak PictureEffect?)
+    # 0x204 - rational64u: 0/10
+    # 0x206 - float[6]: (not really float because size should be 2 bytes)
+    # 0x207 - string[4]: zeros (GE/Kodak Model?)
+    0x300 => {
+        # brutal.  There are lots of errors in the XG-1 maker notes.  For the XG-1,
+        # 0x300 has a value of "XG-1Pentax".  The "XG-1" part is likely an improperly
+        # stored 0x207 RicohModel, resulting in an erroneous 4-byte offset for this tag
+        Name => 'RicohMake',
+        Writable => 'undef',
+        ValueConv => '$val =~ s/ *$//; $val',
+    },
+    # 0x306 - int16u: 1
+    # 0x500 - int16u: 0
+    # 0x501 - int16u: 0
+    # 0x502 - int16u: 0
+    # 0x9c9c - int8u[6]: ?
+    # 0xadad - int8u[20480]: ?
 );
 
 # Ricoh image info (ref 2)
@@ -594,6 +636,31 @@ my %ricohLensIDs = (
         SubDirectory => { TagTable => 'Image::ExifTool::Ricoh::SerialInfo' },
     }
     # 0x000E ProductionNumber? (ref 2) [no. zero for most models - PH]
+);
+
+
+# Ricoh Theta subdirectory tags - Contains orientation information (ref 4)
+%Image::ExifTool::Ricoh::ThetaSubdir = (
+    GROUPS => { 0 => 'MakerNotes', 2 => 'Camera' },
+    WRITE_PROC => \&Image::ExifTool::Exif::WriteExif,
+    CHECK_PROC => \&Image::ExifTool::Exif::CheckExif,
+    # 0x0001 => Unknown
+    # 0x0002 => Unknown
+    0x0003 => {
+        Name => 'Accelerometer',
+        Writable => 'rational64s',
+        Count => 2,
+    },
+    0x0004 => {
+        Name => 'Compass',
+        Writable => 'rational64u',
+    },
+    # 0x0005 => Unknown
+    # 0x0101 => Unknown - ISO Speed?
+    # 0x0102 => Unknown - F Number?
+    # 0x0103 => Unknown - Exposure?
+    # 0x0104 => Unknown - Serial Number?
+    # 0x0105 => Unknown - Serial Number?
 );
 
 # face detection information (ref PH, CX4)
@@ -827,6 +894,14 @@ my %ricohLensIDs = (
         ValueConv => '$val=~s/\s*:.*//; $val',
         PrintConv => \%ricohLensIDs,
     },
+    RicohPitch => {
+        Require => 'Ricoh:Accelerometer',
+        ValueConv => 'my @v = split(" ",$val); $v[1]',
+    },
+    RicohRoll => {
+        Require => 'Ricoh:Accelerometer',
+        ValueConv => 'my @v = split(" ",$val); $v[0] <= 180 ? $v[0] : $v[0] - 360',
+    },
 );
 
 # add our composite tags
@@ -841,32 +916,32 @@ Image::ExifTool::AddCompositeTags('Image::ExifTool::Ricoh');
 # Returns: 1 on success, otherwise returns 0 and sets a Warning
 sub ProcessRicohText($$$)
 {
-    my ($exifTool, $dirInfo, $tagTablePtr) = @_;
+    my ($et, $dirInfo, $tagTablePtr) = @_;
     my $dataPt = $$dirInfo{DataPt};
     my $dataLen = $$dirInfo{DataLen};
     my $dirStart = $$dirInfo{DirStart} || 0;
     my $dirLen = $$dirInfo{DirLen} || $dataLen - $dirStart;
-    my $verbose = $exifTool->Options('Verbose');
+    my $verbose = $et->Options('Verbose');
 
     my $data = substr($$dataPt, $dirStart, $dirLen);
     return 1 if $data =~ /^\0/;     # blank Ricoh maker notes
     # validate text maker notes
     unless ($data =~ /^(Rev|Rv)/) {
-        $exifTool->Warn('Bad Ricoh maker notes');
+        $et->Warn('Bad Ricoh maker notes');
         return 0;
     }
     while ($data =~ m/([A-Z][a-z]{1,2})([0-9A-F]+);/sg) {
         my $tag = $1;
         my $val = $2;
-        my $tagInfo = $exifTool->GetTagInfo($tagTablePtr, $tag);
+        my $tagInfo = $et->GetTagInfo($tagTablePtr, $tag);
         if ($verbose) {
-            $exifTool->VerboseInfo($tag, $tagInfo,
+            $et->VerboseInfo($tag, $tagInfo,
                 Table  => $tagTablePtr,
                 Value  => $val,
             );
         }
         unless ($tagInfo) {
-            next unless $exifTool->{OPTIONS}->{Unknown};
+            next unless $$et{OPTIONS}{Unknown};
             $tagInfo = {
                 Name => "Ricoh_Text_$tag",
                 Unknown => 1,
@@ -875,7 +950,7 @@ sub ProcessRicohText($$$)
             # add tag information to table
             AddTagToTable($tagTablePtr, $tag, $tagInfo);
         }
-        $exifTool->FoundTag($tagInfo, $val);
+        $et->FoundTag($tagInfo, $val);
     }
     return 1;
 }
@@ -886,33 +961,33 @@ sub ProcessRicohText($$$)
 # Returns: 1 on success, otherwise returns 0 and sets a Warning
 sub ProcessRicohRMETA($$$)
 {
-    my ($exifTool, $dirInfo, $tagTablePtr) = @_;
+    my ($et, $dirInfo, $tagTablePtr) = @_;
     my $dataPt = $$dirInfo{DataPt};
     my $dirStart = $$dirInfo{DirStart};
     my $dataLen = length($$dataPt);
     my $dirLen = $dataLen - $dirStart;
-    my $verbose = $exifTool->Options('Verbose');
+    my $verbose = $et->Options('Verbose');
 
-    $exifTool->VerboseDir('Ricoh RMETA') if $verbose;
-    $dirLen > 6 or $exifTool->Warn('Truncated Ricoh RMETA data', 1), return 0;
+    $et->VerboseDir('Ricoh RMETA') if $verbose;
+    $dirLen > 6 or $et->Warn('Truncated Ricoh RMETA data', 1), return 0;
     my $byteOrder = substr($$dataPt, $dirStart, 2);
-    SetByteOrder($byteOrder) or $exifTool->Warn('Bad Ricoh RMETA data', 1), return 0;
+    SetByteOrder($byteOrder) or $et->Warn('Bad Ricoh RMETA data', 1), return 0;
     my $rmetaNum = Get16u($dataPt, $dirStart+4);
     if ($rmetaNum != 0) {
         # not sure how to recognize audio, so do it by checking for "RIFF" header
         # and assume all subsequent RMETA segments are part of the audio data
         # (but it looks like the int16u at $dirStart+6 is the next block number
         # if the data is continued, or 0 for the last block)
-        $dirLen < 14 and $exifTool->Warn('Short Ricoh RMETA block', 1), return 0;
+        $dirLen < 14 and $et->Warn('Short Ricoh RMETA block', 1), return 0;
         my $audioLen = Get16u($dataPt, $dirStart+12);
-        $audioLen + 14 > $dirLen and $exifTool->Warn('Truncated Ricoh RMETA audio data', 1), return 0;
+        $audioLen + 14 > $dirLen and $et->Warn('Truncated Ricoh RMETA audio data', 1), return 0;
         my $buff = substr($$dataPt, $dirStart + 14, $audioLen);
         if ($audioLen >= 4 and substr($buff, 0, 4) eq 'RIFF') {
-            $exifTool->HandleTag($tagTablePtr, '_audio', \$buff);
-        } elsif ($$exifTool{VALUE}{SoundFile}) {
-            ${$$exifTool{VALUE}{SoundFile}} .= $buff;
+            $et->HandleTag($tagTablePtr, '_audio', \$buff);
+        } elsif ($$et{VALUE}{SoundFile}) {
+            ${$$et{VALUE}{SoundFile}} .= $buff;
         } else {
-            $exifTool->Warn('Unknown Ricoh RMETA type', 1);
+            $et->Warn('Unknown Ricoh RMETA type', 1);
             return 0;
         }
         return 1;
@@ -927,7 +1002,7 @@ sub ProcessRicohRMETA($$$)
         $pos += 4;
         $size -= 2;
         if ($size < 0 or $pos + $size > $dataLen) {
-            $exifTool->Warn('Corrupted Ricoh RMETA data', 1);
+            $et->Warn('Corrupted Ricoh RMETA data', 1);
             last;
         }
         if ($type eq 1) {
@@ -953,7 +1028,7 @@ sub ProcessRicohRMETA($$$)
     if (@tags or @vals) {
         if (@tags < @vals) {
             my ($nt, $nv) = (scalar(@tags), scalar(@vals));
-            $exifTool->Warn("Fewer tags ($nt) than values ($nv) in Ricoh RMETA", 1);
+            $et->Warn("Fewer tags ($nt) than values ($nv) in Ricoh RMETA", 1);
         }
         # find next tag in null-delimited list
         # unpack numerical values from block of int16u values
@@ -965,7 +1040,7 @@ sub ProcessRicohRMETA($$$)
             $name =~ s/ (\w)/\U$1/g;                # remove special characters
             $name = 'RMETA_Unknown' unless length($name);
             my $num = shift @nums;
-            my $tagInfo = $exifTool->GetTagInfo($tagTablePtr, $tag);
+            my $tagInfo = $et->GetTagInfo($tagTablePtr, $tag);
             if ($tagInfo) {
                 # make sure print conversion is defined
                 $$tagInfo{PrintConv} = { } unless ref $$tagInfo{PrintConv} eq 'HASH';
@@ -979,7 +1054,7 @@ sub ProcessRicohRMETA($$$)
             # add conversion for this value (replacing any existing entry)
             $tagInfo->{PrintConv}->{$num} = length $val ? $val : $num;
             if ($verbose) {
-                $exifTool->VerboseInfo($tag, $tagInfo,
+                $et->VerboseInfo($tag, $tagInfo,
                     Table   => $tagTablePtr,
                     Value   => $num,
                     DataPt  => $dataPt,
@@ -988,7 +1063,7 @@ sub ProcessRicohRMETA($$$)
                     Size    => length($val),
                 );
             }
-            $exifTool->FoundTag($tagInfo, $num);
+            $et->FoundTag($tagInfo, $num);
             $valPos += length($val) + 1;
         }
     }
@@ -1014,7 +1089,7 @@ interpret Ricoh maker notes EXIF meta information.
 
 =head1 AUTHOR
 
-Copyright 2003-2013, Phil Harvey (phil at owl.phy.queensu.ca)
+Copyright 2003-2015, Phil Harvey (phil at owl.phy.queensu.ca)
 
 This library is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

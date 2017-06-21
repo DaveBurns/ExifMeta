@@ -24,7 +24,7 @@
 #               9) http://www.w3.org/TR/SVG11/
 #               10) http://www.adobe.com/devnet/xmp/pdfs/XMPSpecificationPart2.pdf (Oct 2008)
 #               11) http://www.extensis.com/en/support/kb_article.jsp?articleNumber=6102211
-#               12) http://www.cipa.jp/english/hyoujunka/kikaku/pdf/DC-010-2012_E.pdf
+#               12) http://www.cipa.jp/std/documents/e/DC-010-2012_E.pdf
 #
 # Notes:      - Property qualifiers are handled as if they were separate
 #               properties (with no associated namespace).
@@ -47,7 +47,7 @@ use Image::ExifTool qw(:Utils);
 use Image::ExifTool::Exif;
 require Exporter;
 
-$VERSION = '2.68';
+$VERSION = '2.82';
 @ISA = qw(Exporter);
 @EXPORT_OK = qw(EscapeXML UnescapeXML);
 
@@ -56,6 +56,7 @@ sub WriteXMP($$;$);
 sub CheckXMP($$$);
 sub ParseXMPElement($$$;$$$$);
 sub DecodeBase64($);
+sub EncodeBase64($;$);
 sub SaveBlankInfo($$$;$);
 sub ProcessBlankInfo($$$;$);
 sub ValidateXMP($;$);
@@ -65,7 +66,9 @@ sub FormatXMPDate($);
 sub ConvertRational($);
 sub ConvertRationalList($);
 
-my %curNS;  # namespaces currently in effect while parsing the file
+# namespaces and prefixes currently in effect while parsing the file,
+# and lookup to translate brain-dead-Microsoft-Photo-software prefixes
+my (%curURI, %curNS, %xlatNS);
 
 # lookup for translating to ExifTool namespaces
 # Note: Use $xlatNamespace (only valid during processing) to do the translation
@@ -229,6 +232,9 @@ my %boolConv = (
 # (Note: namespaces with non-standard prefixes aren't currently ignored)
 my %ignoreNamespace = ( 'x'=>1, rdf=>1, xmlns=>1, xml=>1, svg=>1, et=>1, office=>1 );
 
+# XMP properties to ignore (set dynamically via dirInfo IgnoreProp)
+my %ignoreProp;
+
 # these are the attributes that we handle for properties that contain
 # sub-properties.  Attributes for simple properties are easy, and we
 # just copy them over.  These are harder since we don't store attributes
@@ -241,7 +247,8 @@ my %recognizedAttrs = (
     'rdf:parseType' => 1,
     'rdf:nodeID' => 1,
     'et:toolkit' => 1,
-    'rdf:xmlns' => 1, # this is presumably the default namespace, which we currently ignore
+    'rdf:xmlns'  => 1, # this is presumably the default namespace, which we currently ignore
+    'lastUpdate' => [ 'Image::ExifTool::XMP::XML', 'lastUpdate', 'LastUpdate' ], # found in XML from Sony ICLE-7S MP4
 );
 
 # special tags in structures below
@@ -414,6 +421,25 @@ my %sCorrectionMask = (
     ZeroY        => { Writable => 'real', List => 0 },
     FullX        => { Writable => 'real', List => 0 },
     FullY        => { Writable => 'real', List => 0 },
+    # new elements used in CircularGradientBasedCorrections CorrectionMasks
+    # and RetouchAreas Masks
+    Top          => { Writable => 'real', List => 0 },
+    Left         => { Writable => 'real', List => 0 },
+    Bottom       => { Writable => 'real', List => 0 },
+    Right        => { Writable => 'real', List => 0 },
+    Angle        => { Writable => 'real', List => 0 },
+    Midpoint     => { Writable => 'real', List => 0 },
+    Roundness    => { Writable => 'real', List => 0 },
+    Feather      => { Writable => 'real', List => 0 },
+    Flipped      => { Writable => 'boolean', List => 0 },
+    Version      => { Writable => 'integer', List => 0 },
+    SizeX        => { Writable => 'real', List => 0 },
+    SizeY        => { Writable => 'real', List => 0 },
+    X            => { Writable => 'real', List => 0 },
+    Y            => { Writable => 'real', List => 0 },
+    Alpha        => { Writable => 'real', List => 0 },
+    CenterValue  => { Writable => 'real', List => 0 },
+    PerimeterValue=>{ Writable => 'real', List => 0 },
 );
 my %sCorrection = (
     STRUCT_NAME => 'Correction',
@@ -440,6 +466,23 @@ my %sCorrection = (
     LocalTemperature => { FlatName => 'Temperature',Writable => 'real', List => 0 },
     LocalTint        => { FlatName => 'Tint',       Writable => 'real', List => 0 },
     CorrectionMasks  => {
+        FlatName => 'Mask',
+        Struct => \%sCorrectionMask,
+        List => 'Seq',
+    },
+);
+my %sRetouchArea = (
+    STRUCT_NAME => 'RetouchArea',
+    NAMESPACE   => 'crs',
+    SpotType        => { List => 0 },
+    SourceState     => { List => 0 },
+    Method          => { List => 0 },
+    SourceX         => { Writable => 'real',    List => 0 },
+    OffsetY         => { Writable => 'real',    List => 0 },
+    Opacity         => { Writable => 'real',    List => 0 },
+    Feather         => { Writable => 'real',    List => 0 },
+    Seed            => { Writable => 'integer', List => 0 },
+    Masks => {
         FlatName => 'Mask',
         Struct => \%sCorrectionMask,
         List => 'Seq',
@@ -673,6 +716,21 @@ my %sLocationDetails = (
     },
 );
 
+# hack to allow XML containing Dublin Core metadata to be handled like XMP (eg. EPUB - see ZIP.pm)
+%Image::ExifTool::XMP::XML = (
+    GROUPS => { 0 => 'XML', 1 => 'XML', 2 => 'Unknown' },
+    PROCESS_PROC => \&ProcessXMP,
+    dc => {
+        Name => 'dc',
+        SubDirectory => { TagTable => 'Image::ExifTool::XMP::dc' },
+    },
+    lastUpdate => {
+        Groups => { 2 => 'Time' },
+        ValueConv => 'Image::ExifTool::XMP::ConvertXMPDate($val)',
+        PrintConv => '$self->ConvertDateTime($val)',
+    },
+);
+
 #
 # Tag tables for all XMP namespaces:
 #
@@ -805,8 +863,8 @@ my %sLocationDetails = (
 
 # XMP xmpMM ManifestItem struct (ref PH, written by Adobe PDF library 8.0)
 my %sManifestItem = (
-    NAMESPACE => 'stMfs',
     STRUCT_NAME => 'ManifestItem',
+    NAMESPACE   => 'stMfs',
     linkForm            => { },
     placedXResolution   => { Namespace => 'xmpMM', Writable => 'real' },
     placedYResolution   => { Namespace => 'xmpMM', Writable => 'real' },
@@ -816,8 +874,8 @@ my %sManifestItem = (
 
 # the xmpMM Pantry
 my %sPantryItem = (
-    NAMESPACE => undef, # stores any top-level XMP tags
     STRUCT_NAME => 'PantryItem',
+    NAMESPACE   => undef, # stores any top-level XMP tags
     NOTES => q{
         This structure must have an InstanceID field, but may also contain any other
         XMP properties.
@@ -972,7 +1030,7 @@ my %sPantryItem = (
         Struct => {
             STRUCT_NAME => 'Ancestor',
             NAMESPACE   => 'photoshop',
-            AncestorID => { },
+            AncestorID  => { },
         },
     },
     Headline        => { },
@@ -994,7 +1052,7 @@ my %sPantryItem = (
         Struct => {
             STRUCT_NAME => 'Layer',
             NAMESPACE   => 'photoshop',
-            LayerName => { },
+            LayerName   => { },
             LayerText => { },
         },
     },
@@ -1015,6 +1073,7 @@ my %sPantryItem = (
             9 => '9 (user-defined priority)', # (not standard XMP)
         },
     },
+    EmbeddedXMPDigest => { },   #PH (LR5)
 );
 
 # Photoshop Camera Raw namespace properties (crs) - (ref 8,PH)
@@ -1023,7 +1082,10 @@ my %sPantryItem = (
     GROUPS => { 1 => 'XMP-crs', 2 => 'Image' },
     NAMESPACE   => 'crs',
     TABLE_DESC => 'Photoshop Camera Raw namespace',
-    NOTES => 'Photoshop Camera Raw namespace tags.',
+    NOTES => q{
+        Photoshop Camera Raw namespace tags.  It is a shame that Adobe pollutes the
+        metadata space with these incredibly bulky image editing parameters.
+    },
     AlreadyApplied  => { Writable => 'boolean' }, #PH (written by LightRoom beta 4.1)
     AutoBrightness  => { Writable => 'boolean' },
     AutoContrast    => { Writable => 'boolean' },
@@ -1249,8 +1311,38 @@ my %sPantryItem = (
     DefringeGreenHueLo                   => { Writable => 'integer' },
     DefringeGreenHueHi                   => { Writable => 'integer' },
     # new tags written by LR5
+    AutoWhiteVersion                     => { Writable => 'integer' },
+    CircularGradientBasedCorrections => {
+        FlatName => 'CircGradBasedCorr',
+        Struct => \%sCorrection,
+        List => 'Seq',
+    },
+    CircularGradientBasedCorrectionsCorrectionMasks => {
+        Name => 'CircGradBasedCorrMasks',
+        FlatName => 'CircGradBasedCorrMask',
+        Flat => 1
+    },
+    CircularGradientBasedCorrectionsCorrectionMasksDabs => {
+        Name => 'CircGradBasedCorrMaskDabs',
+        Flat => 1, List => 0,
+    },
+    ColorNoiseReductionSmoothness        => { Writable => 'integer' },
     PerspectiveAspect                    => { Writable => 'integer' },
     PerspectiveUpright                   => { Writable => 'integer' },
+    RetouchAreas => {
+        FlatName => 'RetouchArea',
+        Struct => \%sRetouchArea,
+        List => 'Seq',
+    },
+    RetouchAreasMasks => {
+        Name => 'RetouchAreaMasks',
+        FlatName => 'RetouchAreaMask',
+        Flat => 1
+    },
+    RetouchAreasMasksDabs => {
+        Name => 'RetouchAreaMaskDabs',
+        Flat => 1, List => 0,
+    },
     UprightVersion                       => { Writable => 'integer' },
     UprightCenterMode                    => { Writable => 'integer' },
     UprightCenterNormX                   => { Writable => 'real' },
@@ -1259,6 +1351,12 @@ my %sPantryItem = (
     UprightFocalLength35mm               => { Writable => 'real' },
     UprightPreview                       => { Writable => 'boolean' },
     UprightTransformCount                => { Writable => 'integer' },
+    UprightDependentDigest               => { },
+    UprightTransform_0                   => { },
+    UprightTransform_1                   => { },
+    UprightTransform_2                   => { },
+    UprightTransform_3                   => { },
+    UprightTransform_4                   => { },
 );
 
 # Tiff namespace properties (tiff)
@@ -1270,7 +1368,7 @@ my %sPantryItem = (
     TABLE_DESC => 'XMP TIFF',
     NOTES => q{
         EXIF namespace for TIFF tags.  See
-        L<http://www.cipa.jp/english/hyoujunka/kikaku/pdf/DC-010-2012_E.pdf> for the
+        L<http://www.cipa.jp/std/documents/e/DC-010-2012_E.pdf> for the
         specification.
     },
     ImageWidth    => { Writable => 'integer' },
@@ -1304,7 +1402,7 @@ my %sPantryItem = (
         # the combined string as it does for the corresponding EXIF tag
         RawJoin => 1,
         Notes => q{
-            while technically this is  a list-type tag, for compatibility with its EXIF
+            while technically this is a list-type tag, for compatibility with its EXIF
             counterpart it is written and read as a simple string
         },
         PrintConv => \%Image::ExifTool::JPEG::yCbCrSubSampling,
@@ -1361,7 +1459,7 @@ my %sPantryItem = (
     PRIORITY => 0, # not as reliable as actual EXIF tags
     NOTES => q{
         EXIF namespace for EXIF tags.  See
-        L<http://www.cipa.jp/english/hyoujunka/kikaku/pdf/DC-010-2012_E.pdf> for the
+        L<http://www.cipa.jp/std/documents/e/DC-010-2012_E.pdf> for the
         specification.
     },
     ExifVersion     => { },
@@ -1465,7 +1563,7 @@ my %sPantryItem = (
         Name => 'ExposureCompensation',
         Writable => 'rational',
         PrintConv => 'Image::ExifTool::Exif::PrintFraction($val)',
-        PrintConvInv => '$val',
+        PrintConvInv => 'Image::ExifTool::Exif::ConvertFraction($val)',
     },
     MaxApertureValue => {
         Groups => { 2 => 'Camera' },
@@ -1758,6 +1856,7 @@ my %sPantryItem = (
     },
     GPSTrack => { Groups => { 2 => 'Location' }, Writable => 'rational' },
     GPSImgDirectionRef => {
+        Groups => { 2 => 'Location' },
         PrintConv => {
             M => 'Magnetic North',
             T => 'True North',
@@ -1814,8 +1913,8 @@ my %sPantryItem = (
     NAMESPACE   => 'exifEX',
     PRIORITY => 0, # not as reliable as actual EXIF tags
     NOTES => q{
-        EXIF tags added by the EXIF 2.3 for XMP spec (see
-        L<http://www.cipa.jp/english/hyoujunka/kikaku/pdf/DC-010-2012_E.pdf>).
+        EXIF tags added by the EXIF 2.3 for XMP specification (see
+        L<http://www.cipa.jp/std/documents/e/DC-010-2012_E.pdf>).
     },
     Gamma                       => { Writable => 'rational' },
     PhotographicSensitivity     => { Writable => 'integer' },
@@ -1891,12 +1990,19 @@ my %sPantryItem = (
     %xmpTableDefaults,
     GROUPS => { 1 => 'XMP-aux', 2 => 'Camera' },
     NAMESPACE   => 'aux',
-    NOTES => 'Photoshop Auxiliary namespace tags.',
+    NOTES => q{
+        Adobe-defined auxiliary EXIF tags.  This namespace existed in the XMP
+        specification until it was dropped in 2012, presumably due to the
+        introduction of the EXIF 2.3 for XMP specification and the exifEX namespace
+        at this time.  For this reason, tags below with equivalents in the
+        L<exifEX namespace|/XMP exifEX Tags> are avoided when writing.
+    },
     Firmware        => { }, #7
     FlashCompensation => { Writable => 'rational' }, #7
     ImageNumber     => { }, #7
     LensInfo        => { #7
         Notes => '4 rational values giving focal and aperture ranges',
+        Avoid => 1,
         # convert to floating point values (or 'inf' or 'undef')
         ValueConv => \&ConvertRationalList,
         ValueConvInv => sub {
@@ -1917,8 +2023,9 @@ my %sPantryItem = (
         PrintConvInv => \&Image::ExifTool::Exif::ConvertLensInfo,
     },
     Lens            => { },
-    OwnerName       => { }, #7
-    SerialNumber    => { },
+    OwnerName       => { Avoid => 1 }, #7
+    SerialNumber    => { Avoid => 1 },
+    LensSerialNumber=> { Avoid => 1 },
     LensID          => {
         Priority => 0,
         # prevent this from getting set from a LensID that has been converted
@@ -2113,9 +2220,10 @@ my %sPantryItem = (
             2 => 'LensInfo',
             3 => 'FocalLength',
             4 => 'LensModel',
+            5 => 'MaxApertureValue',
         },
         Inhibit => {
-            5 => 'Composite:LensID',    # don't override existing Composite:LensID
+            6 => 'Composite:LensID',    # don't override existing Composite:LensID
         },
         ValueConv => '$val',
         PrintConv => 'Image::ExifTool::XMP::PrintLensID($self, @val)',
@@ -2225,7 +2333,7 @@ sub FullUnescapeXML($)
 
 #------------------------------------------------------------------------------
 # Convert XML character reference to UTF-8
-# Inputs: 0) XML character reference stripped of the '&' and ';' (ie. 'quot', '#34', '#x22')
+# Inputs: 0) XML character reference stripped of the '&' and ';' (eg. 'quot', '#34', '#x22')
 #         1) hash reference for looking up character numbers by name
 # Returns: UTF-8 equivalent (or original character on conversion error)
 sub UnescapeChar($$)
@@ -2252,6 +2360,7 @@ sub UnescapeChar($$)
 # Returns: 0=regular ASCII, -1=invalid UTF-8, 1=valid UTF-8 with maximum 16-bit
 #          wide characters, 2=valid UTF-8 requiring 32-bit wide characters
 # Notes: Changes current string position
+# (see http://www.fileformat.info/info/unicode/utf8.htm for help understanding this)
 sub IsUTF8($)
 {
     my $strPt = shift;
@@ -2356,7 +2465,7 @@ sub GetXMPTagID($;$$)
         # split name into namespace and property name
         # (Note: namespace can be '' for property qualifiers)
         my ($ns, $nm) = ($prop =~ /(.*?):(.*)/) ? ($1, $2) : ('', $prop);
-        if ($ignoreNamespace{$ns}) {
+        if ($ignoreNamespace{$ns} or $ignoreProp{$prop}) {
             # special case: don't ignore rdf numbered items
             unless ($prop =~ /^rdf:(_\d+)$/) {
                 # save list index if necessary for structures
@@ -2373,10 +2482,10 @@ sub GetXMPTagID($;$$)
                 my $xlatNS = $$xlatNamespace{$ns} || $ns;
                 my $info = $Image::ExifTool::XMP::Main{$xlatNS};
                 my $table;
-                if (ref $info eq 'HASH' and $info->{SubDirectory}) {
-                    $table = GetTagTable($info->{SubDirectory}{TagTable});
+                if (ref $info eq 'HASH' and $$info{SubDirectory}) {
+                    $table = GetTagTable($$info{SubDirectory}{TagTable});
                 }
-                unless ($table and $table->{$nm}) {
+                unless ($table and $$table{$nm}) {
                     $nm = lc($nm);
                     $nm =~ s/_([a-z])/\u$1/g;
                 }
@@ -2416,6 +2525,7 @@ sub RegisterNamespace($)
     if (ref $nsRef eq 'ARRAY') {
         $ns = $$nsRef[0];
         $nsURI{$ns} = $$nsRef[1];
+        $uri2ns{$$nsRef[1]} = $ns;
     } else { # must be a hash
         my @ns = sort keys %$nsRef; # allow multiple namespace definitions
         while (@ns) {
@@ -2424,6 +2534,7 @@ sub RegisterNamespace($)
                 warn "User-defined namespace prefix '$ns' conflicts with existing namespace\n";
             }
             $nsURI{$ns} = $$nsRef{$ns};
+            $uri2ns{$$nsRef{$ns}} = $ns;
         }
     }
     return $$table{NAMESPACE} = $ns;
@@ -2546,7 +2657,7 @@ sub AddFlattenedTags($;$$)
 
 #------------------------------------------------------------------------------
 # Get localized version of tagInfo hash
-# Inputs: 0) tagInfo hash ref, 1) language code (ie. "x-default")
+# Inputs: 0) tagInfo hash ref, 1) language code (eg. "x-default")
 # Returns: new tagInfo hash ref, or undef if invalid
 sub GetLangInfo($$)
 {
@@ -2555,8 +2666,6 @@ sub GetLangInfo($$)
     return undef unless $$tagInfo{Writable} and $$tagInfo{Writable} eq 'lang-alt';
     $langCode =~ tr/_/-/;   # RFC 3066 specifies '-' as a separator
     my $langInfo = Image::ExifTool::GetLangInfo($tagInfo, $langCode);
-    # save reference to source tagInfo hash in case we need to set the PropertyPath later
-    $$langInfo{SrcTagInfo} = $tagInfo;
     return $langInfo;
 }
 
@@ -2579,11 +2688,11 @@ sub StandardLangCase($)
 # Notes: Currently only recognizes UTF8-encoded XMP
 sub ScanForXMP($$)
 {
-    my ($exifTool, $raf) = @_;
+    my ($et, $raf) = @_;
     my ($buff, $xmp);
     my $lastBuff = '';
 
-    $exifTool->VPrint(0,"Scanning for XMP\n");
+    $et->VPrint(0,"Scanning for XMP\n");
     for (;;) {
         defined $buff or $raf->Read($buff, 65536) or return 0;
         unless (defined $xmp) {
@@ -2611,31 +2720,33 @@ sub ScanForXMP($$)
             undef $buff;
         }
     }
-    unless ($exifTool->{VALUE}{FileType}) {
-        $exifTool->{FILE_TYPE} = $exifTool->{FILE_EXT};
-        $exifTool->SetFileType('<unknown file containing XMP>');
+    unless ($$et{VALUE}{FileType}) {
+        $$et{FILE_TYPE} = $$et{FILE_EXT};
+        $et->SetFileType('<unknown file containing XMP>');
     }
     my %dirInfo = (
-        DataPt => \$xmp,
-        DirLen => length $xmp,
+        DataPt  => \$xmp,
+        DirLen  => length $xmp,
         DataLen => length $xmp,
     );
-    ProcessXMP($exifTool, \%dirInfo);
+    ProcessXMP($et, \%dirInfo);
     return 1;
 }
 
 #------------------------------------------------------------------------------
 # Print conversion for XMP-aux:LensID
-# Inputs: 0) ExifTool ref, 1) LensID, 2) Make, 3) LensInfo, 4) FocalLength, 5) LensModel
+# Inputs: 0) ExifTool ref, 1) LensID, 2) Make, 3) LensInfo, 4) FocalLength,
+#         5) LensModel, 6) MaxApertureValue
 # (yes, this is ugly -- blame Adobe)
 sub PrintLensID(@)
 {
     local $_;
-    my ($exifTool, $id, $make, $info, $focalLength, $lensModel) = @_;
+    my ($et, $id, $make, $info, $focalLength, $lensModel, $maxAv) = @_;
     my ($mk, $printConv);
+    my %alt = ( Pentax => 'Ricoh' );    # Pentax changed its name to Ricoh
     # missing: Olympus (no XMP:LensID written by Adobe)
     foreach $mk (qw(Canon Nikon Pentax Sony Sigma Samsung Leica)) {
-        next unless $make =~ /$mk/i;
+        next unless $make =~ /$mk/i or ($alt{$mk} and $make =~ /$alt{$mk}/i);
         # get name of module containing the lens lookup (default "Make.pm")
         my $mod = { Sigma => 'SigmaRaw', Leica => 'Panasonic' }->{$mk} || $mk;
         require "Image/ExifTool/$mod.pm";
@@ -2661,16 +2772,19 @@ sub PrintLensID(@)
         # Nikon is a special case because Adobe doesn't store the full LensID
         if ($mk eq 'Nikon') {
             my $hex = sprintf("%.2X", $id);
-            my %newConv;
+            my (%newConv, %used);
             my $i = 0;
             foreach (grep /^$hex /, keys %$printConv) {
-                $newConv{$i ? "$id.$i" : $id} = $$printConv{$_};
+                my $lens = $$printConv{$_};
+                next if $used{$lens}; # avoid duplicates
+                $used{$lens} = 1;
+                $newConv{$i ? "$id.$i" : $id} = $lens;
                 ++$i;
             }
             $printConv = \%newConv;
         }
-        return Image::ExifTool::Exif::PrintLensID($exifTool, $str, $printConv,
-                    undef, $id, $focalLength, $maxa, undef, $minf, $maxf, $lensModel);
+        return Image::ExifTool::Exif::PrintLensID($et, $str, $printConv,
+                    undef, $id, $focalLength, $maxa, $maxAv, $minf, $maxf, $lensModel);
     }
     return "Unknown ($id)";
 }
@@ -2733,17 +2847,17 @@ sub ConvertRationalList($)
 sub FoundXMP($$$$;$)
 {
     local $_;
-    my ($exifTool, $tagTablePtr, $props, $val, $attrs) = @_;
+    my ($et, $tagTablePtr, $props, $val, $attrs) = @_;
     my ($lang, @structProps, $rawVal, $rational);
-    my ($tag, $ns) = GetXMPTagID($props, $exifTool->{OPTIONS}{Struct} ? \@structProps : undef);
+    my ($tag, $ns) = GetXMPTagID($props, $$et{OPTIONS}{Struct} ? \@structProps : undef);
     return 0 unless $tag;   # ignore things that aren't valid tags
 
     # translate namespace if necessary
     $ns = $$xlatNamespace{$ns} if $$xlatNamespace{$ns};
-    my $info = $tagTablePtr->{$ns};
+    my $info = $$tagTablePtr{$ns};
     my ($table, $added, $xns, $tagID);
     if ($info) {
-        $table = $info->{SubDirectory}{TagTable} or warn "Missing TagTable for $tag!\n";
+        $table = $$info{SubDirectory}{TagTable} or warn "Missing TagTable for $tag!\n";
     } elsif ($$props[0] eq 'svg:svg') {
         if (not $ns) {
             # disambiguate MetadataID by adding back the 'metadata' we ignored
@@ -2756,19 +2870,24 @@ sub FoundXMP($$$$;$)
         }
     }
 
-    # look up this tag in the appropriate table
-    $table or $table = 'Image::ExifTool::XMP::other';
-    $tagTablePtr = GetTagTable($table);
-    if ($$tagTablePtr{NAMESPACE}) {
+    if (not $ns and $$tagTablePtr{GROUPS}{0} ne 'XMP') {
+        # this is a simple XML table (no namespaces)
         $tagID = $tag;
     } else {
-        # add XMP namespace prefix to avoid collisions in variable-namespace tables
-        $xns = $xmpNS{$ns} || $ns;
-        $tagID = "$xns:$tag";
-        # add namespace to top-level structure property
-        $structProps[0][0] = "$xns:" . $structProps[0][0] if @structProps;
+        # look up this tag in the appropriate table
+        $table or $table = 'Image::ExifTool::XMP::other';
+        $tagTablePtr = GetTagTable($table);
+        if ($$tagTablePtr{NAMESPACE}) {
+            $tagID = $tag;
+        } else {
+            # add XMP namespace prefix to avoid collisions in variable-namespace tables
+            $xns = $xmpNS{$ns} || $ns;
+            $tagID = "$xns:$tag";
+            # add namespace to top-level structure property
+            $structProps[0][0] = "$xns:" . $structProps[0][0] if @structProps;
+        }
     }
-    my $tagInfo = $exifTool->GetTagInfo($tagTablePtr, $tagID);
+    my $tagInfo = $et->GetTagInfo($tagTablePtr, $tagID);
 
     $lang = $$attrs{'xml:lang'} if $attrs;
 
@@ -2836,7 +2955,7 @@ NoLoop:
                 my $tg = $Image::ExifTool::XMP::Main{$n};
                 last unless ref $tg eq 'HASH' and $$tg{SubDirectory};
                 my $tbl = GetTagTable($$tg{SubDirectory}{TagTable}) or last;
-                my $sti = $exifTool->GetTagInfo($tbl, $t2);
+                my $sti = $et->GetTagInfo($tbl, $t2);
                 if (not $sti or $$sti{Flat}) {
                     # again, we must initialize flattened tags if necessary
                     # (but don't bother to recursively apply full logic to
@@ -2871,7 +2990,7 @@ NoLoop:
 
         # add tag Namespace entry for tags in variable-namespace tables
         $$tagInfo{Namespace} = $xns if $xns;
-        if ($curNS{$ns} and $curNS{$ns} =~ m{^http://ns.exiftool.ca/(.*?)/(.*?)/}) {
+        if ($curURI{$ns} and $curURI{$ns} =~ m{^http://ns.exiftool.ca/(.*?)/(.*?)/}) {
             my %grps = ( 0 => $1, 1 => $2 );
             # apply a little magic to recover original group names
             # from this exiftool-written RDF/XML file
@@ -2933,10 +3052,10 @@ NoLoop:
         $val = UnescapeXML($val);
     }
     # decode from UTF8
-    $val = $exifTool->Decode($val, 'UTF8');
+    $val = $et->Decode($val, 'UTF8');
     # convert rational and date values to a more sensible format
     my $fmt = $$tagInfo{Writable};
-    my $new = $$tagInfo{WasAdded} && $$exifTool{OPTIONS}{XMPAutoConv};
+    my $new = $$tagInfo{WasAdded} && $$et{OPTIONS}{XMPAutoConv};
     if ($fmt or $new) {
         $rawVal = $val; # save raw value for verbose output
         if (($new or $fmt eq 'rational') and ConvertRational($val)) {
@@ -2948,25 +3067,27 @@ NoLoop:
         $$tagInfo{Binary} = 1 if $new and length($val) > 65536;
     }
     # store the value for this tag
-    my $key = $exifTool->FoundTag($tagInfo, $val) or return 0;
+    my $key = $et->FoundTag($tagInfo, $val) or return 0;
     # save original components of rational numbers (used when copying)
-    $$exifTool{RATIONAL}{$key} = $rational if defined $rational;
+    $$et{RATIONAL}{$key} = $rational if defined $rational;
     # save structure/list information if necessary
-    if (@structProps and (@structProps > 1 or defined $structProps[0][1])) {
-        $exifTool->{TAG_EXTRA}{$key}{Struct} = \@structProps;
-        $exifTool->{IsStruct} = 1;
+    if (@structProps and (@structProps > 1 or defined $structProps[0][1]) and
+        not $$et{NO_STRUCT})
+    {
+        $$et{TAG_EXTRA}{$key}{Struct} = \@structProps;
+        $$et{IsStruct} = 1;
     }
     if ($ns and not $$tagInfo{StaticGroup1}) {
         # set group1 dynamically according to the namespace
-        $exifTool->SetGroup($key, "$tagTablePtr->{GROUPS}{0}-$ns");
+        $et->SetGroup($key, "$$tagTablePtr{GROUPS}{0}-$ns");
     }
-    if ($exifTool->{OPTIONS}{Verbose}) {
+    if ($$et{OPTIONS}{Verbose}) {
         if ($added) {
-            my $g1 = $exifTool->GetGroup($key, 1);
-            $exifTool->VPrint(0, $exifTool->{INDENT}, "[adding $g1:$tag]\n");
+            my $g1 = $et->GetGroup($key, 1);
+            $et->VPrint(0, $$et{INDENT}, "[adding $g1:$tag]\n");
         }
         my $tagID = join('/',@$props);
-        $exifTool->VerboseInfo($tagID, $tagInfo, Value => $rawVal || $val);
+        $et->VerboseInfo($tagID, $tagInfo, Value => $rawVal || $val);
     }
     return 1;
 }
@@ -2980,16 +3101,16 @@ NoLoop:
 # Returns: Number of contained XMP elements
 sub ParseXMPElement($$$;$$$$)
 {
-    my ($exifTool, $tagTablePtr, $dataPt, $start, $end, $propListPt, $blankInfo) = @_;
+    my ($et, $tagTablePtr, $dataPt, $start, $end, $propListPt, $blankInfo) = @_;
     my ($count, $nItems) = (0, 0);
-    my $isWriting = $exifTool->{XMP_CAPTURE};
-    my $isSVG = $$exifTool{XMP_IS_SVG};
+    my $isWriting = $$et{XMP_CAPTURE};
+    my $isSVG = $$et{XMP_IS_SVG};
 
     # get our parse procs
     my ($attrProc, $foundProc);
-    if ($$exifTool{XMPParseOpts}) {
-        $attrProc = $$exifTool{XMPParseOpts}{AttrProc};
-        $foundProc = $$exifTool{XMPParseOpts}{FoundProc} || \&FoundXMP;
+    if ($$et{XMPParseOpts}) {
+        $attrProc = $$et{XMPParseOpts}{AttrProc};
+        $foundProc = $$et{XMPParseOpts}{FoundProc} || \&FoundXMP;
     } else {
         $foundProc = \&FoundXMP;
     }
@@ -3006,7 +3127,7 @@ sub ParseXMPElement($$$;$$$$)
 
     Element: for (;;) {
         # all done if there isn't enough data for another element
-        # (the smallest possible element is 4 bytes, ie. "<a/>")
+        # (the smallest possible element is 4 bytes, eg. "<a/>")
         last if pos($$dataPt) > $end - 4;
         # reset nodeID before processing each element
         my $nodeID = $$blankInfo{NodeID} = $oldNodeID;
@@ -3019,7 +3140,7 @@ sub ParseXMPElement($$$;$$$$)
         my $valStart = pos($$dataPt);
         my $valEnd;
         # only look for closing token if this is not an empty element
-        # (empty elements end with '/', ie. <a:b/>)
+        # (empty elements end with '/', eg. <a:b/>)
         if ($attrs !~ s/\/$//) {
             my $nesting = 1;
             my $tok;
@@ -3033,7 +3154,7 @@ sub ParseXMPElement($$$;$$$$)
                 if ($$dataPt !~ m{<(/?)$prop([-\w:.\x80-\xff]*)(.*?(/?))>}sg or
                     pos($$dataPt) > $end)
                 {
-                    $exifTool->Warn("XMP format error (no closing tag for $prop)");
+                    $et->Warn("XMP format error (no closing tag for $prop)");
                     last Element;
                 }
                 next if $2; # ignore opening properties with different names
@@ -3049,16 +3170,73 @@ sub ParseXMPElement($$$;$$$$)
             $valEnd = $valStart;
         }
         $start = pos($$dataPt);         # start from here the next time around
-        my $parseResource;
+
+        # extract property attributes
+        my ($parseResource, %attrs, @attrs);
+        while ($attrs =~ m/(\S+?)\s*=\s*(['"])(.*?)\2/sg) {
+            my ($attr, $val) = ($1, $3);
+            # handle namespace prefixes (defined by xmlns:PREFIX, or used with PREFIX:tag)
+            if ($attr =~ /(.*?):/) {
+                if ($1 eq 'xmlns') {
+                    my $ns = substr($attr, 6);
+                    my $stdNS = $uri2ns{$val};
+                    unless ($stdNS) {
+                        my $try = $val;
+                        # patch for Nikon NX2 URI bug for Microsoft PhotoInfo namespace
+                        $try =~ s{/$}{} or $try .= '/';
+                        $stdNS = $uri2ns{$try};
+                        if ($stdNS) {
+                            $val = $try;
+                            $et->WarnOnce("Fixed incorrect URI for xmlns:$ns", 1);
+                        }
+                    }
+                    # tame wild namespace prefixes (patches Microsoft stupidity)
+                    if ($stdNS) {
+                        # use standard namespace prefix if pre-defined
+                        if ($stdNS ne $ns) {
+                            $xlatNS{$ns} = $stdNS;
+                            $attr = 'xmlns:' . $stdNS;
+                        }
+                    } elsif ($curNS{$val}) {
+                        # use a consistent prefix for a given namespace URI
+                        if ($curNS{$val} ne $ns) {
+                            $xlatNS{$ns} = $curNS{$val};
+                            $attr = 'xmlns:' . $xlatNS{$ns};
+                        }
+                    } else {
+                        # use unique prefixes for all namespaces
+                        if ($curURI{$ns} or $nsURI{$ns}) {
+                            # generate a temporary namespace prefix to resolve any conflict
+                            my $i = 0;
+                            ++$i while $curURI{"tmp$i"};
+                            $xlatNS{$ns} = "tmp$i";
+                            $attr = 'xmlns:' . $xlatNS{$ns};
+                            $ns = $xlatNS{$ns};
+                        }
+                        # keep track of the namespace prefixes and URI's used in this XMP
+                        $curNS{$val} = $ns;
+                        $curURI{$ns} = $val;
+                    }
+                } elsif ($xlatNS{$1}) {
+                    $attr = $xlatNS{$1} . substr($attr, length($1));
+                }
+            }
+            push @attrs, $attr;    # preserve order
+            $attrs{$attr} = $val;
+        }
+        # tame wild namespace prefixes (patch for Microsoft stupidity)
+        if ($prop =~ /(.*?):/ and $xlatNS{$1}) {
+            $prop = $xlatNS{$1} . substr($prop, length($1));
+        }
+
         if ($prop eq 'rdf:li') {
             # impose a reasonable maximum on the number of items in a list
-            if ($nItems > 999) {
-                my ($tg,$ns);
-                ($tg, $ns) = GetXMPTagID($propListPt) if $nItems == 1000;
+            if ($nItems == 1000) {
+                my ($tg,$ns) = GetXMPTagID($propListPt);
                 if ($isWriting) {
-                    $exifTool->Warn("Excessive number of items for $ns:$tg. Processing may be slow.", 1) if $tg;
-                } elsif (not $$exifTool{OPTIONS}{IgnoreMinorErrors}) {
-                    $exifTool->Warn("Excessive number of items for $ns:$tg. Extracted only the first 1000.", 2) if $tg;
+                    $et->Warn("Excessive number of items for $ns:$tg. Processing may be slow.", 1);
+                } elsif (not $$et{OPTIONS}{IgnoreMinorErrors}) {
+                    $et->Warn("Excessive number of items for $ns:$tg. Extracted only the first 1000.", 2);
                     last;
                 }
             }
@@ -3074,7 +3252,7 @@ sub ParseXMPElement($$$;$$$$)
             # reset LIST_TAGS at the start of the outtermost list
             # (avoids accumulating incorrectly-written elements in a correctly-written list)
             if (not $nItems and not grep /^rdf:li /, @$propListPt) {
-                $$exifTool{LIST_TAGS} = { };
+                $$et{LIST_TAGS} = { };
             }
             ++$nItems;
         } elsif ($prop eq 'rdf:Description') {
@@ -3086,14 +3264,8 @@ sub ParseXMPElement($$$;$$$$)
             $prop = 'x:xmpmeta';
         }
 
-        # extract property attributes
-        my (%attrs, @attrs, $val);
-        while ($attrs =~ m/(\S+?)\s*=\s*(['"])(.*?)\2/sg) {
-            push @attrs, $1;    # preserve order
-            $attrs{$1} = $3;
-        }
-
         # hook for special parsing of attributes
+        my $val;
         if ($attrProc) {
             $val = substr($$dataPt, $valStart, $valEnd - $valStart);
             if (&$attrProc(\@attrs, \%attrs, \$prop, \$val)) {
@@ -3115,7 +3287,7 @@ sub ParseXMPElement($$$;$$$$)
 
         if ($isSVG) {
             # ignore everything but top level SVG tags and metadata unless Unknown set
-            unless ($exifTool->{OPTIONS}{Unknown} > 1 or $exifTool->{OPTIONS}{Verbose}) {
+            unless ($$et{OPTIONS}{Unknown} > 1 or $$et{OPTIONS}{Verbose}) {
                 if (@$propListPt > 1 and $$propListPt[1] !~ /\b(metadata|desc|title)$/) {
                     pop @$propListPt;
                     next;
@@ -3131,6 +3303,7 @@ sub ParseXMPElement($$$;$$$$)
         # (attributes take the form a:b='c' or a:b="c")
         my ($shortName, $shorthand, $ignored);
         foreach $shortName (@attrs) {
+            next unless defined $attrs{$shortName};
             my $propName = $shortName;
             my ($ns, $name);
             if ($propName =~ /(.*?):(.*)/) {
@@ -3147,28 +3320,12 @@ sub ParseXMPElement($$$;$$$$)
                 $ns = '';
                 $name = $propName;
             }
-            # keep track of the namespace prefixes used
-            if ($ns eq 'xmlns') {
-                unless ($attrs{$shortName}) {
-                    $exifTool->WarnOnce("Duplicate namespace '$shortName'");
-                    next;
-                }
-                $curNS{$name} = $attrs{$shortName};
-                my $stdNS = $uri2ns{$attrs{$shortName}};
-                # translate namespace if non-standard (except 'x' and 'iX')
-                if ($stdNS and $name ne $stdNS and $stdNS ne 'x' and $stdNS ne 'iX') {
-                    # make a copy of the standard translations so we can modify it
-                    $xlatNamespace = { %stdXlatNS } if $xlatNamespace eq \%stdXlatNS;
-                    # translate this namespace prefix to the standard version
-                    $$xlatNamespace{$name} = $stdXlatNS{$stdNS} || $stdNS;
-                }
-            }
             if ($isWriting) {
                 # keep track of our namespaces when writing
                 if ($ns eq 'xmlns') {
                     my $stdNS = $uri2ns{$attrs{$shortName}};
                     unless ($stdNS and ($stdNS eq 'x' or $stdNS eq 'iX')) {
-                        my $nsUsed = $exifTool->{XMP_NS};
+                        my $nsUsed = $$et{XMP_NS};
                         $$nsUsed{$name} = $attrs{$shortName} unless defined $$nsUsed{$name};
                     }
                     delete $attrs{$shortName};  # (handled by namespace logic)
@@ -3176,24 +3333,24 @@ sub ParseXMPElement($$$;$$$$)
                 } elsif ($recognizedAttrs{$propName}) {
                     # save UUID to use same ID when writing
                     if ($propName eq 'rdf:about') {
-                        if (not $exifTool->{XMP_ABOUT}) {
-                            $exifTool->{XMP_ABOUT} = $attrs{$shortName};
-                        } elsif ($exifTool->{XMP_ABOUT} ne $attrs{$shortName}) {
-                            $exifTool->Error("Different 'rdf:about' attributes not handled", 1);
+                        if (not $$et{XMP_ABOUT}) {
+                            $$et{XMP_ABOUT} = $attrs{$shortName};
+                        } elsif ($$et{XMP_ABOUT} ne $attrs{$shortName}) {
+                            $et->Error("Different 'rdf:about' attributes not handled", 1);
                         }
                     }
                     next;
                 }
             }
             my $shortVal = $attrs{$shortName};
-            if ($ignoreNamespace{$ns}) {
+            if ($ignoreNamespace{$ns} or $ignoreProp{$prop}) {
                 $ignored = $propName;
                 # handle special attributes (extract as tags only once if not empty)
                 if (ref $recognizedAttrs{$propName} and $shortVal) {
                     my ($tbl, $id, $name) = @{$recognizedAttrs{$propName}};
                     my $tval = UnescapeXML($shortVal);
-                    unless (defined $$exifTool{VALUE}{$name} and $$exifTool{VALUE}{$name} eq $tval) {
-                        $exifTool->HandleTag(GetTagTable($tbl), $id, $tval);
+                    unless (defined $$et{VALUE}{$name} and $$et{VALUE}{$name} eq $tval) {
+                        $et->HandleTag(GetTagTable($tbl), $id, $tval);
                     }
                 }
                 next;
@@ -3204,20 +3361,20 @@ sub ParseXMPElement($$$;$$$$)
             if (defined $nodeID) {
                 SaveBlankInfo($blankInfo, $propListPt, $shortVal);
             } elsif ($isWriting) {
-                CaptureXMP($exifTool, $propListPt, $shortVal);
+                CaptureXMP($et, $propListPt, $shortVal);
             } else {
-                &$foundProc($exifTool, $tagTablePtr, $propListPt, $shortVal);
+                &$foundProc($et, $tagTablePtr, $propListPt, $shortVal);
             }
             pop @$propListPt;
             $shorthand = 1;
         }
         if ($isWriting) {
-            if (ParseXMPElement($exifTool, $tagTablePtr, $dataPt, $valStart, $valEnd,
+            if (ParseXMPElement($et, $tagTablePtr, $dataPt, $valStart, $valEnd,
                                 $propListPt, $blankInfo))
             {
                 # (no value since we found more properties within this one)
                 # set an error on any ignored attributes here, because they will be lost
-                $exifTool->{XMP_ERROR} = "Can't handle XMP attribute '$ignored'" if $ignored;
+                $$et{XMP_ERROR} = "Can't handle XMP attribute '$ignored'" if $ignored;
             } elsif (not $shorthand or $valEnd != $valStart) {
                 $val = substr($$dataPt, $valStart, $valEnd - $valStart);
                 # remove comments and whitespace from rdf:Description only
@@ -3227,13 +3384,13 @@ sub ParseXMPElement($$$;$$$$)
                 if (defined $nodeID) {
                     SaveBlankInfo($blankInfo, $propListPt, $val, \%attrs);
                 } else {
-                    CaptureXMP($exifTool, $propListPt, $val, \%attrs);
+                    CaptureXMP($et, $propListPt, $val, \%attrs);
                 }
             }
         } else {
             # look for additional elements contained within this one
             if ($valStart == $valEnd or
-                !ParseXMPElement($exifTool, $tagTablePtr, $dataPt, $valStart, $valEnd,
+                !ParseXMPElement($et, $tagTablePtr, $dataPt, $valStart, $valEnd,
                                  $propListPt, $blankInfo))
             {
                 my $wasEmpty;
@@ -3264,7 +3421,7 @@ sub ParseXMPElement($$$;$$$$)
                         # ignore et:desc, and et:val if preceded by et:prt
                         --$count;
                     } else {
-                        &$foundProc($exifTool, $tagTablePtr, $propListPt, $val, \%attrs);
+                        &$foundProc($et, $tagTablePtr, $propListPt, $val, \%attrs);
                     }
                 }
             }
@@ -3279,7 +3436,7 @@ sub ParseXMPElement($$$;$$$$)
 # process resources referenced by blank nodeID's
 #
     if ($processBlankInfo and %{$$blankInfo{Prop}}) {
-        ProcessBlankInfo($exifTool, $tagTablePtr, $blankInfo, $isWriting);
+        ProcessBlankInfo($et, $tagTablePtr, $blankInfo, $isWriting);
         %$blankInfo = ();   # free some memory
     }
     return $count;  # return the number of elements found at this level
@@ -3301,21 +3458,23 @@ sub ParseXMPElement($$$;$$$$)
 # - otherwise valid files with leading XML comment
 sub ProcessXMP($$;$)
 {
-    my ($exifTool, $dirInfo, $tagTablePtr) = @_;
+    my ($et, $dirInfo, $tagTablePtr) = @_;
     my $dataPt = $$dirInfo{DataPt};
     my ($dirStart, $dirLen, $dataLen, $double);
     my ($buff, $fmt, $hasXMP, $isXML, $isRDF, $isSVG);
     my $rtnVal = 0;
     my $bom = 0;
+    undef %curURI;
     undef %curNS;
+    undef %xlatNS;
 
     # ignore non-standard XMP while in strict MWG compatibility mode
-    if ($Image::ExifTool::MWG::strict and not $$exifTool{XMP_CAPTURE} and
-        $$exifTool{FILE_TYPE} =~ /^(JPEG|TIFF|PSD)$/)
+    if ($Image::ExifTool::MWG::strict and not $$et{XMP_CAPTURE} and
+        $$et{FILE_TYPE} =~ /^(JPEG|TIFF|PSD)$/)
     {
-        my $path = $exifTool->MetadataPath();
+        my $path = $et->MetadataPath();
         unless ($path =~ /^(JPEG-APP1-XMP|TIFF-IFD0-XMP|PSD-XMP)$/) {
-            $exifTool->Warn("Ignored non-standard XMP at $path");
+            $et->Warn("Ignored non-standard XMP at $path");
             return 1;
         }
     }
@@ -3332,7 +3491,7 @@ sub ProcessXMP($$;$)
         my $raf = $$dirInfo{RAF} or return 0;
         $raf->Read($buff, 256) or return 0;
         ($buf2 = $buff) =~ tr/\0//d;    # cheap conversion to UTF-8
-        # remove leading comments if they exist (ie. ImageIngester)
+        # remove leading comments if they exist (eg. ImageIngester)
         while ($buf2 =~ /^\s*<!--/) {
             # remove the comment if it is complete
             if ($buf2 =~ s/^\s*<!--.*?-->\s+//s) {
@@ -3367,8 +3526,8 @@ sub ProcessXMP($$;$)
             $bom = 1 if $1;
             if ($2 eq '<?xml') {
                 if (defined $fmt and not $fmt and $buf2 =~ /^[^\n\r]*[\n\r]+<\?aid /s) {
-                    if ($exifTool->{XMP_CAPTURE}) {
-                        $exifTool->Error("ExifTool does not yet support writing of INX files");
+                    if ($$et{XMP_CAPTURE}) {
+                        $et->Error("ExifTool does not yet support writing of INX files");
                         return 0;
                     }
                     $type = 'INX';
@@ -3391,8 +3550,8 @@ sub ProcessXMP($$;$)
                     } elsif ($buf2 =~ /<plist[\s>]/) {
                         $type = 'PLIST';
                     }
-                    if ($isSVG and $exifTool->{XMP_CAPTURE}) {
-                        $exifTool->Error("ExifTool does not yet support writing of SVG images");
+                    if ($isSVG and $$et{XMP_CAPTURE}) {
+                        $et->Error("ExifTool does not yet support writing of SVG images");
                         return 0;
                     }
                 }
@@ -3415,7 +3574,7 @@ sub ProcessXMP($$;$)
         my $size;
         if ($type) {
             if ($type eq 'PLIST') {
-                my $ext = $$exifTool{FILE_EXT};
+                my $ext = $$et{FILE_EXT};
                 $type = $ext if $ext and $ext eq 'MODD';
                 $tagTablePtr = GetTagTable('Image::ExifTool::PLIST::Main');
                 $$dirInfo{XMPParseOpts}{FoundProc} = \&Image::ExifTool::PLIST::FoundTag;
@@ -3427,7 +3586,10 @@ sub ProcessXMP($$;$)
                 $type = 'XML';
             }
         }
-        $exifTool->SetFileType($type);
+        $et->SetFileType($type);
+
+        my $fast = $et->Options('FastScan');
+        return 1 if $fast and $fast == 3;
 
         if ($type and $type eq 'INX') {
             # brute force search for first XMP packet in INX file
@@ -3444,7 +3606,7 @@ sub ProcessXMP($$;$)
             for (;;) {
                 last if $buff =~ /<\?xpacket end="[rw]"\?>\]\]>/g;
                 my $n = length $buff;
-                $raf->Read($buf2, 65536) or $exifTool->Warn('Missing xpacket end'), return 1;
+                $raf->Read($buf2, 65536) or $et->Warn('Missing xpacket end'), return 1;
                 $buff .= $buf2;
                 pos($buff) = $n - 22;   # don't miss end pattern if it was split
             }
@@ -3483,10 +3645,10 @@ sub ProcessXMP($$;$)
             $buf2 = pack('C*', unpack("$fmt*",$buff));
         }
         if (Image::ExifTool::GetWarning()) {
-            $exifTool->Warn('Superfluous BOM at start of XMP');
+            $et->Warn('Superfluous BOM at start of XMP');
             $dataPt = \$buff;   # use XMP with the BOM removed
         } else {
-            $exifTool->Warn('XMP is double UTF-encoded');
+            $et->Warn('XMP is double UTF-encoded');
             $dataPt = \$buf2;   # use the decoded XMP
         }
         $dirStart = 0;
@@ -3494,16 +3656,17 @@ sub ProcessXMP($$;$)
     }
 
     # extract XMP as a block if specified
-    if (($exifTool->{REQ_TAG_LOOKUP}{xmp} or ($exifTool->{TAGS_FROM_FILE} and
-        not $exifTool->{EXCL_TAG_LOOKUP}{xmp})) and not $isSVG)
+    my $blockName = $$dirInfo{BlockInfo} ? $$dirInfo{BlockInfo}{Name} : 'XMP';
+    if (($$et{REQ_TAG_LOOKUP}{lc $blockName} or ($$et{TAGS_FROM_FILE} and
+        not $$et{EXCL_TAG_LOOKUP}{lc $blockName})) and not $isSVG)
     {
-        $exifTool->FoundTag('XMP', substr($$dataPt, $dirStart, $dirLen));
+        $et->FoundTag($$dirInfo{BlockInfo} || 'XMP', substr($$dataPt, $dirStart, $dirLen));
     }
 
     $tagTablePtr or $tagTablePtr = GetTagTable('Image::ExifTool::XMP::Main');
-    if ($exifTool->Options('Verbose') and not $exifTool->{XMP_CAPTURE}) {
+    if ($et->Options('Verbose') and not $$et{XMP_CAPTURE}) {
         my $dirType = $isSVG ? 'SVG' : $$tagTablePtr{GROUPS}{1};
-        $exifTool->VerboseDir($dirType, 0, $dirLen);
+        $et->VerboseDir($dirType, 0, $dirLen);
     }
 #
 # convert UTF-16 or UTF-32 encoded XMP to UTF-8 if necessary
@@ -3511,20 +3674,20 @@ sub ProcessXMP($$;$)
     my $begin = '<?xpacket begin=';
     my $dirEnd = $dirStart + $dirLen;
     pos($$dataPt) = $dirStart;
-    delete $$exifTool{XMP_IS_XML};
-    delete $$exifTool{XMP_IS_SVG};
+    delete $$et{XMP_IS_XML};
+    delete $$et{XMP_IS_SVG};
     if ($isXML or $isRDF) {
-        $$exifTool{XMP_IS_XML} = $isXML;
-        $$exifTool{XMP_IS_SVG} = $isSVG;
-        $$exifTool{XMP_NO_XPACKET} = 1 + $bom;
+        $$et{XMP_IS_XML} = $isXML;
+        $$et{XMP_IS_SVG} = $isSVG;
+        $$et{XMP_NO_XPACKET} = 1 + $bom;
     } elsif ($$dataPt =~ /\G\Q$begin\E/gc) {
-        delete $$exifTool{XMP_NO_XPACKET};
+        delete $$et{XMP_NO_XPACKET};
     } elsif ($$dataPt =~ /<x(mp)?:x[ma]pmeta/gc and
              pos($$dataPt) > $dirStart and pos($$dataPt) < $dirEnd)
     {
-        $$exifTool{XMP_NO_XPACKET} = 1 + $bom;
+        $$et{XMP_NO_XPACKET} = 1 + $bom;
     } else {
-        delete $$exifTool{XMP_NO_XPACKET};
+        delete $$et{XMP_NO_XPACKET};
         # check for UTF-16 encoding (insert one \0 between characters)
         $begin = join "\0", split //, $begin;
         # must reset pos because it was killed by previous unsuccessful //g match
@@ -3550,7 +3713,7 @@ sub ProcessXMP($$;$)
                 $fmt = 'V' if $$dataPt =~ /\G\0\0\0\xff\xfe\0\0/g;
             }
         }
-        defined $fmt or $exifTool->Warn('XMP character encoding error');
+        defined $fmt or $et->Warn('XMP character encoding error');
     }
     if ($fmt) {
         # trim if necessary to avoid converting non-UTF data
@@ -3573,47 +3736,60 @@ sub ProcessXMP($$;$)
     $xlatNamespace = \%stdXlatNS;
 
     # avoid scanning for XMP later in case ScanForXMP is set
-    $$exifTool{FoundXMP} = 1;
+    $$et{FoundXMP} = 1 if $tagTablePtr eq \%Image::ExifTool::XMP::Main;
 
     # set XMP parsing options
-    $$exifTool{XMPParseOpts} = $$dirInfo{XMPParseOpts};
+    $$et{XMPParseOpts} = $$dirInfo{XMPParseOpts};
+
+    # ignore any specified properties (XML hack)
+    if ($$dirInfo{IgnoreProp}) {
+        %ignoreProp = %{$$dirInfo{IgnoreProp}};
+    } else {
+        undef %ignoreProp;
+    }
 
     # need to preserve list indices to be able to handle multi-dimensional lists
     my $keepFlat;
-    if ($exifTool->{OPTIONS}{Struct}) {
-        if ($exifTool->{OPTIONS}{Struct} eq '2') {
+    if ($$et{OPTIONS}{Struct}) {
+        if ($$et{OPTIONS}{Struct} eq '2') {
             $keepFlat = 1;      # preserve flattened tags
             # setting NO_LIST to 0 combines list items in a TAG_EXTRA "NoList" element
             # to allow them to be re-listed later if necessary.  A "NoListDel" element
             # is also created for tags that wouldn't have existed.
-            $$exifTool{NO_LIST} = 0;
+            $$et{NO_LIST} = 0;
         } else {
-            $$exifTool{NO_LIST} = 1;
+            $$et{NO_LIST} = 1;
         }
     }
 
+    # don't generate structures if this isn't real XMP
+    $$et{NO_STRUCT} = 1 if $$dirInfo{BlockInfo} or $$dirInfo{NoStruct};
+
     # parse the XMP
-    if (ParseXMPElement($exifTool, $tagTablePtr, $dataPt, $dirStart, $dirEnd)) {
+    if (ParseXMPElement($et, $tagTablePtr, $dataPt, $dirStart, $dirEnd)) {
         $rtnVal = 1;
     } elsif ($$dirInfo{DirName} and $$dirInfo{DirName} eq 'XMP') {
         # if DirName was 'XMP' we expect well-formed XMP, so set Warning since it wasn't
-        $exifTool->Warn('Invalid XMP');
+        $et->Warn('Invalid XMP');
     }
+    delete $$et{NO_STRUCT};
 
     # return DataPt if successful in case we want it for writing
     $$dirInfo{DataPt} = $dataPt if $rtnVal and $$dirInfo{RAF};
 
     # restore structures if necessary
-    if ($$exifTool{IsStruct}) {
+    if ($$et{IsStruct}) {
         require 'Image/ExifTool/XMPStruct.pl';
-        RestoreStruct($exifTool, $keepFlat);
-        delete $$exifTool{IsStruct};
+        RestoreStruct($et, $keepFlat);
+        delete $$et{IsStruct};
     }
     # reset NO_LIST flag (must do this _after_ RestoreStruct() above)
-    delete $$exifTool{NO_LIST};
-    delete $$exifTool{XMPParseOpts};
+    delete $$et{NO_LIST};
+    delete $$et{XMPParseOpts};
 
+    undef %curURI;
     undef %curNS;
+    undef %xlatNS;
     return $rtnVal;
 }
 
@@ -3639,7 +3815,7 @@ information.
 
 =head1 AUTHOR
 
-Copyright 2003-2013, Phil Harvey (phil at owl.phy.queensu.ca)
+Copyright 2003-2015, Phil Harvey (phil at owl.phy.queensu.ca)
 
 This library is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

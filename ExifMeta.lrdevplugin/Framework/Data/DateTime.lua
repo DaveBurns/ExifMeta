@@ -114,7 +114,45 @@ function DateTime:formatTimeDiff( secs )
     end
 end
     
-    
+
+
+--- Parse date in IPTC format, e.g. 2005-09-20T15:10:55Z
+--
+function DateTime:parseIptcDateTime( iptcDateTime )
+    local year, month, day, hour, minute, second
+    local halfs = str:split( iptcDateTime, "T" )
+    if #halfs == 2 then
+        local dateComps = str:split( halfs[1], "-" ) -- ###1 must be interpreted as plain text.
+        if #dateComps == 3 then
+            local timeComps = str:split( halfs[2], ":" )
+            if #timeComps == 3 then
+                year = tonumber( dateComps[1] )
+                month = tonumber( dateComps[2] )
+                day = tonumber( dateComps[3] )
+                hour = tonumber( timeComps[1] )
+                minute = tonumber( timeComps[2] )
+                local secStr = timeComps[3]
+                if #secStr == 3 then
+                    secStr = secStr:sub( 1, 2 ) -- time zone? ###1
+                end
+                second = tonumber( secStr )
+                if year and month and day and hour and minute and second then
+                    return LrDate.timeFromComponents( year, month, day, hour, minute, second, "local" ) -- ###1 tz.
+                else
+                    return nil, str:fmtx( "invalid date-time string (^1) - must be in IPTC format", iptcDateTime )
+                end
+            else
+                return nil, str:fmtx( "invalid date-time string - must be in IPTC format, wrong number of time components: ^1 (expected 3)", #timeComps )
+            end
+        else
+            return nil, str:fmtx( "invalid date-time string - must be in IPTC format, wrong number of date components: ^1 (expected 3)", #dateComps )
+        end
+    else
+        return nil, "invalid date-time string - must be in IPTC format (no 'T')"
+    end
+end
+
+
     
 ---  Parse date in MM-DD-YY format.
 --

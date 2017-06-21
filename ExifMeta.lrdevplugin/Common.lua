@@ -492,6 +492,11 @@ function Common._getFormattedExif( photo, exifPath, photoPath, tbl )
                 -- _debugTrace( "text value not string, label: ", str:to( label ) )
                 if tableToString then
                     text = tableToString {
+                        photo = photo,
+                        label = label,
+                        group = group,
+                        compName = compName,
+                        title = friendlyName,
                         xmlTbl = text, -- text is table of parsed xml (not ideal to pass to user func, but it's the best I got without massive rewriting).
                         delim = sep,
                     }

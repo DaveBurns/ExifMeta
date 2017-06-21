@@ -16,7 +16,7 @@ use Image::ExifTool qw(:DataAccess :Utils);
 use Image::ExifTool::Exif;
 use Image::ExifTool::XMP;
 
-$VERSION = '1.13';
+$VERSION = '1.14';
 
 sub RecoverTruncatedIPTC($$$);
 sub ListToString($);
@@ -84,7 +84,7 @@ my $mwgLoaded;  # flag set if we alreaded Load()ed the MWG tags
         DelCheck   => 'Image::ExifTool::MWG::ReconcileIPTCDigest($self)',
         WriteCheck => 'Image::ExifTool::MWG::ReconcileIPTCDigest($self)',
         WriteAlso  => {
-            # only write Keywords if IPTC exists (ie. set EditGroup option)
+            # only write Keywords if IPTC exists (eg. set EditGroup option)
             'IPTC:Keywords'  => '$opts{EditGroup} = 1; $val',
             'XMP-dc:Subject' => '$val',
         },
@@ -391,7 +391,7 @@ my %sExtensions = (
     NOTES => q{
         This structure may contain any top-level XMP tags, but none have been
         pre-defined in ExifTool.  Since no flattened tags have been pre-defined,
-        RegionExtensions is writable only as a structure (ie.
+        RegionExtensions is writable only as a structure (eg.
         C<{xmp-dc:creator=me,rating=5}>).  Fields for this structure are identified
         using the standard ExifTool tag name (with optional leading group name,
         and/or trailing language code, and/or trailing C<#> symbol to disable print
@@ -575,7 +575,7 @@ sub ListToString($)
 # Notes: Sets Warning tag on error
 sub StringToList($$)
 {
-    my ($str, $exifTool) = @_;
+    my ($str, $et) = @_;
     my (@vals, $inQuotes);
     my @t = split '; ', $str, -1;
     foreach (@t) {
@@ -594,7 +594,7 @@ sub StringToList($$)
             push @vals, $_;
         }
     }
-    $exifTool->Warn('Incorrectly quoted MWG string-list value') if $inQuotes;
+    $et->Warn('Incorrectly quoted MWG string-list value') if $inQuotes;
     return @vals > 1 ? \@vals : $vals[0];
 }
 
@@ -606,11 +606,11 @@ sub StringToList($$)
 sub OverwriteStringList($$$$)
 {
     local $_;
-    my ($exifTool, $nvHash, $val, $newValuePt) = @_;
+    my ($et, $nvHash, $val, $newValuePt) = @_;
     my (@new, $delIndex);
     if ($$nvHash{DelValue} and defined $val) {
         # preserve specified old values
-        my $old = StringToList($val, $exifTool);
+        my $old = StringToList($val, $et);
         my @old = ref $old eq 'ARRAY' ? @$old : $old;
         if (@{$$nvHash{DelValue}}) {
             my %del;
@@ -646,17 +646,17 @@ sub OverwriteStringList($$$$)
 # Returns: empty string
 sub ReconcileIPTCDigest($)
 {
-    my $exifTool = shift;
+    my $et = shift;
 
     # set new value for IPTCDigest if not done already
     unless ($Image::ExifTool::Photoshop::iptcDigestInfo and
-            $exifTool->{NEW_VALUE}{$Image::ExifTool::Photoshop::iptcDigestInfo})
+            $$et{NEW_VALUE}{$Image::ExifTool::Photoshop::iptcDigestInfo})
     {
         # write new IPTCDigest only if it doesn't exist or
         # is the same as the digest of the original IPTC
         my @a; # (capture warning messages)
-        @a = $exifTool->SetNewValue('Photoshop:IPTCDigest', 'old', Protected => 1, DelValue => 1);
-        @a = $exifTool->SetNewValue('Photoshop:IPTCDigest', 'new', Protected => 1);
+        @a = $et->SetNewValue('Photoshop:IPTCDigest', 'old', Protected => 1, DelValue => 1);
+        @a = $et->SetNewValue('Photoshop:IPTCDigest', 'new', Protected => 1);
     }
     return '';
 }
@@ -717,7 +717,7 @@ By default, loading the MWG Composite tags enables "strict MWG conformance"
 unless previously enabled or disabled by the user.  In this mode, ExifTool
 will generate a Warning instead of extracting EXIF, IPTC and XMP from
 non-standard locations.  The strict mode may be disabled or enabled at any
-time by setting the MWG "strict" flag to 0 or 1.  ie)
+time by setting the MWG "strict" flag to 0 or 1.  eg)
 
     $Image::ExifTool::MWG::strict = 0;
 
@@ -727,7 +727,7 @@ must be loaded explicitly as described above.
 
 =head1 AUTHOR
 
-Copyright 2003-2013, Phil Harvey (phil at owl.phy.queensu.ca)
+Copyright 2003-2015, Phil Harvey (phil at owl.phy.queensu.ca)
 
 This library is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

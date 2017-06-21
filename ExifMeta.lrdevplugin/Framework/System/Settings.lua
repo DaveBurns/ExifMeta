@@ -837,13 +837,17 @@ end
 --  note2: key must be in ready-to-use (internal/absolute) format, e.g. __settings__mysetting.
 --  @return value (any, required) typed and formatted value.
 --  @return rawValue (any, required) raw value, as stored in property table.
+--  @return other (boolean) true iff no spec in lookup.
 function Settings:_getValue( itemKey, bindTo, options )
 
     app:callingAssert( itemKey, "no itemKey" )
     app:callingAssert( bindTo, "no bind-to" )
     
     local spec = self.lookup[itemKey]
-    app:assert( spec, "no spec for '^1'", itemKey ) -- ###2 room for improvement: this function is called for both expected and unexpected keys. As it stands, errors are deep-6'd for the sake of the latter, but is the wrong thing in case of former.
+    if spec == nil then
+        return nil, nil, true
+    end
+    --app:assert( spec, "no spec for '^1'", itemKey ) -- ###2 room for improvement: this function is called for both expected and unexpected keys. As it stands, errors are deep-6'd for the sake of the latter, but is the wrong thing in case of former.
 
     --Debug.logn( str:fmtx( "getting value for spec id '^1' using key '^2'", spec.id, itemKey ) )
     
@@ -916,7 +920,7 @@ function Settings:_getValue( itemKey, bindTo, options )
                 value = function() end
             end
         elseif spec.dataType == 'array' then
-            --Debug.pause( "array", itemKey )
+            --Debug.pause( "array", itemKey, spec.viewType )
             if spec.viewType == 'multiList' then
                 rawValue = bindTo[itemKey.."_list"] -- names
                 local viewOptions = tab:getTable( spec.viewOptions ) or {}
@@ -990,6 +994,7 @@ function Settings:_getValue( itemKey, bindTo, options )
                 elseif not whole then
                     sel = bindTo[itemKey .. '_sel'] or error( "no sel" )                
                 end
+                --Debug.pause( #names )
                 for index = 1, #names do
                     local name = names[index] or error( "no name" )
                     if whole or index == options.index or name == sel then
@@ -1002,14 +1007,19 @@ function Settings:_getValue( itemKey, bindTo, options )
                                 
                                 local k = itemKey .. "_" .. index .. "__" .. it.id
                                 --Debug.logn( "Considering getting array element, spec", k, it.whole )
-                                local _v, _rv = self:_getValue( k, bindTo, { whole=it.whole } ) -- get bound value from prefs.
+                                local _v, _rv, nope = self:_getValue( k, bindTo, { whole=it.whole } ) -- get bound value from prefs.
                                 --Debug.logn( str:fmtx( "Got array elem member [^1].^2 = ^3", index, it.id, str:to( _v ) ) )
+                                if nope and type( nope ) == 'boolean'then -- no spec in lookup
+                                    return nil, nil, nope
+                                end
                                 
                                 elem[it.id] = _v
                                 raw[it.id] = _rv
                             until true
                         end
-                        other = index
+                        
+                        other = index -- number.
+                        
                         if not whole then
                             value = elem
                             rawValue = raw
@@ -1022,6 +1032,7 @@ function Settings:_getValue( itemKey, bindTo, options )
                         --Debug.pause( "not sel name (and not getting whole)", name )
                     end
                 end
+                -- Debug.pause( whole, rawValue, value )
             else
                 app:error( "Unable to get array value due to unrecognized view type: ^1", spec.viewType )
             end -- not multi-list
@@ -1073,15 +1084,16 @@ function Settings:getValue( _key, bindTo, options )
     else
         key = _key
     end
-    --Debug.logn( "public getting", key )
-    --return self:_getValue( key, bindTo, options ) - throws error.
-    --Debug.pause( "Getting", key )
     if options and #options > 0 then -- subkeys, implied.
         local value = {}
         for i, subkey in ipairs( options ) do
             local absKey = self:getKey( key, subkey )
             local s, _value, _rawValue, _other = LrTasks.pcall( self._getValue, self, absKey, bindTo, options )
+            Debug.pause( s, _value, _rawValue, _other )
             if s then
+                if _other and type( _other ) == 'boolean' then -- no spec in lookup
+                    return nil
+                end
                 value[subkey] = _value
             else
                 app:show{ warning="No formatted value for '^1' (raw value is '^2')", self:getNameForKey( absKey ), _rawValue or "false/nil" }
@@ -1091,7 +1103,11 @@ function Settings:getValue( _key, bindTo, options )
         return value
     end
     local s, _value, _rawValue, _other = LrTasks.pcall( self._getValue, self, key, bindTo, options )
+    -- Debug.pause( s, _value, _rawValue, _other )
     if s then
+        if _other and type( _other ) == 'boolean' then -- no spec in lookup
+            return nil
+        end
         if _value == nil and _rawValue ~= nil then
             app:show{ warning="No value for '^1' - ^2", self:getNameForKey( _key ), _rawValue }    
         else
@@ -2726,9 +2742,9 @@ function Settings:getViewItems( params )
             elseif spec.viewType == 'popup' then
                 viewItem = getPopupMenu( spec, label, viewData )
             elseif spec.viewType == 'smartCollChooser' then
-                viewData.width_in_chars = 30
+                viewData.width_in_chars = var:value( viewData.width_in_chars, 30 )
                 viewData.value = nil -- kill default value binding
-                viewData.tooltip = "Smart collection name (path)"
+                viewData.tooltip = var:value( viewData.tooltip, "Smart collection name (path)" )
                 cat:getSmartCollectionPopupItems( nil ) -- dump items - just init (###). Start where? (nil => catalog) ###1
                 local dataView = vf:static_text( tab:mergeSets( viewData, { -- assure title binding to translate ID to name.
                     width = dataWidth, -- shared, which unfortunately means expandable.

@@ -88,4 +88,14 @@ function Variable:is( v )
 end
 
 
+
+function Variable:value( v, dflt )
+    if v ~= nil then
+        return v
+    else
+        return dflt
+    end
+end
+
+
 return Variable

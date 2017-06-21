@@ -38,5 +38,5 @@ return {
             file = "Write.lua",
         },
     },
-    VERSION = { display = "5.9    Build: 2015-01-09 03:36:18" },
+    VERSION = { display = "5.11    Build: 2015-01-18 18:10:26" },
 }

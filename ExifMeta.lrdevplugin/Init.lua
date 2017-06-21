@@ -71,6 +71,8 @@ _G.ScrollView = require( 'Gui/ScrollView' )
 _G.Reload = require( 'System/Reload' )
 -- @9/Sep/2012 18:20 only used for new Write feature: ###3 - update all features to use exif-tool external-app object.
 _G.ExifTool = require( "ExternalApps/ExifTool" )
+_G.Keywords = require( "Catalog/Keywords" )
+_G.keywords = Keywords:new() -- ### make standard part of framework?
 _G.exifTool = ExifTool:new{ prefName = 'exifToolExe' } -- uses non-standard pref-name for backward compatibility.
 _G.Xmp = require( "Image/Xmp" )
 _G.xmp = Xmp:new()

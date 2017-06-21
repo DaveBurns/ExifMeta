@@ -9,7 +9,7 @@ local Keywords, dbg, dbgf = Object:newClass{ className='Keywords', register=true
 
 
 
-local kwFromPath -- to support legacy methods.
+local kwFromPath -- to support legacy methods (aka cache).
 
 
 
@@ -291,6 +291,121 @@ function Keywords:getKeywordComponents( keyword, reverse )
         return comp
     end
     return comp
+end
+
+
+
+--- Assure keyword (specified by name or nix-style path) exists in the catalog.
+--  @usage invented to support parental keyword creation/assurance before processing which may create child keywords.
+--  @param keywordNameOrPath (string, required) e.g. "MyKeyword", "/MyKeyword", "MyRoot/MyKeyword", "/MyRoot/MyKeyword". if no path prefix, root is implied (leading slash is optional).
+--  @return child keyword or nil if failure.
+--  @return explanation if failure.
+function Keywords:assureKeyword( keywordNameOrPath, synonyms, includeOnExport )
+    app:callingAssert( str:is( keywordNameOrPath ), "no kw-nm/pth" )
+    self:_assureInit()
+    assert( self.kwFromPath, "?" )
+    if not var:is( synonyms ) then -- no synonyms,
+        synonyms = nil -- make sure it's nil.
+    else -- synonyms
+        app:callingTypeAssert( synonyms, "synonyms", 'table' ) -- make sure it's a table.
+    end
+    includeOnExport = var:value( includeOnExport, true ) -- if nil, default to true.
+    local abs = keywordNameOrPath:sub( 1, 1 ) == "/"
+    local kw, err
+    if abs then
+        kw = self:getKeywordForPath( keywordNameOrPath )
+    else
+        kw = self:getKeywordForPath( "/"..keywordNameOrPath )
+    end
+    if kw then
+        Debug.pause( "kw from cache" )
+        return kw
+    end
+    -- not already existing, so create
+    local names
+    -- create chain of keywords, if not already created (leaf hasn't been), 
+    local function createAllKeywords() 
+        names = str:split( keywordNameOrPath, "/" )
+        local parent = nil -- start at top level (root).
+        local path = ""
+        for i, name in ipairs( names ) do
+            if str:is( name ) then
+                path = path.."/"..name
+                kw = catalog:createKeyword( name, synonyms, includeOnExport, parent, true ) -- ###1 - syn, exprtble..    ( keywordName, synonyms, includeOnExport, parent, returnExisting )
+                if kw then
+                    Debug.pause( "created keyword", name, "parent", parent and parent:getName() or "root", path )
+                    -- maintain bookeeping structures.
+                    self.kwFromPath[path] = kw
+                    if self.kwsFromName[name] == nil then
+                        self.kwsFromName[name] = { kw }
+                    else
+                        local dat = self.kwsFromName[name]
+                        dat[#dat + 1] = kw
+                    end
+                    if not self.kwSet[kw] then
+                        self.kwSet[kw] = true
+                        self.kwArray[#self.kwArray + 1] = kw
+                    else -- already recorded
+                        --Debug.pause( "?" ) - happens all the time, when parents exist but child does not.
+                    end
+                    parent = kw
+                else
+                    err = "unable to create keyword"
+                    break
+                end
+            else
+                --Debug.pause( "?" )
+            end
+        end
+    end
+    local s, m
+    if catalog.hasWriteAccess then
+        s, m = LrTasks.pcall( createAllKeywords )
+    else
+        s, m = cat:update( 30, "Creating keyword(s)", createAllKeywords ) -- ###1 tmo is hardcoded.
+    end
+    if s then
+        if kw then
+            assert( kw:getName() == names[#names], "?" )
+            app:log( "Created keywords corresponding to '^1'", keywordNameOrPath )
+        elseif not err then
+            Debug.pause( "?" )
+            err = "unable to create keyword(s) - not sure why"
+        -- else err is set
+        end
+    else
+        err = str:fmtx( "Unable to created keywords corresponding to '^1' - ^2", keywordNameOrPath, m )
+    end
+    return kw, err
+end
+
+
+
+--- Assure specified keyword is applied to specified photo.
+--
+--  @usage auto-wraps for catalog access if need be.
+--
+--  @return status (boolean) true if keyword applied.
+--  @return qualifier (string) may accompany true (sometimes) or false (always) status, to explain..
+function Keywords:applyKeyword( photo, keyword, cache )
+    local function isApplied()
+        local kwSet = tab:createSet( lrMeta:getRaw( photo, 'keywords', cache ) )
+        return kwSet[keyword] 
+    end
+    local function apply()
+        photo:addKeyword( keyword )
+    end
+    if not isApplied() then
+        local s, m
+        if catalog.hasWriteAccess then
+            s, m = LrTasks.pcall( apply )
+        else
+            s, m = cat:update( 30, "Apply Keyword", apply )
+        end
+        return s, m
+    else
+        return true, "keyword was already applied to photo"
+    end
 end
 
 
